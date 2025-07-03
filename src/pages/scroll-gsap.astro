@@ -8,16 +8,19 @@ import Text from 'src/components/text.astro'
   import gsap from 'gsap'
   import { ScrollSmoother } from 'gsap/ScrollSmoother'
   import { ScrollTrigger } from 'gsap/ScrollTrigger'
+  import pinText from '../components/text'
 
   gsap.registerPlugin(ScrollSmoother, ScrollTrigger)
 
   ScrollSmoother.create({
-      content: '.smooth-content',
-      effects: false,
-      smooth: 1.23,
-      smoothTouch: 0.1,
-      wrapper: '.smooth-wrapper',
-    })
+    content: '.smooth-content',
+    effects: false,
+    smooth: 1.23,
+    smoothTouch: 0.1,
+    wrapper: '.smooth-wrapper',
+  })
+
+  pinText()
 
 </script>
 
