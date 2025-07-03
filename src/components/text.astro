@@ -1,0 +1,134 @@
+---
+const randomText = (min = 10, max = 30) => {
+  const amount = Math.floor(Math.random() * (max - min + 1)) + min // gsap.utils.random(min, max)
+  let text = ''
+  const words = [
+    'lorem',
+    'ipsum',
+    'dolor',
+    'sit',
+    'amet',
+    'consectetur',
+    'adipiscing',
+    'elit',
+    'sed',
+    'do',
+    'eiusmod',
+    'tempor',
+    'incididunt',
+    'ut',
+    'labore',
+    'et',
+    'dolore',
+    'magna',
+    'aliqua',
+  ]
+
+  Array.from({ length: amount }).forEach(() => {
+    const randomIndex = Math.floor(Math.random() * words.length)
+    text += `${words[randomIndex]} `
+  })
+
+  text = text.trim()
+  text = `${text.charAt(0).toUpperCase()}${text.slice(1)}`
+
+  return text
+}
+---
+
+<script>
+  import gsap from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+  gsap.registerPlugin(ScrollTrigger)
+
+  const q = gsap.utils.selector('.scrolltriggers-test')
+
+  q('.title').forEach((section) => {
+    gsap.set(section, { opacity: 0 })
+
+    ScrollTrigger.create({
+      onEnter: () => {
+        gsap.to(section, { opacity: 1 })
+      },
+      onLeaveBack: () => {
+        gsap.to(section, { opacity: 0 })
+      },
+      start: () => '0% 90%',
+      trigger: section.querySelector('div'),
+    })
+
+    ScrollTrigger.create({
+      end: () => '+=100%',
+      // pin: section.querySelector('div'),
+      pin: true,
+      pinSpacing: false,
+      start: () => '50% 50%',
+      // trigger: section,
+      trigger: section.querySelector('div'),
+    })
+  })
+
+  q('.text').forEach((section) => {
+    ScrollTrigger.create({
+      onEnter: () => {
+        gsap.to(section.previousElementSibling, { opacity: 0 })
+      },
+      onLeaveBack: () => {
+        gsap.to(section.previousElementSibling, { opacity: 1 })
+      },
+      start: '0% 50%',
+      trigger: section,
+    })
+  })
+</script>
+
+<style lang="scss">
+  .scrolltriggers-test {
+    padding-top: 60vh;
+
+    .title {
+      padding: 20vh 10vw;
+
+      p {
+        // display: none;
+        margin: 5vw auto 0;
+        max-width: 75%;
+        text-align: center;
+      }
+    }
+
+    section {
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+      justify-content: center;
+      gap: 3vw;
+      padding: 10vw;
+    }
+
+    h1 {
+      font-size: 11vw;
+      line-height: 90%;
+      text-align: center;
+    }
+
+    p {
+      font-size: 3vw;
+      line-height: 154%;
+
+      @media (max-width: 768px) {
+        font-size: 6vw;
+      }
+    }
+  }
+</style>
+
+<div class="scrolltriggers-test">
+  <section class="title"><div><h1>{randomText(2, 3)}</h1><p>{randomText(15, 30)}</p></div></section>
+  <section class="text"><p>{randomText(70, 140)}</p><p>{randomText(70, 140)}</p></section>
+  <section class="title"><div><h1>{randomText(2, 3)}</h1><p>{randomText(15, 30)}</p></div></section>
+  <section class="text"><p>{randomText(70, 140)}</p><p>{randomText(70, 140)}</p></section>
+  <section class="title"><div><h1>{randomText(2, 3)}</h1><p>{randomText(15, 30)}</p></div></section>
+  <section class="text"><p>{randomText(70, 140)}</p><p>{randomText(70, 140)}</p></section>
+</div>

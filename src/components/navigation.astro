@@ -1,30 +1,27 @@
+---
+const { active } = Astro.props
+---
 
 <style lang="scss">
-  .nav {
+  .navigation {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 4vw;
+    position: fixed;
+    inset: 50px auto auto 2vw; 
+    z-index: 123;
     list-style: none;
-    padding: 0;
-    margin: 0;
+    font-size: max(16px, 2vw);
 
-    li {
-      display: inline;
-      margin-right: 1em;
-
-      a {
-        text-decoration: none;
-        color: #0070f3;
-
-        &:hover {
-          text-decoration: underline;
-        }
-      }
+    [data-active] {
+      text-decoration: underline;
     }
   }
-
 </style>
 
-<ul class="nav">
-  <li><a href="./scroll-vanilla">vanilla</a></li>
-  <li><a href="./scroll-lenis">lenis</a></li>
-  <li><a href="./scroll-smoother">scroll smoother</a></li>
-  <li><a href="./scroll-swup">swup</a></li>
+<ul class="navigation">
+  <li><a href="./scroll-vanilla" data-active={active === '1'}>vanilla</a></li>
+  <li><a href="./scroll-lenis" data-active={active === '2'}>lenis</a></li>
+  <li><a href="./scroll-gsap" data-active={active === '3'}>gsap</a></li>
+  <li><a href="./scroll-swup" data-active={active === '4'}>swup</a></li>
 </ul>

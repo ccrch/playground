@@ -1,18 +1,11 @@
 ---
 import Layout from '../layouts/layout.astro'
-import unicorn from '../assets/images/unicorn.svg?raw'
-import Navigation from 'src/components/navigation.astro'
 ---
-<Layout title="Home">
-  <h1>Hello from Astro 👋</h1>
-  <Fragment set:html={unicorn} />
-  <Navigation />
-  <a href="./test">Test page</a>
-  <div class="asdf">
-    <div class="asdf__zxcv">
-      <p>This is a test of the Astro framework.</p>
-      <p>It is a simple page with some styles applied.</p>
-      <p>Check out the source code to see how it works!</p>
-    </div>
-  </div>
-</Layout>
+
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    window.location.href = './scroll-vanilla'
+  })
+</script>
+
+<Layout></Layout>
