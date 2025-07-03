@@ -1,0 +1,19 @@
+---
+const { title } = Astro.props
+
+import '../styles/styles.scss'
+import RunScript from '../scripts/RunScript'
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <main>
+      <slot />
+    </main>
+    <RunScript client:load />
+  </body>
+</html>

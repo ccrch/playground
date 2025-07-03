@@ -1,0 +1,22 @@
+{
+  "name": "astro-conversion",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "format": "biome format .",
+    "lint": "biome lint ."
+  },
+  "dependencies": {
+    "gsap": "^3.13.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@astrojs/react": "^3.3.0",
+    "astro": "^4.0.0",
+    "biome": "^0.3.3",
+    "sass": "1.58.3"
+  }
+}

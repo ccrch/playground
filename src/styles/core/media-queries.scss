@@ -1,0 +1,259 @@
+////
+/// @group Media Queries
+////
+
+// Some articles on responsive design + common screen sizes
+// 
+// https://ishadeed.com/article/responsive-design/
+// https://www.hobo-web.co.uk/best-screen-size/
+// https://www.browserstack.com/guide/responsive-design-breakpoints
+// https://kinsta.com/blog/responsive-web-design/
+
+/// Breakpoints variable map
+/// @type Map
+/// 
+$breakpoints: (
+  phone-xs: 0,
+  phone-s: 321px,
+  phone-m: 480px,
+  tablet: 768px,
+  desktop-xs: 1025px,
+  desktop-s: 1366px,
+  desktop-m: 1600px,
+  desktop-l: 1920px,
+  desktop-xl: 2560px,
+);
+
+@function breakpoint($key) {
+  @return map-get($breakpoints, $key);
+}
+
+// Support functions and mixins
+@function breakpoint-next($name, $breakpoints: $breakpoints, $breakpoint-names: map-keys($breakpoints)) {
+  $n: index($breakpoint-names, $name);
+  @return if($n < length($breakpoint-names), nth($breakpoint-names, $n + 1), null);
+}
+
+@function breakpoint-min($name, $breakpoints: $breakpoints) {
+  $min: map-get($breakpoints, $name);
+  @return if($min != 0, $min, null);
+}
+
+@function breakpoint-max($name, $breakpoints: $breakpoints) {
+  $next: breakpoint-next($name, $breakpoints);
+  @return if($next, breakpoint-min($next, $breakpoints) - 0.02px, null);
+}
+
+@function breakpoint-infix($name, $breakpoints: $breakpoints) {
+  @return if(breakpoint-min($name, $breakpoints) == null, '', '-#{$name}');
+}
+
+// Media of at least the minimum breakpoint width. No query for the smallest breakpoint.
+// Makes the @content apply to the given breakpoint and wider.
+@mixin media-breakpoint-up($name, $breakpoints: $breakpoints) {
+  $min: breakpoint-min($name, $breakpoints);
+  @if $min {
+    @media (min-width: $min) {
+      @content;
+    }
+  }
+  @else {
+    @content;
+  }
+}
+
+// Media of at most the maximum breakpoint width. No query for the largest breakpoint.
+// Makes the @content apply to the given breakpoint and narrower.
+@mixin media-breakpoint-down($name, $breakpoints: $breakpoints) {
+  $max: breakpoint-max($name, $breakpoints);
+  @if $max {
+    /* stylelint-disable-next-line */
+    @media (max-width: $max) {
+      @content;
+    }
+  }
+  @else {
+    @content;
+  }
+}
+
+// Media that spans multiple breakpoint widths.
+// Makes the @content apply between the min and max breakpoints
+@mixin media-breakpoint-between($lower, $upper, $breakpoints: $breakpoints) {
+  $min: breakpoint-min($lower, $breakpoints);
+  $max: breakpoint-max($upper, $breakpoints);
+
+  @if $min != null and $max != null {
+    /* stylelint-disable-next-line */
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  }
+  @else if $max == null {
+    @include media-breakpoint-up($lower) {
+      @content;
+    }
+  }
+  @else if $min == null {
+    @include media-breakpoint-down($upper) {
+      @content;
+    }
+  }
+}
+
+// Queries
+
+/// Main media query.
+/// All media queries are mobile-first so they break up and not down.
+/// @param {String} $name [undefined] - The name of the breakpoint, e.g. phone-s.
+/// @param {Map} $breakpoints [$breakpoints] - The map of breakpoints to use, optional.
+/// @example @include mq(desktop-l) { ... }
+@mixin mq($name, $breakpoints: $breakpoints) {
+  $min: breakpoint-min($name, $breakpoints);
+  @if $min {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+/// Media query for only one breakpoint.
+/// All media queries are mobile-first so they break up and not down.
+/// @param {String} $name [undefined]  - The name of the breakpoint, e.g. desktop-s.
+/// @param {Map} $breakpoints [$breakpoints] - The map of breakpoints to use, optional.
+/// @example @include mqOnly(desktop-l) { ... }
+@mixin mqOnly($name, $breakpoints: $breakpoints) {
+  $min: breakpoint-min($name, $breakpoints);
+  $max: breakpoint-max($name, $breakpoints);
+
+  @if $min != null and $max != null {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  } @else if $max == null {
+    @include media-breakpoint-up($name, $breakpoints) {
+      @content;
+    }
+  } @else if $min == null {
+    @include media-breakpoint-down($name, $breakpoints) {
+      @content;
+    }
+  }
+}
+
+/// Media query for inbetween breakpoints.
+/// All media queries are mobile-first so they break up and not down.
+/// 
+/// @param {String} $name [undefined] - The name of the breakpoint, e.g. (tablet, desktop-l).
+/// @param {Map} $breakpoints [$breakpoints] - The map of breakpoints to use, optional.
+/// @example  @include mqBetween(desktop-l) { ... }
+/// 
+@mixin mqBetween($lower, $upper, $breakpoints: $breakpoints) {
+  $min: breakpoint-min($lower, $breakpoints);
+  $max: breakpoint-max($upper, $breakpoints);
+
+  @if $min != null and $max != null {
+    /* stylelint-disable-next-line */
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  }
+  @else if $max == null {
+    @include media-breakpoint-up($lower, $breakpoints) {
+      @content;
+    }
+  }
+  @else if $min == null {
+    @include media-breakpoint-down($upper, $breakpoints) {
+      @content;
+    }
+  }
+}
+
+// Extra mixins for convenience
+
+@mixin isMobile($breakpoints: $breakpoints) {
+  @include mqBetween(phone-xs, phone-m, $breakpoints) {
+    @content;
+  }
+}
+
+@mixin isDesktop($breakpoints: $breakpoints) {
+  @include mq(tablet, $breakpoints) {
+    @content;
+  }
+}
+
+@mixin isUltraWide($breakpoints: $breakpoints) {
+  @include mq(desktop-xl, $breakpoints) {
+    @content;
+  }
+}
+
+// Media label
+
+@if $showMediaLabel == true {
+  body::after {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    width: 43px;
+    height: 21px;
+    color: #fff;
+    font-size: 10px;
+    line-height: 1;
+    text-align: center;
+    text-transform: uppercase;
+
+    @include mq(phone-xs) {
+      content: 'xs';
+      background: #3645b0;
+    }
+
+    @include mq(phone-s) {
+      content: 's';
+      background: #3645b0;
+    }
+
+    @include mq(phone-m) {
+      content: 'm';
+      background: #3645b0;
+    }
+
+    @include mq(tablet) {
+      content: 't';
+      background: #b03636;
+    }
+
+    @include mq(desktop-xs) {
+      content: 'xs';
+      background: #263238;
+    }
+
+    @include mq(desktop-s) {
+      content: 's';
+      background: #263238;
+    }
+
+    @include mq(desktop-m) {
+      content: 'm';
+      background: #263238;
+    }
+
+    @include mq(desktop-l) {
+      content: 'l';
+      background: #263238;
+    }
+
+    @include mq(desktop-xl) {
+      content: 'xl';
+      background: #263238;
+    }
+  }
+}
