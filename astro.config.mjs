@@ -4,6 +4,7 @@ import react from '@astrojs/react'
 const isDev = process.env.NODE_ENV === 'development'
 
 export default defineConfig({
+  outDir: 'build',
   integrations: [react()],
   vite: {
     css: {
