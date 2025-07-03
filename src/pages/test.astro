@@ -1,6 +1,6 @@
 ---
-import Layout from '../layouts/Layout.astro'
-
+import Layout from '../layouts/layout.astro'
+import Navigation from 'src/components/navigation.astro'
 ---
 <style lang="scss">
   .bla {
@@ -38,6 +38,7 @@ import Layout from '../layouts/Layout.astro'
 
 <Layout title="Home">
   <h1>Hello from Astro 👋</h1>
+  <Navigation />
   <a href="/">Index page</a>
   <div class="bla">
     <div class="bla__inner">

@@ -4,8 +4,9 @@ import react from '@astrojs/react'
 const isDev = process.env.NODE_ENV === 'development'
 
 export default defineConfig({
-  outDir: 'build',
+  base: isDev ? '/' : '/astro-test/',
   integrations: [react()],
+  outDir: 'build',
   vite: {
     css: {
       preprocessorOptions: {
@@ -17,5 +18,5 @@ export default defineConfig({
         }
       }
     }
-  }
+  },
 })
