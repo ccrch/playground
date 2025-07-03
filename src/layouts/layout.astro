@@ -2,7 +2,7 @@
 const { title } = Astro.props
 
 import '../styles/styles.scss'
-import RunScript from '../scripts/RunScript'
+// import RunScript from '../scripts/RunScript'
 
 const now = new Date()
 const formatted = now.toLocaleString('en-GB', {
@@ -16,10 +16,19 @@ const formatted = now.toLocaleString('en-GB', {
 })
 ---
 
+<script>
+  import { initScripts } from '../scripts/scripts'
+  
+  initScripts()
+</script>
+
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8">
+    <meta name="author" content="Ccrch">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>{title}</title>
   </head>
   <body>
@@ -27,6 +36,6 @@ const formatted = now.toLocaleString('en-GB', {
       <div class="date">{formatted}</div>
       <slot />
     </main>
-    <RunScript client:load />
+    <!-- <RunScript client:load /> -->
   </body>
 </html>
