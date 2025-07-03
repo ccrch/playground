@@ -1,10 +1,9 @@
 import { defineConfig } from 'astro/config'
 import react from '@astrojs/react'
 
-const isProd = import.meta.env?.MODE === 'production'
+const isDev = process.env.NODE_ENV === 'development'
 
 export default defineConfig({
-  base: isProd ? '/astro-test/' : '/',
   integrations: [react()],
   outDir: 'build',
   vite: {
@@ -12,7 +11,7 @@ export default defineConfig({
       preprocessorOptions: {
         scss: {
           additionalData: `
-            $showMediaLabel: ${isProd ? 'false' : 'true'};
+            $showMediaLabel: ${isDev};\n
             @import 'src/styles/core/media-queries.scss';\n
           `
         }
