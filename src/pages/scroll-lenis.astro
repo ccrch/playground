@@ -8,8 +8,12 @@ import Text from 'src/components/text.astro'
   import { lenisScroll } from '../scripts/core/helpers'
   import pinText from '../components/text'
 
-  lenisScroll.init()
-  pinText()
+  window.addEventListener('load', () => {
+    lenisScroll.init()
+    window.requestAnimationFrame(() => {
+      pinText()
+    })
+  })
 </script>
 
 <Layout title='lenis scroll'>
