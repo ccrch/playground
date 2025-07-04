@@ -1,8 +1,7 @@
 ---
-const { active } = Astro.props
+import { url } from '../scripts/core/astro-helpers'
 
-const isDev = process.env.NODE_ENV === 'development'
-const path = isDev ? '/astro-test' : 'https://ccrch.github.io/astro-test'
+const { active } = Astro.props
 ---
 
 <style lang='scss'>
@@ -23,8 +22,9 @@ const path = isDev ? '/astro-test' : 'https://ccrch.github.io/astro-test'
 </style>
 
 <ul class='navigation'>
-  <li><a href=`${path}/scroll-vanilla` data-active={active === '1'}>vanilla</a></li>
-  <li><a href=`${path}/scroll-lenis` data-active={active === '2'}>lenis</a></li>
-  <li><a href=`${path}/scroll-gsap` data-active={active === '3'}>gsap</a></li>
-  <li><a href=`${path}/scroll-swup` data-active={active === '4'}>swup</a></li>
+  <li><a href={url('/')}>index</a></li>
+  <li><a href={url('/scroll-vanilla')} data-active={active === '1'}>vanilla</a></li>
+  <li><a href={url('/scroll-lenis')} data-active={active === '2'}>lenis</a></li>
+  <li><a href={url('/scroll-gsap')} data-active={active === '3'}>gsap</a></li>
+  <li><a href={url('/scroll-swup')} data-active={active === '4'}>swup</a></li>
 </ul>

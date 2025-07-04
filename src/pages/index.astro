@@ -1,11 +1,25 @@
 ---
 import Layout from '../layouts/layout.astro'
+import { url } from '../scripts/core/astro-helpers'
 ---
 
-<script>
-  window.addEventListener('DOMContentLoaded', () => {
-    window.location.href = './scroll-vanilla'
-  })
-</script>
+<style>
+  .link {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 4vw;
+    position: fixed;
+    inset: 50px auto auto 2vw; 
+    z-index: 123;
+    list-style: none;
+    font-size: max(16px, 2vw);
 
-<Layout></Layout>
+    [data-active] {
+      text-decoration: underline;
+    }
+  }
+</style>
+
+<Layout title='hi'>
+  <a class='link' href={url('/scroll-vanilla')}>hi</a>
+</Layout>
