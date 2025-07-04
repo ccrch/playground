@@ -15,9 +15,8 @@ import Text from 'src/components/text.astro'
   ScrollSmoother.create({
     content: '.smooth-content',
     effects: false,
+    normalizeScroll: true,
     smooth: 1.23,
-    smoothTouch: 0.01,
-    // normalizeScroll: true,
     wrapper: '.smooth-wrapper',
   })
 

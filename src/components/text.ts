@@ -25,7 +25,8 @@ const pinText = () => {
       // pin: section.querySelector('div'),
       pin: true,
       pinSpacing: false,
-      start: '50% 50%',
+      // start: '50% 50%',
+      start: `50% ${window.visualViewport?.height / 2}px`,
       // trigger: section,
       trigger: section.querySelector('.title__container'),
     })

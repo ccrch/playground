@@ -47,17 +47,17 @@ export const lenisScroll = {
     })
 
     // Standard approach
-    // lenisRaf(lenis)
+    lenisRaf(lenis)
 
     // GSAP approach - better performance & no lags with ScrollTriggers & pinned containers
-    gsap.registerPlugin(ScrollTrigger)
-    lenis.on('scroll', ScrollTrigger.update)
+    // gsap.registerPlugin(ScrollTrigger)
+    // lenis.on('scroll', ScrollTrigger.update)
 
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000)
-    })
+    // gsap.ticker.add((time) => {
+    //   lenis.raf(time * 1000)
+    // })
 
-    gsap.ticker.lagSmoothing(0)
+    // gsap.ticker.lagSmoothing(0)
   },
 }
 

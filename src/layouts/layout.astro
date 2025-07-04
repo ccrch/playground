@@ -17,7 +17,7 @@ const date = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')
     document.querySelector('.vh-test > div[data-vh] + p').textContent = `100vh - ${document.querySelector<HTMLElement>('.vh-test > div[data-vh]').offsetHeight}px`
     document.querySelector('.vh-test > div[data-dvh] + p').textContent = `100dvh - ${document.querySelector<HTMLElement>('.vh-test > div[data-dvh]').offsetHeight}px`
     document.querySelector('.vh-test > div[data-svh] + p').textContent = `100svh - ${document.querySelector<HTMLElement>('.vh-test > div[data-svh]').offsetHeight}px`
-      document.querySelector('.vh-test > div[data-svh-2] + p').textContent = `100svh - visual vh - ${window.visualViewport?.height}px`
+    document.querySelector('.vh-test > div[data-dvh-2] + p').textContent = `100dvh - visual vh - ${window.visualViewport?.height}px`
   }
 
   bla()
@@ -47,7 +47,7 @@ const date = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')
         <div data-vh></div><p></p>
         <div data-dvh></div><p></p>
         <div data-svh></div><p></p>
-        <div data-svh-2></div><p></p>
+        <div data-dvh-2></div><p></p>
       </div>
       <slot />
     </main>
