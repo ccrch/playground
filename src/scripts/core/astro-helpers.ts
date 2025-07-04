@@ -39,5 +39,5 @@ export const url = (url) => {
   const isDev = process.env.NODE_ENV === 'development'
   const base = isDev ? '/astro-test' : 'https://ccrch.github.io/astro-test'
 
-  return `${base}${url}`
+  return `${base}${url}?v=${Date.now()}`
 }
