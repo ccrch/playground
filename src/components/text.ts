@@ -21,7 +21,7 @@ const pinText = () => {
     // })
   
     ScrollTrigger.create({
-      anticipatePin: 0.5,
+      anticipatePin: 1,
       end: '+=100%',
       // pin: section.querySelector('div'),
       pin: true,
