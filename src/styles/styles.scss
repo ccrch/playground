@@ -3,11 +3,6 @@
 @import 'core/base.scss';
 @import 'core/media-queries.scss';
 
-body {
-  background: #eee;
-  font-family: 'DM Sans', sans-serif;
-}
-
 astro-dev-toolbar {
   display: none !important;
 }

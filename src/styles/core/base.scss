@@ -1,7 +1,13 @@
 
+html {
+  scroll-behavior: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 body {
   background: #eee;
   color: #111;
+  font-family: 'DM Sans', sans-serif;
   font-size: 2.1em;
 
   svg {
