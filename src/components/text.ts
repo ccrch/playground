@@ -5,6 +5,9 @@ const pinText = () => {
   gsap.registerPlugin(ScrollTrigger)
   
   const q = gsap.utils.selector('.scrolltriggers-test')
+
+  const isGsapScroll = !!document.querySelector('.smooth-wrapper')
+  console.log(isGsapScroll)
   
   q('.title').forEach((section) => {
     // gsap.set(section, { opacity: 0 })
@@ -26,9 +29,9 @@ const pinText = () => {
       // pin: section.querySelector('div'),
       pin: true,
       pinSpacing: false,
-      pinType: 'transform',
-      // start: '50% 50%',
-      start: `50% ${window.visualViewport?.height / 2}px`,
+      pinType: isGsapScroll ? 'transform' : 'fixed',
+      start: '50% 50%',
+      // start: `50% ${window.visualViewport?.height / 2}px`,
       // trigger: section,
       trigger: section.querySelector('.title__container'),
     })
