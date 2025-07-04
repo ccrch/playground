@@ -30,6 +30,7 @@ body {
     z-index: 1;
     margin: 0;
     border: 0;
+    opacity: 0.8;
 
     &::before {
       position: absolute;
@@ -50,12 +51,12 @@ body {
       }
     }
 
-    &:nth-child(1) {
-      inset: 50svh 0 auto 0;
+    &:nth-child(2) {
+      inset: 50vh 0 auto 0;
       border-bottom: 1px dashed #00f;
 
       &::before {
-        content: '50svh';
+        content: '50vh';
         color: #00f;
       }
     }

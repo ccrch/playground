@@ -21,11 +21,11 @@ const pinText = () => {
     // })
   
     ScrollTrigger.create({
-      end: () => '+=100%',
+      end: '+=100%',
       // pin: section.querySelector('div'),
       pin: true,
       pinSpacing: false,
-      start: () => `50% ${window.innerHeight / 2}px`,
+      start: '50% 50%',
       // trigger: section,
       trigger: section.querySelector('.title__container'),
     })
