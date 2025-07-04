@@ -9,12 +9,11 @@ body {
     transform: translateX(-7em) scaleX(-1);
     width: 12em;
   }
-}
 
-.asdf {
-  background: blue;
-
-  &__zxcv {
-    color: white;
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 50% 0 auto 0;
+    border-bottom: 1px dashed #f00;
   }
 }

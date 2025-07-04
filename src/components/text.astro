@@ -52,6 +52,18 @@ const randomText = (min = 10, max = 30) => {
       }
     }
 
+    .asdf {
+      position: relative;
+      z-index: 1;
+
+      &::before {
+        content: '';
+        position: absolute;
+        inset: -2vw;
+        border: 1px dashed #f00;
+      }
+    }
+
     section {
       display: flex;
       flex-flow: column nowrap;
@@ -79,10 +91,10 @@ const randomText = (min = 10, max = 30) => {
 </style>
 
 <div class='scrolltriggers-test'>
-  <section class='title'><div><h1>{randomText(2, 3)}</h1><p>{randomText(15, 30)}</p></div></section>
+  <section class='title'><div class='asdf'><h1>{randomText(2, 3)}</h1><p>{randomText(15, 15)}</p></div></section>
   <section class='text'><p>{randomText(70, 140)}</p><p>{randomText(70, 140)}</p></section>
-  <section class='title'><div><h1>{randomText(2, 3)}</h1><p>{randomText(15, 30)}</p></div></section>
+  <section class='title'><div class='asdf'><h1>{randomText(2, 3)}</h1><p>{randomText(15, 15)}</p></div></section>
   <section class='text'><p>{randomText(70, 140)}</p><p>{randomText(70, 140)}</p></section>
-  <section class='title'><div><h1>{randomText(2, 3)}</h1><p>{randomText(15, 30)}</p></div></section>
+  <section class='title'><div class='asdf'><h1>{randomText(2, 3)}</h1><p>{randomText(15, 15)}</p></div></section>
   <section class='text'><p>{randomText(70, 140)}</p><p>{randomText(70, 140)}</p></section>
 </div>
