@@ -8,14 +8,6 @@ body {
   font-family: 'DM Sans', sans-serif;
 }
 
-.date {
-  position: fixed;
-  inset: 0 auto auto 0;
-  z-index: 123;
-  padding: 2vw 0 0 2vw;
-  font-size: 13px;
-}
-
 astro-dev-toolbar {
   display: none !important;
 }

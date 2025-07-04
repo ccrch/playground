@@ -9,11 +9,55 @@ body {
     transform: translateX(-7em) scaleX(-1);
     width: 12em;
   }
+}
 
-  &::before {
-    content: '';
+.date {
+  position: fixed;
+  inset: 0 auto auto 0;
+  z-index: 123;
+  padding: 2vw 0 0 2vw;
+  font-size: 13px;
+}
+
+.lines {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+
+  div {
     position: fixed;
-    inset: 50% 0 auto 0;
-    border-bottom: 1px dashed #f00;
+    z-index: 1;
+    margin: 0;
+    border: 0;
+
+    &::before {
+      position: absolute;
+      inset: 0 auto auto 0;
+      z-index: 1;
+      padding: 13px 0 0 2vw;
+      overflow: visible;
+      font-size: 13px;
+    }
+
+    &:nth-child(1) {
+      inset: 50% 0 auto 0;
+      border-bottom: 1px dashed #f00;
+
+      &::before {
+        content: '50%';
+        color: #f00;
+      }
+    }
+
+    &:nth-child(1) {
+      inset: 50svh 0 auto 0;
+      border-bottom: 1px dashed #00f;
+
+      &::before {
+        content: '50svh';
+        color: #00f;
+      }
+    }
   }
 }
