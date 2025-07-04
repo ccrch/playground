@@ -6,28 +6,28 @@ const pinText = () => {
   
   const q = gsap.utils.selector('.scrolltriggers-test')
   
-  q('.title__container').forEach((section) => {
-    gsap.set(section, { opacity: 0 })
+  q('.title').forEach((section) => {
+    // gsap.set(section, { opacity: 0 })
   
-    ScrollTrigger.create({
-      onEnter: () => {
-        gsap.to(section, { opacity: 1 })
-      },
-      onLeaveBack: () => {
-        gsap.to(section, { opacity: 0 })
-      },
-      start: () => '0% 90%',
-      trigger: section.querySelector('div'),
-    })
+    // ScrollTrigger.create({
+    //   onEnter: () => {
+    //     gsap.to(section, { opacity: 1 })
+    //   },
+    //   onLeaveBack: () => {
+    //     gsap.to(section, { opacity: 0 })
+    //   },
+    //   start: () => '0% 90%',
+    //   trigger: section.querySelector('.title__container > div'),
+    // })
   
     ScrollTrigger.create({
       end: () => '+=100%',
       // pin: section.querySelector('div'),
       pin: true,
       pinSpacing: false,
-      start: () => '0% 0%',
+      start: () => '50% 50%',
       // trigger: section,
-      trigger: section,
+      trigger: section.querySelector('.title__container'),
     })
   })
   
