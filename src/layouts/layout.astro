@@ -12,6 +12,14 @@ const date = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')
   import { initScripts } from '../scripts/scripts'
   
   initScripts()
+
+  const bla = () => {
+    document.querySelector('.vh-test > p').textContent = `100vh: ${document.querySelector<HTMLElement>('.vh-test > div').offsetHeight}px`
+  }
+
+  bla()
+  window.addEventListener('resize', bla)
+  window.addEventListener('scroll', bla)
 </script>
 
 <!doctype html>
@@ -32,6 +40,7 @@ const date = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')
   <body>
     <main>
       <div class='date'>{date}</div>
+      <div class='vh-test'><div></div><p></p></div>
       <slot />
     </main>
     <!-- <RunScripts client:load /> -->

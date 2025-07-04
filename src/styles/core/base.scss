@@ -19,6 +19,20 @@ body {
   font-size: 13px;
 }
 
+.vh-test {
+  position: fixed;
+  inset: 0 0 auto auto;
+  z-index: 123;
+  padding: 2vw;
+  font-size: 13px;
+
+  > div {
+    position: absolute;
+    width: 10px;
+    height: 100vh;
+  }
+}
+
 .lines {
   position: fixed;
   inset: 0;
