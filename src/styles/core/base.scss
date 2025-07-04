@@ -83,7 +83,30 @@ body {
 
       &::before {
         content: '50vh';
+        margin-left: 20vw;
         color: #00f;
+      }
+    }
+
+    &:nth-child(3) {
+      inset: 50dvh 0 auto 0;
+      border-bottom: 1px dashed rgb(234, 0, 255);
+
+      &::before {
+        content: '50dvh';
+        margin-left: 40vw;
+        color: rgb(234, 0, 255);
+      }
+    }
+
+    &:nth-child(4) {
+      inset: 50svh 0 auto 0;
+      border-bottom: 1px dashed rgb(255, 136, 0);
+
+      &::before {
+        content: '50svh';
+        margin-left: 60vw;
+        color: rgb(255, 136, 0);
       }
     }
   }
