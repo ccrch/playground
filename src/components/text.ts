@@ -6,7 +6,7 @@ const pinText = () => {
   
   const q = gsap.utils.selector('.scrolltriggers-test')
   
-  q('.title').forEach((section) => {
+  q('.title__container').forEach((section) => {
     gsap.set(section, { opacity: 0 })
   
     ScrollTrigger.create({
@@ -25,9 +25,9 @@ const pinText = () => {
       // pin: section.querySelector('div'),
       pin: true,
       pinSpacing: false,
-      start: () => '50% 50%',
+      start: () => '0% 0%',
       // trigger: section,
-      trigger: section.querySelector('div'),
+      trigger: section,
     })
   })
   

@@ -4,21 +4,32 @@ import { randomText } from '../scripts/core/astro-helpers'
 
 <style lang='scss'>
   .scrolltriggers-test {
-    padding-top: 70vh;
+    display: flex;
+    flex-flow: column nowrap;
+    // padding-top: 70vh;
 
     .title {
-      padding: 20vh 10vw;
+      display: flex;
+      width: 100%;
+      height: 100dvh;
+    }
+
+    .title__container {
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+      justify-content: center;
+      gap: 3vw;
+      height: 100dvh;
+      padding: 0 20vw;
       opacity: 0;
 
-      p {
-        // display: none;
-        margin: 5vw auto 0;
-        max-width: 75%;
+      * {
         text-align: center;
       }
     }
 
-    .asdf {
+    .title__container > div {
       position: relative;
       z-index: 1;
 
@@ -30,12 +41,7 @@ import { randomText } from '../scripts/core/astro-helpers'
       }
     }
 
-    section {
-      display: flex;
-      flex-flow: column nowrap;
-      align-items: center;
-      justify-content: center;
-      gap: 3vw;
+    .text {
       padding: 10vw;
     }
 
@@ -57,10 +63,12 @@ import { randomText } from '../scripts/core/astro-helpers'
 </style>
 
 <div class='scrolltriggers-test'>
-  <section class='title'><div class='asdf'><h1>{randomText(2, 3)}</h1><p>{randomText(15, 15)}</p></div></section>
+  <section class='title'><div class='title__container'><div><h1>{randomText(2, 3)}</h1><p>{randomText(15, 15)}</p></div></div></section>
   <section class='text'><p>{randomText(70, 140)}</p><p>{randomText(70, 140)}</p></section>
-  <section class='title'><div class='asdf'><h1>{randomText(2, 3)}</h1><p>{randomText(15, 15)}</p></div></section>
+  <section class='title'><div class='title__container'><div><h1>{randomText(2, 3)}</h1><p>{randomText(15, 15)}</p></div></div></section>
   <section class='text'><p>{randomText(70, 140)}</p><p>{randomText(70, 140)}</p></section>
-  <section class='title'><div class='asdf'><h1>{randomText(2, 3)}</h1><p>{randomText(15, 15)}</p></div></section>
+  <section class='title'><div class='title__container'><div><h1>{randomText(2, 3)}</h1><p>{randomText(15, 15)}</p></div></div></section>
+  <section class='text'><p>{randomText(70, 140)}</p><p>{randomText(70, 140)}</p></section>
+  <section class='title'><div class='title__container'><div><h1>{randomText(2, 3)}</h1><p>{randomText(15, 15)}</p></div></div></section>
   <section class='text'><p>{randomText(70, 140)}</p><p>{randomText(70, 140)}</p></section>
 </div>
