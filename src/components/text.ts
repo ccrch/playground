@@ -29,7 +29,7 @@ const pinText = () => {
       const { isMobile } = context.conditions
 
       ScrollTrigger.create({
-        anticipatePin: isMobile ? (ScrollTrigger.isTouch ? 0.7 : 0) : 0,
+        anticipatePin: isMobile ? (ScrollTrigger.isTouch === 1 ? 0.7 : 0) : 0,
         end: '+=100%',
         // pin: section.querySelector('div'),
         pin: true,
