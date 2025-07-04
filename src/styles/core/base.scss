@@ -25,11 +25,23 @@ body {
   z-index: 123;
   padding: 2vw;
   font-size: 13px;
+  text-align: right;
 
   > div {
     position: absolute;
     width: 10px;
-    height: 100vh;
+
+    &[data-vh] {
+      height: 100vh;
+    }
+
+    &[data-dvh] {
+      height: 100dvh;
+    }
+
+    &[data-svh] {
+      height: 100svh;
+    }
   }
 }
 
