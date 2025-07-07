@@ -51,6 +51,14 @@ body {
   }
 }
 
+.triggers-refresh {
+  position: fixed;
+  inset: calc(50px + 10vw) auto auto 2vw;
+  z-index: 123;
+  opacity: 0.21;
+  font-size: max(16px, 2vw);
+}
+
 .lines {
   position: fixed;
   inset: 0;

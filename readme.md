@@ -1,4 +1,4 @@
 
-# twig starter
+# astro-test
 
-twig + scss + ts
+Testing GSAP Scrolltrigger pins for mobile & desktop
