@@ -10,9 +10,9 @@ const date = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')
 
 <script>
   import { initScripts } from '../scripts/scripts'
-  import gsap from 'gsap'
-  import { ScrollTrigger } from 'gsap/ScrollTrigger'
-  import { debounce } from 'throttle-debounce'
+  // import gsap from 'gsap'
+  // import { ScrollTrigger } from 'gsap/ScrollTrigger'
+  // import { debounce } from 'throttle-debounce'
   
   initScripts()
 
@@ -27,16 +27,18 @@ const date = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')
   window.addEventListener('resize', bla)
   window.addEventListener('scroll', bla)
 
-  gsap.registerPlugin(ScrollTrigger)
+  // This causes scroll to stop on mobile
 
-  let refreshCount: any = 0
+  // gsap.registerPlugin(ScrollTrigger)
+
+  // let refreshCount: any = 0
   
-  window.addEventListener('resize', debounce(123, () => {
-    refreshCount++
-    gsap.timeline().to('.triggers-refresh', { duration: 0.1, opacity: 1 }).to('.triggers-refresh', { clearProps: 'all', duration: 1, opacity: 0.21 })
-    document.querySelector<HTMLElement>('.triggers-refresh span').innerHTML = refreshCount
-    setTimeout(ScrollTrigger.refresh, 12)
-  }))
+  // window.addEventListener('resize', debounce(123, () => {
+  //   refreshCount++
+  //   gsap.timeline().to('.triggers-refresh', { duration: 0.1, opacity: 1 }).to('.triggers-refresh', { clearProps: 'all', duration: 1, opacity: 0.21 })
+  //   document.querySelector<HTMLElement>('.triggers-refresh span').innerHTML = refreshCount
+  //   setTimeout(ScrollTrigger.refresh, 12)
+  // }))
 </script>
 
 <!doctype html>
