@@ -15,9 +15,14 @@ import Text from 'src/components/text.astro'
 <style>
   html,
   body {
-    height: 100vh;
-    overscroll-behavior: none;
-    scroll-behavior: smooth;
+    height: 100dvh;
+    min-height: 100dvh;
+  }
+
+  body {
+    min-height: 100dvh;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; // for smoother iOS experience
   }
 </style>
 
