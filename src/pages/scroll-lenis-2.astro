@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/layout.astro'
+import Navigation from 'src/components/navigation.astro'
+import Text from 'src/components/text.astro'
+---
+
+<script>
+  import { lenisScroll } from '../scripts/core/helpers'
+  import pinText from '../components/text'
+
+  lenisScroll.init()
+  pinText()
+</script>
+
+<style>
+  html,
+  body {
+    height: 100vh;
+    overscroll-behavior: none;
+    scroll-behavior: smooth;
+  }
+</style>
+
+<Layout title='lenis scroll 2'>
+  <Navigation active='3' />
+  <Text />
+</Layout>
