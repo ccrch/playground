@@ -1,4 +1,8 @@
 ---
+export const frontmatter = {
+  title: 'lenis scroll'
+}
+
 import Layout from '../layouts/layout.astro'
 import Navigation from 'src/components/navigation.astro'
 import Text from 'src/components/text.astro'
@@ -12,7 +16,7 @@ import Text from 'src/components/text.astro'
   pinText()
 </script>
 
-<Layout title='lenis scroll'>
+<Layout title={frontmatter.title}>
   <Navigation active='2' />
   <Text />
 </Layout>

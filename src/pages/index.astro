@@ -1,9 +1,13 @@
 ---
+export const frontmatter = {
+  title: 'Hi!',
+}
+
 import Layout from '../layouts/layout.astro'
 import { url } from '../scripts/core/astro-helpers'
 ---
 
-<style>
+<style lang='scss'>
   .link {
     display: flex;
     flex-flow: row nowrap;
@@ -20,6 +24,6 @@ import { url } from '../scripts/core/astro-helpers'
   }
 </style>
 
-<Layout title='hi'>
+<Layout title={frontmatter.title}>
   <a class='link' href={url('/scroll-vanilla')}>→</a>
 </Layout>

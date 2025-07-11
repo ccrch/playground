@@ -4,7 +4,7 @@ import react from '@astrojs/react'
 const isDev = process.env.NODE_ENV === 'development'
 
 export default defineConfig({
-  base: '/astro-test/',
+  base: '/playground/',
   integrations: [react()],
   outDir: 'build',
   vite: {

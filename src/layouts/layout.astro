@@ -2,7 +2,6 @@
 const { title } = Astro.props
 
 import '../styles/styles.scss'
-// import RunScripts from '../scripts/RunScripts'
 
 const now = new Date()
 const date = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}-${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}`
@@ -10,39 +9,12 @@ const date = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')
 
 <script>
   import { initScripts } from '../scripts/scripts'
-  // import gsap from 'gsap'
-  // import { ScrollTrigger } from 'gsap/ScrollTrigger'
-  // import { debounce } from 'throttle-debounce'
   
   initScripts()
-
-  const bla = () => {
-    document.querySelector('.vh-test > div[data-vh] + p').textContent = `100vh - ${document.querySelector<HTMLElement>('.vh-test > div[data-vh]').offsetHeight}px`
-    document.querySelector('.vh-test > div[data-dvh] + p').textContent = `100dvh - ${document.querySelector<HTMLElement>('.vh-test > div[data-dvh]').offsetHeight}px`
-    document.querySelector('.vh-test > div[data-svh] + p').textContent = `100svh - ${document.querySelector<HTMLElement>('.vh-test > div[data-svh]').offsetHeight}px`
-    document.querySelector('.vh-test > div[data-dvh-2] + p').textContent = `100dvh - visual vh - ${window.visualViewport?.height}px`
-  }
-
-  bla()
-  window.addEventListener('resize', bla)
-  window.addEventListener('scroll', bla)
-
-  // This causes scroll to stop on mobile
-
-  // gsap.registerPlugin(ScrollTrigger)
-
-  // let refreshCount: any = 0
-  
-  // window.addEventListener('resize', debounce(123, () => {
-  //   refreshCount++
-  //   gsap.timeline().to('.triggers-refresh', { duration: 0.1, opacity: 1 }).to('.triggers-refresh', { clearProps: 'all', duration: 1, opacity: 0.21 })
-  //   document.querySelector<HTMLElement>('.triggers-refresh span').innerHTML = refreshCount
-  //   setTimeout(ScrollTrigger.refresh, 12)
-  // }))
 </script>
 
 <!doctype html>
-<html lang='en'>
+<html class='preload' lang='en'>
   <head>
     <meta charset='utf-8'>
     <meta name='author' content='Ccrch'>
@@ -54,26 +26,12 @@ const date = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')
     <link rel='preconnect' href='https://fonts.googleapis.com'>
     <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
     <link href='https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap' rel='stylesheet'>
-    <title>{title}</title>
+    <title>{title} | Code Playground</title>
   </head>
   <body>
     <main>
       <div class='date'>{date}</div>
-      <div class='vh-test'>
-        <div data-vh></div><p></p>
-        <div data-dvh></div><p></p>
-        <div data-svh></div><p></p>
-        <div data-dvh-2></div><p></p>
-      </div>
-      <!-- <div class='triggers-refresh'>triggers refreshed (<span>0</span>)</div> -->
       <slot />
     </main>
-    <!-- <RunScripts client:load /> -->
-    <div class='lines'>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
   </body>
 </html>

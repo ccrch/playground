@@ -1,4 +1,4 @@
 
-# astro-test
+# Code Playground
 
-Testing GSAP Scrolltrigger pins for mobile & desktop
+All sort of different stuff

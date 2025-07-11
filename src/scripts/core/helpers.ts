@@ -2,30 +2,6 @@ import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import Lenis from 'lenis'
 
-export const esbuildReload = () => {
-  new EventSource('https://localhost:9000/esbuild').addEventListener('change', (e) => {
-    const { added, removed, updated } = JSON.parse(e.data)
-
-    console.log('asdf')
-
-    if (!added.length && !removed.length && updated.length === 1) {
-      for (const link of document.getElementsByTagName('link') as any) {
-        const url = new URL(link.href)
-
-        if (url.host === location.host && url.pathname === updated[0]) {
-          const next = link.cloneNode()
-          next.href = `${updated[0]}?${Math.random().toString(36).slice(2)}`
-          next.onload = () => link.remove()
-          link.parentNode.insertBefore(next, link.nextSibling)
-          return
-        }
-      }
-    }
-
-    location.reload()
-  })
-}
-
 export const isProduction = process.env.NODE_ENV === 'production'
 
 export let lenis = null

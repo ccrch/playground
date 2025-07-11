@@ -1,7 +1,12 @@
 ---
+export const frontmatter = {
+  title: 'GSAP smooth scroll',
+}
+
 import Layout from '../layouts/layout.astro'
 import Navigation from 'src/components/navigation.astro'
 import Text from 'src/components/text.astro'
+
 ---
 
 <script>
@@ -24,7 +29,7 @@ import Text from 'src/components/text.astro'
 
 </script>
 
-<Layout title='gsap smooth scroll'>
+<Layout title={frontmatter.title}>
   <Navigation active='4' />
   <div class='smooth-wrapper'>
     <div class='smooth-content'>

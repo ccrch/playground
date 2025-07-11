@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/layout.astro'
+import Navigation from 'src/components/navigation.astro'
+// import { url } from '../../scripts/core/astro-helpers'
+
+export const frontmatter = {
+  title: 'This is a test',
+}
+---
+
+<style lang='scss'>
+  .text {
+    padding: 10vw;
+  }
+</style>
+
+<Layout title={frontmatter.title}>
+  <Navigation active='5' />
+  <div class='text'>Velit aliquip qui laboris elit exercitation officia tempor aliqua. Sunt quis officia ex irure veniam sit eu ad qui sint qui. Magna eiusmod adipisicing laborum voluptate velit non quis non ea aliquip cillum duis reprehenderit reprehenderit. Consequat non consectetur sit quis veniam aliquip consequat. Qui deserunt ad sunt ea aliqua dolore in culpa.
+
+Ipsum commodo ipsum ullamco et exercitation ea aliqua minim. Commodo culpa fugiat voluptate est sint enim elit non ipsum officia aliqua ad magna. Qui ad est aliquip velit in duis amet dolore. Qui exercitation ipsum fugiat qui aliqua. Occaecat labore est elit Lorem dolor duis veniam non laboris incididunt mollit magna sunt. Deserunt proident adipisicing voluptate exercitation dolor ut aliquip ullamco. Non qui et cillum quis enim culpa excepteur dolore fugiat enim proident aliquip elit culpa.
+
+Consequat est cillum laboris magna do id officia adipisicing ipsum. Officia nostrud occaecat do fugiat aliquip esse ex enim tempor enim. Sint laborum dolore minim commodo elit eiusmod nostrud aliqua anim. Anim Lorem sunt Lorem ex adipisicing et duis incididunt id. Esse duis et aliqua incididunt et incididunt irure adipisicing reprehenderit eiusmod aliqua Lorem.
+
+Eu nulla ex exercitation reprehenderit sunt Lorem fugiat aliquip aute eiusmod enim. Ipsum tempor proident ea sit qui culpa. Deserunt exercitation esse cillum cupidatat anim ipsum sint sunt excepteur elit nostrud pariatur cupidatat minim. Nostrud ex sit officia elit nostrud id excepteur aliquip proident culpa velit elit. Proident qui dolor laborum tempor mollit officia adipisicing amet dolor ad occaecat enim laboris.
+
+Ipsum occaecat incididunt reprehenderit ipsum nostrud enim veniam dolore nisi pariatur consequat consequat. Velit sunt incididunt commodo velit adipisicing ullamco ullamco do magna quis irure laboris veniam. Aute dolor sit minim aliquip proident nostrud qui do sint. Exercitation sint cillum magna irure enim nisi voluptate duis ut ex labore enim eu. Ullamco ad cillum duis voluptate ex ut exercitation consectetur cillum ex laboris. Dolore dolor incididunt non ad esse amet est cupidatat mollit. Adipisicing proident voluptate laborum excepteur duis eu est amet adipisicing dolore do.Aute qui ad nisi dolore consectetur proident anim velit consectetur est ad id voluptate.</div>
+</Layout>

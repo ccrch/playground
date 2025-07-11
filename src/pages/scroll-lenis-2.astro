@@ -1,4 +1,8 @@
 ---
+export const frontmatter = {
+  title: 'Lenis scroll 2',
+}
+
 import Layout from '../layouts/layout.astro'
 import Navigation from 'src/components/navigation.astro'
 import Text from 'src/components/text.astro'
@@ -26,7 +30,7 @@ import Text from 'src/components/text.astro'
   }
 </style>
 
-<Layout title='lenis scroll 2'>
+<Layout title={frontmatter.title}>
   <Navigation active='3' />
   <Text />
 </Layout>

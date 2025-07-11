@@ -1,11 +1,13 @@
 ---
-import { url } from '../scripts/core/astro-helpers'
 
-const { active } = Astro.props
+import { getAstroPages, url } from '../scripts/core/astro-helpers'
+
+const currentPath = Astro.url.pathname
+const pages = getAstroPages()
 ---
 
 <style lang='scss'>
-  .navigation {
+  .playground-navigation {
     display: flex;
     flex-flow: row nowrap;
     gap: 4vw;
@@ -21,11 +23,7 @@ const { active } = Astro.props
   }
 </style>
 
-<ul class='navigation'>
+<ul class='playground-navigation'>
   <li><a href={url('/')}>←</a></li>
-  <li><a href={url('/scroll-vanilla')} data-active={active === '1'}>vanilla</a></li>
-  <li><a href={url('/scroll-lenis')} data-active={active === '2'}>lenis</a></li>
-  <li><a href={url('/scroll-lenis-2')} data-active={active === '3'}>lenis-2</a></li>
-  <li><a href={url('/scroll-gsap')} data-active={active === '4'}>gsap</a></li>
-  <!-- <li><a href={url('/scroll-swup')} data-active={active === '4'}>swup</a></li> -->
+  {pages.map((p, index) => <li><a href={p.url} data-active={p.url.replace(/\?.*$/, '') === currentPath}>{p.title}</a></li>)}
 </ul>
