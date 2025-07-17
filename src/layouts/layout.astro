@@ -1,10 +1,13 @@
 ---
-const { title } = Astro.props
-
+import Navigation from './navigation.astro'
 import '../styles/styles.scss'
 
+const { baseClass, title } = Astro.props
 const now = new Date()
 const date = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}-${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}`
+
+const htmlClass = baseClass ? `${baseClass}__html` : ''
+const bodyClass = baseClass ? `${baseClass}__body` : ''
 ---
 
 <script>
@@ -14,7 +17,7 @@ const date = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')
 </script>
 
 <!doctype html>
-<html class='preload' lang='en'>
+<html class={`preload ${htmlClass}`} lang='en'>
   <head>
     <meta charset='utf-8'>
     <meta name='author' content='Ccrch'>
@@ -28,10 +31,9 @@ const date = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')
     <link href='https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap' rel='stylesheet'>
     <title>{title} | Code Playground</title>
   </head>
-  <body>
-    <main>
-      <div class='date'>{date}</div>
-      <slot />
-    </main>
+  <body class={bodyClass}>
+    <div class='date'>{date}</div>
+    <Navigation />
+    <slot />
   </body>
 </html>

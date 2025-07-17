@@ -1,7 +1,9 @@
 
 @import 'core/reset.scss';
 @import 'core/base.scss';
+@import 'core/lenis.scss';
 @import 'core/media-queries.scss';
+@import 'core/print.scss';
 
 astro-dev-toolbar {
   display: none !important;
