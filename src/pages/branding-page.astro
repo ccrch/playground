@@ -38,7 +38,10 @@ const sectionId = (index) => navigation[index].url.replace('#', '')
       </a>
       <div class='navigation__links'>
         {navigation.map((item, index) => (
-          index !== 0 && <a class='navigation__link' href={item.url}>{item.label}</a>
+          index !== 0 && <a class='navigation__link' href={item.url}>
+            {item.label}
+            <div class='navigation__link-status'><div></div></div>
+          </a>
         ))}
         <div class='navigation__background'></div>
       </div>

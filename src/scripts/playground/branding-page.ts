@@ -19,6 +19,7 @@ const brandingPage = {
     
     this.handleNavigationThemeChange()
     this.handleNavigation()
+    this.handleNavigationLinksStatus()
     this.handleHero()
     this.handleSectionHeadline()
     
@@ -124,6 +125,44 @@ const brandingPage = {
     })
   },
 
+  handleNavigationLinksStatus(): void {
+    this.q('.section').forEach((section, index) => {
+      if (index === 0) return
+
+      // Move the line along with section's scroll progress
+
+      ScrollTrigger.create({
+        animation: gsap.to(this.q('.navigation__link-status > div')[index - 1], { scaleX: 1 }),
+        end: '100% 50%',
+        scrub: true,
+        start: '0% 50%',
+        trigger: section,
+      })
+
+      // Display only currently active line
+
+      const lineReveal = (opacity) => gsap.to(document.querySelectorAll('.navigation__link-status')[index - 1], { opacity })
+8
+      ScrollTrigger.create({ 
+        onEnter: () => {
+          lineReveal(1)
+        },
+        onEnterBack: () => {
+          lineReveal(1)
+        },
+        onLeave: () => {
+          lineReveal(0)
+        },
+        onLeaveBack: () => {
+          lineReveal(0)
+        },
+        end: '100% 50%',
+        start: '0% 50%',
+        trigger: section,
+      })
+    })
+  },
+
   handleNavigationThemeChange(): void {
     this.q('.section').forEach((section) => {
       ScrollTrigger.create({
@@ -162,7 +201,6 @@ const brandingPage = {
       const a = {
         resetHeadline: () => {
           gsap.set([el.headlineEyebrow, el.headlineWords], { opacity: 0, overwrite: true, y: '100%' })
-          console.log('reset headline')
         },
       }
 
