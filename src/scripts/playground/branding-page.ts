@@ -30,6 +30,36 @@ const brandingPage = {
     // setTimeout(() => {
     //   lenis.start()
     // }, 1234)
+
+    SplitText.create('.symbol__boxes-container p', {
+      linesClass: 'split-line',
+      mask: 'lines',
+      type: 'lines',
+    })
+
+    gsap.set('.symbol__boxes-container .split-line', { opacity: 0, overwrite: true, y: '100%' })
+
+    ScrollTrigger.create({
+      onEnter: () => {
+        gsap.to('.symbol__boxes-container .split-line', {
+          duration: 1.234,
+          ease: 'power4.out',
+          opacity: 1,
+          stagger: 0.0876,
+          y: '0%',
+        })
+      },
+      start: '0% 80%',
+      trigger: '.symbol__boxes-container',
+    })
+
+    ScrollTrigger.create({
+      onLeaveBack: () => {
+        gsap.set('.symbol__boxes-container .split-line', { opacity: 0, overwrite: true, y: '100%' })
+      },
+      start: '0% 100%',
+      trigger: '.symbol__boxes-container',
+    })
   },
 
   handleHero(): void {
@@ -114,6 +144,8 @@ const brandingPage = {
     this.q('.navigation__logo, .navigation__link').forEach((link) => {
       link.addEventListener('pointerdown', () => {
         const href = link.getAttribute('href')
+
+        if (!lenis) return
 
         lenis.scrollTo(href, {
           duration: 0.543, //2.1, //1.234,

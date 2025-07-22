@@ -69,7 +69,23 @@ const sectionId = (index) => navigation[index].url.replace('#', '')
         isDark={(index - 1) % 2}
         headline={item.headline ? item.headline : randomText(3, 5)}
       >
-        {randomText(111, 222)}
+        {index === 1 ?
+          <div class='symbol'>
+            <div class='symbol__box'>
+              <div></div>
+              <div></div>
+            </div>
+            <div class='symbol__boxes-container'>
+              <p>{randomText(30, 55)}</p>
+              <div class='symbol__boxes'>
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+          </div>
+          : 
+          randomText(111, 222)
+        }
       </BrandingPageSection>
     ))}
 

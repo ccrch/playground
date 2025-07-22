@@ -12,6 +12,7 @@
 }
 
 .branding-page-html {
+  --color-gray: #dedede;
   --color-navy: #0B1423;
   --color-red: #FF3D00;
   --color-white: #F2F5F8;
@@ -20,7 +21,7 @@
   --desktop-design-width: 1440;
   --ultrawide-breakpoint: 2560;
   
-  // scroll-behavior: smooth;
+  scroll-behavior: smooth;
   font-size: calc((100 / var(--mobile-design-width)) * 1vw);// This must match desktop-xl breakpoint
 
   @include isDesktop {
@@ -206,16 +207,64 @@
     }
 
     &__content {
+      width: 100%;
       margin: 150dvh 0 0;
       padding: 0 12% 50dvh;
+
+      // TODO: Create partials + move this into component/refactor later
+
+      .symbol {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 80rem;
+        position: relative;
+        z-index: 3;
+        font-size: 24rem;
+
+        &__box {
+          aspect-ratio: 16 / 9;
+          background: var(--color-gray);
+          border-radius: 50rem;
+        }
+
+        &__boxes-container {
+          display: flex;
+          flex-flow: row nowrap;
+          gap: 40rem;
+
+          > * {
+            flex: 0 0 calc(50% - 20rem);
+          }
+        }
+
+        &__boxes {
+          display: flex;
+          flex-flow: column nowrap;
+          gap: 30rem;
+
+          > div {
+            aspect-ratio: 16 / 9;
+            border-radius: 30rem;
+          }
+
+          > div:first-child {
+            background: var(--color-gray);
+          }
+
+          > div:last-child {
+            background: var(--color-navy);
+          }
+        }
+      }
+
     }
 
-    .pin-marker {
-      position: absolute;
-      inset: -50dvh 0 auto;
-      z-index: 2;
-      border-bottom: 1px dashed var(--color-red);
-    }
+    // .pin-marker {
+    //   position: absolute;
+    //   inset: -50dvh 0 auto;
+    //   z-index: 2;
+    //   border-bottom: 1px dashed var(--color-red);
+    // }
   }
 
   .hero {
