@@ -76,7 +76,7 @@ export const randomText = (min = 10, max = 30) => {
   })
 
   text = text.trim()
-  text = `${text.charAt(0).toUpperCase()}${text.slice(1)}.`
+  text = `${text.charAt(0).toUpperCase()}${text.slice(1)}` //.`
 
   return text
 }

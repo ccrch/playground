@@ -1,0 +1,280 @@
+
+@mixin isDesktop {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin isUltrawide {
+  @media (min-width: 2560px) {
+    @content;
+  }
+}
+
+.branding-page-html {
+  --color-navy: #0B1423;
+  --color-red: #FF3D00;
+  --color-white: #F2F5F8;
+
+  --mobile-design-width: 440;
+  --desktop-design-width: 1440;
+  --ultrawide-breakpoint: 2560;
+  
+  // scroll-behavior: smooth;
+  font-size: calc((100 / var(--mobile-design-width)) * 1vw);// This must match desktop-xl breakpoint
+
+  @include isDesktop {
+    font-size: calc((100 / var(--desktop-design-width)) * 1vw);
+  }
+
+  @include isUltraWide {
+    font-size: calc(((100 / var(--desktop-design-width)) * var(--ultrawide-breakpoint) / 16) * 0.01rem);
+  }
+}
+
+.branding-page-body {
+  background: var(--color-navy);
+  font-family: sans-serif;
+  font-size: 3vw;
+
+  .date {
+    color: var(--color-red);
+    font-size: 11px;
+  }
+}
+
+.branding-page {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 100%;
+  min-height: 200vh;
+  opacity: 0;
+
+  // ! Typography
+
+  h1 {
+    font-size: 72rem;
+    line-height: 112%;
+    text-align: center;
+  }
+
+  // TODO: Move into partials/components
+  
+  .navigation {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 40rem;
+    position: fixed;
+    inset: auto 0 0;
+    z-index: 21;
+    margin: 48rem;
+    color: var(--color-white);
+    font-size: 21rem;
+    pointer-events: none;
+    transition: opacity 0.321s;
+
+    &__logo {
+      display: flex;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      height: 64rem;
+      padding: 0 32rem;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+      border-radius: 32rem;
+      color: var(--color-red);
+      font-size: 123%;
+      pointer-events: all;
+    }
+
+    &__links {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      gap: 40rem;
+      position: relative;
+      z-index: 1;
+      height: 64rem;
+      padding: 0 32rem;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+      border-radius: 32rem;
+    }
+    
+    &__link {
+      color: inherit;
+      pointer-events: all;
+    }
+    
+    &__background {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: var(--color-white); 
+      border-radius: 32rem;
+      opacity: 0.05;
+      transition: background 0.321s;
+    }
+  }
+
+  .navigation--dark {
+    color: var(--color-navy);
+ 
+    .navigation__background {
+      background: var(--color-navy);
+    }
+  }
+
+  // ! Layout/sections - general styles + section specific
+
+  .section {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    z-index: 1;
+    min-height: 300dvh;
+    overflow: hidden;
+    clip-path: inset(0 0 0 0);
+
+    &--dark {
+      background: var(--color-navy);
+      color: var(--color-white);
+    }
+
+    &--light {
+      background: var(--color-white);
+      color: var(--color-navy);
+    }
+
+    &__headline {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      // position: absolute;
+      // inset: 0 0 auto;
+      // z-index: 1;
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      width: 50%;
+      height: 100dvh;
+      // margin: -100dvh auto 0;
+      margin: 0 auto;
+      pointer-events: none;
+
+      > div {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: center;
+        gap: 30rem;
+      }
+
+      h1,
+      p {
+        pointer-events: all;
+      }
+
+      p {
+        color: var(--color-red);
+        font-size: 21rem;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+    }
+
+    &__content {
+      margin: 150dvh 0 0;
+      padding: 0 12% 50dvh;
+    }
+
+    .pin-marker {
+      position: absolute;
+      inset: -50dvh 0 auto;
+      z-index: 2;
+      border-bottom: 1px dashed var(--color-red);
+    }
+  }
+
+  .hero {
+    justify-content: center;
+    min-height: 100vh;
+
+    &__circles {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+    }
+
+    &__circle {
+      position: absolute;
+      inset: 50% auto auto 50%;
+      z-index: 1;
+      transform: translate(-50%, -50%);
+
+      @for $i from 1 through 5 {
+        &:nth-child(#{$i}) .hero__circle-wrapper {
+          width: #{320 + (270 * $i) + rem};
+          opacity: #{0.9 - (0.17 * $i)};
+
+          .shape__gradient {
+            animation-duration: #{11 * $i + s};
+          }
+        }
+      }
+    }
+  }
+
+  // ! Components
+  // TODO: Split into partials
+
+  .shape {
+    // position: relative;
+    // z-index: 1;
+    // width: 300rem;
+    overflow: hidden;
+    aspect-ratio: 1;
+    mask-size: cover;
+
+    &--circle-stroke {
+      mask-image: url('data:image/svg+xml;utf8,\
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
+          <circle cx="50" cy="50" r="45" fill="none" stroke="black" stroke-width="2" vector-effect="non-scaling-stroke" />\
+        </svg>');
+    }
+
+    &__gradient {
+      position: absolute;
+      inset: -66rem;
+      z-index: 0; 
+
+      &--conic {
+        background: conic-gradient(
+          from 180deg at 50% 50%,
+          #ff3d00 0deg,
+          rgba(255, 0, 0, 0) 45deg,
+          #ff3d00 90deg,
+          rgba(255, 0, 0, 0) 180deg,
+          #ff3d00 270deg,
+          rgba(255, 0, 0, 0) 315deg,
+          #ff3d00 360deg
+        );
+        animation: gradient-rotation 21s linear infinite;
+  
+        @keyframes gradient-rotation {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+      }
+    }
+  }
+}

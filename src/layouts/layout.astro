@@ -2,12 +2,12 @@
 import Navigation from './navigation.astro'
 import '../styles/styles.scss'
 
-const { baseClass, title } = Astro.props
+const { baseClass, navigationHidden = false, title } = Astro.props
 const now = new Date()
 const date = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}-${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}`
 
-const htmlClass = baseClass ? `${baseClass}__html` : ''
-const bodyClass = baseClass ? `${baseClass}__body` : ''
+const htmlClass = baseClass ? `${baseClass}-html` : ''
+const bodyClass = baseClass ? `${baseClass}-body` : ''
 ---
 
 <script>
@@ -32,8 +32,8 @@ const bodyClass = baseClass ? `${baseClass}__body` : ''
     <title>{title} | Code Playground</title>
   </head>
   <body class={bodyClass}>
-    <div class='date'>{date}</div>
-    <Navigation />
+    <div class='date'>{date} // 0.1.12 alpha</div>
+    {!navigationHidden && <Navigation />}
     <slot />
   </body>
 </html>

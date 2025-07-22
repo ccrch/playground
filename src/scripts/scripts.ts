@@ -8,7 +8,7 @@ export const initScripts = () => {
   //   module.prefetch.init()
   // })
   
-  console.log('Hi!')
+  // console.log('Hi!')
   document.querySelector('html').classList.remove('preload')
 }
 

@@ -1,0 +1,98 @@
+---
+export const frontmatter = {
+  baseClass: 'branding-page',
+  title: 'Ný ásýnd Vettvangs',
+}
+
+import BrandingPageSection from 'src/components/branding-page-section.astro'
+import Layout from '../layouts/layout.astro'
+import '../styles/playground/branding-page.scss'
+import { randomText } from 'src/scripts/core/astro-helpers'
+
+const navigation = [
+  { label: 'Heim', url: '#heim' },
+  { label: 'Merkið', url: '#merkid', headline: 'Ný nálgun á rótgrónu merki' },
+  { label: 'Litir', url: '#litir' },
+  { label: 'Letur', url: '#letur' },
+  { label: 'Tákn', url: '#takn' },
+  { label: 'Raddblær', url: '#raddblaer' },
+  { label: 'Ásýnd', url: '#asynd' },
+]
+
+const sectionId = (index) => navigation[index].url.replace('#', '')
+---
+
+<script>
+  import brandingPage from '../scripts/playground/branding-page'
+  
+  brandingPage.init()
+</script>
+
+<Layout baseClass={frontmatter.baseClass} navigationHidden={true} title={frontmatter.title}>
+  <main class={frontmatter.baseClass}>
+
+    <nav class='navigation'>
+      <a class='navigation__logo' href='#heim'>
+        [logo]
+        <div class='navigation__background'></div>
+      </a>
+      <div class='navigation__links'>
+        {navigation.map((item, index) => (
+          index !== 0 && <a class='navigation__link' href={item.url}>{item.label}</a>
+        ))}
+        <div class='navigation__background'></div>
+      </div>
+    </nav>
+
+    <section class='hero section section--dark' id={sectionId(0)}>
+      <div class='section__headline'>
+        <h1>Ný ásýnd <br> Vettvangs</h1>
+      </div>
+      <div class='hero__circles'>
+        {Array.from({ length: 5 }).map(() => (
+          <div class='hero__circle'>
+            <div class='hero__circle-wrapper shape shape--circle-stroke'>
+              <div class='shape__gradient shape__gradient--conic'></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    {navigation.map((item, index) => (
+      index !== 0 && <BrandingPageSection
+        eyebrow={item.label}
+        id={sectionId(index)}
+        isDark={(index - 1) % 2}
+        headline={item.headline ? item.headline : randomText(3, 5)}
+      >
+        {randomText(111, 222)}
+      </BrandingPageSection>
+    ))}
+
+    <!-- <section class='section section--light' id={sectionId(1)}>
+      [section-1]
+    </section>
+
+    <section class='section section--dark' id={sectionId(2)}>
+      [section-2]
+    </section>
+
+    <section class='section section--light' id={sectionId(3)}>
+      [section-3]
+    </section>
+
+    <section class='section section--dark' id={sectionId(4)}>
+      [section-4]
+    </section>
+
+    <section class='section section--light' id={sectionId(5)}>
+      [section-5]
+    </section>
+
+    <section class='section section--dark' id={sectionId(6)}>
+      [section-6]
+    </section> -->
+
+  </main>
+</Layout>
