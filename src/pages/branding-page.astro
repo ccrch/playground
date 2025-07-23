@@ -12,11 +12,11 @@ import { randomText } from 'src/scripts/core/astro-helpers'
 const navigation = [
   { label: 'Heim', url: '#heim' },
   { label: 'Merkið', url: '#merkid', headline: 'Ný nálgun á rótgrónu merki' },
-  { label: 'Litir', url: '#litir' },
-  { label: 'Letur', url: '#letur' },
-  { label: 'Tákn', url: '#takn' },
-  { label: 'Raddblær', url: '#raddblaer' },
-  { label: 'Ásýnd', url: '#asynd' },
+  { label: 'Litir', url: '#litir', headline: 'Litirnir spegla kjarnann okkar' },
+  { label: 'Letur', url: '#letur', headline: 'Letrið setur tóninn' },
+  { label: 'Tákn', url: '#takn', headline: 'Grafíkin styður upplifun og flæði' },
+  { label: 'Raddblær', url: '#raddblaer', headline: 'Við erum hnitmiðuð, aðgengileg, skýr, reynd, traust, vinaleg, leiðandi og áhrifarík' },
+  { label: 'Ásýnd', url: '#asynd', headline: 'Samræmi skapar fagurfræðilega heild' },
 ]
 
 const sectionId = (index) => navigation[index].url.replace('#', '')
@@ -33,7 +33,11 @@ const sectionId = (index) => navigation[index].url.replace('#', '')
 
     <nav class='navigation'>
       <a class='navigation__logo' href='#heim'>
-        [logo]
+        <svg width='44' height='25' viewBox='0 0 44 25' fill='none' xmlns='http://www.w3.org/2000/svg'>
+          <path d='M29.0658 24.25L43.2269 0.25H39.0035L26.9531 20.6619L29.0658 24.25Z' fill='#FD3D00'/>
+          <path d='M25.4564 18.1432L36.0083 0.25H31.7545L23.3438 14.5268L25.4564 18.1432Z' fill='#FD3D00'/>
+          <path d='M28.7613 0.25H0.5L14.6307 24.25L28.7613 0.25ZM22.4291 3.83432L14.6307 17.0738L6.83418 3.83432H22.4291Z' fill='#FD3D00'/>
+        </svg>
         <div class='navigation__background'></div>
       </a>
       <div class='navigation__links'>

@@ -183,7 +183,7 @@ const brandingPage = {
               document.querySelector('.navigation').classList.add('navigation--dark')
             }
           },
-          start: '0% 90%',
+          start: () => `0% ${window.innerHeight - document.querySelector<HTMLElement>('.navigation').offsetHeight}px`,
           trigger: section,
         })
       })

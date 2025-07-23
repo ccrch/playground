@@ -44,7 +44,7 @@
 }
 
 .branding-page-html {
-  --color-gray: #dedede;
+  --color-gray: #EEF2F6;
   --color-navy: #0B1423;
   --color-red: #FF3D00;
   --color-white: #F2F5F8;
@@ -96,20 +96,19 @@
     }
   }
 
-  // TODO: Move into partials/components
+  // Navigation
   
   .navigation {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
     justify-content: center;
-    gap: 40rem;
+    gap: 10rem;
     position: fixed;
     inset: auto 0 0;
     z-index: 21;
-    margin: 48rem;
-    color: var(--color-white);
-    font-size: 21rem;
+    height: 64rem;
+    margin: 36rem;
     pointer-events: none;
     transition: opacity 0.321s;
 
@@ -119,24 +118,29 @@
       position: relative;
       z-index: 1;
       height: 64rem;
-      padding: 0 32rem;
+      padding: 0 24rem;
       overflow: hidden;
       backdrop-filter: blur(4px);
       border-radius: 32rem;
       color: var(--color-red);
       font-size: 123%;
       pointer-events: all;
+
+      svg {
+        width: 44rem;
+        height: 25rem;
+      }
     }
 
     &__links {
       display: flex;
       flex-flow: row nowrap;
       align-items: center;
-      gap: 40rem;
+      gap: 48rem; //64rem;
       position: relative;
       z-index: 1;
       height: 64rem;
-      padding: 0 32rem;
+      padding: 0 36rem;
       overflow: hidden;
       backdrop-filter: blur(4px);
       border-radius: 32rem;
@@ -145,8 +149,11 @@
     &__link {
       position: relative;
       z-index: 1;
-      color: inherit;
+      color: var(--color-white);
+      font-size: 16rem;
+      font-weight: 500;
       pointer-events: all;
+      transition: color 0.321s;
     }
 
     &__link-status {
@@ -170,20 +177,22 @@
       z-index: 1;
       background: var(--color-white); 
       border-radius: 32rem;
-      opacity: 0.05;
+      opacity: 0.03;
       transition: background 0.321s;
     }
   }
 
   .navigation--dark {
-    color: var(--color-navy);
+    .navigation__link {
+      color: var(--color-navy);
+    }
  
     .navigation__background {
       background: var(--color-navy);
     }
   }
 
-  // ! Layout/sections - general styles + section specific
+  // Layout/sections - general styles + section specific
 
   .section {
     display: flex;
@@ -194,7 +203,7 @@
     z-index: 1;
     min-height: 300dvh;
     overflow: hidden;
-    clip-path: inset(0 0 0 0);
+    clip-path: inset(0% 0% 0% 0%);
 
     &--dark {
       background: var(--color-navy);
@@ -210,16 +219,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      // position: absolute;
-      // inset: 0 0 auto;
-      // z-index: 1;
       position: fixed;
       inset: 0;
       z-index: 2;
       width: 75%;
       height: 100dvh;
-      // margin: -100dvh auto 0;
       margin: 0 auto;
+      padding: 0 0 64rem;
       pointer-events: none;
 
       > div {
@@ -237,7 +243,7 @@
 
       p {
         color: var(--color-red);
-        font-size: 21rem;
+        font-size: 16rem;
         font-weight: 700;
         text-transform: uppercase;
       }
@@ -318,7 +324,7 @@
       position: absolute;
       inset: 50% auto auto 50%;
       z-index: 1;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, calc(-50% - 32rem));
 
       @for $i from 1 through 5 {
         &:nth-child(#{$i}) .hero__circle-wrapper {
@@ -359,13 +365,13 @@
       &--conic {
         background: conic-gradient(
           from 180deg at 50% 50%,
-          #ff3d00 0deg,
+          var(--color-red) 0deg,
           rgba(255, 0, 0, 0) 45deg,
-          #ff3d00 90deg,
+          var(--color-red) 90deg,
           rgba(255, 0, 0, 0) 180deg,
-          #ff3d00 270deg,
+          var(--color-red) 270deg,
           rgba(255, 0, 0, 0) 315deg,
-          #ff3d00 360deg
+          var(--color-red) 360deg
         );
         animation: gradient-rotation 21s linear infinite;
   
