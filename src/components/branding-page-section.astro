@@ -5,14 +5,15 @@ const themeClass = isDark ? 'section--dark' : 'section--light'
 ---
 
 <div class={`section ${themeClass}`} id={id}>
-  <!-- <div class='pin-marker'></div> -->
-  <div class='section__headline'>
-    <div>
-      <p class='section__headline-eyebrow'>{eyebrow}</p>
-      <h1>{headline}</h1>
+  <div class='container'>
+    <div class='section__headline'>
+      <div>
+        <p class='section__headline-eyebrow'>{eyebrow}</p>
+        <h1>{headline}</h1>
+      </div>
     </div>
-  </div>
-  <div class='section__content'>
-    <slot />
+    <div class='section__content'>
+      <slot />
+    </div>
   </div>
 </div>

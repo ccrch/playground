@@ -14,7 +14,7 @@ const brandingPage = {
         })
       })
 
-      // lenis?.scrollTo(0, 0)
+      // lenis.scrollTo(0, { immediate: true })
       lenis?.stop()
     },
 
@@ -70,7 +70,7 @@ const brandingPage = {
         onLeaveBack: () => {
           gsap.to('.hero .section__headline .split-char', {
             duration: 1.234,
-            ease: 'power3.inOut',
+            ease: 'power3.out',
             stagger: 0.021,
             y: '0%',
           })
@@ -82,7 +82,7 @@ const brandingPage = {
       // Move headline a bit on scroll
 
       ScrollTrigger.create({
-        animation: gsap.fromTo('.hero .section__headline, .hero__circles', { y: '25rem' }, { ease: 'none', y: '-25rem' }),
+        animation: gsap.fromTo('.hero .section__headline, .hero__circles', { y: '44rem' }, { ease: 'none', y: '-44rem' }),
         end: '+=150%',
         scrub: true,
         start: '0% 0%',
@@ -167,23 +167,28 @@ const brandingPage = {
     },
 
     themeChange(): void {
-      document.querySelectorAll('.section').forEach((section) => {
+      const el = {
+        navigation: document.querySelector<HTMLElement>('.navigation'),
+        sections: document.querySelectorAll<HTMLElement>('.section'),
+      }
+
+      el.sections.forEach((section) => {
         ScrollTrigger.create({
           onEnter: () => {
             if (section.classList.contains('section--light')) {
-              document.querySelector('.navigation').classList.add('navigation--dark')
+              el.navigation.classList.add('navigation--light')
             } else {
-              document.querySelector('.navigation').classList.remove('navigation--dark')
+              el.navigation.classList.remove('navigation--light')
             }
           },
           onLeaveBack: () => {
             if (section.classList.contains('section--light')) {
-              document.querySelector('.navigation').classList.remove('navigation--dark')
+              el.navigation.classList.remove('navigation--light')
             } else {
-              document.querySelector('.navigation').classList.add('navigation--dark')
+              el.navigation.classList.add('navigation--light')
             }
           },
-          start: () => `0% ${window.innerHeight - document.querySelector<HTMLElement>('.navigation').offsetHeight}px`,
+          start: () => `0% ${window.innerHeight - el.navigation.offsetHeight}px`,
           trigger: section,
         })
       })
@@ -192,19 +197,18 @@ const brandingPage = {
 
   section: {
     scrollTriggers(): void {
-      document.querySelectorAll('.section:not(.hero)').forEach((section, index) => {  
+      document.querySelectorAll('.section:not(.hero)').forEach((section) => {  
         const el = {
           content: section.querySelector('.section__content'),
           headline: section.querySelector('.section__headline'),
-          headlineEyebrow: section.querySelector('.section__headline-eyebrow .split-line'),
-          headlineLines: section.querySelectorAll('.section__headline h1 .split-line'),
+          headlineLines: section.querySelectorAll('.section__headline-eyebrow .split-line, .section__headline h1 .split-line'),
         }
   
         // Reset headlines - on scroll down & scroll back up
   
         ScrollTrigger.create({
           onEnter: () => {
-            gsap.set([el.headlineEyebrow, el.headlineLines], { overwrite: true, y: '100%' })
+            gsap.set(el.headlineLines, { overwrite: true, y: '100%' })
           },
           start: '0% 100%',
           trigger: section,
@@ -212,7 +216,7 @@ const brandingPage = {
   
         ScrollTrigger.create({
           onEnter: () => {
-            gsap.set([el.headlineEyebrow, el.headlineLines], { overwrite: true, y: '100%' })
+            gsap.set(el.headlineLines, { overwrite: true, y: '100%' })
           },
           start: '100% 0%',
           trigger: section,
@@ -222,7 +226,7 @@ const brandingPage = {
   
         ScrollTrigger.create({
           onEnter: () => {
-            gsap.to([el.headlineEyebrow, el.headlineLines], {
+            gsap.to(el.headlineLines, {
               duration: 1.234,
               ease: 'power3.out',
               opacity: 1,
@@ -238,7 +242,7 @@ const brandingPage = {
   
         ScrollTrigger.create({
           onEnter: () => {
-            gsap.to([el.headlineEyebrow, el.headlineLines], {
+            gsap.to(el.headlineLines, {
               duration: 0.876,
               ease: 'power3.inOut',
               overwrite: true,
@@ -247,11 +251,11 @@ const brandingPage = {
             })
           },
           onLeaveBack: () => {
-            gsap.fromTo([el.headlineEyebrow, el.headlineLines], {
+            gsap.fromTo(el.headlineLines, {
               y: '100%',
             }, {
               duration: 1.234,
-              ease: 'power3.inOut',
+              ease: 'power3.out',
               opacity: 1,
               stagger: 0.0876,
               y: '0%',
@@ -265,10 +269,10 @@ const brandingPage = {
   
         ScrollTrigger.create({
           animation: gsap.fromTo(el.headline, {
-            y: '33rem',
+            y: '44rem',
           }, {
             ease: 'none',
-            y: '-33rem',
+            y: '-44rem',
           }),
           end: '+=210%',
           scrub: true,
@@ -326,6 +330,11 @@ const brandingPage = {
       this.navigation.themeChange()
     })
 
+
+
+
+
+
     // TODO: Test later
     // ScrollTrigger.normalizeScroll(true)
     
@@ -361,33 +370,24 @@ const brandingPage = {
 
     document.querySelectorAll('.symbol__boxes-container .split-line').forEach((line) => {
       ScrollTrigger.create({
-        // animation: 
-        //   gsap.to(line, {
-        //     ease: 'none',
-        //     opacity: 1,
-        //     y: '0%',
-        //   }),
         onEnter: () => {
           gsap.to(line, {
             duration: 1.234,
             ease: 'power4.out',
             opacity: 1,
-            // stagger: 0.0876,
             y: '0%',
           })
         },
-        // end: '+=5%',
-        // scrub: true,
         start: '0% 90%',
-        trigger: line,
+        trigger: line.parentElement,
       })
 
       ScrollTrigger.create({
         onLeaveBack: () => {
-          gsap.set(line, { y: '100%' })
+          gsap.set(line, { overwrite: true, y: '100%' })
         },
         start: '0% 100%',
-        trigger: line,
+        trigger: line.parentElement,
       })
     })
   },

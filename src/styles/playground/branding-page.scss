@@ -47,7 +47,7 @@
   --color-gray: #EEF2F6;
   --color-navy: #0B1423;
   --color-red: #FF3D00;
-  --color-white: #F2F5F8;
+  --color-white: #F8FAFB;
 
   --mobile-design-width: 440;
   --desktop-design-width: 1440;
@@ -71,8 +71,10 @@
   font-size: 21rem;
 
   .date {
+    padding: 21rem;
     color: var(--color-red);
     font-size: 11px;
+    pointer-events: none;
   }
 }
 
@@ -121,12 +123,15 @@
       padding: 0 24rem;
       overflow: hidden;
       backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 32rem;
       color: var(--color-red);
       font-size: 123%;
       pointer-events: all;
+      transition: border 0.321s;
 
       svg {
+        transform: translateY(1rem);
         width: 44rem;
         height: 25rem;
       }
@@ -136,14 +141,16 @@
       display: flex;
       flex-flow: row nowrap;
       align-items: center;
-      gap: 48rem; //64rem;
+      gap: 48rem;
       position: relative;
       z-index: 1;
       height: 64rem;
       padding: 0 36rem;
       overflow: hidden;
       backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 32rem;
+      transition: border 0.321s;
     }
     
     &__link {
@@ -158,9 +165,8 @@
 
     &__link-status {
       position: absolute;
-      inset: auto 0 0;
-      z-index: 1;
-      // opacity: 0;
+      inset: auto 0 -7rem;
+      z-index: -1;
 
       > div {
         transform: scaleX(0);
@@ -174,21 +180,27 @@
     &__background {
       position: absolute;
       inset: 0;
-      z-index: 1;
+      z-index: -1;
       background: var(--color-white); 
       border-radius: 32rem;
       opacity: 0.03;
-      transition: background 0.321s;
+      transition: background 0.321s, opacity 0.321s;
     }
   }
 
-  .navigation--dark {
+  .navigation--light {
+    .navigation__logo,
+    .navigation__links {
+      border-color: rgba(11, 20, 35, 0.07);
+    }
+
     .navigation__link {
       color: var(--color-navy);
     }
  
     .navigation__background {
       background: var(--color-navy);
+      opacity: 0.02;
     }
   }
 
@@ -201,7 +213,6 @@
     justify-content: flex-start;
     position: relative;
     z-index: 1;
-    min-height: 300dvh;
     overflow: hidden;
     clip-path: inset(0% 0% 0% 0%);
 
@@ -242,6 +253,7 @@
       }
 
       p {
+        margin-bottom: 4rem;
         color: var(--color-red);
         font-size: 16rem;
         font-weight: 700;
@@ -252,62 +264,8 @@
     &__content {
       width: 100%;
       margin: 150dvh 0 0;
-      padding: 0 12% 50dvh;
-
-      // TODO: Create partials + move this into component/refactor later
-
-      .symbol {
-        display: flex;
-        flex-flow: column nowrap;
-        gap: 80rem;
-        position: relative;
-        z-index: 3;
-        font-size: 24rem;
-
-        &__box {
-          aspect-ratio: 16 / 9;
-          background: var(--color-gray);
-          border-radius: 50rem;
-        }
-
-        &__boxes-container {
-          display: flex;
-          flex-flow: row nowrap;
-          gap: 40rem;
-
-          > * {
-            flex: 0 0 calc(50% - 20rem);
-          }
-        }
-
-        &__boxes {
-          display: flex;
-          flex-flow: column nowrap;
-          gap: 30rem;
-
-          > div {
-            aspect-ratio: 16 / 9;
-            border-radius: 30rem;
-          }
-
-          > div:first-child {
-            background: var(--color-gray);
-          }
-
-          > div:last-child {
-            background: var(--color-navy);
-          }
-        }
-      }
-
+      padding: 0 0 180rem;
     }
-
-    // .pin-marker {
-    //   position: absolute;
-    //   inset: -50dvh 0 auto;
-    //   z-index: 2;
-    //   border-bottom: 1px dashed var(--color-red);
-    // }
   }
 
   .hero {
@@ -339,13 +297,69 @@
     }
   }
 
-  // ! Components
-  // TODO: Split into partials
+  // Components
+
+  .container {
+    width: 100%;
+    max-width: 1440rem;
+    margin: 0 auto;
+    padding: 0 180rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 0 40rem;
+  }
+
+  .symbol {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 80rem;
+    position: relative;
+    z-index: 3;
+    font-size: 24rem;
+
+    &__box {
+      aspect-ratio: 16 / 9;
+      background: var(--color-gray);
+      border-radius: 50rem;
+    }
+
+    &__boxes-container {
+      display: flex;
+      flex-flow: row nowrap;
+      gap: 40rem;
+
+      > * {
+        flex: 0 0 calc(50% - 20rem);
+      }
+    }
+
+    &__boxes {
+      display: flex;
+      flex-flow: column nowrap;
+      gap: 30rem;
+
+      > div {
+        aspect-ratio: 16 / 9;
+        border-radius: 30rem;
+      }
+
+      > div:first-child {
+        background: var(--color-gray);
+      }
+
+      > div:last-child {
+        background: var(--color-navy);
+      }
+    }
+  }
 
   .shape {
-    // position: relative;
-    // z-index: 1;
-    // width: 300rem;
+    position: relative;
+    z-index: 1;
+    width: 300rem;
     overflow: hidden;
     aspect-ratio: 1;
     mask-size: cover;

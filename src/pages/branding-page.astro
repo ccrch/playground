@@ -23,9 +23,8 @@ const sectionId = (index) => navigation[index].url.replace('#', '')
 ---
 
 <script>
-  import brandingPage from '../scripts/playground/branding-page'
-  
-  brandingPage.init()
+  import stuff from '../scripts/playground/branding-page'
+  stuff.init()
 </script>
 
 <Layout baseClass={frontmatter.baseClass} navigationHidden={true} title={frontmatter.title}>
@@ -52,17 +51,19 @@ const sectionId = (index) => navigation[index].url.replace('#', '')
     </nav>
 
     <section class='hero section section--dark' id={sectionId(0)}>
-      <div class='section__headline'>
-        <h1>Ný ásýnd <br> Vettvangs</h1>
-      </div>
-      <div class='hero__circles'>
-        {Array.from({ length: 5 }).map(() => (
-          <div class='hero__circle'>
-            <div class='hero__circle-wrapper shape shape--circle-stroke'>
-              <div class='shape__gradient shape__gradient--conic'></div>
+      <div class='container'>
+        <div class='section__headline'>
+          <h1>Ný ásýnd<br> Vettvangs</h1>
+        </div>
+        <div class='hero__circles'>
+          {Array.from({ length: 5 }).map(() => (
+            <div class='hero__circle'>
+              <div class='hero__circle-wrapper shape shape--circle-stroke'>
+                <div class='shape__gradient shape__gradient--conic'></div>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
 
@@ -87,35 +88,11 @@ const sectionId = (index) => navigation[index].url.replace('#', '')
               </div>
             </div>
           </div>
-          : 
+          :
           randomText(111, 222)
         }
       </BrandingPageSection>
     ))}
-
-    <!-- <section class='section section--light' id={sectionId(1)}>
-      [section-1]
-    </section>
-
-    <section class='section section--dark' id={sectionId(2)}>
-      [section-2]
-    </section>
-
-    <section class='section section--light' id={sectionId(3)}>
-      [section-3]
-    </section>
-
-    <section class='section section--dark' id={sectionId(4)}>
-      [section-4]
-    </section>
-
-    <section class='section section--light' id={sectionId(5)}>
-      [section-5]
-    </section>
-
-    <section class='section section--dark' id={sectionId(6)}>
-      [section-6]
-    </section> -->
 
   </main>
 </Layout>
