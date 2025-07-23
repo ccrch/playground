@@ -1,7 +1,7 @@
 import gsap from 'gsap'
 
 const animatedSvgTextOnPath = {
-  q: gsap.utils.selector('.svg-text-on-path-animation__body'),
+  q: gsap.utils.selector('.svg-text-on-path-animation-body'),
 
   init(): void {
     gsap.set(this.q('.svg-text-on-path-animation'), { opacity: 1 })
