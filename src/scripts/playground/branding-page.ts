@@ -214,7 +214,7 @@ const brandingPage = {
     reset(): void {
       // Set random circle rotations
 
-      document.querySelectorAll('.section--home .circle-wrapper').forEach((circle) => {
+      document.querySelectorAll('.section--home .circle').forEach((circle) => {
         gsap.set(circle, {
           rotate: gsap.utils.random(0, 180, 33),
         })
@@ -250,7 +250,7 @@ const brandingPage = {
       // Hide circles on scroll down
 
       ScrollTrigger.create({
-        animation: gsap.to('.section--home .circle', { ease: 'none', opacity: 0, stagger: 0.21 }),
+        animation: gsap.to('.section--home .circle-container', { ease: 'none', opacity: 0, stagger: 0.21 }),
         end: '100% 0%',
         scrub: true,
         start: '0% -10%',
@@ -314,16 +314,57 @@ const brandingPage = {
     scrollTriggers(): void {
       // Pinning the details text
 
-      ScrollTrigger.create({
-        end: () => `100% ${document.querySelector<HTMLElement>('.section--sign .details__text').offsetHeight + 40}px`,
-        pin: '.section--sign .details__text',
-        start: '0% 40rem',
-        trigger: '.section--sign .details__boxes',
-      })
+      // ScrollTrigger.create({
+      //   end: () => `100% ${document.querySelector<HTMLElement>('.section--sign .details__text').offsetHeight + 40}px`,
+      //   pin: '.section--sign .details__text',
+      //   start: '0% 40rem',
+      //   trigger: '.section--sign .details__boxes',
+      // })
+
+      // Moving the details text along with boxes on the right
+
+      // const el = {
+      //   boxes: document.querySelector<HTMLElement>('.section--sign .details__boxes'),
+      //   text: document.querySelector<HTMLElement>('.section--sign .details__text'),
+      // }
+
+      // ScrollTrigger.create({
+      //   // animation:
+      //   //  `100% ${document.querySelector<HTMLElement>('.section--sign .details__text').offsetHeight + 40}px`,
+      //   // pin: '.section--sign .details__text',
+      //   animation: gsap.to(el.text, { ease: 'none', y: el.boxes.offsetHeight - el.text.offsetHeight }),
+      //   end: '100% 0%',
+      //   scrub: true,
+      //   start: '0% 100%',
+      //   trigger: el.boxes,
+      // })
 
       // Showing/hiding logos
 
+      gsap.set('.section--sign .box', { overwrite: true, scale: 0.8 })
       gsap.set('.section--sign .logo', { overwrite: true, scale: 0 })
+
+      document.querySelectorAll('.section--sign .box').forEach((box) => {
+        ScrollTrigger.create({
+          onEnter: () => {
+            gsap.to(box, {
+              scale: 1,
+              duration: 1.234,
+              ease: 'power3.out',
+            })
+          },
+          start: '0% 100%',
+          trigger: box,
+        })
+
+        ScrollTrigger.create({
+          onLeaveBack: () => {
+            gsap.set(box, { scale: 0.8, overwrite: true })
+          },
+          start: '0% 100%',
+          trigger: box,
+        })
+      })
 
       document.querySelectorAll('.section--sign .logo').forEach((logo, index) => {
         ScrollTrigger.create({
@@ -409,7 +450,7 @@ const brandingPage = {
       this.section.splitText()
       this.sectionHome.reset()
       this.sectionHome.splitText()
-      this.typography.splitText()
+      // this.typography.splitText()
     }).then(() => {
       // Revealing the page
 
@@ -420,7 +461,7 @@ const brandingPage = {
       this.section.scrollTriggers()
       this.sectionHome.scrollTriggers()
       this.sectionSign.scrollTriggers()
-      this.typography.scrollTriggers()
+      // this.typography.scrollTriggers()
 
       // Handling navigation
 

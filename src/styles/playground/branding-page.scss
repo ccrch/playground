@@ -324,14 +324,14 @@
       z-index: 1;
     }
 
-    .circle {
+    .circle-container {
       position: absolute;
       inset: 50% auto auto 50%;
       z-index: 1;
       transform: translate(-50%, calc(-50% - 32rem));
 
       @for $i from 1 through 5 {
-        &:nth-child(#{$i}) .circle-wrapper {
+        &:nth-child(#{$i}) .circle {
           width: #{360 + (270 * $i) + 'rem'};
           opacity: #{0.9 - (0.17 * $i)};
 
@@ -380,14 +380,14 @@
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
     gap: 0 80rem;
-  }
 
-  .grid-col {
-    grid-column: span 1;
-
-    @for $i from 1 through 12 {
-      &--#{$i}  {
-        grid-column: span $i;
+    &__col {
+      grid-column: span 1;
+  
+      @for $i from 1 through 12 {
+        &--#{$i}  {
+          grid-column: span $i;
+        }
       }
     }
   }

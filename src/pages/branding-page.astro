@@ -59,8 +59,8 @@ const sectionId = (index) => navigation[index].url.replace('#', '')
         </div>
         <div class='circles'>
           {Array.from({ length: 5 }).map(() => (
-            <div class='circle'>
-              <div class='circle-wrapper shape shape--circle-stroke'>
+            <div class='circle-container'>
+              <div class='circle shape shape--circle-stroke'>
                 <div class='shape__gradient shape__gradient--conic'></div>
               </div>
             </div>
@@ -84,10 +84,10 @@ const sectionId = (index) => navigation[index].url.replace('#', '')
           </div>
           <div class='details'>
             <div class='grid'>
-              <div class='grid-col grid-col--6'>
+              <div class='grid__col grid__col--6'>
                 <p class='details__text split-text'>Nýja merkið okkar er skarpara, einfaldara og hannað með fjölbreytta miðla í huga. Það er eftirminnilegt, auðvelt í útfærslu og stendur sterkt eitt og sér – en líka sem hluti af heild.</p>
               </div>
-              <div class='grid-col grid-col--6'>
+              <div class='grid__col grid__col--6'>
                 <div class='details__boxes'>
                   <div class='box box--small box--light'>
                     <div class='logo'></div>
