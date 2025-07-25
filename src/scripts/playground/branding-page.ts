@@ -169,10 +169,10 @@ const brandingPage = {
   
         ScrollTrigger.create({
           animation: gsap.fromTo(el.headline, {
-            y: '44rem',
+            y: '66rem',
           }, {
             ease: 'none',
-            y: '-44rem',
+            y: '-66rem',
           }),
           end: '+=210%',
           scrub: true,
