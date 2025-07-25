@@ -437,24 +437,23 @@ const brandingPage = {
 
     // Loading the page
 
-    new Promise((resolve) => {
+    ;(async () => {
       // Loading fonts
 
-      document.fonts.ready.then(() => {
-        setTimeout(() => resolve(1), 12)
-      })
-    }).then(() => {
-      // Loading & reseting page stuff
+      await document.fonts.ready
+      await new Promise(r => setTimeout(r, 12))
+    
+      //  Loading & reseting page stuff
 
       lenisScroll.init()
-      this.section.splitText()
-      this.sectionHome.reset()
-      this.sectionHome.splitText()
-      // this.typography.splitText()
-    }).then(() => {
+      await this.section.splitText()
+      await this.sectionHome.reset()
+      await this.sectionHome.splitText()
+      // await this.typography.splitText()
+    
       // Revealing the page
 
-      this.sectionHome.reveal()
+      await this.sectionHome.reveal()
 
       // Handling scroll triggers
 
@@ -462,18 +461,18 @@ const brandingPage = {
       this.sectionHome.scrollTriggers()
       this.sectionSign.scrollTriggers()
       // this.typography.scrollTriggers()
-
+    
       // Handling navigation
 
       this.navigation.links()
       this.navigation.linksStatus()
       this.navigation.themeChange()
-    }).then(() => {
-      setTimeout(() => {
-        ScrollTrigger.refresh()
-      }, 12)
-    })
+    
+      // ScrollTrigger refresh
 
+      await new Promise(r => setTimeout(r, 12))
+      ScrollTrigger.refresh()
+    })()
 
 
 
