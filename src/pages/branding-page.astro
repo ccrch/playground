@@ -10,13 +10,13 @@ import '../styles/playground/branding-page.scss'
 import { randomText } from 'src/scripts/core/astro-helpers'
 
 const navigation = [
-  { label: 'Heim', url: '#heim' },
-  { label: 'Merkið', url: '#merkid', headline: 'Ný nálgun á rótgrónu merki' },
-  { label: 'Litir', url: '#litir', headline: 'Litirnir spegla kjarnann okkar' },
-  { label: 'Letur', url: '#letur', headline: 'Letrið setur tóninn' },
-  { label: 'Tákn', url: '#takn', headline: 'Grafíkin styður upplifun og flæði' },
-  { label: 'Raddblær', url: '#raddblaer', headline: 'Við erum hnitmiðuð, aðgengileg, skýr, reynd, traust, vinaleg, leiðandi og áhrifarík' },
-  { label: 'Ásýnd', url: '#asynd', headline: 'Samræmi skapar fagurfræðilega heild' },
+  { section: 'home', label: 'Heim', url: '#heim' },
+  { section: 'sign', label: 'Merkið', url: '#merkid', headline: 'Ný nálgun á rótgrónu merki' },
+  { section: 'colors', label: 'Litir', url: '#litir', headline: 'Litirnir spegla kjarnann okkar' },
+  { section: 'typography', label: 'Letur', url: '#letur', headline: 'Letrið setur tóninn' },
+  { section: 'symbols', label: 'Tákn', url: '#takn', headline: 'Grafíkin styður upplifun og flæði' },
+  { section: 'tone', label: 'Raddblær', url: '#raddblaer', headline: 'Við erum hnitmiðuð, aðgengileg, skýr, reynd, traust, vinaleg, leiðandi og áhrifarík' },
+  { section: 'appearance', label: 'Ásýnd', url: '#asynd', headline: 'Samræmi skapar fagurfræðilega heild' },
 ]
 
 const sectionId = (index) => navigation[index].url.replace('#', '')
@@ -50,15 +50,17 @@ const sectionId = (index) => navigation[index].url.replace('#', '')
       </div>
     </nav>
 
-    <section class='hero section section--dark' id={sectionId(0)}>
+    <section class='section section--home section--dark' id={sectionId(0)}>
       <div class='container'>
         <div class='section__headline'>
-          <h1>Ný ásýnd<br> Vettvangs</h1>
+          <div>
+            <h1>Ný ásýnd<br> Vettvangs</h1>
+          </div>
         </div>
-        <div class='hero__circles'>
+        <div class='circles'>
           {Array.from({ length: 5 }).map(() => (
-            <div class='hero__circle'>
-              <div class='hero__circle-wrapper shape shape--circle-stroke'>
+            <div class='circle'>
+              <div class='circle-wrapper shape shape--circle-stroke'>
                 <div class='shape__gradient shape__gradient--conic'></div>
               </div>
             </div>
@@ -69,26 +71,38 @@ const sectionId = (index) => navigation[index].url.replace('#', '')
 
     {navigation.map((item, index) => (
       index !== 0 && <BrandingPageSection
+        className={`section--${item.section}`}
         eyebrow={item.label}
         id={sectionId(index)}
         isDark={(index - 1) % 2}
         headline={item.headline ? item.headline : randomText(3, 5)}
       >
-        {index === 1 ?
-          <div class='symbol'>
-            <div class='symbol__box'>
-              <div></div>
-              <div></div>
-            </div>
-            <div class='symbol__boxes-container'>
-              <p>{randomText(30, 55)}</p>
-              <div class='symbol__boxes'>
-                <div></div>
-                <div></div>
+        {item.section === 'sign' ?
+          <div class='box box--light box--1'>
+            <div class='logo'></div>
+            <div class='logo'></div>
+          </div>
+          <div class='details'>
+            <div class='grid'>
+              <div class='grid-col grid-col--6'>
+                <p class='details__text split-text'>Nýja merkið okkar er skarpara, einfaldara og hannað með fjölbreytta miðla í huga. Það er eftirminnilegt, auðvelt í útfærslu og stendur sterkt eitt og sér – en líka sem hluti af heild.</p>
+              </div>
+              <div class='grid-col grid-col--6'>
+                <div class='details__boxes'>
+                  <div class='box box--small box--light'>
+                    <div class='logo'></div>
+                  </div>
+                  <div class='box box--small box--dark'>
+                    <div class='logo'></div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          :
+          <div class='box box--dark'>
+            <div class='logo'></div>
+          </div>
+        :
           randomText(111, 222)
         }
       </BrandingPageSection>

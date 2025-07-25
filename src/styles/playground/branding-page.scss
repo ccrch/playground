@@ -95,6 +95,7 @@
 
     .split-line {
       margin: -18rem 0;
+      will-change: transform;
     }
   }
 
@@ -262,39 +263,101 @@
     }
 
     &__content {
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 180rem;
+      position: relative;
+      z-index: 3;
       width: 100%;
       margin: 150dvh 0 0;
       padding: 0 0 180rem;
     }
+
+    &__shapes {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      // opacity: 0.2;
+      will-change: transform;
+
+      > div {
+        position: absolute;
+        z-index: 1;
+        width: 440rem;
+        aspect-ratio: 1;
+        // border-radius: 50%;
+        // border: 13rem solid var(--color-red);
+
+        &:nth-child(2n) {
+          left: -3%;
+        }
+
+        &:nth-child(2n + 1) {
+          right: -3%;
+        }
+
+        @for $i from 1 through 10 {
+          &:nth-child(#{$i})  {
+            top: #{-30 + 10 * $i + '%'};
+          }
+        }
+      }
+    }
   }
 
-  .hero {
+  .section--home {
     justify-content: center;
     min-height: 100vh;
 
-    &__circles {
+    .circles {
       position: fixed;
       inset: 0;
       z-index: 1;
     }
 
-    &__circle {
+    .circle {
       position: absolute;
       inset: 50% auto auto 50%;
       z-index: 1;
       transform: translate(-50%, calc(-50% - 32rem));
 
       @for $i from 1 through 5 {
-        &:nth-child(#{$i}) .hero__circle-wrapper {
-          width: #{320 + (270 * $i) + rem};
+        &:nth-child(#{$i}) .circle-wrapper {
+          width: #{360 + (270 * $i) + 'rem'};
           opacity: #{0.9 - (0.17 * $i)};
 
           .shape__gradient {
-            animation-duration: #{11 * $i + s};
+            animation-duration: #{11 * $i + 's'};
           }
         }
       }
     }
+  }
+
+  .section--sign {
+    .box--1 {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: space-evenly;
+    }
+
+    .logo {
+      width: 21%;
+    }
+
+    .details__boxes {
+      display: flex;
+      flex-flow: column nowrap;
+      gap: 40rem;
+    }
+
+    // .details__text { // Can't use it because of overflow: hidden;
+    //   position: sticky;
+    //   top: 40rem;
+    // }
   }
 
   // Components
@@ -309,53 +372,47 @@
   .grid {
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
-    gap: 0 40rem;
+    gap: 0 80rem;
   }
 
-  .symbol {
+  .grid-col {
+    grid-column: span 1;
+
+    @for $i from 1 through 12 {
+      &--#{$i}  {
+        grid-column: span $i;
+      }
+    }
+  }
+
+  .box {
     display: flex;
-    flex-flow: column nowrap;
-    gap: 80rem;
-    position: relative;
-    z-index: 3;
-    font-size: 24rem;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 40rem;
 
-    &__box {
-      aspect-ratio: 16 / 9;
+    &--light {
       background: var(--color-gray);
-      border-radius: 50rem;
     }
 
-    &__boxes-container {
-      display: flex;
-      flex-flow: row nowrap;
-      gap: 40rem;
-
-      > * {
-        flex: 0 0 calc(50% - 20rem);
-      }
+    &--dark {
+      background: var(--color-navy);
     }
 
-    &__boxes {
-      display: flex;
-      flex-flow: column nowrap;
-      gap: 30rem;
-
-      > div {
-        aspect-ratio: 16 / 9;
-        border-radius: 30rem;
-      }
-
-      > div:first-child {
-        background: var(--color-gray);
-      }
-
-      > div:last-child {
-        background: var(--color-navy);
-      }
+    &--small {
+      border-radius: 30rem;
     }
   }
 
+  .logo {
+    width: 123rem;
+    aspect-ratio: 1;
+    background: var(--color-red);
+    border-radius: 50%;
+  }
+  
   .shape {
     position: relative;
     z-index: 1;
@@ -367,7 +424,7 @@
     &--circle-stroke {
       mask-image: url('data:image/svg+xml;utf8,\
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
-          <circle cx="50" cy="50" r="45" fill="none" stroke="black" stroke-width="2" vector-effect="non-scaling-stroke" />\
+          <circle cx="50" cy="50" r="45" fill="none" stroke="black" stroke-width="3" vector-effect="non-scaling-stroke" />\
         </svg>');
     }
 
@@ -375,6 +432,7 @@
       position: absolute;
       inset: -66rem;
       z-index: 0; 
+      will-change: transform;
 
       &--conic {
         background: conic-gradient(

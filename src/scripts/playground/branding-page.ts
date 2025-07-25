@@ -4,106 +4,6 @@ import SplitText from 'gsap/SplitText'
 import { lenis, lenisScroll } from '../core/helpers'
 
 const brandingPage = {  
-  hero: {
-    reset(): void {
-      // Set random circle rotations
-
-      document.querySelectorAll('.hero__circle-wrapper').forEach((circle) => {
-        gsap.set(circle, {
-          rotate: gsap.utils.random(0, 180, 33),
-        })
-      })
-
-      // lenis.scrollTo(0, { immediate: true })
-      lenis?.stop()
-    },
-
-    reveal(): void {
-      // Reveal the page
-
-      gsap.to('.branding-page', { delay: 0.234, duration: 1.234, opacity: 1 })
-
-      // Show headline characters
-
-      gsap.to('.hero h1 .split-char', {
-        delay: 0.543,
-        duration: 1.234,
-        ease: 'power3.inOut',
-        stagger: 0.021,
-        y: '0%',
-      })
-
-      // Enable scrolling
-
-      setTimeout(() => {
-        lenis?.start()
-      }, 1234)
-    },
-
-    scrollTriggers(): void {
-      // Hide circles on scroll down
-
-      ScrollTrigger.create({
-        animation: gsap.to('.hero__circle', { ease: 'none', opacity: 0, stagger: 0.21 }),
-        end: '100% 0%',
-        scrub: true,
-        start: '0% -10%',
-        trigger: '.hero',
-      })
-
-      // Hide headline on scroll down
-
-      ScrollTrigger.create({
-        onEnter: () => {
-          gsap.set('.hero .section__headline .split-char', {
-            overwrite: true,
-            y: '100%',
-          })
-        },
-        start: '100% 30%',
-        trigger: '.hero',
-      })
-
-      // Show headline on scroll back up
-
-      ScrollTrigger.create({
-        onLeaveBack: () => {
-          gsap.to('.hero .section__headline .split-char', {
-            duration: 1.234,
-            ease: 'power3.out',
-            stagger: 0.021,
-            y: '0%',
-          })
-        },
-        start: '100% 70%',
-        trigger: '.hero',
-      })
-
-      // Move headline a bit on scroll
-
-      ScrollTrigger.create({
-        animation: gsap.fromTo('.hero .section__headline, .hero__circles', { y: '44rem' }, { ease: 'none', y: '-44rem' }),
-        end: '+=150%',
-        scrub: true,
-        start: '0% 0%',
-        trigger: '.hero',
-      })
-    },
-
-    splitText(): void {
-      // Split the text & reset it
-
-      SplitText.create('.hero h1', {
-        charsClass: 'split-char',
-        linesClass: 'split-line',
-        mask: 'lines',
-        type: 'chars, lines',
-      })
-
-      gsap.set('.hero h1 .split-char', { overwrite: true, y: '100%' })
-    },
-  },
-
   navigation: {
     links(): void {
       document.querySelectorAll('.navigation__logo, .navigation__link').forEach((link) => {
@@ -121,7 +21,7 @@ const brandingPage = {
     },
 
     linksStatus(): void {
-      document.querySelectorAll('.section:not(.hero)').forEach((section, index) => {
+      document.querySelectorAll('.section:not(.section--home)').forEach((section, index) => {
         // Move the line along with section's scroll progress
 
         ScrollTrigger.create({
@@ -197,7 +97,7 @@ const brandingPage = {
 
   section: {
     scrollTriggers(): void {
-      document.querySelectorAll('.section:not(.hero)').forEach((section) => {  
+      document.querySelectorAll('.section:not(.section--home)').forEach((section) => {  
         const el = {
           content: section.querySelector('.section__content'),
           headline: section.querySelector('.section__headline'),
@@ -285,13 +185,194 @@ const brandingPage = {
     splitText(): void {
       // Split the text & reset it
 
-      SplitText.create('.section:not(.hero) .section__headline h1, .section:not(.hero) .section__headline p', {
+      SplitText.create('.section:not(.section--home) .section__headline h1, .section:not(.section--home) .section__headline p', {
         linesClass: 'split-line',
         mask: 'lines',
         type: 'lines',
       })
 
-      gsap.set('.section:not(.hero) .section__headline .split-line', { overwrite: true, y: '100%' })
+      gsap.set('.section:not(.section--home) .section__headline .split-line', { overwrite: true, y: '100%' })
+    },
+  },
+
+  sectionHome: {
+    reset(): void {
+      // Set random circle rotations
+
+      document.querySelectorAll('.section--home .circle-wrapper').forEach((circle) => {
+        gsap.set(circle, {
+          rotate: gsap.utils.random(0, 180, 33),
+        })
+      })
+
+      // lenis.scrollTo(0, { immediate: true })
+      lenis?.stop()
+    },
+
+    reveal(): void {
+      // Reveal the page
+
+      gsap.to('.branding-page', { delay: 0.234, duration: 1.234, opacity: 1 })
+
+      // Show headline characters
+
+      gsap.to('.section--home h1 .split-char', {
+        delay: 0.543,
+        duration: 1.234,
+        ease: 'power3.inOut',
+        stagger: 0.021,
+        y: '0%',
+      })
+
+      // Enable scrolling
+
+      setTimeout(() => {
+        lenis?.start()
+      }, 1234)
+    },
+
+    scrollTriggers(): void {
+      // Hide circles on scroll down
+
+      ScrollTrigger.create({
+        animation: gsap.to('.section--home .circle', { ease: 'none', opacity: 0, stagger: 0.21 }),
+        end: '100% 0%',
+        scrub: true,
+        start: '0% -10%',
+        trigger: '.section--home',
+      })
+
+      // Hide headline on scroll down
+
+      ScrollTrigger.create({
+        onEnter: () => {
+          gsap.set('.section--home .section__headline .split-char', {
+            overwrite: true,
+            y: '100%',
+          })
+        },
+        start: '100% 30%',
+        trigger: '.section--home',
+      })
+
+      // Show headline on scroll back up
+
+      ScrollTrigger.create({
+        onLeaveBack: () => {
+          gsap.to('.section--home .section__headline .split-char', {
+            duration: 1.234,
+            ease: 'power3.out',
+            stagger: 0.021,
+            y: '0%',
+          })
+        },
+        start: '100% 70%',
+        trigger: '.section--home',
+      })
+
+      // Move headline a bit on scroll
+
+      ScrollTrigger.create({
+        animation: gsap.fromTo('.section--home .section__headline, .section--home .circles', { y: '44rem' }, { ease: 'none', y: '-44rem' }),
+        end: '+=150%',
+        scrub: true,
+        start: '0% 0%',
+        trigger: '.section--home',
+      })
+    },
+
+    splitText(): void {
+      // Split the text & reset it
+
+      SplitText.create('.section--home h1', {
+        charsClass: 'split-char',
+        linesClass: 'split-line',
+        mask: 'lines',
+        type: 'chars, lines',
+      })
+
+      gsap.set('.section--home h1 .split-char', { overwrite: true, y: '100%' })
+    },
+  },
+
+  sectionSign: {
+    scrollTriggers(): void {
+      // Pinning the details text
+
+      ScrollTrigger.create({
+        end: () => `100% ${document.querySelector<HTMLElement>('.section--sign .details__text').offsetHeight + 40}px`,
+        pin: '.section--sign .details__text',
+        start: '0% 40rem',
+        trigger: '.section--sign .details__boxes',
+      })
+
+      // Showing/hiding logos
+
+      gsap.set('.section--sign .logo', { overwrite: true, scale: 0 })
+
+      document.querySelectorAll('.section--sign .logo').forEach((logo, index) => {
+        ScrollTrigger.create({
+          onEnter: () => {
+            gsap.to(logo, {
+              delay: index === 1 ? 0.234 : 0,
+              duration: 0.876,
+              ease: 'power3.out',
+              scale: 1,
+            })
+          },
+          start: '0% 80%',
+          trigger: logo.parentElement,
+        })
+
+        ScrollTrigger.create({
+          onLeaveBack: () => {
+            gsap.set(logo, { overwrite: true, scale: 0 })
+          },
+          start: '0% 100%',
+          trigger: logo.parentElement,
+        })
+      })
+    },
+  },
+
+  typography: {
+    scrollTriggers(): void {
+      // Handle scroll trigger for all content split text
+
+      document.querySelectorAll('.split-text .split-line').forEach((line) => {
+        ScrollTrigger.create({
+          onEnter: () => {
+            gsap.to(line, {
+              duration: 1.234,
+              ease: 'power4.out',
+              opacity: 1,
+              y: '0%',
+            })
+          },
+          start: '0% 90%',
+          trigger: line.parentElement,
+        })
+  
+        ScrollTrigger.create({
+          onLeaveBack: () => {
+            gsap.set(line, { overwrite: true, y: '100%' })
+          },
+          start: '0% 100%',
+          trigger: line.parentElement,
+        })
+      })
+    },
+
+    splitText(): void {
+      // Split the text & reset it
+
+      SplitText.create('.split-text', {
+        linesClass: 'split-line',
+        mask: 'lines',
+        type: 'lines',
+      })
+  
+      gsap.set('.split-text .split-line', { overwrite: true, y: '100%' })
     },
   },
 
@@ -310,24 +391,31 @@ const brandingPage = {
       // Loading & reseting page stuff
 
       lenisScroll.init()
-      this.hero.reset()
-      this.hero.splitText()
       this.section.splitText()
+      this.sectionHome.reset()
+      this.sectionHome.splitText()
+      this.typography.splitText()
     }).then(() => {
       // Revealing the page
 
-      this.hero.reveal()
+      this.sectionHome.reveal()
 
       // Handling scroll triggers
 
-      this.hero.scrollTriggers()
       this.section.scrollTriggers()
+      this.sectionHome.scrollTriggers()
+      this.sectionSign.scrollTriggers()
+      this.typography.scrollTriggers()
 
       // Handling navigation
 
       this.navigation.links()
       this.navigation.linksStatus()
       this.navigation.themeChange()
+    }).then(() => {
+      setTimeout(() => {
+        ScrollTrigger.refresh()
+      }, 12)
     })
 
 
@@ -338,56 +426,27 @@ const brandingPage = {
     // TODO: Test later
     // ScrollTrigger.normalizeScroll(true)
     
-    SplitText.create('.symbol__boxes-container p', {
-      linesClass: 'split-line',
-      mask: 'lines',
-      type: 'lines',
-    })
+    // TODO: Testing parallax shapes
 
-    gsap.set('.symbol__boxes-container .split-line', { overwrite: true, y: '100%' })
+    gsap.set('.section__shapes', { display: 'none' })
 
-    // ScrollTrigger.create({
-    //   onEnter: () => {
-    //     gsap.to('.symbol__boxes-container .split-line', {
-    //       duration: 1.234,
-    //       ease: 'power4.out',
-    //       opacity: 1,
-    //       stagger: 0.0876,
-    //       y: '0%',
-    //     })
-    //   },
-    //   start: '0% 80%',
-    //   trigger: '.symbol__boxes-container',
-    // })
+    document.querySelectorAll('.section:not(.section--home)').forEach((section) => {
+      section.querySelectorAll('.section__shapes > div').forEach((shape, index) => {
+        gsap.set(shape, { width: gsap.utils.random(180, 440, 44) + 'rem', aspectRatio: 1 })
 
-    // ScrollTrigger.create({
-    //   onLeaveBack: () => {
-    //     gsap.set('.symbol__boxes-container .split-line', { opacity: 0, overwrite: true, y: '100%' })
-    //   },
-    //   start: '0% 100%',
-    //   trigger: '.symbol__boxes-container',
-    // })
-
-    document.querySelectorAll('.symbol__boxes-container .split-line').forEach((line) => {
-      ScrollTrigger.create({
-        onEnter: () => {
-          gsap.to(line, {
-            duration: 1.234,
-            ease: 'power4.out',
-            opacity: 1,
-            y: '0%',
-          })
-        },
-        start: '0% 90%',
-        trigger: line.parentElement,
+        if ((index - 1) % 2 === 0) {
+          gsap.set(shape, { left: gsap.utils.random(-10, -1, 1) + '%' })
+        } else {
+          gsap.set(shape, { right: gsap.utils.random(-10, -1, 1) + '%' })
+        }
       })
 
       ScrollTrigger.create({
-        onLeaveBack: () => {
-          gsap.set(line, { overwrite: true, y: '100%' })
-        },
+        animation: gsap.to(section.querySelector('.section__shapes'), { y: '50%'}),
+        end: '100% 0%',
+        scrub: true,
         start: '0% 100%',
-        trigger: line.parentElement,
+        trigger: section,
       })
     })
   },

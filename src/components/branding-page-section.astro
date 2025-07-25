@@ -1,10 +1,10 @@
 ---
-const { eyebrow, headline, id, isDark = false } = Astro.props
+const { className = '', eyebrow, headline, id, isDark = false } = Astro.props
 
 const themeClass = isDark ? 'section--dark' : 'section--light'
 ---
 
-<div class={`section ${themeClass}`} id={id}>
+<div class={`section ${className} ${themeClass}`} id={id}>
   <div class='container'>
     <div class='section__headline'>
       <div>
@@ -15,5 +15,12 @@ const themeClass = isDark ? 'section--dark' : 'section--light'
     <div class='section__content'>
       <slot />
     </div>
+  </div>
+  <div class='section__shapes'>
+    {Array.from({ length: 10 }).map(() => (
+      <div class='shape shape--circle-stroke'>
+        <div class='shape__gradient shape__gradient--conic'></div>
+      </div>
+    ))}
   </div>
 </div>
