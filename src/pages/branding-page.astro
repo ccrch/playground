@@ -17,6 +17,7 @@ const navigation = [
   { section: 'symbols', label: 'Tákn', url: '#takn', headline: 'Grafíkin styður upplifun og flæði' },
   { section: 'tone', label: 'Raddblær', url: '#raddblaer', headline: 'Við erum hnitmiðuð, aðgengileg, skýr, reynd, traust, vinaleg, leiðandi og áhrifarík' },
   { section: 'appearance', label: 'Ásýnd', url: '#asynd', headline: 'Samræmi skapar fagurfræðilega heild' },
+  { section: 'summary', label: 'Ein heild', url: '#ein-heid', headline: 'Merki, litir, letur og grafík vinna saman að því að skapa samræmda ímynd sem styrkir bæði notagildi og útlit.' },
 ]
 
 const sectionId = (index) => navigation[index].url.replace('#', '')
@@ -41,7 +42,7 @@ const sectionId = (index) => navigation[index].url.replace('#', '')
       </a>
       <div class='navigation__links'>
         {navigation.map((item, index) => (
-          index !== 0 && <a class='navigation__link' href={item.url}>
+          index !== 0 && index !== navigation.length - 1 && <a class='navigation__link' href={item.url}>
             {item.label}
             <div class='navigation__link-status'><div></div></div>
           </a>
@@ -50,17 +51,19 @@ const sectionId = (index) => navigation[index].url.replace('#', '')
       </div>
     </nav>
 
-    <section class='section section--home section--dark' id={sectionId(0)}>
+    <section class='section section--home section--navy' id={sectionId(0)}>
       <div class='container'>
         <div class='section__headline'>
-          <div>
-            <h1>Ný ásýnd<br> Vettvangs</h1>
+          <div class='container'>
+            <div>
+              <h1>Ný ásýnd<br> Vettvangs</h1>
+            </div>
           </div>
         </div>
         <div class='circles'>
           {Array.from({ length: 5 }).map(() => (
-            <div class='circle-container'>
-              <div class='circle shape shape--circle-stroke'>
+            <div class='circle'>
+              <div class='circle__container shape shape--circle-stroke'>
                 <div class='shape__gradient shape__gradient--conic'></div>
               </div>
             </div>
@@ -74,13 +77,16 @@ const sectionId = (index) => navigation[index].url.replace('#', '')
         className={`section--${item.section}`}
         eyebrow={item.label}
         id={sectionId(index)}
-        isDark={(index - 1) % 2}
+        isHeadlineSmall={item.section === 'tone' || item.section === 'summary'}
+        isNavy={(index - 1) % 2}
         headline={item.headline ? item.headline : randomText(3, 5)}
       >
-        {item.section === 'sign' ?
-          <div class='box box--light box--1'>
-            <div class='logo'></div>
-            <div class='logo'></div>
+        {item.section === 'sign' &&
+          <div class='box box--gray box--1'>
+            <div class='box__container'>
+              <div class='logo'></div>
+              <div class='logo'></div>
+            </div>
           </div>
           <div class='details'>
             <div class='grid'>
@@ -89,24 +95,177 @@ const sectionId = (index) => navigation[index].url.replace('#', '')
               </div>
               <div class='grid__col grid__col--6'>
                 <div class='details__boxes'>
-                  <div class='box box--small box--light'>
-                    <div class='logo'></div>
+                  <div class='box box--small box--gray'>
+                    <div class='box__container'>
+                      <div class='logo'></div>
+                    </div>
                   </div>
-                  <div class='box box--small box--dark'>
-                    <div class='logo'></div>
+                  <div class='box box--small box--navy'>
+                    <div class='box__container'>
+                      <div class='logo'></div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class='box box--dark'>
-            <div class='logo'></div>
+          <div class='box box--gray'>
+            <div class='box__container'>
+              <div class='logo'></div>
+            </div>
           </div>
-        :
-          randomText(111, 222)
+        }
+        {item.section === 'colors' &&
+          <div class='box box--white'>
+            <div class='box__container'>
+              [colors]
+            </div>
+          </div>
+          <div class='grid'>
+            <div class='grid__col grid__col--6'>
+              <h2 class='split-text'>Litirnir okkar</h2>
+            </div>
+            <div class='grid__col grid__col--6'>
+              <p class='split-text'>Litapalletta Vettvangs er skörp og afgerandi – og dregur fram þau gildi sem móta sjálfsmynd okkar: heiðarleika, hreinskiptni og skýrar línur.</p>
+            </div>
+          </div>
+        }
+        {item.section === 'typography' &&
+          <div class='typography-circles'>
+            <div class='typography-circle'>
+              <p>Læsilegt</p>
+            </div>
+            <div class='typography-circle'>
+              <p>Þægilegt</p>
+            </div>
+            <div class='typography-circle'>
+              <p>Fágað</p>
+            </div>
+            <div class='typography-circle'>
+              <p>Fallegt</p>
+            </div>
+            <div class='typography-circle'>
+              <p>Sterkt</p>
+            </div>
+          </div>
+          <div class='grid'>
+            <div class='grid__col grid__col--6'>
+              <h2 class='split-text'>Letrið okkar</h2>
+            </div>
+            <div class='grid__col grid__col--6'>
+              <p class='split-text'>Skýrt, nútímalegt og með karakter. Letrið okkar – Aeonik – sameinar fágaðan stíl og góða læsileika. Það virkar á öllum miðlum og speglar nútímalegan, traustan og aðgengilegan persónuleika Vettvangs.</p>
+            </div>
+          </div>
+          <div class='grid'>
+            <div class='grid__col grid__col--6'>
+              <div class='box box--gray box--small'>
+                <div class='box__container'>
+                  
+                </div>
+              </div>
+            </div>
+            <div class='grid__col grid__col--6'>
+              <div class='box box--navy box--small'>
+                <div class='box__container'>
+
+                </div>
+              </div>
+            </div>
+            <div class='grid__col grid__col--6'>
+              <div class='box box--red box--small'>
+                <div class='box__container'>
+                  
+                </div>
+              </div>
+            </div>
+            <div class='grid__col grid__col--6'>
+              <div class='box box--gray box--small'>
+                <div class='box__container'>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+        {item.section === 'symbols' &&
+          <div class='symbols'>
+            {Array.from({ length: 7 }).map(() => (
+              <div class='symbol'></div>
+            ))}
+          </div>
+          <div class='grid'>
+            <div class='grid__col grid__col--6'>
+              <h2 class='split-text'>Grafísk element sækja innblástur í merki Vettvangs</h2>
+            </div>
+            <div class='grid__col grid__col--6'>
+              <p class='split-text'>Við tjáum okkur í gegnum einföld form sem tákna fjölbreytni okkar. Fjölbreytt fólk, fjölbreytt verkefni, fjölbreytt starfssvið. Táknin hjálpa til að segja söguna og bæta sérstöðu og persónuleika.</p>
+            </div>
+          </div>
+          <div class='shapes'>
+            {Array.from({ length: 3 }).map(() => (
+              <div class='shape shape--circle-stroke'>
+                <div class='shape__gradient shape__gradient--conic'></div>
+              </div>
+            ))}
+          </div>
+        }
+        {item.section === 'tone' &&
+          <div class='box box--navy'>
+            <div class='box__container'>
+              <h1 class='split-text'>Við látum<br> <strong>verkin</strong> tala</h1>
+            </div>
+          </div>
+          <div class='grid'>
+            <div class='grid__col grid__col--6'>
+              <h2 class='split-text'>Rödd Vettvangs</h2>
+            </div>
+            <div class='grid__col grid__col--6'>
+              <p class='split-text'>Við erum skýr, traust og mannleg – hún gefur tóninn í öllum samskiptum og hjálpar til við að byggja upp traust og tengingu, hvar sem við mætum notandanum.</p>
+            </div>
+          </div>
+        }
+        {item.section === 'appearance' &&
+          <div class='grid'>
+            <div class='grid__col grid__col--12'>
+              <div class='box box--white'>
+                <div class='box__container'>
+                  
+                </div>
+              </div>
+            </div>
+            <div class='grid__col grid__col--6'>
+              <div class='box box--gray box--small'>
+                <div class='box__container'>
+                  
+                </div>
+              </div>
+            </div>
+            <div class='grid__col grid__col--6'>
+              <div class='box box--red box--small'>
+                <div class='box__container'>
+
+                </div>
+              </div>
+            </div>
+            <div class='grid__col grid__col--6'>
+              <div class='box box--red box--small'>
+                <div class='box__container'>
+                  
+                </div>
+              </div>
+            </div>
+            <div class='grid__col grid__col--6'>
+              <div class='box box--gray box--small'>
+                <div class='box__container'>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
         }
       </BrandingPageSection>
     ))}
+    <footer class='footer'></footer>
 
   </main>
 </Layout>

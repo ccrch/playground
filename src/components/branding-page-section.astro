@@ -1,15 +1,18 @@
 ---
-const { className = '', eyebrow, headline, id, isDark = false } = Astro.props
+const { className = '', eyebrow, headline, id, isHeadlineSmall = false, isNavy = false } = Astro.props
 
-const themeClass = isDark ? 'section--dark' : 'section--light'
+const headlineClass = isHeadlineSmall ? 'section__headline--small' : ''
+const themeClass = isNavy ? 'section--navy' : 'section--white'
 ---
 
 <div class={`section ${className} ${themeClass}`} id={id}>
   <div class='container'>
-    <div class='section__headline'>
-      <div>
-        <p>{eyebrow}</p>
-        <h1>{headline}</h1>
+    <div class={`section__headline ${headlineClass}`}>
+      <div class='container'>
+        <div>
+          <p>{eyebrow}</p>
+          <h1>{headline}</h1>
+        </div>
       </div>
     </div>
     <div class='section__content'>

@@ -22,6 +22,8 @@ const brandingPage = {
 
     linksStatus(): void {
       document.querySelectorAll('.section:not(.section--home)').forEach((section, index) => {
+        if (!document.querySelectorAll('.navigation__link-status > div')[index]) return
+
         // Move the line along with section's scroll progress
 
         ScrollTrigger.create({
@@ -75,17 +77,17 @@ const brandingPage = {
       el.sections.forEach((section) => {
         ScrollTrigger.create({
           onEnter: () => {
-            if (section.classList.contains('section--light')) {
-              el.navigation.classList.add('navigation--light')
+            if (section.classList.contains('section--white')) {
+              el.navigation.classList.add('navigation--white')
             } else {
-              el.navigation.classList.remove('navigation--light')
+              el.navigation.classList.remove('navigation--white')
             }
           },
           onLeaveBack: () => {
-            if (section.classList.contains('section--light')) {
-              el.navigation.classList.remove('navigation--light')
+            if (section.classList.contains('section--white')) {
+              el.navigation.classList.remove('navigation--white')
             } else {
-              el.navigation.classList.add('navigation--light')
+              el.navigation.classList.add('navigation--white')
             }
           },
           start: () => `0% ${window.innerHeight - el.navigation.offsetHeight}px`,
@@ -105,6 +107,8 @@ const brandingPage = {
           headlineEyebrow: section.querySelectorAll('.section__headline p .split-line'),
           headlineLines: section.querySelectorAll('.section__headline h1 .split-line'),
         }
+
+        const isHeadlineSmall = el.headline.classList.contains('section__headline--small')
   
         // Reset headlines - on scroll down & scroll back up
   
@@ -135,7 +139,7 @@ const brandingPage = {
               duration: 1.234,
               ease: 'power3.out',
               opacity: 1,
-              stagger: 0.021,
+              stagger: !isHeadlineSmall ? 0.021 : 0.012,
               y: '0%',
             })
           },
@@ -143,7 +147,7 @@ const brandingPage = {
           trigger: section,
         })
   
-        // Hide headline on scroll down when content comes in
+        // Hide headline on scroll down when content comes in & show it again on scroll back up
   
         ScrollTrigger.create({
           onEnter: () => {
@@ -157,14 +161,14 @@ const brandingPage = {
             })
           },
           onLeaveBack: () => {
+            gsap.set(el.headlineChars, { overwrite: true, y: '100%' })
             gsap.set(el.headlineLines, { overwrite: true, y: '0%' })
             gsap.fromTo([el.headlineEyebrow, el.headlineChars], {
               y: '100%',
             }, {
               duration: 1.234,
               ease: 'power3.out',
-              opacity: 1,
-              stagger: 0.021,
+              stagger: !isHeadlineSmall ? 0.021 : 0.012,
               y: '0%',
             })
           },
@@ -214,7 +218,7 @@ const brandingPage = {
     reset(): void {
       // Set random circle rotations
 
-      document.querySelectorAll('.section--home .circle').forEach((circle) => {
+      document.querySelectorAll('.section--home .circle__container').forEach((circle) => {
         gsap.set(circle, {
           rotate: gsap.utils.random(0, 180, 33),
         })
@@ -250,7 +254,7 @@ const brandingPage = {
       // Hide circles on scroll down
 
       ScrollTrigger.create({
-        animation: gsap.to('.section--home .circle-container', { ease: 'none', opacity: 0, stagger: 0.21 }),
+        animation: gsap.to('.section--home .circle', { ease: 'none', opacity: 0, stagger: 0.21 }),
         end: '100% 0%',
         scrub: true,
         start: '0% -10%',
@@ -323,48 +327,52 @@ const brandingPage = {
 
       // Moving the details text along with boxes on the right
 
-      // const el = {
-      //   boxes: document.querySelector<HTMLElement>('.section--sign .details__boxes'),
-      //   text: document.querySelector<HTMLElement>('.section--sign .details__text'),
-      // }
+      const el = {
+        boxes: document.querySelector<HTMLElement>('.section--sign .details__boxes'),
+        text: document.querySelector<HTMLElement>('.section--sign .details__text'),
+      }
 
-      // ScrollTrigger.create({
-      //   // animation:
-      //   //  `100% ${document.querySelector<HTMLElement>('.section--sign .details__text').offsetHeight + 40}px`,
-      //   // pin: '.section--sign .details__text',
-      //   animation: gsap.to(el.text, { ease: 'none', y: el.boxes.offsetHeight - el.text.offsetHeight }),
-      //   end: '100% 0%',
-      //   scrub: true,
-      //   start: '0% 100%',
-      //   trigger: el.boxes,
-      // })
+      ScrollTrigger.create({
+        animation: gsap.fromTo(el.text, { yPercent: -7 }, { ease: 'none', yPercent: () => {
+          const px = el.boxes.offsetHeight - el.text.offsetHeight
+          const percent = (px / el.text.offsetHeight) * 100
+          return percent
+        } }),
+        end: '100% 0%',
+        scrub: true,
+        start: '0% 100%',
+        trigger: el.boxes,
+      })
 
       // Showing/hiding logos
 
-      gsap.set('.section--sign .box', { overwrite: true, scale: 0.8 })
+      // gsap.set('.section--sign .box__container', { overwrite: true, scale: 0.8 })
       gsap.set('.section--sign .logo', { overwrite: true, scale: 0 })
 
-      document.querySelectorAll('.section--sign .box').forEach((box) => {
-        ScrollTrigger.create({
-          onEnter: () => {
-            gsap.to(box, {
-              scale: 1,
-              duration: 1.234,
-              ease: 'power3.out',
-            })
-          },
-          start: '0% 100%',
-          trigger: box,
-        })
+      // document.querySelectorAll('.section--sign .box__container').forEach((box) => {
+      //   ScrollTrigger.create({
+      //     onEnter: () => {
+      //       gsap.to(box, {
+      //         duration: 1.234,
+      //         ease: 'power3.out',
+      //         scale: 1,
+      //       })
+      //     },
+      //     start: '0% 90%',
+      //     trigger: box.parentElement,
+      //   })
 
-        ScrollTrigger.create({
-          onLeaveBack: () => {
-            gsap.set(box, { scale: 0.8, overwrite: true })
-          },
-          start: '0% 100%',
-          trigger: box,
-        })
-      })
+      //   ScrollTrigger.create({
+      //     onLeaveBack: () => {
+      //       gsap.set(box, {
+      //         overwrite: true,
+      //         scale: 0.8,
+      //       })
+      //     },
+      //     start: '0% 100%',
+      //     trigger: box.parentElement,
+      //   })
+      // })
 
       document.querySelectorAll('.section--sign .logo').forEach((logo, index) => {
         ScrollTrigger.create({
@@ -398,10 +406,11 @@ const brandingPage = {
       document.querySelectorAll('.split-text .split-line').forEach((line) => {
         ScrollTrigger.create({
           onEnter: () => {
-            gsap.to(line, {
+            gsap.to(line.querySelectorAll('.split-word'), {
               duration: 1.234,
               ease: 'power4.out',
               opacity: 1,
+              stagger: 0.0543,
               y: '0%',
             })
           },
@@ -411,7 +420,7 @@ const brandingPage = {
   
         ScrollTrigger.create({
           onLeaveBack: () => {
-            gsap.set(line, { overwrite: true, y: '100%' })
+            gsap.set(line.querySelectorAll('.split-word'), { overwrite: true, y: '100%' })
           },
           start: '0% 100%',
           trigger: line.parentElement,
@@ -425,10 +434,11 @@ const brandingPage = {
       SplitText.create('.split-text', {
         linesClass: 'split-line',
         mask: 'lines',
-        type: 'lines',
+        type: 'lines, words',
+        wordsClass: 'split-word',
       })
   
-      gsap.set('.split-text .split-line', { overwrite: true, y: '100%' })
+      gsap.set('.split-text .split-word', { overwrite: true, y: '100%' })
     },
   },
 
@@ -449,7 +459,7 @@ const brandingPage = {
       await this.section.splitText()
       await this.sectionHome.reset()
       await this.sectionHome.splitText()
-      // await this.typography.splitText()
+      await this.typography.splitText()
     
       // Revealing the page
 
@@ -457,10 +467,10 @@ const brandingPage = {
 
       // Handling scroll triggers
 
+      this.typography.scrollTriggers()
       this.section.scrollTriggers()
       this.sectionHome.scrollTriggers()
       this.sectionSign.scrollTriggers()
-      // this.typography.scrollTriggers()
     
       // Handling navigation
 
