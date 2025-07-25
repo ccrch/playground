@@ -99,6 +99,12 @@
     }
   }
 
+  p {
+    font-size: 21rem;
+    font-weight: 400;
+    line-height: 150%;
+  }
+
   // Navigation
   
   .navigation {
@@ -235,7 +241,7 @@
       inset: 0;
       z-index: 2;
       width: 75%;
-      height: 100vh;
+      // height: 100vh;
       margin: 0 auto;
       padding: 0 0 64rem;
       pointer-events: none;
@@ -258,6 +264,7 @@
         color: var(--color-red);
         font-size: 16rem;
         font-weight: 700;
+        line-height: 150%;
         text-transform: uppercase;
       }
     }
