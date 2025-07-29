@@ -58,13 +58,17 @@ h5,
 h6 {
   overflow-wrap: break-word;
   font-size: inherit;
-  // white-space: normal;
-  // word-break: normal;
+  white-space: normal;
+  word-break: normal;
 }
+
+// This breaks down SplitText
 
 // p {
 //   text-wrap: pretty;
 // }
+
+// This breaks down SplitText
 
 // h1,
 // h2,

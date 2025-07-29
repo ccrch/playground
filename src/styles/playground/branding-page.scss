@@ -16,37 +16,37 @@
   }
 }
 
-// @font-face {
-//   font-display: swap;
-//   font-family: 'Aeonik';
-//   font-style: normal;
-//   font-weight: 700;
-//   src: url('../../assets/fonts/aeonik-bold.otf') format('opentype');
-// }
+@font-face {
+  font-display: swap;
+  font-family: 'Aeonik';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../../assets/fonts/aeonik-bold.otf') format('opentype');
+}
 
-// @font-face {
-//   font-display: swap;
-//   font-family: 'Aeonik';
-//   font-style: normal;
-//   font-weight: 500;
-//   src: url('../../assets/fonts/aeonik-medium.otf') format('opentype');
-// }
+@font-face {
+  font-display: swap;
+  font-family: 'Aeonik';
+  font-style: normal;
+  font-weight: 500;
+  src: url('../../assets/fonts/aeonik-medium.otf') format('opentype');
+}
 
-// @font-face {
-//   font-display: swap;
-//   font-family: 'Aeonik';
-//   font-style: normal;
-//   font-weight: 400;
-//   src: url('../../assets/fonts/aeonik-regular.otf') format('opentype');
-// }
+@font-face {
+  font-display: swap;
+  font-family: 'Aeonik';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../../assets/fonts/aeonik-regular.otf') format('opentype');
+}
 
-// @font-face {
-//   font-display: swap;
-//   font-family: 'Aeonik';
-//   font-style: normal;
-//   font-weight: 600;
-//   src: url('../../assets/fonts/aeonik-semibold.otf') format('opentype');
-// }
+@font-face {
+  font-display: swap;
+  font-family: 'Aeonik';
+  font-style: normal;
+  font-weight: 600;
+  src: url('../../assets/fonts/aeonik-semibold.otf') format('opentype');
+}
 
 .branding-page-html {
   --color-gray: #EEF2F6;
@@ -73,8 +73,7 @@
 
 .branding-page-body {
   background: var(--color-navy);
-  // font-family: 'Aeonik', sans-serif;
-  font-family: sans-serif;
+  font-family: 'Aeonik', sans-serif;
   font-size: 21rem;
 
   .date {
