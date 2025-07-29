@@ -262,8 +262,9 @@
       align-items: center;
       justify-content: center;
       position: fixed;
-      inset: 0;
+      inset: 0 0 auto;
       z-index: 2;
+      height: 100vh;
       margin: 0 auto;
       padding: 0 0 64rem;
       pointer-events: none;
@@ -401,8 +402,9 @@
 
     .circles {
       position: fixed;
-      inset: 0;
+      inset: 0 0 auto;
       z-index: 1;
+      height: 100vh;
     }
 
     .circle {
