@@ -11,7 +11,7 @@ const themeClass = isNavy ? 'section--navy' : 'section--white'
       <div class='container'>
         <div>
           <p>{eyebrow}</p>
-          <h1>{headline}</h1>
+          <h1 set:html={headline}></h1>
         </div>
       </div>
     </div>

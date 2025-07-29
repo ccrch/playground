@@ -1,3 +1,8 @@
+@mixin isMobile {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
 
 @mixin isDesktop {
   @media (min-width: 768px) {
@@ -48,9 +53,9 @@
   --color-gray-dark: #D3DFE8;
   --color-navy: #0B1423;
   --color-red: #FF3D00;
-  --color-white: #F8FAFB;
+  --color-white: #F8FAFB; // rgb(248, 250, 251)
 
-  --mobile-design-width: 1440; // 440;
+  --mobile-design-width: 440; // 440;
   --desktop-design-width: 1440;
   --ultrawide-breakpoint: 2560;
   
@@ -68,7 +73,7 @@
 
 .branding-page-body {
   background: var(--color-navy);
-  font-family: 'Aeonik', serif, sans-serif;
+  font-family: 'Aeonik', sans-serif;
   font-size: 21rem;
 
   .date {
@@ -88,15 +93,32 @@
 
   // Typography
 
+  .split-char,
+  .split-line,
+  .split-word {
+    will-change: transform;
+  }
+
+  .split-break {
+    @include isDesktop {
+      display: none;
+    }
+  }
+
   h1 {
+    position: relative;
+    z-index: 1;
     font-size: 100rem;
     font-weight: 600;
     line-height: 121%;
-    text-align: center;
-
+    
+    @include isMobile {
+      font-size: 64rem;
+    }
+    
     .split-line {
       margin: -18rem 0;
-      will-change: transform;
+      text-align: center;
     }
   }
 
@@ -129,6 +151,7 @@
     transition: opacity 0.321s;
 
     &__logo {
+      flex: 0 0 auto;
       display: flex;
       align-items: center;
       position: relative;
@@ -175,6 +198,10 @@
       font-weight: 500;
       pointer-events: all;
       transition: color 0.321s;
+
+      @include isMobile {
+        font-size: 0;
+      }
     }
 
     &__link-status {
@@ -230,16 +257,6 @@
     overflow: hidden;
     clip-path: inset(0% 0% 0% 0%);
 
-    &--navy {
-      background: var(--color-navy);
-      color: var(--color-white);
-    }
-
-    &--white {
-      background: var(--color-white);
-      color: var(--color-navy);
-    }
-
     &__headline {
       display: flex;
       align-items: center;
@@ -278,10 +295,18 @@
           flex-direction: row;
           align-items: flex-start;
           justify-content: flex-start;
+
+          @include isMobile {
+            flex-direction: column;
+            // align-items: center;
+            // justify-content: center;
+          }
         }
 
         p {
-          flex: 0 0 16%;
+          @include isDesktop {
+            flex: 0 0 16%;
+          }
         }
 
         h1 {
@@ -289,6 +314,14 @@
           font-size: 64rem;
           line-height: 130%;
           text-align: left;
+
+          @include isMobile {
+            font-size: 48rem;
+
+            .split-line {
+              margin: -12rem 0;
+            }
+          }
         }
       }
     }
@@ -304,6 +337,12 @@
       width: 100%;
       margin: 125vh 0 0;
       padding: 0 0 180rem;
+
+      @include isMobile {
+        gap: 80rem;
+        margin-top: 112vh;
+        padding-bottom: 80rem;
+      }
     }
 
     &__shapes {
@@ -336,6 +375,24 @@
         }
       }
     }
+
+    &--navy {
+      background: var(--color-navy);
+      color: var(--color-white);
+
+      .section__content {
+        background: var(--color-navy);
+      }
+    }
+
+    &--white {
+      background: var(--color-white);
+      color: var(--color-navy);
+
+      .section__content {
+        background: var(--color-white);
+      }
+    }
   }
 
   .section--home {
@@ -359,6 +416,10 @@
           width: #{360 + (270 * $i) + 'rem'};
           opacity: #{0.9 - (0.17 * $i)};
 
+          @include isMobile {
+            width: #{180 + (210 * $i) + 'rem'};
+          }
+
           .shape__gradient {
             animation-duration: #{11 * $i + 's'};
           }
@@ -373,6 +434,10 @@
       flex-flow: row nowrap;
       align-items: center;
       justify-content: space-evenly;
+
+      @include isMobile {
+        flex-direction: column;
+      }
     }
 
     .logo {
@@ -388,10 +453,20 @@
         gap: 40rem;
         position: relative;
         z-index: 1;
+
+        @include isMobile {
+          gap: 30rem;
+        }
       }
 
       &__text {
-        padding-right: 40rem;
+        @include isDesktop {
+          padding-right: 40rem;
+        }
+
+        @include isMobile {
+          margin-bottom: 56rem;
+        }
       }
     }
   }
@@ -407,6 +482,11 @@
       align-items: center;
       width: 100%;
       padding: 0 15rem;
+
+      @include isMobile {
+        flex-direction: column;
+        padding: 0;
+      }
     }
 
     .typography-circle {
@@ -422,13 +502,23 @@
       border-radius: 50%;
       text-align: center;
 
+      @include isMobile {
+        flex: 0 0 60%;
+        width: 60%;
+        margin: -15rem 0;
+      }
+
       p {
         font-size: 24rem;
       }
     }
 
-    .box__container {
-      aspect-ratio: 4 / 3;
+    .box .box__container {
+      aspect-ratio: 1;
+
+      @include isDesktop {
+        aspect-ratio: 4 / 3;
+      }
     }
   }
 
@@ -440,9 +530,19 @@
       justify-content: center;
       gap: 60rem;
       width: 100%;
+      margin: -50rem auto;
+      padding: 50rem 0;
+      background: var(--color-navy);
+
+      @include isMobile {
+        width: 80%;
+        flex-wrap: wrap;
+        gap: 40rem;
+      }
     }
 
     .symbol {
+      flex: 0 0 40rem;
       width: 40rem;
       aspect-ratio: 1;
       background: var(--color-red);
@@ -455,10 +555,35 @@
       align-items: center;
       justify-content: space-between;
       width: 100%;
+
+      @include isMobile {
+        flex-direction: column;
+        gap: 60rem;
+      }
     }
 
     .shape {
       width: 270rem;
+
+      @include isMobile {
+        width: 66%;
+      }
+    }
+  }
+
+  .section--tone {
+    .tone__text {
+      text-align: center;
+
+      strong {
+        color: var(--color-red);
+      }
+    }
+
+    .box__container {
+      @include isMobile {
+        aspect-ratio: 1;
+      }
     }
   }
 
@@ -466,12 +591,36 @@
     .box--small .box__container {
       aspect-ratio: 4 / 3;
     }
+
+    .box .box__container {
+      @include isMobile {
+        aspect-ratio: 1;
+      }
+    }
+  }
+
+  .section--summary {
+    .section__content {
+      background: none;
+    }
   }
 
   .footer {
-    background: var(--color-red);
-    filter: brightness(0.9);
-    height: 100vh;
+    &::before {
+      content: '';
+      display: block;
+      height: 45vh;
+      background: var(--color-red);
+      filter: brightness(0.9);
+    }
+    // height: 100vh;
+
+    &::after {
+      content: '';
+      display: block;
+      height: 75vh;
+      background: var(--color-navy);
+    }
   }
 
   // Components
@@ -481,6 +630,10 @@
     max-width: 1440rem;
     margin: 0 auto;
     padding: 0 180rem;
+
+    @include isMobile {
+      padding: 0 24rem;
+    }
   }
 
   .grid {
@@ -488,13 +641,20 @@
     grid-template-columns: repeat(12, minmax(0, 1fr));
     gap: 40rem;
     width: 100%;
+    
+    @include isMobile {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 24rem;
+    }
 
     &__col {
       grid-column: span 1;
   
       @for $i from 1 through 12 {
         &--#{$i}  {
-          grid-column: span $i;
+          @include isDesktop {
+            grid-column: span $i;
+          }
         }
       }
     }
@@ -510,6 +670,11 @@
       width: 100%;
       aspect-ratio: 16 / 9;
       border-radius: 40rem;
+
+      @include isMobile {
+        aspect-ratio: 9 / 16;
+        border-radius: 30rem;
+      }
     }
 
     &--gray .box__container {
@@ -534,6 +699,10 @@
 
     &--small .box__container {
       border-radius: 30rem;
+
+      @include isMobile {
+        aspect-ratio: 16 / 9;
+      }
     }
   }
 
@@ -557,6 +726,13 @@
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
           <circle cx="50" cy="50" r="45" fill="none" stroke="black" stroke-width="3" vector-effect="non-scaling-stroke" />\
         </svg>');
+
+      @include isMobile {
+        mask-image: url('data:image/svg+xml;utf8,\
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
+            <circle cx="50" cy="50" r="45" fill="none" stroke="black" stroke-width="2" vector-effect="non-scaling-stroke" />\
+          </svg>');
+      }
     }
 
     &__gradient {

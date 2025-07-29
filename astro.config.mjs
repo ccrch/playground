@@ -5,6 +5,7 @@ const isDev = process.env.NODE_ENV === 'development'
 
 export default defineConfig({
   base: '/playground/',
+  devToolbar: { enabled: false },
   integrations: [react()],
   outDir: 'build',
   vite: {

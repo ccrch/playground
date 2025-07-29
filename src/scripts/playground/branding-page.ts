@@ -3,7 +3,12 @@ import ScrollTrigger from 'gsap/ScrollTrigger'
 import SplitText from 'gsap/SplitText'
 import { lenis, lenisScroll } from '../core/helpers'
 
-const brandingPage = {  
+const brandingPage = {
+  breakpoints: {
+    isDesktop: '(min-width: 768px)',
+    isMobile: '(max-width: 767px)',
+  },
+
   navigation: {
     links(): void {
       document.querySelectorAll('.navigation__logo, .navigation__link').forEach((link) => {
@@ -15,6 +20,7 @@ const brandingPage = {
             easing: (t) => (t < 0.5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2), // power3.inOut
             // easing: (t) => (t < 0.5 ? 8 * t ** 4 : 1 - (-2 * t + 2) ** 4 / 2), // power4.inOut
             // offset: -window.innerHeight / 2 + titleHeight / 2,
+            // immediate: true,
           })
         })
       })
@@ -99,118 +105,129 @@ const brandingPage = {
 
   section: {
     scrollTriggers(): void {
-      document.querySelectorAll('.section:not(.section--home)').forEach((section) => {  
-        const el = {
-          content: section.querySelector('.section__content'),
-          headline: section.querySelector('.section__headline'),
-          headlineChars: section.querySelectorAll('.section__headline h1 .split-char'),
-          headlineEyebrow: section.querySelectorAll('.section__headline p .split-line'),
-          headlineLines: section.querySelectorAll('.section__headline h1 .split-line'),
-        }
-
-        const isHeadlineSmall = el.headline.classList.contains('section__headline--small')
+      gsap.matchMedia().add(brandingPage.breakpoints, () => {
+        document.querySelectorAll('.section:not(.section--home)').forEach((section) => {  
+          const el = {
+            content: section.querySelector('.section__content'),
+            headline: section.querySelector('.section__headline'),
+            headlineChars: section.querySelectorAll('.section__headline h1 .split-char'),
+            headlineEyebrow: section.querySelectorAll('.section__headline p .split-line'),
+            headlineLines: section.querySelectorAll('.section__headline h1 .split-line'),
+          }
   
-        // Reset headlines - on scroll down & scroll back up
-  
-        ScrollTrigger.create({
-          onEnter: () => {
-            gsap.set([el.headlineEyebrow, el.headlineChars], { overwrite: true, y: '100%' })
-            gsap.set(el.headlineLines, { overwrite: true, y: '0%' })
-          },
-          start: '0% 100%',
-          trigger: section,
-        })
-  
-        ScrollTrigger.create({
-          onEnter: () => {
-            gsap.set([el.headlineEyebrow, el.headlineChars], { overwrite: true, y: '100%' })
-            gsap.set(el.headlineLines, { overwrite: true, y: '0%' })
-          },
-          start: '100% 0%',
-          trigger: section,
-        })
-  
-        // Show headline on scroll down
-  
-        ScrollTrigger.create({
-          onEnter: () => {
-            gsap.set(el.headlineLines, { overwrite: true, y: '0%' })
-            gsap.to([el.headlineEyebrow, el.headlineChars], {
-              duration: 1.234,
-              ease: 'power3.out',
-              opacity: 1,
-              stagger: !isHeadlineSmall ? 0.021 : 0.012,
-              y: '0%',
-            })
-          },
-          start: '0% 50%',
-          trigger: section,
-        })
-  
-        // Hide headline on scroll down when content comes in & show it again on scroll back up
-  
-        ScrollTrigger.create({
-          onEnter: () => {
-            // gsap.set(el.headlineChars, { overwrite: true, y: '0%' })
-            gsap.to([el.headlineEyebrow, el.headlineLines], {
-              duration: 0.876,
-              ease: 'power3.inOut',
-              overwrite: true,
-              stagger: 0.0543,
-              y: '-100%',
-            })
-          },
-          onLeaveBack: () => {
-            gsap.set(el.headlineChars, { overwrite: true, y: '100%' })
-            gsap.set(el.headlineLines, { overwrite: true, y: '0%' })
-            gsap.fromTo([el.headlineEyebrow, el.headlineChars], {
-              y: '100%',
+          const isHeadlineSmall = el.headline.classList.contains('section__headline--small')
+    
+          // Reset headlines - on scroll down & scroll back up
+    
+          ScrollTrigger.create({
+            onEnter: () => {
+              gsap.set([el.headlineEyebrow, el.headlineChars], { overwrite: true, y: '100%' })
+              gsap.set(el.headlineLines, { overwrite: true, y: '0%' })
+            },
+            start: '0% 100%',
+            trigger: section,
+          })
+    
+          ScrollTrigger.create({
+            onEnter: () => {
+              gsap.set([el.headlineEyebrow, el.headlineChars], { overwrite: true, y: '100%' })
+              gsap.set(el.headlineLines, { overwrite: true, y: '0%' })
+            },
+            start: '100% 0%',
+            trigger: section,
+          })
+    
+          // Show headline on scroll down
+    
+          ScrollTrigger.create({
+            onEnter: () => {
+              gsap.set(el.headlineLines, { overwrite: true, y: '0%' })
+              gsap.to([el.headlineEyebrow, el.headlineChars], {
+                duration: 1.234,
+                ease: 'power3.out',
+                opacity: 1,
+                stagger: !isHeadlineSmall ? 0.021 : 0.012,
+                y: '0%',
+              })
+            },
+            start: '0% 50%',
+            trigger: section,
+          })
+    
+          // Hide headline on scroll down when content comes in & show it again on scroll back up
+    
+          ScrollTrigger.create({
+            onEnter: () => {
+              // gsap.set(el.headlineChars, { overwrite: true, y: '0%' })
+              gsap.to([el.headlineEyebrow, el.headlineLines], {
+                duration: 0.876,
+                ease: 'power3.inOut',
+                overwrite: true,
+                stagger: 0.0543,
+                y: '-100%',
+              })
+            },
+            onLeaveBack: () => {
+              gsap.set(el.headlineChars, { overwrite: true, y: '100%' })
+              gsap.set(el.headlineLines, { overwrite: true, y: '0%' })
+              gsap.fromTo([el.headlineEyebrow, el.headlineChars], {
+                y: '100%',
+              }, {
+                duration: 1.234,
+                ease: 'power3.out',
+                stagger: !isHeadlineSmall ? 0.021 : 0.012,
+                y: '0%',
+              })
+            },
+            start: '0% 80%',
+            trigger: el.content,
+          })
+    
+          // Move headline a bit while it reveals
+    
+          ScrollTrigger.create({
+            animation: gsap.fromTo(el.headline, {
+              y: '66rem',
             }, {
-              duration: 1.234,
-              ease: 'power3.out',
-              stagger: !isHeadlineSmall ? 0.021 : 0.012,
-              y: '0%',
-            })
-          },
-          start: '0% 100%',
-          trigger: el.content,
-        })
-  
-        // Move headline a bit while it reveals
-  
-        ScrollTrigger.create({
-          animation: gsap.fromTo(el.headline, {
-            y: '66rem',
-          }, {
-            ease: 'none',
-            y: '-66rem',
-          }),
-          end: '+=210%',
-          scrub: true,
-          start: '0% 100%',
-          trigger: section,
+              ease: 'none',
+              y: '-66rem',
+            }),
+            end: '+=210%',
+            scrub: true,
+            start: '0% 100%',
+            trigger: section,
+          })
         })
       })
     },
 
     splitText(): void {
       // Split the text & reset it
+      // Setting text-align to left to avoid issues with SplitText not splitting text correctly when aligned to center
 
-      SplitText.create('.section:not(.section--home) .section__headline p', {
-        linesClass: 'split-line',
-        mask: 'lines',
-        type: 'lines',
+      gsap.matchMedia().add(brandingPage.breakpoints, () => {
+        SplitText.create('.section:not(.section--home) .section__headline p', {
+          linesClass: 'split-line',
+          mask: 'lines',
+          type: 'lines',
+        })
+  
+        gsap.set('.section:not(.section--home) .section__headline h1', { textAlign: 'left' })
+  
+        SplitText.create('.section:not(.section--home) .section__headline h1', {
+          charsClass: 'split-char',
+          linesClass: 'split-line',
+          mask: 'lines',
+          type: 'chars, lines, words',
+          wordsClass: 'split-word',
+        })
+  
+        gsap.set('.section:not(.section--home) .section__headline h1', { clearProps: 'textAlign' })
+        gsap.set('.section:not(.section--home) .section__headline:not(.section__headline--small) h1 .split-line', { textAlign: 'center' })
+  
+        gsap.set('.section:not(.section--home) .section__headline p .split-line', { overwrite: true, y: '100%' })
+        gsap.set('.section:not(.section--home) .section__headline h1 .split-char', { overwrite: true, y: '100%' })
       })
-
-      SplitText.create('.section:not(.section--home) .section__headline h1', {
-        charsClass: 'split-char',
-        linesClass: 'split-line',
-        mask: 'lines',
-        type: 'chars, lines',
-      })
-
-      gsap.set('.section:not(.section--home) .section__headline p .split-line', { overwrite: true, y: '100%' })
-      gsap.set('.section:not(.section--home) .section__headline h1 .split-char', { overwrite: true, y: '100%' })
     },
   },
 
@@ -229,25 +246,27 @@ const brandingPage = {
     },
 
     reveal(): void {
-      // Reveal the page
-
-      gsap.to('.branding-page', { delay: 0.234, duration: 1.234, opacity: 1 })
-
-      // Show headline characters
-
-      gsap.to('.section--home h1 .split-char', {
-        delay: 0.543,
-        duration: 1.234,
-        ease: 'power3.inOut',
-        stagger: 0.021,
-        y: '0%',
+      gsap.matchMedia().add(brandingPage.breakpoints, () => {
+        // Reveal the page
+  
+        gsap.to('.branding-page', { delay: 0.234, duration: 1.234, opacity: 1 })
+  
+        // Show headline characters
+  
+        gsap.to('.section--home h1 .split-char', {
+          delay: 0.543,
+          duration: 1.234,
+          ease: 'power3.inOut',
+          stagger: 0.021,
+          y: '0%',
+        })
+  
+        // Enable scrolling
+  
+        setTimeout(() => {
+          lenis?.start()
+        }, 1234)
       })
-
-      // Enable scrolling
-
-      setTimeout(() => {
-        lenis?.start()
-      }, 1234)
     },
 
     scrollTriggers(): void {
@@ -261,32 +280,34 @@ const brandingPage = {
         trigger: '.section--home',
       })
 
-      // Hide headline on scroll down
-
-      ScrollTrigger.create({
-        onEnter: () => {
-          gsap.set('.section--home .section__headline .split-char', {
-            overwrite: true,
-            y: '100%',
-          })
-        },
-        start: '100% 30%',
-        trigger: '.section--home',
-      })
-
-      // Show headline on scroll back up
-
-      ScrollTrigger.create({
-        onLeaveBack: () => {
-          gsap.to('.section--home .section__headline .split-char', {
-            duration: 1.234,
-            ease: 'power3.out',
-            stagger: 0.021,
-            y: '0%',
-          })
-        },
-        start: '100% 70%',
-        trigger: '.section--home',
+      gsap.matchMedia().add(brandingPage.breakpoints, () => {
+        // Hide headline on scroll down
+  
+        ScrollTrigger.create({
+          onEnter: () => {
+            gsap.set('.section--home .section__headline .split-char', {
+              overwrite: true,
+              y: '100%',
+            })
+          },
+          start: '100% 30%',
+          trigger: '.section--home',
+        })
+  
+        // Show headline on scroll back up
+  
+        ScrollTrigger.create({
+          onLeaveBack: () => {
+            gsap.to('.section--home .section__headline .split-char', {
+              duration: 1.234,
+              ease: 'power3.out',
+              stagger: 0.021,
+              y: '0%',
+            })
+          },
+          start: '100% 70%',
+          trigger: '.section--home',
+        })
       })
 
       // Move headline a bit on scroll
@@ -302,15 +323,24 @@ const brandingPage = {
 
     splitText(): void {
       // Split the text & reset it
+      // Setting text-align to left to avoid issues with SplitText not splitting text correctly when aligned to center
 
-      SplitText.create('.section--home h1', {
-        charsClass: 'split-char',
-        linesClass: 'split-line',
-        mask: 'lines',
-        type: 'chars, lines',
+      gsap.matchMedia().add(brandingPage.breakpoints, () => {
+        gsap.set('.section--home h1', { textAlign: 'left' })
+  
+        SplitText.create('.section--home h1', {
+          charsClass: 'split-char',
+          linesClass: 'split-line',
+          mask: 'words',
+          type: 'chars, lines, words',
+          wordsClass: 'split-word',
+        })
+  
+        gsap.set('.section--home h1', { clearProps: 'textAlign' })
+        gsap.set('.section--home h1 .split-line', { textAlign: 'center' })
+  
+        gsap.set('.section--home h1 .split-char', { overwrite: true, y: '100%' })
       })
-
-      gsap.set('.section--home h1 .split-char', { overwrite: true, y: '100%' })
     },
   },
 
@@ -332,16 +362,22 @@ const brandingPage = {
         text: document.querySelector<HTMLElement>('.section--sign .details__text'),
       }
 
-      ScrollTrigger.create({
-        animation: gsap.fromTo(el.text, { yPercent: -7 }, { ease: 'none', yPercent: () => {
-          const px = el.boxes.offsetHeight - el.text.offsetHeight
-          const percent = (px / el.text.offsetHeight) * 100
-          return percent
-        } }),
-        end: '100% 0%',
-        scrub: true,
-        start: '0% 100%',
-        trigger: el.boxes,
+      gsap.matchMedia().add(brandingPage.breakpoints, (context) => {
+        const { isDesktop } = context.conditions
+
+        if (isDesktop) {          
+          ScrollTrigger.create({
+            animation: gsap.fromTo(el.text, { yPercent: -7 }, { ease: 'none', yPercent: () => {
+              const px = el.boxes.offsetHeight - el.text.offsetHeight
+              const percent = (px / el.text.offsetHeight) * 100
+              return percent
+            } }),
+            end: '100% 0%',
+            scrub: true,
+            start: '0% 100%',
+            trigger: el.boxes,
+          })
+        }
       })
 
       // Showing/hiding logos
@@ -403,27 +439,29 @@ const brandingPage = {
     scrollTriggers(): void {
       // Handle scroll trigger for all content split text
 
-      document.querySelectorAll('.split-text .split-line').forEach((line) => {
-        ScrollTrigger.create({
-          onEnter: () => {
-            gsap.to(line.querySelectorAll('.split-word'), {
-              duration: 1.234,
-              ease: 'power4.out',
-              opacity: 1,
-              stagger: 0.0543,
-              y: '0%',
-            })
-          },
-          start: '0% 90%',
-          trigger: line.parentElement,
-        })
-  
-        ScrollTrigger.create({
-          onLeaveBack: () => {
-            gsap.set(line.querySelectorAll('.split-word'), { overwrite: true, y: '100%' })
-          },
-          start: '0% 100%',
-          trigger: line.parentElement,
+      gsap.matchMedia().add(brandingPage.breakpoints, () => {
+        document.querySelectorAll('.split-text .split-line').forEach((line) => {
+          ScrollTrigger.create({
+            onEnter: () => {
+              gsap.to(line.querySelectorAll('.split-word'), {
+                duration: 1.234,
+                ease: 'power4.out',
+                opacity: 1,
+                stagger: 0.0543,
+                y: '0%',
+              })
+            },
+            start: '0% 90%',
+            trigger: line.parentElement,
+          })
+    
+          ScrollTrigger.create({
+            onLeaveBack: () => {
+              gsap.set(line.querySelectorAll('.split-word'), { overwrite: true, y: '100%' })
+            },
+            start: '0% 100%',
+            trigger: line.parentElement,
+          })
         })
       })
     },
@@ -431,14 +469,23 @@ const brandingPage = {
     splitText(): void {
       // Split the text & reset it
 
-      SplitText.create('.split-text', {
-        linesClass: 'split-line',
-        mask: 'lines',
-        type: 'lines, words',
-        wordsClass: 'split-word',
+      gsap.matchMedia().add(brandingPage.breakpoints, () => {
+        SplitText.create('.split-text', {
+          // TODO: Test later
+          // autoSplit: true,
+          // onSplit: (self) => {
+          //   console.log(self)
+          //   // brandingPage.typography.scrollTriggers()
+          // },
+          aria: 'none',
+          linesClass: 'split-line',
+          mask: 'words',
+          type: 'lines, words',
+          wordsClass: 'split-word',
+        })
+    
+        gsap.set('.split-text .split-word', { overwrite: true, y: '100%' })
       })
-  
-      gsap.set('.split-text .split-word', { overwrite: true, y: '100%' })
     },
   },
 
@@ -452,10 +499,13 @@ const brandingPage = {
 
       await document.fonts.ready
       await new Promise(r => setTimeout(r, 12))
+
+      // Smooth scrolling init
+
+      lenisScroll.init()
     
       //  Loading & reseting page stuff
 
-      lenisScroll.init()
       await this.section.splitText()
       await this.sectionHome.reset()
       await this.sectionHome.splitText()
@@ -484,9 +534,9 @@ const brandingPage = {
       ScrollTrigger.refresh()
     })()
 
-
-
-
+    // window.addEventListener('resize', () => {
+    //   console.log(ScrollTrigger.getAll().length)
+    // })
 
     // TODO: Test later
     // ScrollTrigger.normalizeScroll(true)

@@ -16,7 +16,7 @@ const navigation = [
   { section: 'typography', label: 'Letur', url: '#letur', headline: 'Letrið setur tóninn' },
   { section: 'symbols', label: 'Tákn', url: '#takn', headline: 'Grafíkin styður upplifun og flæði' },
   { section: 'tone', label: 'Raddblær', url: '#raddblaer', headline: 'Við erum hnitmiðuð, aðgengileg, skýr, reynd, traust, vinaleg, leiðandi og áhrifarík' },
-  { section: 'appearance', label: 'Ásýnd', url: '#asynd', headline: 'Samræmi skapar fagurfræðilega heild' },
+  { section: 'appearance', label: 'Ásýnd', url: '#asynd', headline: 'Samræmi skapar fagurfræði<div class=\'split-break\'></div>lega heild' },
   { section: 'summary', label: 'Ein heild', url: '#ein-heid', headline: 'Merki, litir, letur og grafík vinna saman að því að skapa samræmda ímynd sem styrkir bæði notagildi og útlit.' },
 ]
 
@@ -212,7 +212,7 @@ const sectionId = (index) => navigation[index].url.replace('#', '')
         {item.section === 'tone' &&
           <div class='box box--navy'>
             <div class='box__container'>
-              <h1 class='split-text'>Við látum<br> <strong>verkin</strong> tala</h1>
+              <h1 class='split-text tone__text'>Við látum<br> <strong>verkin</strong> tala</h1>
             </div>
           </div>
           <div class='grid'>

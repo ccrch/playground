@@ -58,6 +58,8 @@ h5,
 h6 {
   overflow-wrap: break-word;
   font-size: inherit;
+  white-space: normal;
+  word-break: normal;
 }
 
 p {
