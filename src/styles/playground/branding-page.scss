@@ -400,11 +400,15 @@
     justify-content: center;
     min-height: 100vh;
 
+    .section__headline {
+      height: 100svh;
+    }
+
     .circles {
       position: fixed;
       inset: 0 0 auto;
       z-index: 1;
-      height: 100vh;
+      height: 100svh;
     }
 
     .circle {
