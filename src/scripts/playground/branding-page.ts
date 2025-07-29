@@ -345,7 +345,7 @@ const brandingPage = {
         SplitText.create('.section--home h1', {
           charsClass: 'split-char',
           linesClass: 'split-line',
-          mask: 'words',
+          mask: 'lines',
           type: 'chars, lines, words',
           wordsClass: 'split-word',
         })
@@ -493,7 +493,7 @@ const brandingPage = {
           // },
           aria: 'none',
           linesClass: 'split-line',
-          mask: 'words',
+          mask: 'lines',
           type: 'lines, words',
           wordsClass: 'split-word',
         })
