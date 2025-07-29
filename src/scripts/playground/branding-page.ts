@@ -492,13 +492,15 @@ const brandingPage = {
   init(): void {
     gsap.registerPlugin(ScrollTrigger, SplitText)
 
+    const delay = ms => new Promise(r => setTimeout(r, ms))
+
     // Loading the page
 
     ;(async () => {
       // Loading fonts
 
       await document.fonts.ready
-      await new Promise(r => setTimeout(r, 12))
+      await delay(12)
 
       // Smooth scrolling init
 
@@ -530,7 +532,7 @@ const brandingPage = {
     
       // ScrollTrigger refresh
 
-      await new Promise(r => setTimeout(r, 12))
+      await delay(12)
       ScrollTrigger.refresh()
     })()
 
