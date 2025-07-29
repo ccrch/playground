@@ -119,6 +119,10 @@
     .split-line {
       margin: -18rem 0;
       text-align: center;
+
+      @include isMobile {
+        margin: -12rem 0;
+      }
     }
   }
 
@@ -313,15 +317,11 @@
         h1 {
           flex: 1 1 auto;
           font-size: 64rem;
-          line-height: 130%;
+          line-height: 126%;
           text-align: left;
 
           @include isMobile {
             font-size: 48rem;
-
-            .split-line {
-              margin: -12rem 0;
-            }
           }
         }
       }
@@ -381,18 +381,18 @@
       background: var(--color-navy);
       color: var(--color-white);
 
-      .section__content {
-        background: var(--color-navy);
-      }
+      // .section__content {
+      //   background: var(--color-navy);
+      // }
     }
 
     &--white {
       background: var(--color-white);
       color: var(--color-navy);
 
-      .section__content {
-        background: var(--color-white);
-      }
+      // .section__content {
+      //   background: var(--color-white);
+      // }
     }
   }
 
@@ -488,10 +488,14 @@
       align-items: center;
       width: 100%;
       padding: 0 15rem;
+      // margin: -50rem auto;
+      // padding: 50rem 15rem;
+      // background: var(--color-white);
 
       @include isMobile {
         flex-direction: column;
         padding: 0;
+        // padding: 50rem 0;
       }
     }
 
@@ -536,9 +540,10 @@
       justify-content: center;
       gap: 60rem;
       width: 100%;
-      margin: -50rem auto;
-      padding: 50rem 0;
-      background: var(--color-navy);
+      margin: 0 auto;
+      // margin: -50rem auto;
+      // padding: 50rem 0;
+      // background: var(--color-navy);
 
       @include isMobile {
         width: 80%;

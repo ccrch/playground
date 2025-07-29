@@ -9,6 +9,8 @@ const brandingPage = {
     isMobile: '(max-width: 767px)',
   },
 
+  scrollVelocity: 0,
+
   navigation: {
     links(): void {
       document.querySelectorAll('.navigation__logo, .navigation__link').forEach((link) => {
@@ -141,7 +143,9 @@ const brandingPage = {
     
           ScrollTrigger.create({
             onEnter: () => {
+              // console.log(brandingPage.scrollVelocity)
               gsap.set(el.headlineLines, { overwrite: true, y: '0%' })
+              // gsap.timeline().timeScale(brandingPage.scrollVelocity > 2000 ? 3 : 1).to([el.headlineEyebrow, el.headlineChars], {
               gsap.to([el.headlineEyebrow, el.headlineChars], {
                 duration: 1.234,
                 ease: 'power3.out',
@@ -179,7 +183,7 @@ const brandingPage = {
                 y: '0%',
               })
             },
-            start: '0% 80%',
+            start: '0% 100%',
             trigger: el.content,
           })
     
@@ -270,6 +274,16 @@ const brandingPage = {
     },
 
     scrollTriggers(): void {
+      // Get scroll velocity
+
+      ScrollTrigger.create({
+        end: '100% 100%',
+        start: '0% 0%',
+        onUpdate: (self) => {
+          brandingPage.scrollVelocity = self.getVelocity() * self.direction
+        },
+        trigger: '.branding-page',
+      })
       // Hide circles on scroll down
 
       ScrollTrigger.create({
