@@ -1,21 +1,20 @@
 ---
+import { getAstroPages, url } from "../scripts/core/astro-helpers";
 
-import { getAstroPages, url } from '../scripts/core/astro-helpers'
-
-const currentPath = Astro.url.pathname
-const pages = getAstroPages()
+const currentPath = Astro.url.pathname;
+const pages = getAstroPages();
 ---
 
-<style lang='scss'>
+<style lang="scss">
   .playground-navigation {
     display: flex;
-    flex-flow: row nowrap;
-    gap: 4vw;
+    flex-flow: row wrap;
+    gap: 0.6vw 1.2vw;
     position: fixed;
-    inset: 50px auto auto 2vw; 
+    inset: 50px auto auto 2vw;
     z-index: 123;
     list-style: none;
-    font-size: max(16px, 2vw);
+    font-size: max(16px, 1.6vw);
 
     [data-active] {
       text-decoration: underline;
@@ -23,7 +22,18 @@ const pages = getAstroPages()
   }
 </style>
 
-<ul class='playground-navigation'>
-  <li><a href={url('/')}>←</a></li>
-  {pages.map((p, index) => <li><a href={p.url} data-active={p.url.replace(/\?.*$/, '') === currentPath}>{p.title}</a></li>)}
+<ul class="playground-navigation">
+  <li><a href={url("/")}>←</a></li>
+  {
+    pages.map((p, index) => (
+      <li>
+        <a
+          href={p.url}
+          data-active={p.url.replace(/\?.*$/, "") === currentPath}
+        >
+          {p.title}
+        </a>
+      </li>
+    ))
+  }
 </ul>
