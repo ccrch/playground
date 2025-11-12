@@ -3,6 +3,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const pinText = () => {
   gsap.registerPlugin(ScrollTrigger)
+
+  ScrollTrigger.config({
+    ignoreMobileResize: true,
+  })
   
   const q = gsap.utils.selector('.scrolltriggers-test')
 
