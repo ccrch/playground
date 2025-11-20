@@ -29,68 +29,6 @@ export const frontmatter = {
     duration: 55,
     ease: "none",
   });
-
-  document.querySelectorAll(".drum h1").forEach((el) => {
-    ScrollTrigger.create({
-      animation: gsap.fromTo(
-        el.parentElement,
-        { rotateX: -80 },
-        {
-          rotateX: 0,
-          ease: "none",
-        },
-      ),
-      scrub: true,
-      start: "0% 100%",
-      end: "50% 50%",
-      trigger: el,
-    });
-
-    ScrollTrigger.create({
-      animation: gsap.fromTo(
-        el,
-        { y: 333 },
-        {
-          y: 0,
-          ease: "none",
-        },
-      ),
-      scrub: true,
-      start: "0% 100%",
-      end: "50% 50%",
-      trigger: el,
-    });
-
-    ScrollTrigger.create({
-      animation: gsap.fromTo(
-        el.parentElement,
-        { rotateX: 0 },
-        {
-          rotateX: 80,
-          ease: "none",
-        },
-      ),
-      scrub: true,
-      end: "100% 0%",
-      start: "50% 50%",
-      trigger: el,
-    });
-
-    ScrollTrigger.create({
-      animation: gsap.fromTo(
-        el,
-        { y: 0 },
-        {
-          y: -333,
-          ease: "none",
-        },
-      ),
-      scrub: true,
-      end: "100% 0%",
-      start: "50% 50%",
-      trigger: el,
-    });
-  });
 </script>
 
 <style lang="scss">
@@ -283,33 +221,6 @@ export const frontmatter = {
   .text {
     padding: 10vw;
   }
-
-  .drum {
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    min-height: 100vh;
-    padding: 100vh 0;
-
-    > div {
-      perspective: 1234px;
-
-      > div {
-        perspective: 1234px;
-      }
-    }
-
-    h1 {
-      font-size: 7vw;
-      text-align: center;
-    }
-  }
-
-  // .noi {
-  //   display: none !important;
-  // }
 </style>
 
 <Layout title={frontmatter.title}>
@@ -368,17 +279,6 @@ export const frontmatter = {
         </svg>
       </div> -->
     </div>
-  </div>
-  <div class="drum">
-    {
-      Array.from({ length: 5 }).map(() => (
-        <div>
-          <div>
-            <h1>Lorem ipsum dolor</h1>
-          </div>
-        </div>
-      ))
-    }
   </div>
   <div class="text">
     Velit aliquip qui laboris elit exercitation officia tempor aliqua. Sunt quis

@@ -9,7 +9,7 @@
     "node": "20.9.0"
   },
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --host",
     "build": "astro build",
     "preview": "astro preview",
     "format": "biome format .",
