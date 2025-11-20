@@ -221,6 +221,33 @@ export const frontmatter = {
   .text {
     padding: 10vw;
   }
+
+  .drum {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    min-height: 100vh;
+    padding: 100vh 0;
+
+    > div {
+      perspective: 1234px;
+
+      > div {
+        perspective: 1234px;
+      }
+    }
+
+    h1 {
+      font-size: 7vw;
+      text-align: center;
+    }
+  }
+
+  // .noi {
+  //   display: none !important;
+  // }
 </style>
 
 <Layout title={frontmatter.title}>
