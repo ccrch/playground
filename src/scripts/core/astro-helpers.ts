@@ -3,7 +3,7 @@ import path from 'path'
 import { parse } from 'acorn'
 
 export const getAstroPages = () => {
-  const pagesDir = path.resolve('./src/pages')
+  const pagesDir = path.resolve('./src/astro/pages')
   const files = fs.readdirSync(pagesDir)
 
   return files

@@ -4,11 +4,11 @@ export const frontmatter = {
 }
 
 import Layout from '../layouts/layout.astro'
-import Text from 'src/components/text.astro'
+import Text from 'src/astro/components/text.astro'
 ---
 
 <script>
-  import { lenisScroll } from '../scripts/core/helpers'
+  import { lenisScroll } from '../../scripts/core/helpers'
   import pinText from '../components/text'
 
   lenisScroll.init()

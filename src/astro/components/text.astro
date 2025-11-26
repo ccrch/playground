@@ -1,0 +1,100 @@
+---
+import { randomText } from "../../scripts/core/astro-helpers";
+---
+
+<style lang="scss">
+  .scrolltriggers-test {
+    display: flex;
+    flex-flow: column nowrap;
+    padding-top: 100vh;
+
+    .title {
+      // display: flex;
+      // width: 100%;
+      // height: 100vh;
+    }
+
+    .title__container {
+      // display: flex;
+      // flex-flow: column nowrap;
+      // align-items: flex-start;
+      // justify-content: flex-start;
+      // gap: 3vw;
+      // height: 100vh;
+      padding: 20vw;
+      // opacity: 0;
+
+      // will-change: transform, opacity; // <-- maybe needed, maybe not
+
+      * {
+        text-align: center;
+      }
+    }
+
+    .title__container > div {
+      position: relative;
+      z-index: 1;
+
+      &::before {
+        content: "";
+        position: absolute;
+        inset: -2vw;
+        border: 1px dashed #f00;
+      }
+    }
+
+    .text {
+      padding: 10vw;
+    }
+
+    h1 {
+      font-size: 11vw;
+      line-height: 90%;
+      text-align: center;
+    }
+
+    p {
+      font-size: 3vw;
+      line-height: 154%;
+
+      @media (max-width: 768px) {
+        font-size: 6vw;
+      }
+    }
+  }
+</style>
+
+<div class="scrolltriggers-test">
+  <section class="title">
+    <div class="title__container">
+      <div><h1>{randomText(2, 3)}</h1><p>{randomText(15, 15)}</p></div>
+    </div>
+  </section>
+  <section class="text">
+    <p>{randomText(70, 140)}</p><p>{randomText(70, 140)}</p>
+  </section>
+  <section class="title">
+    <div class="title__container">
+      <div><h1>{randomText(2, 3)}</h1><p>{randomText(15, 15)}</p></div>
+    </div>
+  </section>
+  <section class="text">
+    <p>{randomText(70, 140)}</p><p>{randomText(70, 140)}</p>
+  </section>
+  <section class="title">
+    <div class="title__container">
+      <div><h1>{randomText(2, 3)}</h1><p>{randomText(15, 15)}</p></div>
+    </div>
+  </section>
+  <section class="text">
+    <p>{randomText(70, 140)}</p><p>{randomText(70, 140)}</p>
+  </section>
+  <section class="title">
+    <div class="title__container">
+      <div><h1>{randomText(2, 3)}</h1><p>{randomText(15, 15)}</p></div>
+    </div>
+  </section>
+  <section class="text">
+    <p>{randomText(70, 140)}</p><p>{randomText(70, 140)}</p>
+  </section>
+</div>

@@ -1,19 +1,19 @@
 ---
 export const frontmatter = {
-  title: 'Hi!',
-}
+  title: "Hi!",
+};
 
-import Layout from '../layouts/layout.astro'
-import { url } from '../scripts/core/astro-helpers'
+import Layout from "../layouts/layout.astro";
+import { url } from "../../scripts/core/astro-helpers";
 ---
 
-<style lang='scss'>
+<style lang="scss">
   .link {
     display: flex;
     flex-flow: row nowrap;
     gap: 4vw;
     position: fixed;
-    inset: 50px auto auto 2vw; 
+    inset: 50px auto auto 2vw;
     z-index: 123;
     list-style: none;
     font-size: max(16px, 2vw);
@@ -25,5 +25,5 @@ import { url } from '../scripts/core/astro-helpers'
 </style>
 
 <Layout title={frontmatter.title}>
-  <a class='link' href={url('/scroll-vanilla')}>→</a>
+  <a class="link" href={url("/scroll-vanilla")}>→</a>
 </Layout>

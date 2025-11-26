@@ -5,10 +5,17 @@ import mkcert from 'vite-plugin-mkcert'
 const isDev = process.env.NODE_ENV === 'development'
 
 export default defineConfig({
+  // alias: {
+  //   '@components': './src/astro/components',
+  //   '@layouts': './src/astro/layouts',
+  //   '@pages': './src/astro/pages',
+  // },
   base: '/playground/',
   devToolbar: { enabled: false },
   integrations: [react()],
   outDir: 'build',
+  // pages: 'src/astro/pages',
+  srcDir: './src/astro',
   vite: {
     css: {
       preprocessorOptions: {

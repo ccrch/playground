@@ -4,10 +4,10 @@ export const frontmatter = {
   title: 'Ný ásýnd Vettvangs',
 }
 
-import BrandingPageSection from 'src/components/branding-page-section.astro'
+import BrandingPageSection from '../components/branding-page-section.astro'
 import Layout from '../layouts/layout.astro'
-import '../styles/playground/branding-page.scss'
-import { randomText } from 'src/scripts/core/astro-helpers'
+import '../../styles/playground/branding-page.scss'
+import { randomText } from '../../scripts/core/astro-helpers'
 
 const navigation = [
   { section: 'home', label: 'Heim', url: '#heim' },
@@ -24,7 +24,7 @@ const sectionId = (index) => navigation[index].url.replace('#', '')
 ---
 
 <script>
-  import stuff from '../scripts/playground/branding-page'
+  import stuff from '../../scripts/playground/branding-page'
   stuff.init()
 </script>
 
