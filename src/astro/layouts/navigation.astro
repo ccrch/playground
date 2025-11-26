@@ -28,8 +28,11 @@ const pages = getAstroPages();
   {
     pages.map((p, index) => (
       <li>
-        <a href={p.url} data-active={p.url === currentPath}>
-          {p.title} {p.url} {currentPath}
+        <a
+          href={p.url}
+          data-active={p.url.replace(/\?.*$/, "") === currentPath}
+        >
+          {p.title} --- {p.url} --- {currentPath} ---
           {p.url.replace(/\?.*$/, "")}
         </a>
       </li>
