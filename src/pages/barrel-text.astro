@@ -23,20 +23,24 @@ const texts = [
   lenisScroll.init();
   gsap.registerPlugin(ScrollTrigger);
 
+  ScrollTrigger.config({
+    ignoreMobileResize: true,
+  });
+
   document.querySelectorAll(".barrel--1 > div").forEach((el: HTMLElement) => {
     // Opacity
 
     gsap.set(el.firstElementChild.firstElementChild.firstElementChild, {
-      autoAlpha: 0,
+      opacity: 0,
       overwrite: true,
     });
 
     ScrollTrigger.create({
       animation: gsap.fromTo(
         el.firstElementChild.firstElementChild.firstElementChild,
-        { autoAlpha: 0 },
+        { opacity: 0 },
         {
-          autoAlpha: 1,
+          opacity: 1,
           ease: "none",
         },
       ),
@@ -50,9 +54,9 @@ const texts = [
     ScrollTrigger.create({
       animation: gsap.fromTo(
         el.firstElementChild.firstElementChild.firstElementChild,
-        { autoAlpha: 1 },
+        { opacity: 1 },
         {
-          autoAlpha: 0,
+          opacity: 0,
           ease: "none",
         },
       ),
@@ -324,8 +328,8 @@ const texts = [
     justify-content: center;
     position: relative;
     z-index: 1;
-    min-height: 100vh;
-    padding: 100vh 0;
+    // min-height: 200vh;
+    margin: 100vh 0;
 
     &::before {
       position: absolute;
@@ -364,6 +368,8 @@ const texts = [
   }
 
   .barrel--2 {
+    // perspective: 1234px;
+    // transform-style: preserve-3d;
     background: #111;
     color: #fff;
 
