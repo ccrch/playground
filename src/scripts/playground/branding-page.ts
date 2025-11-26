@@ -21,8 +21,15 @@ const brandingPage = {
             duration: 1.234,
             easing: (t) => (t < 0.5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2), // power3.inOut
             // easing: (t) => (t < 0.5 ? 8 * t ** 4 : 1 - (-2 * t + 2) ** 4 / 2), // power4.inOut
+            // offset: -window.innerHeight / 2,
             // offset: -window.innerHeight / 2 + titleHeight / 2,
             // immediate: true,
+            // onComplete: () => {
+            //   lenis?.scrollTo(href, {
+            //     duration: 1.234,
+            //     easing: (t) => (t < 0.5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2), // power3.inOut
+            //   })
+            // },
           })
         })
       })
@@ -37,9 +44,10 @@ const brandingPage = {
         ScrollTrigger.create({
           animation: gsap.to(document.querySelectorAll('.navigation__link-status > div')[index], { scaleX: 1 }),
           end: '100% 50%',
+          endTrigger: section,
           scrub: true,
-          start: '0% 50%',
-          trigger: section,
+          start: '0% 100%',
+          trigger: section.querySelector('.section__headline-bottom-marker'),
         })
   
         // Display only currently active line
@@ -166,6 +174,7 @@ const brandingPage = {
               gsap.to([el.headlineEyebrow, el.headlineLines], {
                 duration: 0.876,
                 ease: 'power3.inOut',
+                fastScrollEnd: true,
                 overwrite: true,
                 stagger: 0.0543,
                 y: '-100%',

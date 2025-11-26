@@ -1,29 +1,39 @@
 ---
-const { className = '', eyebrow, headline, id, isHeadlineSmall = false, isNavy = false } = Astro.props
+const {
+  className = "",
+  eyebrow,
+  headline,
+  id,
+  isHeadlineSmall = false,
+  isNavy = false,
+} = Astro.props;
 
-const headlineClass = isHeadlineSmall ? 'section__headline--small' : ''
-const themeClass = isNavy ? 'section--navy' : 'section--white'
+const headlineClass = isHeadlineSmall ? "section__headline--small" : "";
+const themeClass = isNavy ? "section--navy" : "section--white";
 ---
 
 <div class={`section ${className} ${themeClass}`} id={id}>
-  <div class='container'>
+  <div class="container">
     <div class={`section__headline ${headlineClass}`}>
-      <div class='container'>
+      <div class="container">
         <div>
           <p>{eyebrow}</p>
-          <h1 set:html={headline}></h1>
+          <h1 set:html={headline} />
         </div>
       </div>
     </div>
-    <div class='section__content'>
+    <div class="section__headline-bottom-marker"></div>
+    <div class="section__content">
       <slot />
     </div>
   </div>
-  <div class='section__shapes'>
-    {Array.from({ length: 10 }).map(() => (
-      <div class='shape shape--circle-stroke'>
-        <div class='shape__gradient shape__gradient--conic'></div>
-      </div>
-    ))}
+  <div class="section__shapes">
+    {
+      Array.from({ length: 10 }).map(() => (
+        <div class="shape shape--circle-stroke">
+          <div class="shape__gradient shape__gradient--conic" />
+        </div>
+      ))
+    }
   </div>
 </div>

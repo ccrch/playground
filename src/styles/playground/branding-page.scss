@@ -327,6 +327,14 @@
       }
     }
 
+    &__headline-bottom-marker {
+      position: absolute;
+      inset: 100vh 0 auto;
+      z-index: 1;
+      // background: var(--color-red);
+      // height: 1px;
+    }
+
     &__content {
       display: flex;
       flex-flow: column nowrap;
