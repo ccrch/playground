@@ -36,9 +36,9 @@ const texts = [
     });
 
     ScrollTrigger.create({
-      animation: gsap.fromTo(
+      animation: gsap.to(
         el.firstElementChild.firstElementChild.firstElementChild,
-        { opacity: 0 },
+        // { opacity: 0 },
         {
           opacity: 1,
           ease: "none",
@@ -52,11 +52,11 @@ const texts = [
     });
 
     ScrollTrigger.create({
-      animation: gsap.fromTo(
+      animation: gsap.to(
         el.firstElementChild.firstElementChild.firstElementChild,
-        { opacity: 1 },
+        // { opacity: 1 },
         {
-          opacity: 0,
+          opacity: 0.01,
           ease: "none",
         },
       ),
@@ -152,9 +152,9 @@ const texts = [
     gsap.set(el, { opacity: 0, overwrite: true });
 
     ScrollTrigger.create({
-      animation: gsap.fromTo(
+      animation: gsap.to(
         el,
-        { opacity: 0 },
+        // { opacity: 0 },
         {
           opacity: 1,
           ease: "none",
@@ -168,17 +168,17 @@ const texts = [
     });
 
     ScrollTrigger.create({
-      animation: gsap.fromTo(
+      animation: gsap.to(
         el,
-        { opacity: 1 },
+        // { opacity: 1 },
         {
-          opacity: 0,
+          opacity: 0.01,
           ease: "none",
         },
       ),
       scrub: true,
       start: "0% 13%",
-      end: "0% 3%",
+      end: "0% -3%",
       trigger: el,
       invalidateOnRefresh: true,
     });
@@ -328,7 +328,7 @@ const texts = [
     justify-content: center;
     position: relative;
     z-index: 1;
-    // min-height: 200vh;
+    min-height: 120vh;
     margin: 100vh 0;
 
     &::before {
@@ -365,6 +365,10 @@ const texts = [
       perspective: 1234px;
       transform-style: preserve-3d;
     }
+
+    // h1 {
+    //   opacity: 0;
+    // }
   }
 
   .barrel--2 {
@@ -381,6 +385,7 @@ const texts = [
       // transform-origin: 50% 0%;
       perspective: 1234px;
       transform-style: preserve-3d;
+      // opacity: 0;
 
       > div {
         // transform-origin: 50% 0%;
