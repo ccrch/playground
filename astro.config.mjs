@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config'
 import react from '@astrojs/react'
+import mkcert from 'vite-plugin-mkcert'
 
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -18,6 +19,8 @@ export default defineConfig({
           `
         }
       }
-    }
+    },
+    plugins: [mkcert()],
+    ssr: process.env.NODE_ENV !== "development" ? { noExternal: true } : undefined,
   },
 })
