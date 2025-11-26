@@ -14,7 +14,6 @@ export default defineConfig({
   devToolbar: { enabled: false },
   integrations: [react()],
   outDir: 'build',
-  // pages: 'src/astro/pages',
   srcDir: './src/astro',
   vite: {
     css: {
