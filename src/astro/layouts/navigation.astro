@@ -24,16 +24,16 @@ const pages = getAstroPages();
 </style>
 
 <ul class="playground-navigation">
-  <li><a href={url("/")}>←</a></li>
+  <div>env: {process.env.NODE_ENV}</div>
+  <li><a href={url("")}>←</a></li>
   {
-    pages.map((p, index) => (
+    pages.map((p) => (
       <li>
         <a
           href={p.url}
           data-active={p.url.replace(/\?.*$/, "") === currentPath}
         >
-          {p.title} --- {p.url} --- {currentPath} ---
-          {p.url.replace(/\?.*$/, "")}
+          {p.title}
         </a>
       </li>
     ))
