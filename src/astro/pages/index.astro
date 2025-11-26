@@ -4,7 +4,7 @@ export const frontmatter = {
 };
 
 import Layout from "../layouts/layout.astro";
-import { url } from "../../scripts/core/astro-helpers";
+// import { url } from "../../scripts/core/astro-helpers";
 ---
 
 <style lang="scss">
@@ -13,10 +13,10 @@ import { url } from "../../scripts/core/astro-helpers";
     flex-flow: row nowrap;
     gap: 4vw;
     position: fixed;
-    inset: 50px auto auto 2vw;
+    inset: 43px auto auto 12vw;
     z-index: 123;
     list-style: none;
-    font-size: max(16px, 2vw);
+    font-size: max(12px, 2vw);
 
     [data-active] {
       text-decoration: underline;
@@ -25,5 +25,5 @@ import { url } from "../../scripts/core/astro-helpers";
 </style>
 
 <Layout title={frontmatter.title}>
-  <a class="link" href={url("/scroll-vanilla")}>→</a>
+  <!-- <a class="link" href={url("/scroll-vanilla")}>→</a> -->
 </Layout>
