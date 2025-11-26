@@ -85,5 +85,6 @@ export const url = (url) => {
   const isDev = process.env.NODE_ENV === 'development'
   const base = isDev ? '/playground' : 'https://ccrch.github.io/playground'
 
-  return `${base}${url}?v=${Date.now()}`
+  return `${base}${url}`
+  // return `${base}${url}?v=${Date.now()}`
 }
