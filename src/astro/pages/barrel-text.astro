@@ -31,14 +31,14 @@ const texts = [
     // Opacity
 
     gsap.set(el.firstElementChild.firstElementChild.firstElementChild, {
-      opacity: 0,
+      opacity: 0.01,
       overwrite: true,
     });
 
     ScrollTrigger.create({
-      animation: gsap.to(
+      animation: gsap.fromTo(
         el.firstElementChild.firstElementChild.firstElementChild,
-        // { opacity: 0 },
+        { opacity: 0.01 },
         {
           opacity: 1,
           ease: "none",
@@ -48,13 +48,13 @@ const texts = [
       start: "0% 95%",
       end: "0% 85%",
       trigger: el,
-      invalidateOnRefresh: true,
+      // invalidateOnRefresh: true,
     });
 
     ScrollTrigger.create({
-      animation: gsap.to(
+      animation: gsap.fromTo(
         el.firstElementChild.firstElementChild.firstElementChild,
-        // { opacity: 1 },
+        { opacity: 1 },
         {
           opacity: 0.01,
           ease: "none",
@@ -64,7 +64,7 @@ const texts = [
       start: "0% 5%",
       end: "0% -5%",
       trigger: el,
-      invalidateOnRefresh: true,
+      // invalidateOnRefresh: true,
     });
 
     // Rotation
@@ -149,12 +149,12 @@ const texts = [
   });
 
   document.querySelectorAll(".barrel--2 > div").forEach((el: HTMLElement) => {
-    gsap.set(el, { opacity: 0, overwrite: true });
+    gsap.set(el, { opacity: 0.01, overwrite: true });
 
     ScrollTrigger.create({
-      animation: gsap.to(
+      animation: gsap.fromTo(
         el,
-        // { opacity: 0 },
+        { opacity: 0.01 },
         {
           opacity: 1,
           ease: "none",
@@ -164,13 +164,13 @@ const texts = [
       start: "0% 100%",
       end: "0% 90%",
       trigger: el,
-      invalidateOnRefresh: true,
+      // invalidateOnRefresh: true,
     });
 
     ScrollTrigger.create({
-      animation: gsap.to(
+      animation: gsap.fromTo(
         el,
-        // { opacity: 1 },
+        { opacity: 1 },
         {
           opacity: 0.01,
           ease: "none",
@@ -180,7 +180,7 @@ const texts = [
       start: "0% 13%",
       end: "0% -3%",
       trigger: el,
-      invalidateOnRefresh: true,
+      // invalidateOnRefresh: true,
     });
 
     // Rotate the text
@@ -422,7 +422,7 @@ const texts = [
   }
 </style>
 
-<Layout title={frontmatter.title} navigationHidden={true}>
+<Layout title={frontmatter.title} navigationHidden={false}>
   <div class="barrel barrel--3">
     {
       texts.map((text) => (
