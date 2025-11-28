@@ -45,6 +45,7 @@ const sectionId = (index) => navigation[index].url.replace('#', '')
           index !== 0 && index !== navigation.length - 1 && <a class='navigation__link' href={item.url}>
             {item.label}
             <div class='navigation__link-status'><div></div></div>
+            <div class='navigation__link-highlight'></div>
           </a>
         ))}
         <div class='navigation__background'></div>
@@ -137,6 +138,7 @@ const sectionId = (index) => navigation[index].url.replace('#', '')
             </div>
             <div class='typography-circle'>
               <p>Þægilegt</p>
+              {/* 🎩🕊️💎 */}
             </div>
             <div class='typography-circle'>
               <p>Fágað</p>

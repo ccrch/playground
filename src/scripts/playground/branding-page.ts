@@ -14,7 +14,7 @@ const brandingPage = {
   navigation: {
     links(): void {
       document.querySelectorAll('.navigation__logo, .navigation__link').forEach((link) => {
-        link.addEventListener('pointerdown', () => {
+        link.addEventListener('click', () => {
           const href = link.getAttribute('href')
     
           lenis?.scrollTo(href, {
@@ -60,6 +60,8 @@ const brandingPage = {
             duration: 0.765,
             ease: 'power3.inOut',
           })
+
+          gsap.set(document.querySelectorAll('.navigation__link-highlight')[index], { opacity: direction === 1 ? 1 : 0 })
         }
 
         // Show or hide lines on scroll
@@ -77,8 +79,9 @@ const brandingPage = {
           onLeaveBack: () => {
             lineReveal(0)
           },
+          fastScrollEnd: true,
           end: '100% 75%',
-          start: '0% 100%',
+          start: '0% 75%',
           trigger: section,
         })
       })
@@ -169,12 +172,12 @@ const brandingPage = {
           // Hide headline on scroll down when content comes in & show it again on scroll back up
     
           ScrollTrigger.create({
+            fastScrollEnd: true,
             onEnter: () => {
               // gsap.set(el.headlineChars, { overwrite: true, y: '0%' })
               gsap.to([el.headlineEyebrow, el.headlineLines], {
                 duration: 0.876,
                 ease: 'power3.inOut',
-                fastScrollEnd: true,
                 overwrite: true,
                 stagger: 0.0543,
                 y: '-100%',

@@ -51,9 +51,15 @@
 .branding-page-html {
   --color-gray: #EEF2F6;
   --color-gray-dark: #D3DFE8;
-  --color-navy: #0B1423;
+  --color-navy: #0b1423;
   --color-red: #FF3D00;
-  --color-white: #F8FAFB; // rgb(248, 250, 251)
+  --color-white: #F8FAFB;
+
+  --color-gray-rgb: 238, 242, 246;
+  --color-gray-dark-rgb: 211, 223, 232;
+  --color-navy-rgb: 11, 20, 35;
+  --color-red-rgb: 255, 61, 0;
+  --color-white-rgb: 248, 250, 251;
 
   --mobile-design-width: 440; // 440;
   --desktop-design-width: 1440;
@@ -164,7 +170,7 @@
       padding: 0 24rem;
       overflow: hidden;
       backdrop-filter: blur(4px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(var(--color-white-rgb), 0.08);
       border-radius: 32rem;
       color: var(--color-red);
       font-size: 123%;
@@ -189,7 +195,7 @@
       padding: 0 36rem;
       overflow: hidden;
       backdrop-filter: blur(4px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(var(--color-white-rgb), 0.08);
       border-radius: 32rem;
       transition: border 0.321s;
     }
@@ -221,31 +227,59 @@
         background: var(--color-red);
       }
     }
+
+    &__link-highlight {
+      position: absolute;
+      inset: auto 0 -7rem;
+      z-index: -2;
+      height: 2rem;
+      background: rgba(var(--color-white-rgb), 0.1);
+      opacity: 0;
+      transition: background 0.321s, opacity 0.321s;
+    }
     
     &__background {
       position: absolute;
       inset: 0;
       z-index: -1;
-      background: var(--color-white); 
+      background: var(--color-white);
       border-radius: 32rem;
-      opacity: 0.03;
+      opacity: 0.021;
       transition: background 0.321s, opacity 0.321s;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 20rem;
+      z-index: 1;
+      background: var(--color-navy);
+      filter: blur(16rem);
+      opacity: 0.1;
     }
   }
 
   .navigation--white {
     .navigation__logo,
     .navigation__links {
-      border-color: rgba(11, 20, 35, 0.07);
+      border-color: rgba(var(--color-navy-rgb), 0.07);
     }
 
     .navigation__link {
       color: var(--color-navy);
     }
+
+    .navigation__link-highlight {
+      background: rgba(var(--color-navy-rgb), 0.07);
+    }
  
     .navigation__background {
       background: var(--color-navy);
-      opacity: 0.02;
+      opacity: 0.021;
+    }
+
+    &::before {
+      background: var(--color-white);
     }
   }
 
