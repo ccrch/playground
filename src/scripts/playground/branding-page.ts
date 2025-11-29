@@ -526,6 +526,7 @@ const brandingPage = {
       // Loading fonts
 
       await document.fonts.ready
+      await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)))
       await delay(12)
 
       // Smooth scrolling init
