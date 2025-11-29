@@ -1,6 +1,7 @@
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import SplitText from 'gsap/SplitText'
+import ScrambleTextPlugin from 'gsap/ScrambleTextPlugin'
 import { lenis, lenisScroll } from '../core/helpers'
 
 const brandingPage = {
@@ -516,7 +517,7 @@ const brandingPage = {
   },
 
   init(): void {
-    gsap.registerPlugin(ScrollTrigger, SplitText)
+    gsap.registerPlugin(ScrambleTextPlugin, ScrollTrigger, SplitText)
 
     const delay = ms => new Promise(r => setTimeout(r, ms))
 
@@ -592,6 +593,63 @@ const brandingPage = {
         start: '0% 100%',
         trigger: section,
       })
+    })
+
+    // Testing scramble text
+
+    gsap.matchMedia().add(brandingPage.breakpoints, () => {
+      SplitText.create('.scramble-test', {
+        aria: 'none',
+        linesClass: 'split-line',
+        mask: 'lines',
+        type: 'lines, chars',
+        charsClass: 'split-char',
+      })
+
+      const chars = gsap.utils.toArray(document.querySelectorAll('.scramble-test .split-char'))
+
+      gsap.utils.shuffle(chars)
+
+      const scrambleTimeline = gsap.timeline({ paused: true })
+
+      chars.forEach((char: HTMLElement, index) => {
+        const letter = char.textContent
+        gsap.set(char, { fontWeight: 100, opacity: 1 })
+
+        const tween = gsap
+          .timeline()
+          .to(char, {
+            duration: 2 + index * 0.3,
+            ease: 'none',
+            scrambleText: {
+              // chars: '0123456789$฿€£¥@#?¿!¡www+−×÷=➀%➊←↑↕↓→&©¶Ω',
+              chars: '0123456789$฿€£¥@#?¿!¡www+−×÷=➀%←↑↕↓→&©Ω',
+              // chars: '@!#$&*)%£¥¢§¶•ªº{}[]<>',
+              // chars: '!@#$%^&*(),.:;/|<>?+-=~',
+              // chars: '.,;:/|<>&+-=~',
+              revealDelay: 2 + index * 0.3,
+              // speed: index > 10 ? 0.3 : 1.6,
+              speed: 0.3,
+              text: letter,
+            },
+            onComplete: () => {
+              char.textContent = letter
+            },
+          })
+          .to(char, { fontWeight: 700, opacity: 1, duration: 0.543 })
+
+        scrambleTimeline.add(tween, 0)
+      })
+
+      // gsap.fromTo(scrambleTimeline, { progress: 0 }, {
+      //   delay: 1,
+      //   duration: 5,
+      //   ease: 'power2.out',
+      //   progress: 1,
+      // })
+
+      scrambleTimeline.timeScale(1).play()
+
     })
   },
 }
