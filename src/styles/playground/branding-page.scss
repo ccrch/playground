@@ -20,32 +20,16 @@
   font-display: swap;
   font-family: 'Aeonik';
   font-style: normal;
-  font-weight: 700;
-  src: url('../../assets/fonts/aeonik-bold.otf') format('opentype');
+  font-weight: 100 1000;
+  src: url('../../assets/fonts/aeonik-variable-roman.woff2') format('woff2');
 }
 
 @font-face {
   font-display: swap;
   font-family: 'Aeonik';
-  font-style: normal;
-  font-weight: 500;
-  src: url('../../assets/fonts/aeonik-medium.otf') format('opentype');
-}
-
-@font-face {
-  font-display: swap;
-  font-family: 'Aeonik';
-  font-style: normal;
-  font-weight: 400;
-  src: url('../../assets/fonts/aeonik-regular.otf') format('opentype');
-}
-
-@font-face {
-  font-display: swap;
-  font-family: 'Aeonik';
-  font-style: normal;
-  font-weight: 600;
-  src: url('../../assets/fonts/aeonik-semibold.otf') format('opentype');
+  font-style: italic;
+  font-weight: 100 1000;
+  src: url('../../assets/fonts/aeonik-variable-italic.woff2') format('woff2');
 }
 
 .branding-page-html {
@@ -61,12 +45,12 @@
   --color-red-rgb: 255, 61, 0;
   --color-white-rgb: 248, 250, 251;
 
-  --mobile-design-width: 440; // 440;
+  --mobile-design-width: 440;
   --desktop-design-width: 1440;
   --ultrawide-breakpoint: 2560;
   
   scroll-behavior: smooth;
-  font-size: calc((100 / var(--mobile-design-width)) * 1vw);// This must match desktop-xl breakpoint
+  font-size: calc((100 / var(--mobile-design-width)) * 1vw); // This must match desktop-xl breakpoint
 
   @include isDesktop {
     font-size: calc((100 / var(--desktop-design-width)) * 1vw);
@@ -248,15 +232,15 @@
       transition: background 0.321s, opacity 0.321s;
     }
 
-    &::before {
-      content: '';
-      position: absolute;
-      inset: 20rem;
-      z-index: 1;
-      background: var(--color-navy);
-      filter: blur(16rem);
-      opacity: 0.1;
-    }
+    // &::before { // TODO - test this later
+    //   content: '';
+    //   position: absolute;
+    //   inset: 20rem;
+    //   z-index: 1;
+    //   background: var(--color-navy);
+    //   filter: blur(16rem);
+    //   opacity: 0.1;
+    // }
   }
 
   .navigation--white {
