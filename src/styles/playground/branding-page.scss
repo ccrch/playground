@@ -823,4 +823,21 @@
       color: var(--color-red);
     }
   }
+
+  .letters-test {
+    position: relative;
+    z-index: 1;
+    font-size: 240rem;
+    font-weight: 700;
+    line-height: 120%;
+    letter-spacing: 0.03em;
+    text-align: center;
+
+    span {
+      position: absolute;
+      inset: 50% auto auto 50%;
+      z-index: 1;
+      transform: translate(-50%, -50%);
+    }
+  }
 }
