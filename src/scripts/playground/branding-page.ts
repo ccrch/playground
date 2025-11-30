@@ -3,7 +3,8 @@ import ScrollTrigger from 'gsap/ScrollTrigger'
 import SplitText from 'gsap/SplitText'
 import ScrambleTextPlugin from 'gsap/ScrambleTextPlugin'
 import { lenis, lenisScroll } from '../core/helpers'
-import { set } from 'astro/zod'
+
+/* prettier-ignore */
 
 const brandingPage = {
   breakpoints: {

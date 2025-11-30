@@ -1,0 +1,50 @@
+---
+import { getAstroPages, url } from '../../scripts/core/astro-helpers'
+
+const currentPath = Astro.url.pathname
+const pages = getAstroPages()
+---
+
+<style lang="scss">
+  .playground-navigation {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: max(6px, 0.5vw);
+    position: fixed;
+    inset: 43px auto auto 21px;
+    z-index: 123;
+    // max-height: 50vh;
+    // overflow-y: auto;
+    // scrollbar-width: thin;
+    list-style: none;
+    font-size: max(12px, 1vw);
+    line-height: 121%;
+
+    a {
+      display: flex;
+      flex-flow: column nowrap;
+
+      &[data-active] span:first-child {
+        text-decoration: underline;
+      }
+
+      span + span {
+        font-size: 75%;
+      }
+    }
+  }
+</style>
+
+<ul class="playground-navigation">
+  <li><a href={url('')}>/</a></li>
+  {
+    pages.map((page) => (
+      <li>
+        <a href={page.url} data-active={page.url.replace(/\?.*$/, '') === currentPath}>
+          <span>{page.title}</span>
+          <span>{page.description}</span>
+        </a>
+      </li>
+    ))
+  }
+</ul>

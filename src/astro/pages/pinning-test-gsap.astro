@@ -1,0 +1,39 @@
+---
+export const frontmatter = {
+  baseClass: 'pinning-test',
+  description: 'ScrollTriggers test with GSAP smooth scroll',
+  title: 'Pinning test (GSAP)',
+}
+
+import Layout from '../layouts/playground-layout.astro'
+import Content from 'src/astro/components/pinning-test-content.astro'
+---
+
+<script>
+  import gsap from 'gsap'
+  import { ScrollSmoother } from 'gsap/ScrollSmoother'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+  import pinText from '../../scripts/playground/pinning-test'
+
+  gsap.registerPlugin(ScrollSmoother, ScrollTrigger)
+
+  ScrollSmoother.create({
+    content: '.smooth-content',
+    effects: false,
+    normalizeScroll: true,
+    smooth: 1.23,
+    wrapper: '.smooth-wrapper',
+  })
+
+  pinText()
+</script>
+
+<Layout title={frontmatter.title}>
+  <main class={frontmatter.baseClass} slot="body">
+    <div class="smooth-wrapper">
+      <div class="smooth-content">
+        <Content />
+      </div>
+    </div>
+  </main>
+</Layout>

@@ -1,344 +1,72 @@
 ---
-import Layout from "../layouts/layout.astro";
-// import { url } from '../../scripts/core/astro-helpers'
-
 export const frontmatter = {
-  title: "Testing stuff",
-};
+  baseClass: 'test',
+  title: 'Testing stuff',
+}
+
+import '../../styles/playground/test.scss'
+import Layout from '../layouts/playground-layout.astro'
+// import { url } from '../../scripts/core/astro-helpers'
 ---
 
 <script>
-  import gsap from "gsap";
-  import ScrollTrigger from "gsap/ScrollTrigger";
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  // gsap.set(".h1-mask", { yPercent: -100 });
-  gsap.set(".h1-text", { opacity: 0 });
-  gsap.to(".h1-text", { opacity: 1, delay: 0.5, duration: 1 });
-  gsap.to(".h1-mask", {
-    yPercent: 100,
-    delay: 0.6,
-    duration: 2,
-    ease: "power3.inOut",
-  });
-
-  gsap.to(".noi .rays svg", {
-    rotate: 360,
-    repeat: -1,
-    duration: 55,
-    ease: "none",
-  });
+  import stuff from '../../scripts/playground/test'
+  stuff.init()
 </script>
 
-<style lang="scss">
-  @import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap");
-
-  .noi {
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 30vw 10vw;
-    background: #f3ede2;
-
-    h1 {
-      position: relative;
-      z-index: 2;
-      // padding: 0 3vw;
-      padding: 5vw;
-      overflow: hidden;
-      color: #5d2c00;
-      font-family: "EB Garamond", serif;
-      font-size: 9vw;
-      font-weight: 500;
-      font-style: italic;
-      line-height: 82%;
-      letter-spacing: -0.06em;
-      text-align: center;
-
-      span {
-        color: #dc6413;
-      }
-
-      &:hover .h1-mask {
-        transform: translateY(0%) !important;
-      }
-    }
-
-    .h1-mask {
-      position: absolute;
-      inset: -9vw;
-      z-index: 1;
-      // transform: translateY(-100%);
-      // transition: transform 2s ease;
-
-      > div {
-        position: absolute;
-        inset: 0;
-        z-index: 1;
-
-        &:nth-child(1) {
-          backdrop-filter: blur(1px);
-          mask-image: linear-gradient(
-            180deg,
-            rgba(0, 0, 0, 0) 12.5%,
-            rgba(0, 0, 0, 1) 25%,
-            rgba(0, 0, 0, 1) 37.5%,
-            rgba(0, 0, 0, 0) 50%
-          );
-        }
-
-        &:nth-child(2) {
-          backdrop-filter: blur(2px);
-          mask-image: linear-gradient(
-            180deg,
-            rgba(0, 0, 0, 0) 25%,
-            rgba(0, 0, 0, 1) 37.5%,
-            rgba(0, 0, 0, 1) 50%,
-            rgba(0, 0, 0, 0) 62.5%
-          );
-        }
-
-        &:nth-child(3) {
-          backdrop-filter: blur(4px);
-          mask-image: linear-gradient(
-            180deg,
-            rgba(0, 0, 0, 0) 37.5%,
-            rgba(0, 0, 0, 1) 50%,
-            rgba(0, 0, 0, 1) 62.5%,
-            rgba(0, 0, 0, 0) 75%
-          );
-        }
-
-        &:nth-child(4) {
-          backdrop-filter: blur(8px);
-          mask-image: linear-gradient(
-            180deg,
-            rgba(0, 0, 0, 0) 50%,
-            rgba(0, 0, 0, 1) 62.5%,
-            rgba(0, 0, 0, 1) 75%,
-            rgba(0, 0, 0, 0) 87.5%
-          );
-        }
-
-        &:nth-child(5) {
-          backdrop-filter: blur(16px);
-          mask-image: linear-gradient(
-            180deg,
-            rgba(0, 0, 0, 0) 62.5%,
-            rgba(0, 0, 0, 1) 75%,
-            rgba(0, 0, 0, 1) 87.5%,
-            rgba(0, 0, 0, 0)
-          );
-        }
-
-        &:nth-child(6) {
-          // height: 200%;
-          backdrop-filter: blur(32px);
-          // mask-image: linear-gradient(
-          //   180deg,
-          //   rgba(0, 0, 0, 0) 37.5%,
-          //   rgba(0, 0, 0, 1) 43.75%,
-          //   rgba(0, 0, 0, 1)
-          // );
-          mask-image: linear-gradient(
-            180deg,
-            rgba(0, 0, 0, 0) 75%,
-            rgba(0, 0, 0, 1) 87.5%,
-            rgba(0, 0, 0, 1)
-          );
-        }
-      }
-    }
-
-    .rays {
-      position: relative;
-      z-index: 31;
-      width: 100vw;
-      mix-blend-mode: darken;
-      pointer-events: none;
-
-      > div {
-        position: absolute;
-        inset: 0 auto auto 50%;
-        z-index: 1;
-        transform: translate(-50%, -50%) translateY(-11vw) scale(2, 1);
-        width: 100%;
-        mask-image: linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0) 0%,
-            rgba(0, 0, 0, 1) 20%,
-            rgba(0, 0, 0, 0.3) 30%,
-            rgba(0, 0, 0, 0) 50%,
-            rgba(0, 0, 0, 0.3) 70%,
-            rgba(0, 0, 0, 1) 80%,
-            rgba(0, 0, 0, 0) 100%
-          ),
-          linear-gradient(
-            to right,
-            rgba(0, 0, 0, 0) 0%,
-            rgba(0, 0, 0, 1) 50%,
-            rgba(0, 0, 0, 0) 100%
-          ),
-          radial-gradient(
-            circle at center,
-            rgba(0, 0, 0, 1) 0%,
-            rgba(0, 0, 0, 0) 90%
-          );
-        mask-composite: intersect;
-
-        svg {
-          width: 100%;
-          aspect-ratio: 1;
-
-          path {
-            stroke-width: 0.7px;
-          }
-        }
-      }
-
-      // > div {
-      //   &:first-child {
-      //     transform: translate(-50%, -50%) translateY(-16vw) scale(1.5, 1);
-      //     mask-image: linear-gradient(
-      //       to bottom,
-      //       rgba(0, 0, 0, 0) 0%,
-      //       rgba(0, 0, 0, 0.5) 20%,
-      //       rgba(0, 0, 0, 1) 45%,
-      //       rgba(0, 0, 0, 0) 60%
-      //     );
-      //   }
-
-      //   &:last-child {
-      //     transform: translate(-50%, -50%) translateY(-6vw) scale(1.5, 1);
-      //   }
-      // }
-    }
-  }
-
-  .text {
-    padding: 10vw;
-  }
-
-  .drum {
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    min-height: 100vh;
-    padding: 100vh 0;
-
-    > div {
-      perspective: 1234px;
-
-      > div {
-        perspective: 1234px;
-      }
-    }
-
-    h1 {
-      font-size: 7vw;
-      text-align: center;
-    }
-  }
-
-  // .noi {
-  //   display: none !important;
-  // }
-</style>
-
 <Layout title={frontmatter.title}>
-  <div class="noi">
-    <h1>
-      <div class="h1-mask">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-      <div class="h1-text">Nóa Konfekt,<br />með þér í <span>90 ár</span></div>
-    </h1>
+  <main class={frontmatter.baseClass} slot="body">
+    <div class="noi">
+      <h1>
+        <div class="h1-mask">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="h1-text">Nóa Konfekt,<br />með þér í <span>90 ár</span></div>
+      </h1>
 
-    <div class="rays">
-      <div>
-        <!-- <svg
-          width="979"
-          height="979"
-          viewBox="0 0 979 979"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M0 488.992H979M490.004 0L490.004 979M143.729 143.012L835.986 835.269M835.986 143.727L143.729 835.984M65.3281 733.809L913.167 244.309M245.187 65.3301L734.687 913.169M16.8091 362.322L962.45 615.706M616.678 16.8091L363.294 962.45M65.834 244.309L913.673 733.809M734.687 65.834L245.187 913.673M363.297 16.5464L616.681 962.188M962.452 363.295L16.8103 616.679M4.25383 425.103L974.878 552.888M553.892 4.25256L426.107 974.877M191.912 100.843L787.89 877.536M878.154 191.909L101.462 787.887M37.068 676.353L941.546 301.706M302.642 37.0687L677.289 941.547M37.4529 301.71L941.931 676.357M677.289 37.4522L302.642 941.93M101.462 191.106L878.155 787.084M787.889 101.461L191.911 878.154M426.11 4.11885L553.895 974.743M974.878 426.107L4.25385 553.892"
-            stroke="#DCCAAD"></path>
-        </svg> -->
-        <svg
-          width="979"
-          height="979"
-          viewBox="0 0 979 979"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M0 488.992H979M490.004 0L490.004 979M143.729 143.012L835.986 835.269M835.986 143.727L143.729 835.984M65.3281 733.809L913.167 244.309M245.187 65.3301L734.687 913.169M16.8091 362.322L962.45 615.706M616.678 16.8091L363.294 962.45M65.834 244.309L913.673 733.809M734.687 65.834L245.187 913.673M363.297 16.5464L616.681 962.188M962.452 363.295L16.8103 616.679M4.25383 425.103L974.878 552.888M553.892 4.25256L426.107 974.877M191.912 100.843L787.89 877.536M878.154 191.909L101.462 787.887M37.068 676.353L941.546 301.706M302.642 37.0687L677.289 941.547M37.4529 301.71L941.931 676.357M677.289 37.4522L302.642 941.93M101.462 191.106L878.155 787.084M787.889 101.461L191.911 878.154M426.11 4.11885L553.895 974.743M974.878 426.107L4.25385 553.892"
-            stroke="#DCCAAD"></path>
-          <path
-            d="M1.22752 454.848L977.843 523.14M524.148 1.22782L455.857 977.843M168.74 119.736L811.022 858.597M859.262 168.739L120.401 811.021M49.3189 703.626L929.238 274.46M275.37 49.3212L704.536 929.241M26.8318 329.659L952.494 648.39M649.341 26.8323L330.61 952.495M83.9694 215.353L895.597 762.803M763.643 83.9697L216.193 895.597M396.596 8.89529L583.398 969.908M970.103 396.595L9.08988 583.397M9.92766 391.411L969.274 586.592M587.584 9.92663L392.403 969.273M219.748 81.031L760.095 897.405M897.966 219.746L81.5921 760.092M25.1356 644.338L953.545 333.697M334.657 25.1365L645.298 953.545M51.6533 270.635L927.794 707.463M708.364 51.6531L271.536 927.794M123.222 164.765L856.45 813.47M814.23 123.221L165.525 856.449M460.122 0.879613L519.889 978.054M978.118 460.12L0.943825 519.886"
-            stroke="#DCCAAD"></path>
-        </svg>
+      <div class="rays">
+        <div>
+          <!-- <svg
+            width="979"
+            height="979"
+            viewBox="0 0 979 979"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 488.992H979M490.004 0L490.004 979M143.729 143.012L835.986 835.269M835.986 143.727L143.729 835.984M65.3281 733.809L913.167 244.309M245.187 65.3301L734.687 913.169M16.8091 362.322L962.45 615.706M616.678 16.8091L363.294 962.45M65.834 244.309L913.673 733.809M734.687 65.834L245.187 913.673M363.297 16.5464L616.681 962.188M962.452 363.295L16.8103 616.679M4.25383 425.103L974.878 552.888M553.892 4.25256L426.107 974.877M191.912 100.843L787.89 877.536M878.154 191.909L101.462 787.887M37.068 676.353L941.546 301.706M302.642 37.0687L677.289 941.547M37.4529 301.71L941.931 676.357M677.289 37.4522L302.642 941.93M101.462 191.106L878.155 787.084M787.889 101.461L191.911 878.154M426.11 4.11885L553.895 974.743M974.878 426.107L4.25385 553.892"
+              stroke="#DCCAAD"></path>
+          </svg> -->
+          <svg width="979" height="979" viewBox="0 0 979 979" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 488.992H979M490.004 0L490.004 979M143.729 143.012L835.986 835.269M835.986 143.727L143.729 835.984M65.3281 733.809L913.167 244.309M245.187 65.3301L734.687 913.169M16.8091 362.322L962.45 615.706M616.678 16.8091L363.294 962.45M65.834 244.309L913.673 733.809M734.687 65.834L245.187 913.673M363.297 16.5464L616.681 962.188M962.452 363.295L16.8103 616.679M4.25383 425.103L974.878 552.888M553.892 4.25256L426.107 974.877M191.912 100.843L787.89 877.536M878.154 191.909L101.462 787.887M37.068 676.353L941.546 301.706M302.642 37.0687L677.289 941.547M37.4529 301.71L941.931 676.357M677.289 37.4522L302.642 941.93M101.462 191.106L878.155 787.084M787.889 101.461L191.911 878.154M426.11 4.11885L553.895 974.743M974.878 426.107L4.25385 553.892" stroke="#DCCAAD"></path>
+            <path d="M1.22752 454.848L977.843 523.14M524.148 1.22782L455.857 977.843M168.74 119.736L811.022 858.597M859.262 168.739L120.401 811.021M49.3189 703.626L929.238 274.46M275.37 49.3212L704.536 929.241M26.8318 329.659L952.494 648.39M649.341 26.8323L330.61 952.495M83.9694 215.353L895.597 762.803M763.643 83.9697L216.193 895.597M396.596 8.89529L583.398 969.908M970.103 396.595L9.08988 583.397M9.92766 391.411L969.274 586.592M587.584 9.92663L392.403 969.273M219.748 81.031L760.095 897.405M897.966 219.746L81.5921 760.092M25.1356 644.338L953.545 333.697M334.657 25.1365L645.298 953.545M51.6533 270.635L927.794 707.463M708.364 51.6531L271.536 927.794M123.222 164.765L856.45 813.47M814.23 123.221L165.525 856.449M460.122 0.879613L519.889 978.054M978.118 460.12L0.943825 519.886" stroke="#DCCAAD"></path>
+          </svg>
+        </div>
+        <!-- <div>
+          <svg
+            width="979"
+            height="979"
+            viewBox="0 0 979 979"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 488.992H979M490.004 0L490.004 979M143.729 143.012L835.986 835.269M835.986 143.727L143.729 835.984M65.3281 733.809L913.167 244.309M245.187 65.3301L734.687 913.169M16.8091 362.322L962.45 615.706M616.678 16.8091L363.294 962.45M65.834 244.309L913.673 733.809M734.687 65.834L245.187 913.673M363.297 16.5464L616.681 962.188M962.452 363.295L16.8103 616.679M4.25383 425.103L974.878 552.888M553.892 4.25256L426.107 974.877M191.912 100.843L787.89 877.536M878.154 191.909L101.462 787.887M37.068 676.353L941.546 301.706M302.642 37.0687L677.289 941.547M37.4529 301.71L941.931 676.357M677.289 37.4522L302.642 941.93M101.462 191.106L878.155 787.084M787.889 101.461L191.911 878.154M426.11 4.11885L553.895 974.743M974.878 426.107L4.25385 553.892"
+              stroke="#DCCAAD"></path>
+          </svg>
+        </div> -->
       </div>
-      <!-- <div>
-        <svg
-          width="979"
-          height="979"
-          viewBox="0 0 979 979"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M0 488.992H979M490.004 0L490.004 979M143.729 143.012L835.986 835.269M835.986 143.727L143.729 835.984M65.3281 733.809L913.167 244.309M245.187 65.3301L734.687 913.169M16.8091 362.322L962.45 615.706M616.678 16.8091L363.294 962.45M65.834 244.309L913.673 733.809M734.687 65.834L245.187 913.673M363.297 16.5464L616.681 962.188M962.452 363.295L16.8103 616.679M4.25383 425.103L974.878 552.888M553.892 4.25256L426.107 974.877M191.912 100.843L787.89 877.536M878.154 191.909L101.462 787.887M37.068 676.353L941.546 301.706M302.642 37.0687L677.289 941.547M37.4529 301.71L941.931 676.357M677.289 37.4522L302.642 941.93M101.462 191.106L878.155 787.084M787.889 101.461L191.911 878.154M426.11 4.11885L553.895 974.743M974.878 426.107L4.25385 553.892"
-            stroke="#DCCAAD"></path>
-        </svg>
-      </div> -->
     </div>
-  </div>
-  <div class="text">
-    Velit aliquip qui laboris elit exercitation officia tempor aliqua. Sunt quis
-    officia ex irure veniam sit eu ad qui sint qui. Magna eiusmod adipisicing
-    laborum voluptate velit non quis non ea aliquip cillum duis reprehenderit
-    reprehenderit. Consequat non consectetur sit quis veniam aliquip consequat.
-    Qui deserunt ad sunt ea aliqua dolore in culpa. Ipsum commodo ipsum ullamco
-    et exercitation ea aliqua minim. Commodo culpa fugiat voluptate est sint
-    enim elit non ipsum officia aliqua ad magna. Qui ad est aliquip velit in
-    duis amet dolore. Qui exercitation ipsum fugiat qui aliqua. Occaecat labore
-    est elit Lorem dolor duis veniam non laboris incididunt mollit magna sunt.
-    Deserunt proident adipisicing voluptate exercitation dolor ut aliquip
-    ullamco. Non qui et cillum quis enim culpa excepteur dolore fugiat enim
-    proident aliquip elit culpa. Consequat est cillum laboris magna do id
-    officia adipisicing ipsum. Officia nostrud occaecat do fugiat aliquip esse
-    ex enim tempor enim. Sint laborum dolore minim commodo elit eiusmod nostrud
-    aliqua anim. Anim Lorem sunt Lorem ex adipisicing et duis incididunt id.
-    Esse duis et aliqua incididunt et incididunt irure adipisicing reprehenderit
-    eiusmod aliqua Lorem. Eu nulla ex exercitation reprehenderit sunt Lorem
-    fugiat aliquip aute eiusmod enim. Ipsum tempor proident ea sit qui culpa.
-    Deserunt exercitation esse cillum cupidatat anim ipsum sint sunt excepteur
-    elit nostrud pariatur cupidatat minim. Nostrud ex sit officia elit nostrud
-    id excepteur aliquip proident culpa velit elit. Proident qui dolor laborum
-    tempor mollit officia adipisicing amet dolor ad occaecat enim laboris. Ipsum
-    occaecat incididunt reprehenderit ipsum nostrud enim veniam dolore nisi
-    pariatur consequat consequat. Velit sunt incididunt commodo velit
-    adipisicing ullamco ullamco do magna quis irure laboris veniam. Aute dolor
-    sit minim aliquip proident nostrud qui do sint. Exercitation sint cillum
-    magna irure enim nisi voluptate duis ut ex labore enim eu. Ullamco ad cillum
-    duis voluptate ex ut exercitation consectetur cillum ex laboris. Dolore
-    dolor incididunt non ad esse amet est cupidatat mollit. Adipisicing proident
-    voluptate laborum excepteur duis eu est amet adipisicing dolore do.Aute qui
-    ad nisi dolore consectetur proident anim velit consectetur est ad id
-    voluptate.
-  </div>
+    <div class="text">
+      <picture>
+        <img src="https://picsum.photos/800/400" alt="Random image from picsum.photos" />
+      </picture>
+      Velit aliquip qui laboris elit exercitation officia tempor aliqua. Sunt quis officia ex irure veniam sit eu ad qui sint qui. Magna eiusmod adipisicing laborum voluptate velit non quis non ea aliquip cillum duis reprehenderit reprehenderit. Consequat non consectetur sit quis veniam aliquip consequat. Qui deserunt ad sunt ea aliqua dolore in culpa. Ipsum commodo ipsum ullamco et exercitation ea aliqua minim. Commodo culpa fugiat voluptate est sint enim elit non ipsum officia aliqua ad magna. Qui ad est aliquip velit in duis amet dolore. Qui exercitation ipsum fugiat qui aliqua. Occaecat labore est elit Lorem dolor duis veniam non laboris incididunt mollit magna sunt. Deserunt proident adipisicing voluptate exercitation dolor ut aliquip ullamco. Non qui et cillum quis enim culpa excepteur dolore fugiat enim proident aliquip elit culpa. Consequat est cillum laboris magna do id officia adipisicing ipsum. Officia nostrud occaecat do fugiat aliquip esse ex enim tempor enim. Sint laborum dolore minim commodo elit eiusmod nostrud aliqua anim. Anim Lorem sunt Lorem ex adipisicing et duis incididunt id. Esse duis et aliqua incididunt et incididunt irure adipisicing reprehenderit eiusmod aliqua Lorem. Eu nulla ex exercitation reprehenderit sunt Lorem fugiat aliquip aute eiusmod enim. Ipsum tempor proident ea sit qui culpa. Deserunt exercitation esse cillum cupidatat anim ipsum sint sunt excepteur elit nostrud pariatur cupidatat minim. Nostrud ex sit officia elit nostrud id excepteur aliquip proident culpa velit elit. Proident qui dolor laborum tempor mollit officia adipisicing amet dolor ad occaecat enim laboris. Ipsum occaecat incididunt reprehenderit ipsum nostrud enim veniam dolore nisi pariatur consequat consequat. Velit sunt incididunt commodo velit adipisicing ullamco ullamco do magna quis irure laboris veniam. Aute dolor sit minim aliquip proident nostrud qui do sint. Exercitation sint cillum magna irure enim nisi voluptate duis ut ex labore enim eu. Ullamco ad cillum duis voluptate ex ut exercitation consectetur cillum ex laboris. Dolore dolor incididunt non ad esse amet est cupidatat mollit. Adipisicing proident voluptate laborum excepteur duis eu est amet adipisicing dolore do.Aute qui ad nisi dolore consectetur proident anim velit consectetur est ad id voluptate.
+    </div>
+  </main>
 </Layout>

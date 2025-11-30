@@ -1,15 +1,8 @@
 ---
-const {
-  className = "",
-  eyebrow,
-  headline,
-  id,
-  isHeadlineSmall = false,
-  isNavy = false,
-} = Astro.props;
+const { className = '', eyebrow, headline, id, isHeadlineSmall = false, isNavy = false } = Astro.props
 
-const headlineClass = isHeadlineSmall ? "section__headline--small" : "";
-const themeClass = isNavy ? "section--navy" : "section--white";
+const headlineClass = isHeadlineSmall ? 'section__headline--small' : ''
+const themeClass = isNavy ? 'section--navy' : 'section--white'
 ---
 
 <div class={`section ${className} ${themeClass}`} id={id}>

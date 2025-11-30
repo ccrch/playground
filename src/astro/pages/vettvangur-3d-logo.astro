@@ -1,0 +1,41 @@
+---
+export const frontmatter = {
+  baseClass: 'vettvangur-3d-logo',
+  description: '',
+  title: 'Vettvangur 3D logo',
+}
+
+import '../../styles/playground/vettvangur-3d-logo.scss'
+import Layout from '../layouts/playground-layout.astro'
+
+const svg = () => {
+  return `
+    <svg width="300" height="169" viewBox="0 0 300 169" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M200.57 168.513L300 0H270.346L185.736 143.32L200.57 168.513Z" fill="#FD3D00"></path>
+      <path d="M175.228 125.635L249.317 0H219.449L160.394 100.243L175.228 125.635Z" fill="#FD3D00"></path>
+      <path d="M198.434 0H0L99.2169 168.513L198.434 0ZM153.972 25.1669L99.2169 118.126L44.4747 25.1669H153.972Z" fill="#FD3D00"></path>
+    </svg>
+  `
+}
+---
+
+<script>
+  import stuff from '../../scripts/playground/vettvangur-3d-logo'
+  stuff.init()
+</script>
+
+<Layout baseClass={frontmatter.baseClass} description={frontmatter.description} title={frontmatter.title}>
+  <main class={frontmatter.baseClass} slot="body">
+    <div class="logo-container">
+      <div class="logo">
+        <div class="logo__layers">
+          {
+            Array.from({ length: 33 }).map(() => {
+              return <div set:html={svg()} />
+            })
+          }
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>

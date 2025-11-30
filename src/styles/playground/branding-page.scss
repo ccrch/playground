@@ -56,7 +56,7 @@
     font-size: calc((100 / var(--desktop-design-width)) * 1vw);
   }
 
-  @include isUltraWide {
+  @include isUltrawide {
     font-size: calc(((100 / var(--desktop-design-width)) * var(--ultrawide-breakpoint) / 16) * 0.01rem);
   }
 }

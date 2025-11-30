@@ -7,17 +7,17 @@ const pinText = () => {
   ScrollTrigger.config({
     ignoreMobileResize: true,
   })
-  
+
   const q = gsap.utils.selector('.scrolltriggers-test')
 
   const gsapBreakpoints = {
     isDesktop: `(min-width: 768px) `,
     isMobile: `(max-width: 767px)`,
   }
-  
+
   q('.title').forEach((section) => {
     // gsap.set(section, { opacity: 0 })
-  
+
     // ScrollTrigger.create({
     //   onEnter: () => {
     //     gsap.to(section, { opacity: 1 })
@@ -45,7 +45,7 @@ const pinText = () => {
       })
     })
   })
-  
+
   q('.text').forEach((section) => {
     ScrollTrigger.create({
       onEnter: () => {
@@ -61,4 +61,3 @@ const pinText = () => {
 }
 
 export default pinText
-

@@ -1,13 +1,13 @@
 ---
 export const frontmatter = {
   baseClass: 'branding-page',
+  description: 'Vettvangur branding page',
   title: 'Ný ásýnd Vettvangs',
 }
 
-import BrandingPageSection from '../components/branding-page-section.astro'
-import Layout from '../layouts/layout.astro'
 import '../../styles/playground/branding-page.scss'
-import { randomText } from '../../scripts/core/astro-helpers'
+import BrandingPageSection from '../components/branding-page-section.astro'
+import Layout from '../layouts/playground-layout.astro'
 
 const navigation = [
   { section: 'home', label: 'Heim', url: '#heim', headline: 'Ný ásýnd<br> Vettvangs' },
@@ -28,8 +28,8 @@ const sectionId = (index) => navigation[index].url.replace('#', '')
   stuff.init()
 </script>
 
-<Layout baseClass={frontmatter.baseClass} navigationHidden={true} title={frontmatter.title}>
-  <main class={frontmatter.baseClass}>
+<Layout baseClass={frontmatter.baseClass} description={frontmatter.description} navigationHidden title={frontmatter.title}>
+  <main class={frontmatter.baseClass} slot="body">
 
     <nav class='navigation'>
       <a class='navigation__logo' href='#heim'>
@@ -80,7 +80,7 @@ const sectionId = (index) => navigation[index].url.replace('#', '')
         id={sectionId(index)}
         isHeadlineSmall={item.section === 'tone' || item.section === 'summary'}
         isNavy={(index - 1) % 2}
-        headline={item.headline ? item.headline : randomText(3, 5)}
+        headline={item.headline}
       >
         {item.section === 'sign' &&
           <div class='box box--gray box--1'>

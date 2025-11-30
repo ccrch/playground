@@ -1,0 +1,48 @@
+.vettvangur-3d-logo {
+  .logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    transform-style: preserve-3d;
+    perspective: 1234px;
+  
+    .logo {
+      position: relative;
+      z-index: 1;
+      transform-style: preserve-3d;
+      width: min(666px, 33vw);
+  
+      .logo__layers {
+        transform-style: preserve-3d;
+        width: 100%;
+        height: 100%;
+  
+        > div {
+          width: 100%;
+          aspect-ratio: 300 / 169;
+  
+          svg {
+            width: 100%;
+            height: auto;
+          }
+        }
+  
+        > div:not(:first-child) {
+          position: absolute;
+          inset: 0;
+          z-index: 1;
+  
+          svg path {
+            fill: darken(#fd3d00, 7%);
+          }
+        }
+  
+        > div:last-child svg path {
+          fill: #fd3d00;
+        }
+      }
+    }
+  }
+}

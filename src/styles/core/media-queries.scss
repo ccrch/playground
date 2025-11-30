@@ -186,7 +186,7 @@ $breakpoints: (
   }
 }
 
-@mixin isUltraWide($breakpoints: $breakpoints) {
+@mixin isUltrawide($breakpoints: $breakpoints) {
   @include mq(desktop-xl, $breakpoints) {
     @content;
   }

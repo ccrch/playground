@@ -1,0 +1,24 @@
+---
+export const frontmatter = {
+  baseClass: 'pinning-test',
+  description: 'ScrollTriggers test with Lenis scroll',
+  title: 'Pinning test (Lenis)',
+}
+
+import Layout from '../layouts/playground-layout.astro'
+import Content from 'src/astro/components/pinning-test-content.astro'
+---
+
+<script>
+  import { lenisScroll } from '../../scripts/core/helpers'
+  import pinText from '../../scripts/playground/pinning-test'
+
+  lenisScroll.init()
+  pinText()
+</script>
+
+<Layout title={frontmatter.title}>
+  <main class={frontmatter.baseClass} slot="body">
+    <Content />
+  </main>
+</Layout>

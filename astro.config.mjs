@@ -6,9 +6,11 @@ const isDev = process.env.NODE_ENV === 'development'
 
 export default defineConfig({
   // alias: {
-  //   '@components': './src/astro/components',
-  //   '@layouts': './src/astro/layouts',
-  //   '@pages': './src/astro/pages',
+  //   '@components': '/src/astro/components',
+  //   '@layouts': '/src/astro/layouts',
+  //   '@pages': '/src/astro/pages',
+  //   '@styles': '/src/styles',
+  //   '@scripts': '/src/scripts',
   // },
   base: '/playground/',
   devToolbar: { enabled: false },
@@ -21,8 +23,11 @@ export default defineConfig({
         scss: {
           additionalData: `
             $showMediaLabel: ${isDev};\n
-            @import 'src/styles/core/media-queries.scss';\n
           `
+          // additionalData: `
+          //   $showMediaLabel: ${isDev};\n
+          //   @import 'src/styles/core/media-queries.scss';\n
+          // `
         }
       }
     },

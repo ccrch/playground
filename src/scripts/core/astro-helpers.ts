@@ -7,25 +7,33 @@ export const getAstroPages = () => {
   const files = fs.readdirSync(pagesDir)
 
   return files
-    .filter(file => file.endsWith('.astro'))
-    .map(file => {
+    .filter((file) => file.endsWith('.astro'))
+    .map((file) => {
       const fullPath = path.join(pagesDir, file)
       const content = fs.readFileSync(fullPath, 'utf-8')
 
       const match = content.match(/export const frontmatter\s*=\s*({[\s\S]*?})/)
+
+      let description: string | undefined
       let title: string | undefined
 
       if (match) {
         try {
           const ast = parse(`(${match[1]})`, { ecmaVersion: 'latest' })
           const node = ast.body?.[0]
+
           if (node?.type === 'ExpressionStatement') {
             const expression = node.expression
+
             if (expression?.type === 'ObjectExpression' && expression.properties) {
-              const titleProp = expression.properties.find((p: any) => p.key.name === 'title')
-              if (titleProp && titleProp.type === 'Property' && titleProp.value.type === 'Literal') {
-                title = String(titleProp.value.value);
+              const getLiteral = (obj: any, key: string) => {
+                const prop = obj.properties.find((p: any) => p.key.name === key)
+
+                return prop?.type === 'Property' && prop.value?.type === 'Literal' ? String(prop.value.value) : undefined
               }
+
+              description = getLiteral(expression, 'description')
+              title = getLiteral(expression, 'title')
             }
           }
           // Removed redundant block as 'properties' does not exist on 'node'.
@@ -37,38 +45,20 @@ export const getAstroPages = () => {
       const rawUrl = file === 'index.astro' ? '/' : `/${file.replace(/\.astro$/, '')}`
 
       return {
-        index: files.indexOf(file),
+        description,
         file,
+        index: files.indexOf(file),
         title: title ?? file.replace(/\.astro$/, ''),
         url: url(rawUrl),
       }
     })
+    .sort((a, b) => a.title.localeCompare(b.title))
 }
 
 export const randomText = (min = 10, max = 30) => {
   const amount = Math.floor(Math.random() * (max - min + 1)) + min // gsap.utils.random(min, max)
   let text = ''
-  const words = [
-    'lorem',
-    'ipsum',
-    'dolor',
-    'sit',
-    'amet',
-    'consectetur',
-    'adipiscing',
-    'elit',
-    'sed',
-    'do',
-    'eiusmod',
-    'tempor',
-    'incididunt',
-    'ut',
-    'labore',
-    'et',
-    'dolore',
-    'magna',
-    'aliqua',
-  ]
+  const words = ['lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipiscing', 'elit', 'sed', 'do', 'eiusmod', 'tempor', 'incididunt', 'ut', 'labore', 'et', 'dolore', 'magna', 'aliqua']
 
   Array.from({ length: amount }).forEach(() => {
     const randomIndex = Math.floor(Math.random() * words.length)
