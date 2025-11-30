@@ -43,17 +43,6 @@ const brandingPageSectionHome = {
   },
 
   scrollTriggers(): void {
-    // Get scroll velocity
-
-    ScrollTrigger.create({
-      end: '100% 100%',
-      start: '0% 0%',
-      onUpdate: (self) => {
-        brandingPage.scrollVelocity = self.getVelocity() * self.direction
-      },
-      trigger: '.branding-page',
-    })
-
     // Hide circles on scroll down
 
     ScrollTrigger.create({
