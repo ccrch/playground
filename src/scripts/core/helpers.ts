@@ -6,26 +6,28 @@ export const isProduction = process.env.NODE_ENV === 'production'
 
 export let lenis = null
 
-export const lenisRaf = (target) => {
-  function raf(time) {
-    target.raf(time)
-    requestAnimationFrame(raf)
-  }
-
-  requestAnimationFrame(raf)
-}
-
 export const lenisScroll = {
-  init(options = undefined): void {
+  init(mode: 'gsap' | 'default' = 'gsap', options = undefined): void {
     lenis = new Lenis({
       lerp: 0.1,
       ...options,
     })
 
-    // Standard approach
-    // lenisRaf(lenis)
+    mode === 'gsap' ? this.gsapMode() : this.defaultMode(lenis)
+  },
 
-    // GSAP approach - better performance & no lags with ScrollTriggers & pinned containers
+  // Standard approach
+  defaultMode(target): void {
+    function raf(time) {
+      target.raf(time)
+      requestAnimationFrame(raf)
+    }
+
+    requestAnimationFrame(raf)
+  },
+
+  // GSAP approach - better performance & no lags with ScrollTriggers & pinned containers
+  gsapMode(): void {
     gsap.registerPlugin(ScrollTrigger)
     lenis.on('scroll', ScrollTrigger.update)
 
