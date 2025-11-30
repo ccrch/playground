@@ -3,9 +3,21 @@ const { className = '', eyebrow, headline, id, isHeadlineSmall = false, isNavy =
 
 const headlineClass = isHeadlineSmall ? 'section__headline--small' : ''
 const themeClass = isNavy ? 'section--navy' : 'section--white'
+
+// TODO: Check later
+
+// <div class="section__shapes">
+//   {
+//     Array.from({ length: 10 }).map(() => (
+//       <div class="shape shape--circle-stroke">
+//         <div class="shape__gradient shape__gradient--conic" />
+//       </div>
+//     ))
+//   }
+// </div>
 ---
 
-<div class={`section ${className} ${themeClass}`} id={id}>
+<section class={`section ${className} ${themeClass}`} id={id}>
   <div class="container">
     <div class={`section__headline ${headlineClass}`}>
       <div class="container">
@@ -20,13 +32,4 @@ const themeClass = isNavy ? 'section--navy' : 'section--white'
       <slot />
     </div>
   </div>
-  <div class="section__shapes">
-    {
-      Array.from({ length: 10 }).map(() => (
-        <div class="shape shape--circle-stroke">
-          <div class="shape__gradient shape__gradient--conic" />
-        </div>
-      ))
-    }
-  </div>
-</div>
+</section>

@@ -1,0 +1,26 @@
+---
+const { headline, id } = Astro.props
+---
+
+<section class="section section--home section--navy" id={id}>
+  <div class="container">
+    <div class="section__headline">
+      <div class="container">
+        <div>
+          <h1 set:html={headline} />
+        </div>
+      </div>
+    </div>
+    <div class="circles">
+      {
+        Array.from({ length: 5 }).map(() => (
+          <div class="circle">
+            <div class="circle__container shape shape--circle-stroke">
+              <div class="shape__gradient shape__gradient--conic" />
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

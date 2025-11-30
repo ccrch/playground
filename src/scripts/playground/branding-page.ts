@@ -48,6 +48,7 @@ const brandingPage = {
           animation: gsap.to(document.querySelectorAll('.navigation__link-status > div')[index], { scaleX: 1 }),
           end: '100% 50%',
           endTrigger: section,
+          // fastScrollEnd: true,
           scrub: true,
           start: '0% 100%',
           trigger: section.querySelector('.section__headline-bottom-marker'),
@@ -82,7 +83,7 @@ const brandingPage = {
           onLeaveBack: () => {
             lineReveal(0)
           },
-          fastScrollEnd: true,
+          // fastScrollEnd: true,
           end: '100% 75%',
           start: '0% 75%',
           trigger: section,
@@ -101,15 +102,19 @@ const brandingPage = {
           onEnter: () => {
             if (section.classList.contains('section--white')) {
               el.navigation.classList.add('navigation--white')
+              el.navigation.classList.remove('navigation--navy')
             } else {
+              el.navigation.classList.add('navigation--navy')
               el.navigation.classList.remove('navigation--white')
             }
           },
           onLeaveBack: () => {
             if (section.classList.contains('section--white')) {
+              el.navigation.classList.add('navigation--navy')
               el.navigation.classList.remove('navigation--white')
             } else {
               el.navigation.classList.add('navigation--white')
+              el.navigation.classList.remove('navigation--navy')
             }
           },
           start: () => `0% ${window.innerHeight - el.navigation.offsetHeight}px`,
@@ -579,27 +584,27 @@ const brandingPage = {
     
     // TODO: Testing parallax shapes
 
-    gsap.set('.section__shapes', { display: 'none' })
+    // gsap.set('.section__shapes', { display: 'none' })
 
-    document.querySelectorAll('.section:not(.section--home)').forEach((section) => {
-      section.querySelectorAll('.section__shapes > div').forEach((shape, index) => {
-        gsap.set(shape, { width: gsap.utils.random(180, 440, 44) + 'rem', aspectRatio: 1 })
+    // document.querySelectorAll('.section:not(.section--home)').forEach((section) => {
+    //   section.querySelectorAll('.section__shapes > div').forEach((shape, index) => {
+    //     gsap.set(shape, { width: gsap.utils.random(180, 440, 44) + 'rem', aspectRatio: 1 })
 
-        if ((index - 1) % 2 === 0) {
-          gsap.set(shape, { left: gsap.utils.random(-10, -1, 1) + '%' })
-        } else {
-          gsap.set(shape, { right: gsap.utils.random(-10, -1, 1) + '%' })
-        }
-      })
+    //     if ((index - 1) % 2 === 0) {
+    //       gsap.set(shape, { left: gsap.utils.random(-10, -1, 1) + '%' })
+    //     } else {
+    //       gsap.set(shape, { right: gsap.utils.random(-10, -1, 1) + '%' })
+    //     }
+    //   })
 
-      ScrollTrigger.create({
-        animation: gsap.to(section.querySelector('.section__shapes'), { y: '50%'}),
-        end: '100% 0%',
-        scrub: true,
-        start: '0% 100%',
-        trigger: section,
-      })
-    })
+    //   ScrollTrigger.create({
+    //     animation: gsap.to(section.querySelector('.section__shapes'), { y: '50%'}),
+    //     end: '100% 0%',
+    //     scrub: true,
+    //     start: '0% 100%',
+    //     trigger: section,
+    //   })
+    // })
 
     // Testing scramble text
 

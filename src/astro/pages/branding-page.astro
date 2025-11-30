@@ -6,7 +6,15 @@ export const frontmatter = {
 }
 
 import '../../styles/playground/branding-page.scss'
+import Navigation from '../components/branding-page-navigation.astro'
 import Section from '../components/branding-page-section.astro'
+import SectionContentAppearance from '../components/branding-page-section-appearance.astro'
+import SectionContentColors from '../components/branding-page-section-colors.astro'
+import SectionContentSign from '../components/branding-page-section-sign.astro'
+import SectionContentSymbols from '../components/branding-page-section-symbols.astro'
+import SectionContentTone from '../components/branding-page-section-tone.astro'
+import SectionContentTypography from '../components/branding-page-section-typography.astro'
+import SectionHome from '../components/branding-page-section-home.astro'
 import Layout from '../layouts/playground-layout.astro'
 
 const navigation = [
@@ -16,7 +24,7 @@ const navigation = [
   { section: 'typography', label: 'Letur', url: '#letur', headline: 'Letrið setur<br> tóninn' },
   { section: 'symbols', label: 'Tákn', url: '#takn', headline: 'Grafíkin styður<br> upplifun og flæði' },
   { section: 'tone', label: 'Raddblær', url: '#raddblaer', headline: 'Við erum hnitmiðuð, aðgengileg, skýr, reynd, traust, vinaleg, leiðandi og áhrifarík' },
-  { section: 'appearance', label: 'Ásýnd', url: '#asynd', headline: 'Samræmi skapar<br> fagurfræði<span class=\'split-break\'></span>lega heild' },
+  { section: 'appearance', label: 'Ásýnd', url: '#asynd', headline: 'Samræmi skapar<br> fagurfræði<span class="split-break"></span>lega heild' },
   { section: 'summary', label: 'Ein heild', url: '#ein-heid', headline: 'Merki, litir, letur og grafík vinna saman að því að skapa samræmda ímynd sem styrkir bæði notagildi og útlit.' },
 ]
 
@@ -30,277 +38,33 @@ const sectionId = (index) => navigation[index].url.replace('#', '')
 
 <Layout baseClass={frontmatter.baseClass} metaDescription={frontmatter.navDescription} metaTitle={frontmatter.navTitle} navigationHidden>
   <main class={frontmatter.baseClass} slot="body">
+    <Navigation navigation={navigation} />
+    <SectionHome headline={navigation[0].headline} id={sectionId(0)} />
+    {
+      navigation.map((item, index) => {
+        const props = {
+          className: `section--${item.section}`,
+          eyebrow: item.label,
+          headline: item.headline,
+          id: sectionId(index),
+          isHeadlineSmall: item.section === 'tone' || item.section === 'summary',
+          isNavy: (index - 1) % 2,
+        }
 
-    <nav class='navigation'>
-      <a class='navigation__logo' href='#heim'>
-        <svg width='44' height='25' viewBox='0 0 44 25' fill='none' xmlns='http://www.w3.org/2000/svg'>
-          <path d='M29.0658 24.25L43.2269 0.25H39.0035L26.9531 20.6619L29.0658 24.25Z' fill='#FD3D00'/>
-          <path d='M25.4564 18.1432L36.0083 0.25H31.7545L23.3438 14.5268L25.4564 18.1432Z' fill='#FD3D00'/>
-          <path d='M28.7613 0.25H0.5L14.6307 24.25L28.7613 0.25ZM22.4291 3.83432L14.6307 17.0738L6.83418 3.83432H22.4291Z' fill='#FD3D00'/>
-        </svg>
-        <div class='navigation__background'></div>
-      </a>
-      <div class='navigation__links'>
-        {navigation.map((item, index) => (
-          index !== 0 && index !== navigation.length - 1 && <a class='navigation__link' href={item.url}>
-            {item.label}
-            <div class='navigation__link-status'><div></div></div>
-            <div class='navigation__link-highlight'></div>
-          </a>
-        ))}
-        <div class='navigation__background'></div>
-      </div>
-    </nav>
+        if (index === 0) return null
 
-    <section class='section section--home section--navy' id={sectionId(0)}>
-      <div class='container'>
-        <div class='section__headline'>
-          <div class='container'>
-            <div>
-              <h1 set:html={navigation[0].headline} />
-            </div>
-          </div>
-        </div>
-        <div class='circles'>
-          {Array.from({ length: 5 }).map(() => (
-            <div class='circle'>
-              <div class='circle__container shape shape--circle-stroke'>
-                <div class='shape__gradient shape__gradient--conic'></div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    {navigation.map((item, index) => (
-      index !== 0 && <Section
-        className={`section--${item.section}`}
-        eyebrow={item.label}
-        id={sectionId(index)}
-        isHeadlineSmall={item.section === 'tone' || item.section === 'summary'}
-        isNavy={(index - 1) % 2}
-        headline={item.headline}
-      >
-        {item.section === 'sign' &&
-          <div class='box box--gray box--1'>
-            <div class='box__container'>
-              <div class='logo'></div>
-              <div class='logo'></div>
-            </div>
-          </div>
-          <div class='details'>
-            <div class='grid'>
-              <div class='grid__col grid__col--6'>
-                <p class='details__text split-text'>Nýja merkið okkar er skarpara, einfaldara og hannað með fjölbreytta miðla í huga. Það er eftirminnilegt, auðvelt í útfærslu og stendur sterkt eitt og sér – en líka sem hluti af heild.</p>
-              </div>
-              <div class='grid__col grid__col--6'>
-                <div class='details__boxes'>
-                  <div class='box box--small box--gray'>
-                    <div class='box__container'>
-                      <div class='logo'></div>
-                    </div>
-                  </div>
-                  <div class='box box--small box--navy'>
-                    <div class='box__container'>
-                      <div class='logo'></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class='box box--gray'>
-            <div class='box__container'>
-              <div class='logo'></div>
-            </div>
-          </div>
-        }
-        {item.section === 'colors' &&
-          <div class='box box--white'>
-            <div class='box__container'>
-              [colors]
-            </div>
-          </div>
-          <div class='grid'>
-            <div class='grid__col grid__col--6'>
-              <h2 class='split-text'>Litirnir okkar</h2>
-            </div>
-            <div class='grid__col grid__col--6'>
-              <p class='split-text'>Litapalletta Vettvangs er skörp og afgerandi – og dregur fram þau gildi sem móta sjálfsmynd okkar: heiðarleika, hreinskiptni og skýrar línur.</p>
-            </div>
-          </div>
-        }
-        {item.section === 'typography' &&
-          <div class='typography-circles'>
-            <div class='typography-circle'>
-              <p>Læsilegt</p>
-            </div>
-            <div class='typography-circle'>
-              <p>Þægilegt</p>
-              {/* 🎩🕊️💎 */}
-            </div>
-            <div class='typography-circle'>
-              <p>Fágað</p>
-            </div>
-            <div class='typography-circle'>
-              <p>Fallegt</p>
-            </div>
-            <div class='typography-circle'>
-              <p>Sterkt</p>
-            </div>
-          </div>
-          <div class='grid'>
-            <div class='grid__col grid__col--6'>
-              <h2 class='split-text'>Letrið okkar</h2>
-            </div>
-            <div class='grid__col grid__col--6'>
-              <p class='split-text'>Skýrt, nútímalegt og með karakter. Letrið okkar – Aeonik – sameinar fágaðan stíl og góða læsileika. Það virkar á öllum miðlum og speglar nútímalegan, traustan og aðgengilegan persónuleika Vettvangs.</p>
-            </div>
-          </div>
-          <div class='grid'>
-            <div class='grid__col grid__col--6'>
-              <div class='box box--gray box--small'>
-                <div class='box__container'>
-                  
-                </div>
-              </div>
-            </div>
-            <div class='grid__col grid__col--6'>
-              <div class='box box--navy box--small'>
-                <div class='box__container'>
-                  <p class="scramble-test">0123456789<br>$฿€£¥@#?¿!¡<br>www+−×÷=➀%➊<br>←↑↕↓→&©¶Ω</p>
-                </div>
-              </div>
-            </div>
-            <div class='grid__col grid__col--6'>
-              <div class='box box--red box--small'>
-                <div class='box__container'>
-                    <p class="letters-test">
-                      <span>Aa</span>
-                      <span>Áá</span>
-                      <span>Bb</span>
-                      <span>Dd</span>
-                      <span>Ðð</span>
-                      <span>Ee</span>
-                      <span>Éé</span>
-                      <span>Ff</span>
-                      <span>Gg</span>
-                      <span>Hh</span>
-                      <span>Ii</span>
-                      <span>Íí</span>
-                      <span>Jj</span>
-                      <span>Kk</span>
-                      <span>Ll</span>
-                      <span>Mm</span>
-                      <span>Nn</span>
-                      <span>Oo</span>
-                      <span>Óó</span>
-                      <span>Pp</span>
-                      <span>Rr</span>
-                      <span>Ss</span>
-                      <span>Tt</span>
-                      <span>Uu</span>
-                      <span>Úú</span>
-                      <span>Vv</span>
-                      <span>Xx</span>
-                      <span>Yy</span>
-                      <span>Ýý</span>
-                      <span>Þþ</span>
-                      <span>Ææ</span>
-                      <span>Öö</span>
-                    </p>
-                </div>
-              </div>
-            </div>
-            <div class='grid__col grid__col--6'>
-              <div class='box box--gray box--small'>
-                <div class='box__container'>
-                  
-                </div>
-              </div>
-            </div>
-          </div>
-        }
-        {item.section === 'symbols' &&
-          <div class='symbols'>
-            {Array.from({ length: 7 }).map(() => (
-              <div class='symbol'></div>
-            ))}
-          </div>
-          <div class='grid'>
-            <div class='grid__col grid__col--6'>
-              <h2 class='split-text'>Grafísk element sækja<br> innblástur í merki Vettvangs</h2>
-            </div>
-            <div class='grid__col grid__col--6'>
-              <p class='split-text'>Við tjáum okkur í gegnum einföld form sem tákna fjölbreytni okkar. Fjölbreytt fólk, fjölbreytt verkefni, fjölbreytt starfssvið. Táknin hjálpa til að segja söguna og bæta sérstöðu og persónuleika.</p>
-            </div>
-          </div>
-          <div class='shapes'>
-            {Array.from({ length: 3 }).map(() => (
-              <div class='shape shape--circle-stroke'>
-                <div class='shape__gradient shape__gradient--conic'></div>
-              </div>
-            ))}
-          </div>
-        }
-        {item.section === 'tone' &&
-          <div class='box box--navy'>
-            <div class='box__container'>
-              <h1 class='split-text tone__text'>Við látum<br> <strong>verkin</strong> tala</h1>
-            </div>
-          </div>
-          <div class='grid'>
-            <div class='grid__col grid__col--6'>
-              <h2 class='split-text'>Rödd Vettvangs</h2>
-            </div>
-            <div class='grid__col grid__col--6'>
-              <p class='split-text'>Við erum skýr, traust og mannleg – hún gefur tóninn í öllum samskiptum og hjálpar til við að byggja upp traust og tengingu, hvar sem við mætum notandanum.</p>
-            </div>
-          </div>
-        }
-        {item.section === 'appearance' &&
-          <div class='grid'>
-            <div class='grid__col grid__col--12'>
-              <div class='box box--white'>
-                <div class='box__container'>
-                  
-                </div>
-              </div>
-            </div>
-            <div class='grid__col grid__col--6'>
-              <div class='box box--gray box--small'>
-                <div class='box__container'>
-                  
-                </div>
-              </div>
-            </div>
-            <div class='grid__col grid__col--6'>
-              <div class='box box--red box--small'>
-                <div class='box__container'>
-
-                </div>
-              </div>
-            </div>
-            <div class='grid__col grid__col--6'>
-              <div class='box box--red box--small'>
-                <div class='box__container'>
-                  
-                </div>
-              </div>
-            </div>
-            <div class='grid__col grid__col--6'>
-              <div class='box box--gray box--small'>
-                <div class='box__container'>
-                  
-                </div>
-              </div>
-            </div>
-          </div>
-        }
-      </Section>
-    ))}
-    <footer class='footer'></footer>
-
+        return (
+          <Section {...props}>
+            {item.section === 'sign' && <SectionContentSign />}
+            {item.section === 'colors' && <SectionContentColors />}
+            {item.section === 'typography' && <SectionContentTypography />}
+            {item.section === 'symbols' && <SectionContentSymbols />}
+            {item.section === 'tone' && <SectionContentTone />}
+            {item.section === 'appearance' && <SectionContentAppearance />}
+          </Section>
+        )
+      })
+    }
+    <footer class="footer"></footer>
   </main>
 </Layout>

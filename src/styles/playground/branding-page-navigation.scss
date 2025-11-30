@@ -24,7 +24,7 @@
       padding: 0 24rem;
       overflow: hidden;
       backdrop-filter: blur(4px);
-      border: 1px solid rgba(var(--color-white-rgb), 0.08);
+      border: 1px solid transparent;
       border-radius: 32rem;
       color: var(--color-red);
       font-size: 123%;
@@ -49,7 +49,7 @@
       padding: 0 36rem;
       overflow: hidden;
       backdrop-filter: blur(4px);
-      border: 1px solid rgba(var(--color-white-rgb), 0.08);
+      border: 1px solid transparent;
       border-radius: 32rem;
       transition: border 0.321s;
     }
@@ -57,7 +57,6 @@
     &__link {
       position: relative;
       z-index: 1;
-      color: var(--color-white);
       font-size: 16rem;
       font-weight: 500;
       line-height: 150%;
@@ -88,7 +87,6 @@
       inset: auto 0 -6rem;
       z-index: -2;
       height: 2rem;
-      background: rgba(var(--color-white-rgb), 0.1);
       opacity: 0;
       transition: background 0.321s, opacity 0.321s;
     }
@@ -97,13 +95,12 @@
       position: absolute;
       inset: 0;
       z-index: -1;
-      background: var(--color-white);
       border-radius: 32rem;
       opacity: 0.021;
       transition: background 0.321s, opacity 0.321s;
     }
 
-    // &::before { // TODO - test this later
+    // &::before { // TODO: Test this later
     //   content: '';
     //   position: absolute;
     //   inset: 20rem;
@@ -112,6 +109,25 @@
     //   filter: blur(16rem);
     //   opacity: 0.1;
     // }
+  }
+
+  .navigation--navy {
+    .navigation__logo,
+    .navigation__links {
+      border-color: rgba(var(--color-white-rgb), 0.08)
+    }
+
+    .navigation__link {
+      color: var(--color-white);
+    }
+
+    .navigation__link-highlight {
+      background: rgba(var(--color-white-rgb), 0.1);
+    }
+ 
+    .navigation__background {
+      background: var(--color-white);
+    }
   }
 
   .navigation--white {
@@ -130,10 +146,9 @@
  
     .navigation__background {
       background: var(--color-navy);
-      opacity: 0.021;
     }
 
-    // &::before {
+    // &::before { // TODO: Remove later
     //   background: var(--color-white);
     // }
   }
