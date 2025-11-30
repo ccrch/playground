@@ -228,6 +228,7 @@ const brandingPage = {
         SplitText.create('.section:not(.section--home) .section__headline p', {
           linesClass: 'split-line',
           mask: 'lines',
+          tag: 'span',
           type: 'lines',
         })
   
@@ -237,6 +238,7 @@ const brandingPage = {
           charsClass: 'split-char',
           linesClass: 'split-line',
           mask: 'lines',
+          tag: 'span',
           type: 'chars, lines, words',
           wordsClass: 'split-word',
         })
@@ -361,6 +363,7 @@ const brandingPage = {
           charsClass: 'split-char',
           linesClass: 'split-line',
           mask: 'lines',
+          tag: 'span',
           type: 'chars, lines, words',
           wordsClass: 'split-word',
         })
@@ -509,6 +512,7 @@ const brandingPage = {
           aria: 'none',
           linesClass: 'split-line',
           mask: 'lines',
+          tag: 'span',
           type: 'lines, words',
           wordsClass: 'split-word',
         })

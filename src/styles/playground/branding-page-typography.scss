@@ -1,5 +1,15 @@
 
 .branding-page {
+  .split-mask-line-mask,
+  .split-line {
+    display: block;
+  }
+
+  .split-word,
+  .split-char {
+    display: inline-block;
+  }
+
   .split-char,
   .split-line,
   .split-word {
@@ -7,6 +17,8 @@
   }
 
   .split-break {
+    display: block;
+
     @include isDesktop {
       display: none;
     }

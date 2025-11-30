@@ -6,7 +6,7 @@ export const frontmatter = {
 }
 
 import '../../styles/playground/branding-page.scss'
-import BrandingPageSection from '../components/branding-page-section.astro'
+import Section from '../components/branding-page-section.astro'
 import Layout from '../layouts/playground-layout.astro'
 
 const navigation = [
@@ -16,7 +16,7 @@ const navigation = [
   { section: 'typography', label: 'Letur', url: '#letur', headline: 'Letrið setur<br> tóninn' },
   { section: 'symbols', label: 'Tákn', url: '#takn', headline: 'Grafíkin styður<br> upplifun og flæði' },
   { section: 'tone', label: 'Raddblær', url: '#raddblaer', headline: 'Við erum hnitmiðuð, aðgengileg, skýr, reynd, traust, vinaleg, leiðandi og áhrifarík' },
-  { section: 'appearance', label: 'Ásýnd', url: '#asynd', headline: 'Samræmi skapar<br> fagurfræði<div class=\'split-break\'></div>lega heild' },
+  { section: 'appearance', label: 'Ásýnd', url: '#asynd', headline: 'Samræmi skapar<br> fagurfræði<span class=\'split-break\'></span>lega heild' },
   { section: 'summary', label: 'Ein heild', url: '#ein-heid', headline: 'Merki, litir, letur og grafík vinna saman að því að skapa samræmda ímynd sem styrkir bæði notagildi og útlit.' },
 ]
 
@@ -74,7 +74,7 @@ const sectionId = (index) => navigation[index].url.replace('#', '')
     </section>
 
     {navigation.map((item, index) => (
-      index !== 0 && <BrandingPageSection
+      index !== 0 && <Section
         className={`section--${item.section}`}
         eyebrow={item.label}
         id={sectionId(index)}
@@ -298,7 +298,7 @@ const sectionId = (index) => navigation[index].url.replace('#', '')
             </div>
           </div>
         }
-      </BrandingPageSection>
+      </Section>
     ))}
     <footer class='footer'></footer>
 
