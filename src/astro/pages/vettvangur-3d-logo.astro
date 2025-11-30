@@ -1,8 +1,8 @@
 ---
 export const frontmatter = {
   baseClass: 'vettvangur-3d-logo',
-  description: '',
-  title: 'Vettvangur 3D logo',
+  navDescription: '',
+  navTitle: 'Vettvangur 3D logo',
 }
 
 import '../../styles/playground/vettvangur-3d-logo.scss'
@@ -24,7 +24,7 @@ const svg = () => {
   stuff.init()
 </script>
 
-<Layout baseClass={frontmatter.baseClass} description={frontmatter.description} title={frontmatter.title}>
+<Layout baseClass={frontmatter.baseClass} metaDescription={frontmatter.navDescription} metaTitle={frontmatter.navTitle}>
   <main class={frontmatter.baseClass} slot="body">
     <div class="logo-container">
       <div class="logo">

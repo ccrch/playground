@@ -1,8 +1,8 @@
 ---
 export const frontmatter = {
   baseClass: 'barrel-text',
-  description: 'Text effect created for Egilshöllin',
-  title: 'Barrel text',
+  navDescription: 'Text effect created for Egilshöllin',
+  navTitle: 'Barrel text',
 }
 
 import '../../styles/playground/barrel-text.scss'
@@ -16,7 +16,7 @@ const texts = ['Starfssemi', 'Salir til leigu', 'Skautasvell', 'Bóka tíma', 'U
   stuff.init()
 </script>
 
-<Layout baseClass={frontmatter.baseClass} description={frontmatter.description} title={frontmatter.title}>
+<Layout baseClass={frontmatter.baseClass} metaDescription={frontmatter.navDescription} metaTitle={frontmatter.navTitle}>
   <main class={frontmatter.baseClass} slot="body">
     <div class="barrel barrel--3">
       {

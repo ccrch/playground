@@ -1,0 +1,45 @@
+
+.playground-date {
+  position: fixed;
+  inset: 21px 21px auto auto;
+  z-index: 123;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.playground-navigation {
+  position: fixed;
+  inset: 21px auto auto 21px;
+  z-index: 123;
+  // max-height: 50vh;
+  // overflow-y: auto;
+  // scrollbar-width: thin;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 121%;
+
+  ul {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: flex-start;
+    gap: 7px;
+    list-style: none;
+  }
+
+  a {
+    display: flex;
+    flex-flow: column nowrap;
+
+    &[data-active] span:first-child {
+      text-decoration: underline;
+    }
+
+    span + span {
+      font-size: 70%;
+    }
+  }
+}

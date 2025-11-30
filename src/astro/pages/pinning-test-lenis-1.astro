@@ -1,8 +1,8 @@
 ---
 export const frontmatter = {
   baseClass: 'pinning-test',
-  description: 'ScrollTriggers test with Lenis scroll',
-  title: 'Pinning test (Lenis)',
+  navDescription: 'ScrollTriggers test with Lenis scroll',
+  navTitle: 'Pinning test (Lenis)',
 }
 
 import Layout from '../layouts/playground-layout.astro'
@@ -17,7 +17,7 @@ import Content from 'src/astro/components/pinning-test-content.astro'
   pinText()
 </script>
 
-<Layout title={frontmatter.title}>
+<Layout baseClass={frontmatter.baseClass} metaDescription={frontmatter.navDescription} metaTitle={frontmatter.navTitle}>
   <main class={frontmatter.baseClass} slot="body">
     <Content />
   </main>

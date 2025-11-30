@@ -14,8 +14,8 @@ export const getAstroPages = () => {
 
       const match = content.match(/export const frontmatter\s*=\s*({[\s\S]*?})/)
 
-      let description: string | undefined
-      let title: string | undefined
+      let navDescription: string | undefined
+      let navTitle: string | undefined
 
       if (match) {
         try {
@@ -32,8 +32,8 @@ export const getAstroPages = () => {
                 return prop?.type === 'Property' && prop.value?.type === 'Literal' ? String(prop.value.value) : undefined
               }
 
-              description = getLiteral(expression, 'description')
-              title = getLiteral(expression, 'title')
+              navDescription = getLiteral(expression, 'navDescription')
+              navTitle = getLiteral(expression, 'navTitle')
             }
           }
           // Removed redundant block as 'properties' does not exist on 'node'.
@@ -45,14 +45,14 @@ export const getAstroPages = () => {
       const rawUrl = file === 'index.astro' ? '/' : `/${file.replace(/\.astro$/, '')}`
 
       return {
-        description,
         file,
         index: files.indexOf(file),
-        title: title ?? file.replace(/\.astro$/, ''),
+        navDescription,
+        navTitle: navTitle ?? file.replace(/\.astro$/, ''),
         url: url(rawUrl),
       }
     })
-    .sort((a, b) => a.title.localeCompare(b.title))
+    .sort((a, b) => a.navTitle.localeCompare(b.navTitle))
 }
 
 export const randomText = (min = 10, max = 30) => {
@@ -78,5 +78,6 @@ export const url = (url) => {
 
   const urlPath = url === '/' ? '' : url
 
-  return `/playground${urlPath}/?v=${Date.now()}`
+  // return `/playground${urlPath}/?v=${Date.now()}`
+  return `/playground${urlPath}/`
 }

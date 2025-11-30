@@ -1,3 +1,4 @@
+
 @mixin isMobile {
   @media (max-width: 767px) {
     @content;
@@ -66,7 +67,7 @@
   font-family: 'Aeonik', sans-serif;
   font-size: 21rem;
 
-  .date {
+  .playground-date {
     padding: 21rem;
     color: var(--color-red);
     font-size: 11px;
@@ -190,6 +191,7 @@
       color: var(--color-white);
       font-size: 16rem;
       font-weight: 500;
+      line-height: 150%;
       pointer-events: all;
       transition: color 0.321s;
 

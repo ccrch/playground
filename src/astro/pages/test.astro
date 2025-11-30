@@ -1,7 +1,8 @@
 ---
 export const frontmatter = {
   baseClass: 'test',
-  title: 'Testing stuff',
+  navDescription: '',
+  navTitle: 'Testing stuff',
 }
 
 import '../../styles/playground/test.scss'
@@ -14,7 +15,7 @@ import Layout from '../layouts/playground-layout.astro'
   stuff.init()
 </script>
 
-<Layout title={frontmatter.title}>
+<Layout baseClass={frontmatter.baseClass} metaDescription={frontmatter.navDescription} metaTitle={frontmatter.navTitle}>
   <main class={frontmatter.baseClass} slot="body">
     <div class="noi">
       <h1>

@@ -1,11 +1,12 @@
 ---
 export const frontmatter = {
-  title: 'Hi!',
+  navDescription: '',
+  navTitle: '/',
 }
 
 import Layout from '../layouts/playground-layout.astro'
 ---
 
-<Layout title={frontmatter.title}>
+<Layout metaDescription="Ccrch playground" metaTitle="Hi!">
   <!-- <a class="link" href={url("/scroll-vanilla")}>→</a> -->
 </Layout>

@@ -1,8 +1,8 @@
 ---
 export const frontmatter = {
   baseClass: 'svg-text-on-path-animation',
-  description: 'Effect used on hareyding.is',
-  title: 'SVG text on path animation',
+  navDescription: 'Effect used on hareyding.is',
+  navTitle: 'SVG text on path animation',
 }
 
 import '../../styles/playground/svg-text-on-path-animation.scss'
@@ -14,7 +14,7 @@ import Layout from '../layouts/playground-layout.astro'
   stuff.init()
 </script>
 
-<Layout baseClass={frontmatter.baseClass} description={frontmatter.description} title={frontmatter.title}>
+<Layout baseClass={frontmatter.baseClass} metaDescription={frontmatter.navDescription} metaTitle={frontmatter.navTitle}>
   <main class={frontmatter.baseClass} slot="body">
     <div class="ellipse">
       <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
@@ -23,9 +23,7 @@ import Layout from '../layouts/playground-layout.astro'
     </div>
     <div class="shape">
       <svg width="364" height="191" viewBox="0 0 364 191" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M364 71.9999C364 123.915 282.516 166 182 166C81.4842 166 0.000153953 261.5 1.59432e-10 71.9999C-0.000131611 -90.0002 81.4842 72.0005 182 72.0005C282.516 72.0005 364 20.0851 364 71.9999Z"
-          fill="#D9D9D9"></path>
+        <path d="M364 71.9999C364 123.915 282.516 166 182 166C81.4842 166 0.000153953 261.5 1.59432e-10 71.9999C-0.000131611 -90.0002 81.4842 72.0005 182 72.0005C282.516 72.0005 364 20.0851 364 71.9999Z" fill="#D9D9D9"></path>
       </svg>
     </div>
   </main>

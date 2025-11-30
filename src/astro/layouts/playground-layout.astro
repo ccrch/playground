@@ -2,7 +2,7 @@
 import Navigation from './playground-navigation.astro'
 import '../../styles/styles.scss'
 
-const { baseClass, navigationHidden = false, description, title } = Astro.props
+const { baseClass, metaDescription, metaTitle, navigationHidden = false } = Astro.props
 const now = new Date()
 const date = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}-${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}`
 
@@ -19,7 +19,7 @@ const bodyClass = baseClass ? `${baseClass}-body` : ''
   <head>
     <meta charset="utf-8" />
     <meta name="author" content="Ccrch" />
-    <meta name="description" content={description} />
+    <meta name="description" content={metaDescription} />
     <meta name="robots" content="noindex, nofollow" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
@@ -29,10 +29,10 @@ const bodyClass = baseClass ? `${baseClass}-body` : ''
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet" />
     <slot name="head" />
-    <title>{title} | Code Playground</title>
+    <title>{metaTitle} | Ccrch Playground | {date}</title>
   </head>
   <body class={bodyClass}>
-    <div class="date">{date} // 0.1.12 alpha</div>
+    <div class="playground-date">{date}</div>
     {!navigationHidden && <Navigation />}
     <slot name="body" />
   </body>

@@ -1,8 +1,8 @@
 ---
 export const frontmatter = {
   baseClass: 'branding-page',
-  description: 'Vettvangur branding page',
-  title: 'Ný ásýnd Vettvangs',
+  navDescription: 'Vettvangur branding page',
+  navTitle: 'Ný ásýnd Vettvangs',
 }
 
 import '../../styles/playground/branding-page.scss'
@@ -28,7 +28,7 @@ const sectionId = (index) => navigation[index].url.replace('#', '')
   stuff.init()
 </script>
 
-<Layout baseClass={frontmatter.baseClass} description={frontmatter.description} navigationHidden title={frontmatter.title}>
+<Layout baseClass={frontmatter.baseClass} metaDescription={frontmatter.navDescription} metaTitle={frontmatter.navTitle}>
   <main class={frontmatter.baseClass} slot="body">
 
     <nav class='navigation'>

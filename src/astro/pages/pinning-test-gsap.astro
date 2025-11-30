@@ -1,8 +1,8 @@
 ---
 export const frontmatter = {
   baseClass: 'pinning-test',
-  description: 'ScrollTriggers test with GSAP smooth scroll',
-  title: 'Pinning test (GSAP)',
+  navDescription: 'ScrollTriggers test with GSAP smooth scroll',
+  navTitle: 'Pinning test (GSAP)',
 }
 
 import Layout from '../layouts/playground-layout.astro'
@@ -28,7 +28,7 @@ import Content from 'src/astro/components/pinning-test-content.astro'
   pinText()
 </script>
 
-<Layout title={frontmatter.title}>
+<Layout baseClass={frontmatter.baseClass} metaDescription={frontmatter.navDescription} metaTitle={frontmatter.navTitle}>
   <main class={frontmatter.baseClass} slot="body">
     <div class="smooth-wrapper">
       <div class="smooth-content">
