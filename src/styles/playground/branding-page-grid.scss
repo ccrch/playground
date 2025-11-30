@@ -1,0 +1,26 @@
+
+.branding-page {
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 40rem;
+    width: 100%;
+    
+    @include isMobile {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 24rem;
+    }
+
+    &__col {
+      grid-column: span 1;
+  
+      @for $i from 1 through 12 {
+        &--#{$i}  {
+          @include isDesktop {
+            grid-column: span $i;
+          }
+        }
+      }
+    }
+  }
+}

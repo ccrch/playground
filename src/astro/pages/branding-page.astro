@@ -28,7 +28,7 @@ const sectionId = (index) => navigation[index].url.replace('#', '')
   stuff.init()
 </script>
 
-<Layout baseClass={frontmatter.baseClass} metaDescription={frontmatter.navDescription} metaTitle={frontmatter.navTitle}>
+<Layout baseClass={frontmatter.baseClass} metaDescription={frontmatter.navDescription} metaTitle={frontmatter.navTitle} navigationHidden>
   <main class={frontmatter.baseClass} slot="body">
 
     <nav class='navigation'>

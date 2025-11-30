@@ -1,0 +1,13 @@
+
+.branding-page {
+  .container {
+    width: 100%;
+    max-width: 1440rem;
+    margin: 0 auto;
+    padding: 0 180rem;
+
+    @include isMobile {
+      padding: 0 24rem;
+    }
+  }
+}

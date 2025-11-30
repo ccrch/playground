@@ -1,0 +1,391 @@
+
+.branding-page {
+  .section {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    clip-path: inset(0% 0% 0% 0%);
+
+    &__headline {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 2;
+      height: 100vh;
+      margin: 0 auto;
+      padding: 0 0 64rem;
+      pointer-events: none;
+  
+      .container > div {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: center;
+        gap: 30rem;
+      }
+  
+      h1,
+      p {
+        pointer-events: all;
+      }
+  
+      p {
+        margin-bottom: 4rem;
+        color: var(--color-red);
+        font-size: 16rem;
+        font-weight: 700;
+        line-height: 150%;
+        text-transform: uppercase;
+      }
+
+      &--small {
+        .container > div {
+          flex-direction: row;
+          align-items: flex-start;
+          justify-content: flex-start;
+
+          @include isMobile {
+            flex-direction: column;
+            // align-items: center;
+            // justify-content: center;
+          }
+        }
+
+        p {
+          @include isDesktop {
+            flex: 0 0 16%;
+          }
+        }
+
+        h1 {
+          flex: 1 1 auto;
+          font-size: 64rem;
+          line-height: 126%;
+          text-align: left;
+
+          @include isMobile {
+            font-size: 48rem;
+          }
+        }
+      }
+    }
+
+    &__headline-bottom-marker {
+      position: absolute;
+      inset: 100vh 0 auto;
+      z-index: 1;
+      // background: var(--color-red);
+      // height: 1px;
+    }
+
+    &__content {
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 180rem;
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      margin: 125vh 0 0;
+      padding: 0 0 180rem;
+
+      @include isMobile {
+        gap: 80rem;
+        margin-top: 112vh;
+        padding-bottom: 80rem;
+      }
+    }
+
+    &__shapes {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      // opacity: 0.2;
+      will-change: transform;
+
+      > div {
+        position: absolute;
+        z-index: 1;
+        width: 440rem;
+        aspect-ratio: 1;
+        // border-radius: 50%;
+        // border: 13rem solid var(--color-red);
+
+        &:nth-child(2n) {
+          left: -3%;
+        }
+
+        &:nth-child(2n + 1) {
+          right: -3%;
+        }
+
+        @for $i from 1 through 10 {
+          &:nth-child(#{$i})  {
+            top: #{-30 + 10 * $i + '%'};
+          }
+        }
+      }
+    }
+  }
+
+  .section--navy {
+    background: var(--color-navy);
+    color: var(--color-white);
+
+    // .section__content {
+    //   background: var(--color-navy);
+    // }
+  }
+
+  .section--white {
+    background: var(--color-white);
+    color: var(--color-navy);
+
+    // .section__content {
+    //   background: var(--color-white);
+    // }
+  }
+
+  // Heim
+
+  .section--home {
+    justify-content: center;
+    min-height: 100vh;
+
+    .section__headline {
+      height: 100svh;
+    }
+
+    .circles {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 1;
+      height: 100svh;
+    }
+
+    .circle {
+      position: absolute;
+      inset: 50% auto auto 50%;
+      z-index: 1;
+      transform: translate(-50%, calc(-50% - 32rem));
+
+      @for $i from 1 through 5 {
+        &:nth-child(#{$i}) .circle__container {
+          width: #{360 + (270 * $i) + 'rem'};
+          opacity: #{0.9 - (0.17 * $i)};
+
+          @include isMobile {
+            width: #{180 + (210 * $i) + 'rem'};
+          }
+
+          .shape__gradient {
+            animation-duration: #{11 * $i + 's'};
+          }
+        }
+      }
+    }
+  }
+
+  // Merkið 
+
+  .section--sign {
+    .box--1 .box__container {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: space-evenly;
+
+      @include isMobile {
+        flex-direction: column;
+      }
+    }
+
+    .logo {
+      width: 21%;
+    }
+
+    .details {
+      width: 100%;
+    }
+
+    .details__boxes {
+      display: flex;
+      flex-flow: column nowrap;
+      gap: 40rem;
+      position: relative;
+      z-index: 1;
+
+      @include isMobile {
+        gap: 30rem;
+      }
+    }
+
+    .details__text {
+      @include isDesktop {
+        padding-right: 40rem;
+      }
+
+      @include isMobile {
+        margin-bottom: 56rem;
+      }
+    }
+  }
+
+  // Litir
+
+  // .section--colors {
+  
+  // }
+
+  // Letur
+
+  .section--typography {
+    .typography-circles {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      width: 100%;
+      padding: 0 15rem;
+      // margin: -50rem auto;
+      // padding: 50rem 15rem;
+      // background: var(--color-white);
+
+      @include isMobile {
+        flex-direction: column;
+        padding: 0;
+        // padding: 50rem 0;
+      }
+    }
+
+    .typography-circle {
+      flex: 0 0 calc(20% + 30rem);
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+      justify-content: center;
+      width: calc(20% + 30rem);
+      margin: 0 -15rem;
+      aspect-ratio: 1;
+      border: 1px solid var(--color-gray-dark);
+      border-radius: 50%;
+      text-align: center;
+
+      @include isMobile {
+        flex: 0 0 60%;
+        width: 60%;
+        margin: -15rem 0;
+      }
+
+      p {
+        font-size: 24rem;
+      }
+    }
+
+    .box .box__container {
+      aspect-ratio: 1;
+
+      @include isDesktop {
+        aspect-ratio: 4 / 3;
+      }
+    }
+  }
+
+  // Tákn
+
+  .section--symbols {
+    .symbols {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: center;
+      gap: 60rem;
+      width: 100%;
+      margin: 0 auto;
+      // margin: -50rem auto;
+      // padding: 50rem 0;
+      // background: var(--color-navy);
+
+      @include isMobile {
+        width: 80%;
+        flex-wrap: wrap;
+        gap: 40rem;
+      }
+    }
+
+    .symbol {
+      flex: 0 0 40rem;
+      width: 40rem;
+      aspect-ratio: 1;
+      background: var(--color-red);
+      border-radius: 50%;
+    }
+
+    .shapes {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+
+      @include isMobile {
+        flex-direction: column;
+        gap: 60rem;
+      }
+    }
+
+    .shape {
+      width: 270rem;
+
+      @include isMobile {
+        width: 66%;
+      }
+    }
+  }
+
+  // Raddblær
+
+  .section--tone {
+    .tone__text {
+      text-align: center;
+
+      strong {
+        color: var(--color-red);
+      }
+    }
+
+    .box__container {
+      @include isMobile {
+        aspect-ratio: 1;
+      }
+    }
+  }
+
+  // Ásýnd
+
+  .section--appearance {
+    .box--small .box__container {
+      aspect-ratio: 4 / 3;
+    }
+
+    .box .box__container {
+      @include isMobile {
+        aspect-ratio: 1;
+      }
+    }
+  }
+
+  // Ein heild
+
+  .section--summary {
+    .section__content {
+      background: none;
+    }
+  }
+}

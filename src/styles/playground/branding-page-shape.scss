@@ -1,0 +1,55 @@
+
+.branding-page {
+  .shape {
+    position: relative;
+    z-index: 1;
+    width: 300rem;
+    overflow: hidden;
+    aspect-ratio: 1;
+    mask-size: cover;
+
+    &--circle-stroke {
+      mask-image: url('data:image/svg+xml;utf8,\
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
+          <circle cx="50" cy="50" r="45" fill="none" stroke="black" stroke-width="3" vector-effect="non-scaling-stroke" />\
+        </svg>');
+
+      @include isMobile {
+        mask-image: url('data:image/svg+xml;utf8,\
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
+            <circle cx="50" cy="50" r="45" fill="none" stroke="black" stroke-width="2" vector-effect="non-scaling-stroke" />\
+          </svg>');
+      }
+    }
+
+    &__gradient {
+      position: absolute;
+      inset: -66rem;
+      z-index: 0; 
+      will-change: transform;
+
+      &--conic {
+        background: conic-gradient(
+          from 180deg at 50% 50%,
+          var(--color-red) 0deg,
+          rgba(255, 0, 0, 0) 45deg,
+          var(--color-red) 90deg,
+          rgba(255, 0, 0, 0) 180deg,
+          var(--color-red) 270deg,
+          rgba(255, 0, 0, 0) 315deg,
+          var(--color-red) 360deg
+        );
+        animation: gradient-rotation 21s linear infinite;
+  
+        @keyframes gradient-rotation {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+      }
+    }
+  }
+}

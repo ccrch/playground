@@ -1,0 +1,48 @@
+
+.branding-page {
+  .box {
+    width: 100%;
+
+    &__container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 40rem;
+
+      @include isMobile {
+        aspect-ratio: 9 / 16;
+        border-radius: 30rem;
+      }
+    }
+
+    &--gray .box__container {
+      background: var(--color-gray);
+      color: var(--color-navy);
+    }
+
+    &--navy .box__container {
+      background: var(--color-navy);
+      color: var(--color-white);
+    }
+
+    &--red .box__container {
+      background: var(--color-red);
+      color: var(--color-gray);
+    }
+
+    &--white .box__container {
+      background: var(--color-white);
+      color: var(--color-navy);
+    }
+
+    &--small .box__container {
+      border-radius: 30rem;
+
+      @include isMobile {
+        aspect-ratio: 16 / 9;
+      }
+    }
+  }
+}

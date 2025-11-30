@@ -1,0 +1,21 @@
+
+.branding-page {
+  .footer {
+    // height: 100vh;
+
+    &::before {
+      content: '';
+      display: block;
+      height: 45vh;
+      background: var(--color-red);
+      filter: brightness(0.9);
+    }
+
+    &::after {
+      content: '';
+      display: block;
+      height: 75vh;
+      background: var(--color-navy);
+    }
+  }
+}
