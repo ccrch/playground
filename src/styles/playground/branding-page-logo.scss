@@ -1,0 +1,75 @@
+
+.branding-page {
+  .logo {
+    position: relative;
+    z-index: 1;
+
+    svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    &--circle {
+      width: 240rem;
+      aspect-ratio: 1;
+    }
+
+    &--full {
+      width: 360rem;
+    }
+
+    &--full-white svg path[fill='#0B1423'] {
+      fill: var(--color-white);
+    }
+
+    &--3d {
+      // transform: rotateX(12deg) rotateY(21deg);
+      transform-style: preserve-3d;
+      perspective: 1234px;
+      width: 360rem;
+
+      .logo__container {
+        transform-style: preserve-3d;
+        width: 100%;
+        height: 100%;
+      }
+
+      .logo__layers {
+        transform-style: preserve-3d;
+        width: 100%;
+        height: 100%;
+  
+        > div {
+          width: 100%;
+          // aspect-ratio: 300 / 169;
+          
+          @for $i from 1 through 27 {
+            &:nth-child(#{$i})  {
+              transform: translateZ(#{($i - 1) * -2rem});
+            }
+          }
+  
+          svg {
+            width: 100%;
+            height: auto;
+          }
+        }
+  
+        > div:not(:first-child) {
+          position: absolute;
+          inset: 0;
+          z-index: 1;
+  
+          svg path {
+            fill: darken(#fd3d00, 7%);
+          }
+        }
+  
+        > div:last-child svg path {
+          fill: #fd3d00;
+        }
+      }
+    }
+  }
+}

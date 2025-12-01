@@ -196,26 +196,27 @@
   // Merkið 
 
   .section--sign {
-    .box--1 .box__container {
-      display: flex;
-      flex-flow: row nowrap;
-      align-items: center;
-      justify-content: space-evenly;
-
+    .section__content-box-1 .box__container {
       @include isMobile {
         flex-direction: column;
       }
     }
 
-    .logo {
-      width: 21%;
-    }
-
-    .details {
+    .section__content-details {
       width: 100%;
     }
 
-    .details__boxes {
+    .section__content-details-text {
+      @include isDesktop {
+        padding-right: 40rem;
+      }
+
+      @include isMobile {
+        margin-bottom: 56rem;
+      }
+    }
+
+    .section__content-details-boxes {
       display: flex;
       flex-flow: column nowrap;
       gap: 40rem;
@@ -224,16 +225,6 @@
 
       @include isMobile {
         gap: 30rem;
-      }
-    }
-
-    .details__text {
-      @include isDesktop {
-        padding-right: 40rem;
-      }
-
-      @include isMobile {
-        margin-bottom: 56rem;
       }
     }
   }

@@ -49,7 +49,7 @@ const brandingPage = {
       // Handling scroll triggers
 
       SectionHome.scrollTriggers()
-      SectionSign.scrollTriggers()
+      SectionSign.init()
       Typography.contentTextScrollTriggers()
       Typography.headlineScrollTriggers()
 
