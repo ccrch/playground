@@ -223,25 +223,36 @@ const brandingPage = {
 
     // Testing scroll velocity & lag
 
-    ScrollTrigger.create({
-      end: '100% 100%',
-      start: '0% 0%',
-      onUpdate: (self) => {
-        brandingPage.scrollVelocity = self.getVelocity() * self.direction
-        console.log(brandingPage.scrollVelocity)
-        gsap.to('.section--symbols .symbol', {
-          duration: 1,
-          ease: 'power4.out',
-          // overwrite: true,
-          y: (index) => `${Math.round(brandingPage.scrollVelocity * self.direction * -1 * (0.02 + index * 0.01))}rem`,
-        })
-      },
-      trigger: '.branding-page',
-    })
+    // ScrollTrigger.create({
+    //   end: '100% 100%',
+    //   start: '0% 0%',
+    //   onUpdate: (self) => {
+    //     brandingPage.scrollVelocity = self.getVelocity() * self.direction
+    //     console.log('scroll velocity' + brandingPage.scrollVelocity)
+    //     gsap.to('.section--symbols .symbol', {
+    //       duration: 1,
+    //       ease: 'power4.out',
+    //       // overwrite: true,
+    //       y: (index) => `${Math.round(brandingPage.scrollVelocity * self.direction * -1 * (0.02 + index * 0.01))}rem`,
+    //     })
+    //   },
+    //   trigger: '.branding-page',
+    // })
 
     // this.smootherLag('.section--symbols .symbol:nth-child(6)', 0.15)
     // this.addLag(document.querySelector('.section--symbols .symbol:nth-child(5)'), 0.12)
     // this.addLagEffect(document.querySelector('.section--symbols .symbol:nth-child(4)'))
+
+    // Testing symbols
+
+    gsap
+      .timeline({ delay: 1, repeat: -1 })
+      .timeScale(1.5)
+      //
+      .to('.symbols .symbol:first-child', { y: '-100rem', duration: 0.7, ease: 'power4.out' })
+      .to('.symbols .symbol:first-child', { y: '0rem', duration: 0.7, ease: 'power4.in' })
+      .to('.symbols .symbol:first-child', { x: '700rem', duration: 1.4, rotation: 360, ease: 'none' }, 0)
+      .to('.symbols ', { x: '-100rem', duration: 1.4, ease: 'none' }, 0)
   },
 
   lerp(start, end, amount): number {
