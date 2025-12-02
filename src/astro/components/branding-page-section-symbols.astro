@@ -4,8 +4,8 @@ const headline = 'Grafísk element sækja<br /> innblástur í merki Vettvangs'
 const text = 'Við tjáum okkur í gegnum einföld form sem tákna fjölbreytni okkar. Fjölbreytt fólk, fjölbreytt verkefni, fjölbreytt starfssvið. Táknin hjálpa til að segja söguna og bæta sérstöðu og persónuleika.'
 ---
 
-<div class="symbols">
-  {shapes.map((shape) => <div class={`symbol shape shape--${shape}-fill`} />)}
+<div class="section__content-small-shapes">
+  {shapes.map((shape) => <div class={`shape shape--small shape--${shape}-fill`} />)}
 </div>
 <div class="grid">
   <div class="grid__col grid__col--6">
@@ -15,7 +15,7 @@ const text = 'Við tjáum okkur í gegnum einföld form sem tákna fjölbreytni 
     <p class="split-content-text" set:html={text} />
   </div>
 </div>
-<div class="shapes">
+<div class="section__content-gradient-shapes">
   {
     Array.from({ length: 3 }).map(() => (
       <div class="shape shape--circle-stroke">

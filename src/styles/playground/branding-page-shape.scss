@@ -82,7 +82,6 @@
   }
 }
 
-
 .branding-page {
   .shape {
     position: relative;
@@ -102,18 +101,14 @@
     @include all-masks('triangle-down');
     @include all-masks('triangle-up');
 
-    // &--circle-fill {
-    //   @include svg-mask('circle', 'fill');
-    // }
+    &--small {
+      flex: 0 0 40rem;
+      width: 40rem;
+    }
 
-    // &--circle-stroke {
-    //   @include svg-mask('circle', 'stroke', 3);
-
-    //   @include isMobile {
-    //     @include svg-mask('circle', 'stroke', 2);
-    //   }
-    // }
-
+    &[class*="-fill"] {
+      background: var(--color-red);
+    }
 
     &__gradient {
       position: absolute;

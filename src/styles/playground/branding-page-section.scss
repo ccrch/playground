@@ -283,7 +283,7 @@
   // Tákn
 
   .section--symbols {
-    .symbols {
+    .section__content-small-shapes {
       display: flex;
       flex-flow: row nowrap;
       align-items: center;
@@ -291,9 +291,6 @@
       gap: 60rem;
       width: 100%;
       margin: 0 auto;
-      // margin: -50rem auto;
-      // padding: 50rem 0;
-      // background: var(--color-navy);
 
       @include isMobile {
         width: 80%;
@@ -302,21 +299,7 @@
       }
     }
 
-    .symbol {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex: 0 0 40rem;
-      width: 40rem;
-      aspect-ratio: 1;
-      background: var(--color-red);
-      color: var(--color-navy);
-      font-size: 0;
-      // font-size: 12rem;
-      // font-weight: 700;
-    }
-
-    .shapes {
+    .section__content-gradient-shapes {
       display: flex;
       flex-flow: row nowrap;
       align-items: center;
@@ -327,13 +310,13 @@
         flex-direction: column;
         gap: 60rem;
       }
-    }
 
-    .shape {
-      width: 270rem;
+      .shape { // TODO: Adjust size when adding multiple shapes
+        width: 270rem;
 
-      @include isMobile {
-        width: 66%;
+        @include isMobile {
+          width: 66%;
+        }
       }
     }
   }
