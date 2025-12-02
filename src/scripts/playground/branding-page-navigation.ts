@@ -89,30 +89,48 @@ const brandingPageNavigation = {
       sections: document.querySelectorAll<HTMLElement>('.section'),
     }
 
+    const navyToWhite = () => {
+      el.navigation.classList.add('navigation--navy')
+      el.navigation.classList.remove('navigation--white')
+    }
+
+    const whiteToNavy = () => {
+      el.navigation.classList.add('navigation--white')
+      el.navigation.classList.remove('navigation--navy')
+    }
+
     el.sections.forEach((section) => {
       ScrollTrigger.create({
         onEnter: () => {
-          if (section.classList.contains('section--white')) {
-            el.navigation.classList.add('navigation--white')
-            el.navigation.classList.remove('navigation--navy')
-          } else {
-            el.navigation.classList.add('navigation--navy')
-            el.navigation.classList.remove('navigation--white')
-          }
+          section.classList.contains('section--white') ? whiteToNavy() : navyToWhite()
         },
         onLeaveBack: () => {
-          if (section.classList.contains('section--white')) {
-            el.navigation.classList.add('navigation--navy')
-            el.navigation.classList.remove('navigation--white')
-          } else {
-            el.navigation.classList.add('navigation--white')
-            el.navigation.classList.remove('navigation--navy')
-          }
+          section.classList.contains('section--white') ? navyToWhite() : whiteToNavy()
         },
         start: () => `0% ${window.innerHeight - el.navigation.offsetHeight}px`,
         trigger: section,
       })
     })
+
+    // Extra theme changes for some elements in specific sections
+
+    const extraThemeChange = ({ changeTo, trigger }: { changeTo: string; trigger: string }) => {
+      ScrollTrigger.create({
+        end: () => `100% ${window.innerHeight - el.navigation.offsetHeight}px`,
+        onEnter: changeTo === 'white' ? navyToWhite : whiteToNavy,
+        onEnterBack: changeTo === 'white' ? navyToWhite : whiteToNavy,
+        onLeave: changeTo === 'white' ? whiteToNavy : navyToWhite,
+        onLeaveBack: changeTo === 'white' ? whiteToNavy : navyToWhite,
+        start: () => `0% ${window.innerHeight - el.navigation.offsetHeight}px`,
+        trigger,
+      })
+    }
+
+    extraThemeChange({ changeTo: 'white', trigger: '.section--sign .section__content-box-2' })
+    extraThemeChange({ changeTo: 'navy', trigger: '.section--colors .box' })
+    extraThemeChange({ changeTo: 'white', trigger: '.section--tone .box' })
+    extraThemeChange({ changeTo: 'navy', trigger: '.section--appearance .grid' })
+    extraThemeChange({ changeTo: 'white', trigger: '.footer__bottom' })
   },
 }
 

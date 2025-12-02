@@ -30,11 +30,12 @@
       font-size: 123%;
       pointer-events: all;
       transition: border 0.321s;
-
+      
       svg {
         transform: translateY(1rem);
         width: 44rem;
         height: 25rem;
+        // filter: brightness(0.95); // TODO: Check later
       }
     }
 

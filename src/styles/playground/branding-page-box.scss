@@ -12,6 +12,7 @@
       align-items: center;
       justify-content: center;
       width: 100%;
+      overflow: hidden;
       aspect-ratio: 16 / 9;
       border-radius: 40rem;
 
@@ -32,8 +33,19 @@
     }
 
     &--red .box__container {
+      // position: relative;
+      // z-index: 1;
       background: var(--color-red);
       color: var(--color-gray);
+
+      // &::after { // TODO: Check later
+      //   content: '';
+      //   position: absolute;
+      //   inset: 0;
+      //   z-index: -1;
+      //   background: var(--color-red);
+      //   filter: brightness(0.95);
+      // }
     }
 
     &--white .box__container {

@@ -3,17 +3,23 @@
   .footer {
     // height: 100vh;
 
-    &::before {
-      content: '';
-      display: block;
+    &__top {
+      // position: relative;
+      // z-index: 1;
       height: 45vh;
       background: var(--color-red);
-      filter: brightness(0.9);
+
+      // &::after { // TODO: Check later  
+      //   content: '';
+      //   position: absolute;
+      //   inset: 0;
+      //   z-index: -1;
+      //   background: var(--color-red);
+      //   filter: brightness(0.9);
+      // }
     }
 
-    &::after {
-      content: '';
-      display: block;
+    &__bottom {
       height: 75vh;
       background: var(--color-navy);
     }
