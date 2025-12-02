@@ -1,12 +1,18 @@
+---
+const shapes = ['hexagon', 'triangle-down', 'diamond', 'circle', 'pentagon', 'square', 'triangle-up']
+const headline = 'Grafísk element sækja<br /> innblástur í merki Vettvangs'
+const text = 'Við tjáum okkur í gegnum einföld form sem tákna fjölbreytni okkar. Fjölbreytt fólk, fjölbreytt verkefni, fjölbreytt starfssvið. Táknin hjálpa til að segja söguna og bæta sérstöðu og persónuleika.'
+---
+
 <div class="symbols">
-  {Array.from({ length: 7 }).map(() => <div class="symbol" />)}
+  {shapes.map((shape) => <div class={`symbol shape shape--${shape}-fill`} />)}
 </div>
 <div class="grid">
   <div class="grid__col grid__col--6">
-    <h2 class="split-content-text">Grafísk element sækja<br /> innblástur í merki Vettvangs</h2>
+    <h2 class="split-content-text" set:html={headline} />
   </div>
   <div class="grid__col grid__col--6">
-    <p class="split-content-text">Við tjáum okkur í gegnum einföld form sem tákna fjölbreytni okkar. Fjölbreytt fólk, fjölbreytt verkefni, fjölbreytt starfssvið. Táknin hjálpa til að segja söguna og bæta sérstöðu og persónuleika.</p>
+    <p class="split-content-text" set:html={text} />
   </div>
 </div>
 <div class="shapes">

@@ -1,4 +1,88 @@
 
+@mixin svg-mask($type, $mode: 'stroke', $stroke-width: 3) {
+  $fill: if($mode == 'fill', 'black', 'none');
+  $stroke: if($mode == 'stroke', 'black', 'none');
+  $stroke-width: if($mode == 'stroke', $stroke-width, 0);
+
+  @if $type == 'circle' {
+    mask-image: url('data:image/svg+xml;utf8,\
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
+        <circle cx="50" cy="50" r="45" fill="#{$fill}" stroke="#{$stroke}" stroke-width="#{$stroke-width}" vector-effect="non-scaling-stroke" />\
+      </svg>');
+  }
+
+  @if $type == 'diamond' {
+    mask-image: url('data:image/svg+xml;utf8,\
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
+        <polygon points="50,5 95,50 50,95 5,50" fill="#{$fill}" stroke="#{$stroke}" stroke-width="#{$stroke-width}" vector-effect="non-scaling-stroke" />\
+      </svg>');
+  }
+
+  @if $type == 'ellipse' {
+    mask-image: url('data:image/svg+xml;utf8,\
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
+        <ellipse cx="50" cy="50" rx="33" ry="50" fill="#{$fill}" stroke="#{$stroke}" stroke-width="#{$stroke-width}" vector-effect="non-scaling-stroke" />\
+      </svg>');
+  }
+
+  @if $type == 'hexagon' {
+    mask-image: url('data:image/svg+xml;utf8,\
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
+        <polygon points="50,5 90,25 90,75 50,95 10,75 10,25" fill="#{$fill}" stroke="#{$stroke}" stroke-width="#{$stroke-width}" vector-effect="non-scaling-stroke" />\
+      </svg>');
+  }
+
+  @if $type == 'octagon' {
+    mask-image: url('data:image/svg+xml;utf8,\
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
+        <polygon points="30,5 70,5 95,30 95,70 70,95 30,95 5,70 5,30" fill="#{$fill}" stroke="#{$stroke}" stroke-width="#{$stroke-width}" vector-effect="non-scaling-stroke" />\
+      </svg>');
+  }
+
+  @if $type == 'pentagon' {
+    mask-image: url('data:image/svg+xml;utf8,\
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
+        <polygon points="50,5 95,38 77,90 23,90 5,38" fill="#{$fill}" stroke="#{$stroke}" stroke-width="#{$stroke-width}" vector-effect="non-scaling-stroke" />\
+      </svg>');
+  }
+
+  @if $type == 'square' {
+    mask-image: url('data:image/svg+xml;utf8,\
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
+        <rect x="10" y="10" width="80" height="80" fill="#{$fill}" stroke="#{$stroke}" stroke-width="#{$stroke-width}" vector-effect="non-scaling-stroke" />\
+      </svg>');
+  }
+
+  @if $type == 'triangle-down' {
+    mask-image: url('data:image/svg+xml;utf8,\
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
+        <polygon points="5,10 95,10 50,90" fill="#{$fill}" stroke="#{$stroke}" stroke-width="#{$stroke-width}" vector-effect="non-scaling-stroke" />\
+      </svg>');
+  }
+
+  @if $type == 'triangle-up' {
+    mask-image: url('data:image/svg+xml;utf8,\
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
+        <polygon points="50,10 95,90 5,90" fill="#{$fill}" stroke="#{$stroke}" stroke-width="#{$stroke-width}" vector-effect="non-scaling-stroke" />\
+      </svg>');
+  }
+}
+
+@mixin all-masks($type, $stroke-desktop: 3, $stroke-mobile: 12) {
+  &--#{$type}-fill {
+    @include svg-mask($type, 'fill')
+  }
+
+  &--#{$type}-stroke {
+    @include svg-mask($type, 'stroke', $stroke-desktop)
+
+    ;@include isMobile {
+      @include svg-mask($type, 'stroke', $stroke-mobile)
+    }
+  }
+}
+
+
 .branding-page {
   .shape {
     position: relative;
@@ -8,19 +92,28 @@
     aspect-ratio: 1;
     mask-size: cover;
 
-    &--circle-stroke {
-      mask-image: url('data:image/svg+xml;utf8,\
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
-          <circle cx="50" cy="50" r="45" fill="none" stroke="black" stroke-width="3" vector-effect="non-scaling-stroke" />\
-        </svg>');
+    @include all-masks('circle');
+    @include all-masks('diamond');
+    @include all-masks('ellipse');
+    @include all-masks('hexagon');
+    @include all-masks('octagon');
+    @include all-masks('pentagon');
+    @include all-masks('square');
+    @include all-masks('triangle-down');
+    @include all-masks('triangle-up');
 
-      @include isMobile {
-        mask-image: url('data:image/svg+xml;utf8,\
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
-            <circle cx="50" cy="50" r="45" fill="none" stroke="black" stroke-width="2" vector-effect="non-scaling-stroke" />\
-          </svg>');
-      }
-    }
+    // &--circle-fill {
+    //   @include svg-mask('circle', 'fill');
+    // }
+
+    // &--circle-stroke {
+    //   @include svg-mask('circle', 'stroke', 3);
+
+    //   @include isMobile {
+    //     @include svg-mask('circle', 'stroke', 2);
+    //   }
+    // }
+
 
     &__gradient {
       position: absolute;

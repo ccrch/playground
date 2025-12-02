@@ -6,6 +6,7 @@ import { lenisScroll } from '../core/helpers'
 import Navigation from './branding-page-navigation'
 import SectionHome from './branding-page-section-home'
 import SectionSign from './branding-page-section-sign'
+import SectionSymbols from './branding-page-section-symbols'
 import Typography from './branding-page-typography'
 
 const brandingPage = {
@@ -50,6 +51,7 @@ const brandingPage = {
 
       SectionHome.scrollTriggers()
       SectionSign.init()
+      SectionSymbols.init()
       Typography.contentTextScrollTriggers()
       Typography.headlineScrollTriggers()
 
@@ -242,17 +244,6 @@ const brandingPage = {
     // this.smootherLag('.section--symbols .symbol:nth-child(6)', 0.15)
     // this.addLag(document.querySelector('.section--symbols .symbol:nth-child(5)'), 0.12)
     // this.addLagEffect(document.querySelector('.section--symbols .symbol:nth-child(4)'))
-
-    // Testing symbols
-
-    gsap
-      .timeline({ delay: 1, repeat: -1 })
-      .timeScale(1.5)
-      //
-      .to('.symbols .symbol:first-child', { y: '-100rem', duration: 0.7, ease: 'power4.out' })
-      .to('.symbols .symbol:first-child', { y: '0rem', duration: 0.7, ease: 'power4.in' })
-      .to('.symbols .symbol:first-child', { x: '700rem', duration: 1.4, rotation: 360, ease: 'none' }, 0)
-      .to('.symbols ', { x: '-100rem', duration: 1.4, ease: 'none' }, 0)
   },
 
   // Testing stuff

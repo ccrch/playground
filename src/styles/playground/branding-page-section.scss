@@ -138,19 +138,11 @@
   .section--navy {
     background: var(--color-navy);
     color: var(--color-white);
-
-    // .section__content {
-    //   background: var(--color-navy);
-    // }
   }
 
   .section--white {
     background: var(--color-white);
     color: var(--color-navy);
-
-    // .section__content {
-    //   background: var(--color-white);
-    // }
   }
 
   // Heim
@@ -311,11 +303,17 @@
     }
 
     .symbol {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       flex: 0 0 40rem;
       width: 40rem;
       aspect-ratio: 1;
       background: var(--color-red);
-      // border-radius: 50%;
+      color: var(--color-navy);
+      font-size: 0;
+      // font-size: 12rem;
+      // font-weight: 700;
     }
 
     .shapes {
