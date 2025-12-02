@@ -1,37 +1,39 @@
 ---
-import LogoCircle from '../../assets/images/vettvangur-logo-circle.svg'
-import LogoFull from '../../assets/images/vettvangur-logo-full.svg'
-import LogoMark from '../../assets/images/vettvangur-logo-mark.svg'
+import LogoCircleSvg from '../../assets/images/vettvangur-logo-circle.svg'
+import LogoFullSvg from '../../assets/images/vettvangur-logo-full.svg'
+import Logo3D from './branding-page-3d-logo.astro'
+
+const text = 'Nýja merkið okkar er skarpara, einfaldara og hannað með fjölbreytta miðla í huga. Það er eftirminnilegt, auðvelt í útfærslu og stendur sterkt eitt og sér – en líka sem hluti af heild.'
 ---
 
 <div class="box box--gray section__content-box-1">
   <div class="box__container">
     <div class="logo logo--circle logo--circle-1">
-      <LogoCircle />
+      <LogoCircleSvg />
     </div>
     <div class="logo logo--circle logo--circle-2">
-      <LogoCircle />
+      <LogoCircleSvg />
     </div>
   </div>
 </div>
 <div class="section__content-details">
   <div class="grid">
     <div class="grid__col grid__col--6">
-      <p class="section__content-details-text split-content-text">Nýja merkið okkar er skarpara, einfaldara og hannað með fjölbreytta miðla í huga. Það er eftirminnilegt, auðvelt í útfærslu og stendur sterkt eitt og sér – en líka sem hluti af heild.</p>
+      <p class="section__content-details-text split-content-text" set:html={text} />
     </div>
     <div class="grid__col grid__col--6">
       <div class="section__content-details-boxes">
         <div class="box box--small box--gray">
           <div class="box__container">
             <div class="logo logo--full">
-              <LogoFull />
+              <LogoFullSvg />
             </div>
           </div>
         </div>
         <div class="box box--small box--navy">
           <div class="box__container">
             <div class="logo logo--full logo--full-white">
-              <LogoFull />
+              <LogoFullSvg />
             </div>
           </div>
         </div>
@@ -41,20 +43,6 @@ import LogoMark from '../../assets/images/vettvangur-logo-mark.svg'
 </div>
 <div class="box box--navy section__content-box-2">
   <div class="box__container">
-    <div class="logo logo--3d">
-      <div class="logo__container">
-        <div class="logo__layers">
-          {
-            Array.from({ length: 27 }).map(() => {
-              return (
-                <div>
-                  <LogoMark />
-                </div>
-              )
-            })
-          }
-        </div>
-      </div>
-    </div>
+    <Logo3D />
   </div>
 </div>

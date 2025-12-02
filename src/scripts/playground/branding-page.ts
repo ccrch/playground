@@ -255,6 +255,13 @@ const brandingPage = {
       .to('.symbols ', { x: '-100rem', duration: 1.4, ease: 'none' }, 0)
   },
 
+  // Testing stuff
+  //
+  //
+  //
+  //
+  //
+
   lerp(start, end, amount): number {
     return start + (end - start) * amount
   },

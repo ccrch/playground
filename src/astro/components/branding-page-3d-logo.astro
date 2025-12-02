@@ -1,0 +1,19 @@
+---
+import LogoMark from '../../assets/images/vettvangur-logo-mark.svg'
+---
+
+<div class="logo logo--3d">
+  <div class="logo__container">
+    <div class="logo__layers">
+      {
+        Array.from({ length: 27 }).map(() => {
+          return (
+            <div>
+              <LogoMark />
+            </div>
+          )
+        })
+      }
+    </div>
+  </div>
+</div>

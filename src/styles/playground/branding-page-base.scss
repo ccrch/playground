@@ -118,31 +118,4 @@
       transform: translate(-50%, -50%);
     }
   }
-
-  .firework {
-    position: absolute;
-    z-index: 1;
-  }
-
-  .firework-bubble {
-    position: absolute;
-    z-index: 1;
-    width: 43rem;
-    height: 43rem;
-    // width: rem(21);
-    // height: rem(21);
-    // transform: translateY(-50%);
-    background: var(--color-red);
-    border-radius: 100%;
-    will-change: transform;
-  }
-
-  .firework-bubble-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2;
-    transform-origin: 0 0;
-    will-change: transform;
-  }
 }
