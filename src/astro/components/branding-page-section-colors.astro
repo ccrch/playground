@@ -1,11 +1,16 @@
+---
+const headline = 'Litirnir okkar'
+const text = 'Litapalletta Vettvangs er skörp og afgerandi – og dregur fram þau gildi sem móta sjálfsmynd okkar: heiðarleika, hreinskiptni og skýrar línur.'
+---
+
 <div class="box box--white">
   <div class="box__container">[colors]</div>
 </div>
 <div class="grid">
   <div class="grid__col grid__col--6">
-    <h2 class="split-content-text">Litirnir okkar</h2>
+    <h2 class="split-content-text" set:html={headline} />
   </div>
   <div class="grid__col grid__col--6">
-    <p class="split-content-text">Litapalletta Vettvangs er skörp og afgerandi – og dregur fram þau gildi sem móta sjálfsmynd okkar: heiðarleika, hreinskiptni og skýrar línur.</p>
+    <p class="split-content-text" set:html={text} />
   </div>
 </div>
