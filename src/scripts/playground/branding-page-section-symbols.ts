@@ -13,24 +13,33 @@ const brandingPageSectionSymbols = {
     gsap.matchMedia().add(brandingPage.breakpoints, (context) => {
       const { isDesktop } = context.conditions
 
-      // Testing symbols
-
-      let count = 1
+      const firstShape = this.q('.shape--small:first-child')
       const shapeTypes = ['hexagon', 'triangle-down', 'diamond', 'circle', 'pentagon', 'square', 'triangle-up']
+      let count = 1
+
+      const skewTheCircle = () => {
+        if ((count - 4) % shapeTypes.length === 0) {
+          gsap
+            .timeline({ defaults: { duration: 0.6 } })
+            .timeScale(1.5)
+            .to(firstShape, { ease: 'power3.out', skewY: 12 })
+            .to(firstShape, { ease: 'power2.in', skewY: 0 }, '>')
+        }
+      }
 
       gsap
         .timeline({ delay: 1, repeat: -1 })
         .timeScale(1.5)
-        .to(this.q('.shape--small:first-child'), { y: '-100rem', duration: 0.7, ease: 'power4.out' })
-        .to(this.q('.shape--small:first-child'), { y: '0rem', duration: 0.7, ease: 'power4.in' })
-        .to(this.q('.shape--small:first-child'), { x: '700rem', duration: 1.4, rotation: 360, ease: 'none' }, 0)
+        .to(firstShape, { y: '-100rem', duration: 0.7, ease: 'power4.out' })
+        .to(firstShape, { y: '0rem', duration: 0.7, ease: 'power4.in' })
+        .to(firstShape, { x: '700rem', duration: 1.4, rotation: 360, ease: 'none' }, 0)
         // TODO: Check later - different type of rotation
-        // .to(this.q('.shape--small:first-child'), { x: '700rem', duration: 1.4, ease: 'none' }, 0)
-        // .to(this.q('.shape--small:first-child'), { rotation: 33, duration: 0.4, ease: 'power3.out' }, 0)
-        // .to(this.q('.shape--small:first-child'), { rotation: 0, duration: 1, ease: 'power3.in' }, '>')
-        .to(this.q('.shape--small:first-child'), { duration: 0.7, ease: 'power3.out', scale: 1.21 }, 0)
-        .to(this.q('.shape--small:first-child'), { duration: 0.7, ease: 'power3.in', scale: 1 }, '>')
-        .to(this.q('.section__content-small-shapes'), { x: '-100rem', duration: 2, ease: 'power3.inOut' }, 0)
+        // .to(firstShape, { x: '700rem', duration: 1.4, ease: 'none' }, 0)
+        // .to(firstShape, { rotation: 33, duration: 0.4, ease: 'power3.out' }, 0)
+        // .to(firstShape, { rotation: 0, duration: 1, ease: 'power3.in' }, '>')
+        .to(firstShape, { duration: 0.7, ease: 'power3.out', onStart: skewTheCircle, scale: 1.4 }, 0)
+        .to(firstShape, { duration: 0.7, ease: 'power2.in', scale: 1 }, '>')
+        .to(this.q('.section__content-small-shapes'), { x: '-100rem', duration: 2.1, ease: 'power3.inOut' }, 0)
         .call(
           () => {
             this.q('.section__content-small-shapes .shape').forEach((shape, index) => {
