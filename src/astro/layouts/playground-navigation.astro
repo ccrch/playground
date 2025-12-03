@@ -5,6 +5,13 @@ const currentPath = Astro.url.pathname
 const pages = getAstroPages()
 ---
 
+<style lang="scss" is:global>
+  // TODO: Remove later
+  .playground-navigation a[href*='branding-page'] {
+    display: none;
+  }
+</style>
+
 <nav class="playground-navigation">
   <ul>
     {
