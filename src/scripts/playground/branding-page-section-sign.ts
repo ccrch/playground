@@ -11,8 +11,8 @@ const brandingPageSectionSign = {
     this.moveText()
 
     brandingPageLogo.animate3DLogo({
-      scrollTriggerTrigger: this.q('.section--sign .section__content-box-2')[0],
-      target: this.q('.section--sign .logo--3d')[0],
+      scrollTriggerTrigger: this.q('.section__content-box-3d-logo')[0],
+      target: this.q('.logo--3d')[0],
     })
   },
 
@@ -46,7 +46,7 @@ const brandingPageSectionSign = {
           () => {
             brandingPageLogo.renderFirework({
               amount: 45,
-              container: this.q('.section--sign .section__content-box-1')[0],
+              container: this.q('.section--sign .section__content-box-2-logos')[0],
               x: isDesktop ? '67%' : '10%',
               y: isDesktop ? '47%' : '10%',
             })
@@ -61,7 +61,7 @@ const brandingPageSectionSign = {
         onEnter: () => {
           animation.play()
         },
-        trigger: this.q('.section__content-box-1'),
+        trigger: this.q('.section__content-box-2-logos'),
         start: '0% 80%',
       })
 
@@ -70,7 +70,7 @@ const brandingPageSectionSign = {
           reset.play()
           animation.seek(0).pause()
         },
-        trigger: this.q('.section__content-box-1'),
+        trigger: this.q('.section__content-box-2-logos'),
         start: '0% 100%',
       })
     })

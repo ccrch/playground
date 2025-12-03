@@ -68,7 +68,7 @@
   }
 }
 
-@mixin all-masks($type, $stroke-desktop: 3, $stroke-mobile: 12) {
+@mixin all-masks($type, $stroke-desktop: 3, $stroke-mobile: 2) {
   &--#{$type}-fill {
     @include svg-mask($type, 'fill')
   }

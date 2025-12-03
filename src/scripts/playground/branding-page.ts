@@ -4,6 +4,7 @@ import SplitText from 'gsap/SplitText'
 import ScrambleTextPlugin from 'gsap/ScrambleTextPlugin'
 import { lenisScroll } from '../core/helpers'
 import Navigation from './branding-page-navigation'
+import SectionAppearance from './branding-page-section-appearance'
 import SectionHome from './branding-page-section-home'
 import SectionSign from './branding-page-section-sign'
 import SectionSymbols from './branding-page-section-symbols'
@@ -51,7 +52,11 @@ const brandingPage = {
 
       SectionHome.scrollTriggers()
       SectionSign.init()
+      // SectionColors.init()
+      // SectionTypography.init()
       SectionSymbols.init()
+      // SectionTone.init()
+      SectionAppearance.init()
       Typography.contentTextScrollTriggers()
       Typography.headlineScrollTriggers()
 

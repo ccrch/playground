@@ -126,10 +126,10 @@ const brandingPageNavigation = {
       })
     }
 
-    extraThemeChange({ changeTo: 'white', trigger: '.section--sign .section__content-box-2' })
+    extraThemeChange({ changeTo: 'white', trigger: '.section--sign .section__content-box-3d-logo' })
     extraThemeChange({ changeTo: 'navy', trigger: '.section--colors .box' })
     extraThemeChange({ changeTo: 'white', trigger: '.section--tone .box' })
-    extraThemeChange({ changeTo: 'navy', trigger: '.section--appearance .grid' })
+    extraThemeChange({ changeTo: 'navy', trigger: '.section--appearance .section__content-box-reel' })
     extraThemeChange({ changeTo: 'white', trigger: '.footer__bottom' })
   },
 }
