@@ -41,6 +41,8 @@ input,
 button,
 textarea,
 select {
+  color: inherit;
+  border-radius: 0;
   font: inherit;
 }
 
