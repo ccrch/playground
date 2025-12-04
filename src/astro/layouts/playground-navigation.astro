@@ -7,7 +7,7 @@ const pages = getAstroPages()
 
 <style lang="scss" is:global>
   // TODO: Remove later
-  .playground-navigation a[href*='branding-page'] {
+  .playground-navigation li:has(a[href*='branding-page']) {
     display: none;
   }
 </style>
@@ -17,7 +17,7 @@ const pages = getAstroPages()
     {
       pages.map((page, index) => (
         <li>
-          <a href={page.url} data-active={page.url.replace(/\?.*$/, '') === currentPath && index !== 0}>
+          <a href={page.url} data-active={page.url.replace(/\?.*$/, '') === currentPath && index !== 0 ? true : undefined}>
             <span>{page.navTitle}</span>
             <span>{page.navDescription}</span>
           </a>

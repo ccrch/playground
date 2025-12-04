@@ -1,0 +1,273 @@
+---
+export const frontmatter = {
+  baseClass: 'yt-test',
+  navDescription: '',
+  navTitle: 'YouTube test (2)',
+}
+
+import Layout from '../layouts/playground-layout.astro'
+
+const data = [
+  {
+    id: 1,
+    text: 'Entertain my faith',
+    textShowDuration: 53,
+    videoUrl: 'https://youtu.be/ktBMxkLUIwY?t=141.4',
+  },
+  {
+    id: 2,
+    text: 'Drop drop drop',
+    textShowDuration: 2.5,
+    videoUrl: 'https://youtu.be/TnoWOgAD054?t=86',
+  },
+  {
+    id: 3,
+    text: 'Downstairs!',
+    textShowDuration: 2,
+    videoUrl: 'https://youtu.be/zcZMQZbPMxM?t=239',
+  },
+  {
+    id: 4,
+    text: 'All of my heart on my sleeve',
+    textShowDuration: 3,
+    videoUrl: 'https://youtu.be/zcZMQZbPMxM?t=162',
+  },
+  {
+    id: 5,
+    text: '...what have I become... dirty and wretched one...',
+    textShowDuration: 7.3,
+    videoUrl: 'https://youtu.be/zcZMQZbPMxM?t=187.4',
+  },
+]
+---
+
+<script>
+  import gsap from 'gsap'
+
+  const tag = document.createElement('script')
+  tag.src = 'https://www.youtube.com/iframe_api'
+  const firstScriptTag = document.getElementsByTagName('script')[0]
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
+
+  declare const YT: any
+
+  const el = {
+    currentTime: document.querySelector<HTMLElement>('.youtube .controls p span'),
+    loadButtons: document.querySelectorAll<HTMLElement>('.youtube .controls button[data-yt]'),
+    pauseButton: document.querySelector<HTMLElement>('.youtube .controls button[data-action="pause"]'),
+    playButton: document.querySelector<HTMLElement>('.youtube .controls button[data-action="play"]'),
+    player: document.querySelector<HTMLElement>('.youtube .player'),
+    playerIframe: document.querySelector<HTMLElement>('.youtube .player > div'),
+    playerText: document.querySelector<HTMLElement>('.youtube .player__text > div'),
+  }
+
+  let interval = null
+  let ytPlayer: YT.Player = null
+
+  // https://developers.google.com/youtube/iframe_api_reference
+  ;(window as any).onYouTubeIframeAPIReady = () => {
+    ytPlayer = new YT.Player(el.playerIframe, {
+      height: '100%',
+      width: '100%',
+      // videoId: 'YDptAmbmUHE',
+      playerVars: {
+        // autoplay: 1,
+        // controls: 0,
+        fs: 0,
+        iv_load_policy: 3,
+        // loop: 1,
+        modestbranding: 1,
+        mute: 0,
+        // playlist:'YDptAmbmUHE',
+        playsinline: 1,
+        rel: 0,
+      },
+      // events: {
+      //   onReady: onPlayerReady,
+      //   onStateChange: onPlayerStateChange
+      // }
+    })
+  }
+
+  // TODO: Add text reveal from old playground sandbox instead of scale tween
+
+  let textTween = null
+
+  const runTimer = (startSeconds, textShowDuration) => {
+    const updateTime = () => {
+      el.currentTime.textContent = `${ytPlayer.getCurrentTime().toFixed(1)}s`
+
+      // console.log(ytPlayer.getCurrentTime(), startSeconds + textShowDuration)
+
+      if (ytPlayer.getCurrentTime() > startSeconds + textShowDuration) {
+        // ytPlayer.pauseVideo()
+        // el.player.classList.add('player--paused')
+        el.playerText.textContent = ''
+      }
+    }
+
+    interval = setInterval(updateTime, 12)
+
+    textTween = gsap.fromTo(el.playerText, { scale: 1 }, { scale: 1.5, duration: textShowDuration + 0.5, ease: 'none' })
+  }
+
+  el.loadButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      if (!ytPlayer) return
+
+      const videoUrl = button.getAttribute('data-yt')
+      const url = new URL(videoUrl)
+      const videoId = url.pathname.split('/').pop()
+      const startSeconds = url.searchParams.get('t') ? parseFloat(url.searchParams.get('t')) : 0
+      const textShowDuration = button.getAttribute('data-text-show-duration') ? parseFloat(button.getAttribute('data-text-show-duration')) : 2
+
+      ytPlayer.loadVideoById({
+        videoId,
+        startSeconds,
+      })
+
+      if (interval) {
+        clearInterval(interval)
+      }
+
+      runTimer(startSeconds, textShowDuration)
+
+      el.player.classList.remove('player--paused')
+
+      el.playerText.textContent = button.getAttribute('title') || ''
+    })
+  })
+
+  el.playButton.addEventListener('click', () => {
+    if (!ytPlayer) return
+    if (!ytPlayer.getVideoData().video_id) return
+
+    ytPlayer.playVideo()
+    el.player.classList.remove('player--paused')
+    textTween.play()
+  })
+
+  el.pauseButton.addEventListener('click', () => {
+    if (!ytPlayer) return
+    if (!ytPlayer.getVideoData().video_id) return
+
+    ytPlayer.pauseVideo()
+    el.player.classList.add('player--paused')
+    textTween.pause()
+  })
+</script>
+
+<style lang="scss">
+  .youtube {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1.5vw;
+    padding: 20vh 20vw;
+    font-family: 'DM Sans', sans-serif;
+
+    .player {
+      position: relative;
+      z-index: 1;
+      width: 60vw;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      background: #111;
+
+      // &::before {
+      //   content: '';
+      //   position: absolute;
+      //   inset: 0;
+      //   z-index: 2;
+      //   background: #111;
+      //   opacity: 0;
+      //   pointer-events: none;
+      //   // transition: opacity 0.321s ease-in-out;
+      // }
+
+      // &--paused::before {
+      //   opacity: 0.7;
+      // }
+
+      iframe {
+        // position: absolute;
+        // inset: -50px;
+        // z-index: 1;
+        // max-width: none !important;
+        // width: calc(100% + 100px) !important;
+        // height: calc(100% + 100px) !important;
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      &__text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        color: #fff;
+        font-size: 2vw;
+        font-weight: 700;
+        line-height: 140%;
+        text-align: center;
+        text-transform: uppercase;
+        pointer-events: none;
+      }
+    }
+
+    .controls {
+      display: flex;
+      flex-flow: row wrap;
+      gap: 1vw;
+      font-size: 0.8vw;
+
+      > div {
+        flex: 0 0 100%;
+        display: flex;
+        align-items: center;
+        gap: 1vw;
+      }
+
+      button {
+        padding: 0.1vw 0.6vw;
+        border: solid 1px #333;
+        border-radius: 0;
+        cursor: pointer;
+
+        &[data-yt] {
+          width: 2.1vw;
+          padding: 0;
+          aspect-ratio: 1;
+        }
+      }
+    }
+  }
+</style>
+
+<Layout baseClass={frontmatter.baseClass} metaDescription={frontmatter.navDescription} metaTitle={frontmatter.navTitle}>
+  <main class={frontmatter.baseClass} slot="body">
+    <div class="youtube">
+      <div class="player player--paused">
+        <div></div>
+        <div class="player__text"><div></div></div>
+      </div>
+      <div class="controls">
+        {
+          data.map((item) => (
+            <button data-yt={item.videoUrl} data-text-show-duration={item.textShowDuration} title={item.text}>
+              {item.id}
+            </button>
+          ))
+        }
+        <div>
+          <button data-action="play">play</button>
+          <button data-action="pause">pause</button>
+          <p>Current time: <span>0</span></p>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
