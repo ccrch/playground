@@ -1,0 +1,31 @@
+
+// Ásýnd
+
+.branding-page {
+  .section--appearance {
+    .box--small .box__container {
+      aspect-ratio: 4 / 3;
+    }
+
+    .box .box__container {
+      @include isMobile {
+        aspect-ratio: 1;
+      }
+    }
+
+    .section__content-box-scrambled-text {
+      .box__container { // TODO: Add colors
+        background: #111927; //lighten(var(--color-navy-rgba), 5%);
+        border: solid 1px #1e2733bb;
+      }
+    }
+
+    .section__content-box-3d-logo .logo--3d {
+      width: 270rem;
+    }
+
+    // .section__content-box-mockup {
+
+    // }
+  }
+}

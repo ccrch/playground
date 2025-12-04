@@ -2,9 +2,11 @@ import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import { lenis } from '../core/helpers'
 
-const brandingPageNavigation = {
+const Navigation = {
+  q: gsap.utils.selector('.branding-page'),
+
   linksScroll(): void {
-    document.querySelectorAll('.navigation__logo, .navigation__link').forEach((link) => {
+    this.q('.navigation__logo, .navigation__link').forEach((link) => {
       link.addEventListener('click', () => {
         const href = link.getAttribute('href')
 
@@ -27,13 +29,13 @@ const brandingPageNavigation = {
   },
 
   linksStatus(): void {
-    document.querySelectorAll('.section:not(.section--home)').forEach((section, index) => {
-      if (!document.querySelectorAll('.navigation__link-status > div')[index]) return
+    this.q('.section:not(.section--home)').forEach((section, index) => {
+      if (!this.q('.navigation__link-status > div')[index]) return
 
       // Move the line along with section's scroll progress
 
       ScrollTrigger.create({
-        animation: gsap.to(document.querySelectorAll('.navigation__link-status > div')[index], { scaleX: 1 }),
+        animation: gsap.to(this.q('.navigation__link-status > div')[index], { scaleX: 1 }),
         end: '100% 50%',
         endTrigger: section,
         // fastScrollEnd: true,
@@ -46,7 +48,7 @@ const brandingPageNavigation = {
 
       const lineReveal = (direction = 1) => {
         gsap.fromTo(
-          document.querySelectorAll('.navigation__link-status')[index],
+          this.q('.navigation__link-status')[index],
           {
             clipPath: `inset(0% 0% 0% ${direction === 0 ? 0 : 100}%)`,
           },
@@ -57,7 +59,7 @@ const brandingPageNavigation = {
           }
         )
 
-        gsap.set(document.querySelectorAll('.navigation__link-highlight')[index], { opacity: direction === 1 ? 1 : 0 })
+        gsap.set(this.q('.navigation__link-highlight')[index], { opacity: direction === 1 ? 1 : 0 })
       }
 
       // Show or hide lines on scroll
@@ -85,8 +87,8 @@ const brandingPageNavigation = {
 
   themeChange(): void {
     const el = {
-      navigation: document.querySelector<HTMLElement>('.navigation'),
-      sections: document.querySelectorAll<HTMLElement>('.section'),
+      navigation: this.q('.navigation')[0],
+      sections: this.q('.section'),
     }
 
     const navyToWhite = () => {
@@ -134,4 +136,4 @@ const brandingPageNavigation = {
   },
 }
 
-export default brandingPageNavigation
+export default Navigation

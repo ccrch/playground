@@ -2,7 +2,7 @@ import gsap from 'gsap'
 // import ScrollTrigger from 'gsap/ScrollTrigger'
 import brandingPage from './branding-page'
 
-const brandingPageSectionSymbols = {
+const Section = {
   q: gsap.utils.selector('.section--symbols'),
 
   init(): void {
@@ -56,4 +56,4 @@ const brandingPageSectionSymbols = {
   },
 }
 
-export default brandingPageSectionSymbols
+export default Section

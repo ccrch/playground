@@ -1,0 +1,42 @@
+
+// Heim
+
+.branding-page {
+  .section--home {
+    justify-content: center;
+    min-height: 100vh;
+
+    .section__headline {
+      height: 100svh;
+    }
+
+    .circles {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 1;
+      height: 100svh;
+    }
+
+    .circle {
+      position: absolute;
+      inset: 50% auto auto 50%;
+      z-index: 1;
+      transform: translate(-50%, calc(-50% - 32rem));
+
+      @for $i from 1 through 5 {
+        &:nth-child(#{$i}) .circle__container {
+          width: #{360 + (270 * $i) + 'rem'};
+          opacity: #{0.9 - (0.17 * $i)};
+
+          @include isMobile {
+            width: #{180 + (210 * $i) + 'rem'};
+          }
+
+          .shape__gradient {
+            animation-duration: #{11 * $i + 's'};
+          }
+        }
+      }
+    }
+  }
+}

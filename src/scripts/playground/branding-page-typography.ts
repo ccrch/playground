@@ -3,12 +3,14 @@ import ScrollTrigger from 'gsap/ScrollTrigger'
 import SplitText from 'gsap/SplitText'
 import brandingPage from '../playground/branding-page'
 
-const brandingPageTypography = {
+const Typography = {
+  q: gsap.utils.selector('.branding-page'),
+
   contentTextScrollTriggers(): void {
     // Handle scroll trigger for all content split text
 
     gsap.matchMedia().add(brandingPage.breakpoints, () => {
-      document.querySelectorAll('.split-content-text .split-line').forEach((line) => {
+      this.q('.split-content-text .split-line').forEach((line) => {
         ScrollTrigger.create({
           onEnter: () => {
             gsap.to(line.querySelectorAll('.split-word'), {
@@ -59,7 +61,7 @@ const brandingPageTypography = {
 
   headlineScrollTriggers(): void {
     gsap.matchMedia().add(brandingPage.breakpoints, () => {
-      document.querySelectorAll('.section:not(.section--home)').forEach((section) => {
+      this.q('.section:not(.section--home)').forEach((section) => {
         const el = {
           content: section.querySelector('.section__content'),
           headline: section.querySelector('.section__headline'),
@@ -198,4 +200,4 @@ const brandingPageTypography = {
   },
 }
 
-export default brandingPageTypography
+export default Typography

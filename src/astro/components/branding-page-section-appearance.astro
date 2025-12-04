@@ -1,5 +1,8 @@
 ---
+import Colors from './branding-page-colors.astro'
 import Logo3D from './branding-page-3d-logo.astro'
+import Mockup from './branding-page-mockup.astro'
+import ScrambledText from './branding-page-scrambled-text.astro'
 ---
 
 <div class="grid">
@@ -10,12 +13,14 @@ import Logo3D from './branding-page-3d-logo.astro'
   </div>
   <div class="grid__col grid__col--6">
     <div class="box box--red box--small section__content-box-colors">
-      <div class="box__container">[colors]</div>
+      <div class="box__container"><Colors /></div>
     </div>
   </div>
   <div class="grid__col grid__col--6">
     <div class="box box--navy box--small section__content-box-scrambled-text">
-      <div class="box__container">[alphabet]</div>
+      <div class="box__container">
+        <ScrambledText />
+      </div>
     </div>
   </div>
   <div class="grid__col grid__col--6">
@@ -28,8 +33,7 @@ import Logo3D from './branding-page-3d-logo.astro'
   <div class="grid__col grid__col--6">
     <div class="box box--red box--small section__content-box-mockup">
       <div class="box__container">
-        <div class="mockup-image"></div>
-        <iframe src="https://vettvangur.is" title="Vettvangur website mockup"></iframe>
+        <Mockup />
       </div>
     </div>
   </div>

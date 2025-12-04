@@ -1,4 +1,7 @@
 ---
+import Alphabet from '../components/branding-page-alphabet.astro'
+import ScrambledText from '../components/branding-page-scrambled-text.astro'
+
 const headline = 'Letrið okkar'
 const text = 'Skýrt, nútímalegt og með karakter. Letrið okkar – Aeonik – sameinar fágaðan stíl og góða læsileika. Það virkar á öllum miðlum og speglar nútímalegan, traustan og aðgengilegan persónuleika Vettvangs.'
 ---
@@ -31,19 +34,21 @@ const text = 'Skýrt, nútímalegt og með karakter. Letrið okkar – Aeonik �
 </div>
 <div class="grid">
   <div class="grid__col grid__col--6">
-    <div class="box box--gray box--small">
-      <div class="box__container"></div>
-    </div>
-  </div>
-  <div class="grid__col grid__col--6">
-    <div class="box box--navy box--small">
+    <div class="box box--gray box--small section__content-box-alphabet">
       <div class="box__container">
-        <p class="scramble-test">0123456789<br />$฿€£¥@#?¿!¡<br />www+−×÷=➀%➊<br />←↑↕↓→&©¶Ω</p>
+        <Alphabet />
       </div>
     </div>
   </div>
   <div class="grid__col grid__col--6">
-    <div class="box box--red box--small">
+    <div class="box box--navy box--small section__content-box-scrambled-text">
+      <div class="box__container">
+        <ScrambledText />
+      </div>
+    </div>
+  </div>
+  <div class="grid__col grid__col--6">
+    <div class="box box--red box--small section__content-box-3d-letters">
       <div class="box__container">
         <p class="letters-test">
           <span>Aa</span>
@@ -83,8 +88,8 @@ const text = 'Skýrt, nútímalegt og með karakter. Letrið okkar – Aeonik �
     </div>
   </div>
   <div class="grid__col grid__col--6">
-    <div class="box box--gray box--small">
-      <div class="box__container"></div>
+    <div class="box box--gray box--small section__content-box-font-weights">
+      <div class="box__container">Light Regular Medium SemiBold Bold</div>
     </div>
   </div>
 </div>

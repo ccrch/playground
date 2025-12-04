@@ -4,11 +4,13 @@ import SplitText from 'gsap/SplitText'
 import { lenis } from '../core/helpers'
 import brandingPage from './branding-page'
 
-const brandingPageSectionHome = {
+const Section = {
+  q: gsap.utils.selector('.section--home'),
+
   reset(): void {
     // Set random circle rotations
 
-    document.querySelectorAll('.section--home .circle__container').forEach((circle) => {
+    this.q('.circle__container').forEach((circle) => {
       gsap.set(circle, {
         rotate: gsap.utils.random(0, 180, 33),
       })
@@ -26,7 +28,7 @@ const brandingPageSectionHome = {
 
       // Show headline characters
 
-      gsap.to('.section--home h1 .split-char', {
+      gsap.to(this.q('h1 .split-char'), {
         delay: 0.543,
         duration: 1.234,
         ease: 'power3.inOut',
@@ -46,7 +48,7 @@ const brandingPageSectionHome = {
     // Hide circles on scroll down
 
     ScrollTrigger.create({
-      animation: gsap.to('.section--home .circle', { ease: 'none', opacity: 0, stagger: 0.21 }),
+      animation: gsap.to(this.q('.circle'), { ease: 'none', opacity: 0, stagger: 0.21 }),
       end: '100% 0%',
       scrub: true,
       start: '0% -10%',
@@ -58,7 +60,7 @@ const brandingPageSectionHome = {
 
       ScrollTrigger.create({
         onEnter: () => {
-          gsap.set('.section--home .section__headline .split-char', {
+          gsap.set(this.q('.section__headline .split-char'), {
             overwrite: true,
             y: '100%',
           })
@@ -71,7 +73,7 @@ const brandingPageSectionHome = {
 
       ScrollTrigger.create({
         onLeaveBack: () => {
-          gsap.to('.section--home .section__headline .split-char', {
+          gsap.to(this.q('.section--home .section__headline .split-char'), {
             duration: 1.234,
             ease: 'power3.out',
             stagger: 0.021,
@@ -86,7 +88,7 @@ const brandingPageSectionHome = {
     // Move headline a bit on scroll
 
     ScrollTrigger.create({
-      animation: gsap.fromTo('.section--home .section__headline, .section--home .circles', { y: '44rem' }, { ease: 'none', y: '-44rem' }),
+      animation: gsap.fromTo(this.q('.section__headline, .circles'), { y: '44rem' }, { ease: 'none', y: '-44rem' }),
       end: '+=150%',
       scrub: true,
       start: '0% 0%',
@@ -99,9 +101,9 @@ const brandingPageSectionHome = {
     // Setting text-align to left to avoid issues with SplitText not splitting text correctly when aligned to center
 
     gsap.matchMedia().add(brandingPage.breakpoints, () => {
-      gsap.set('.section--home h1', { textAlign: 'left' })
+      gsap.set(this.q('h1'), { textAlign: 'left' })
 
-      SplitText.create('.section--home h1', {
+      SplitText.create(this.q('h1'), {
         charsClass: 'split-char',
         linesClass: 'split-line',
         mask: 'lines',
@@ -110,12 +112,12 @@ const brandingPageSectionHome = {
         wordsClass: 'split-word',
       })
 
-      gsap.set('.section--home h1', { clearProps: 'textAlign' })
-      gsap.set('.section--home h1 .split-line', { textAlign: 'center' })
+      gsap.set(this.q('h1'), { clearProps: 'textAlign' })
+      gsap.set(this.q('h1 .split-line'), { textAlign: 'center' })
 
-      gsap.set('.section--home h1 .split-char', { overwrite: true, y: '100%' })
+      gsap.set(this.q('.split-char'), { overwrite: true, y: '100%' })
     })
   },
 }
 
-export default brandingPageSectionHome
+export default Section

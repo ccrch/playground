@@ -1,0 +1,20 @@
+
+// Raddblær
+
+.branding-page {
+  .section--tone {
+    .tone__text {
+      text-align: center;
+
+      strong {
+        color: var(--color-red);
+      }
+    }
+
+    .box__container {
+      @include isMobile {
+        aspect-ratio: 1;
+      }
+    }
+  }
+}

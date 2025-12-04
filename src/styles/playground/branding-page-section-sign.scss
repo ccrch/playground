@@ -1,0 +1,38 @@
+
+// Merkið 
+
+.branding-page {
+  .section--sign {
+    .section__content-box-2-logos .box__container {
+      @include isMobile {
+        flex-direction: column;
+      }
+    }
+
+    .section__content-details {
+      width: 100%;
+    }
+
+    .section__content-details-text {
+      @include isDesktop {
+        padding-right: 40rem;
+      }
+
+      @include isMobile {
+        margin-bottom: 56rem;
+      }
+    }
+
+    .section__content-details-boxes {
+      display: flex;
+      flex-flow: column nowrap;
+      gap: 40rem;
+      position: relative;
+      z-index: 1;
+
+      @include isMobile {
+        gap: 30rem;
+      }
+    }
+  }
+}

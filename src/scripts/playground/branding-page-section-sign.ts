@@ -3,7 +3,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger'
 import brandingPage from './branding-page'
 import brandingPageLogo from './branding-page-logo'
 
-const brandingPageSectionSign = {
+const Section = {
   q: gsap.utils.selector('.section--sign'),
 
   init(): void {
@@ -78,8 +78,8 @@ const brandingPageSectionSign = {
 
   moveText(): void {
     const el = {
-      boxes: document.querySelector<HTMLElement>('.section--sign .section__content-details-boxes'),
-      text: document.querySelector<HTMLElement>('.section--sign .section__content-details-text'),
+      boxes: this.q('.section__content-details-boxes')[0],
+      text: this.q('.section__content-details-text')[0],
     }
 
     // Moving the details text along with boxes on the right
@@ -111,4 +111,4 @@ const brandingPageSectionSign = {
   },
 }
 
-export default brandingPageSectionSign
+export default Section

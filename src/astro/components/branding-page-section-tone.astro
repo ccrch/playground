@@ -1,4 +1,6 @@
 ---
+import Slider from '../components/branding-page-slider.astro'
+
 const headline = 'Rödd Vettvangs'
 const text = 'Við erum skýr, traust og mannleg – hún gefur tóninn í öllum samskiptum og hjálpar til við að byggja upp traust og tengingu, hvar sem við mætum notandanum.'
 ---
@@ -16,4 +18,4 @@ const text = 'Við erum skýr, traust og mannleg – hún gefur tóninn í öllu
     <p class="split-content-text" set:html={text} />
   </div>
 </div>
-<div class="slider">[swiper]</div>
+<Slider />

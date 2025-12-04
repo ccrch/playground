@@ -1,0 +1,43 @@
+
+// Tákn
+
+.branding-page {
+  .section--symbols {
+    .section__content-small-shapes {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: center;
+      gap: 60rem;
+      width: 100%;
+      margin: 0 auto;
+
+      @include isMobile {
+        width: 80%;
+        flex-wrap: wrap;
+        gap: 40rem;
+      }
+    }
+
+    .section__content-gradient-shapes {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+
+      @include isMobile {
+        flex-direction: column;
+        gap: 60rem;
+      }
+
+      .shape { // TODO: Adjust size when adding multiple shapes
+        width: 270rem;
+
+        @include isMobile {
+          width: 66%;
+        }
+      }
+    }
+  }
+}

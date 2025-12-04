@@ -2,7 +2,7 @@ import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import { throttle } from 'throttle-debounce'
 
-const brandingPageLogo = {
+const Logo = {
   animate3DLogo({ scrollTriggerTrigger, target }: { scrollTriggerTrigger: HTMLElement; target: HTMLElement }): void {
     const onMouseMove = (event) => {
       const x = event.touches ? event.touches[0].clientX : event.clientX
@@ -86,4 +86,4 @@ const brandingPageLogo = {
   },
 }
 
-export default brandingPageLogo
+export default Logo
