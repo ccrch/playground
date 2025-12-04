@@ -1,17 +1,15 @@
 ---
 import LogoMark from '../../assets/images/vettvangur-logo-mark.svg'
+
+const { text } = Astro.props
 ---
 
-<div class="logo logo--3d">
+<div class:list={['logo logo--3d', text && 'logo--3d-text']}>
   <div class="logo__container">
     <div class="logo__layers">
       {
         Array.from({ length: 27 }).map(() => {
-          return (
-            <div>
-              <LogoMark />
-            </div>
-          )
+          return <div>{!text ? <LogoMark /> : <p>{text}</p>}</div>
         })
       }
     </div>

@@ -1,7 +1,7 @@
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import brandingPage from './branding-page'
-import brandingPageLogo from './branding-page-logo'
+import Logo from './branding-page-logo'
 
 const Section = {
   q: gsap.utils.selector('.section--sign'),
@@ -10,7 +10,7 @@ const Section = {
     this.animateCircleLogos()
     this.moveText()
 
-    brandingPageLogo.animate3DLogo({
+    Logo.animate3DLogo({
       scrollTriggerTrigger: this.q('.section__content-box-3d-logo')[0],
       target: this.q('.logo--3d')[0],
     })
@@ -44,7 +44,7 @@ const Section = {
         .to(this.q('.logo--circle-2 g path'), { duration: 0.1, fill: '#FF3D00' }, '<0.1')
         .call(
           () => {
-            brandingPageLogo.renderFirework({
+            Logo.renderFirework({
               amount: 45,
               container: this.q('.section--sign .section__content-box-2-logos')[0],
               x: isDesktop ? '67%' : '10%',

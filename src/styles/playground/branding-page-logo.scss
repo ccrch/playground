@@ -73,6 +73,15 @@
         }
       }
     }
+
+    &--3d-text {
+      width: auto;
+      color: var(--color-gray);
+
+      .logo__layers > div:not(:first-child) p {
+        color: darken(#EEF2F6, 7%); // var(--color-gray)
+      }
+    }
   }
 
   .logo-firework {

@@ -1,5 +1,6 @@
 ---
 import Alphabet from '../components/branding-page-alphabet.astro'
+import Logo3D from '../components/branding-page-3d-logo.astro'
 import ScrambledText from '../components/branding-page-scrambled-text.astro'
 
 const headline = 'Letrið okkar'
@@ -50,6 +51,7 @@ const text = 'Skýrt, nútímalegt og með karakter. Letrið okkar – Aeonik �
   <div class="grid__col grid__col--6">
     <div class="box box--red box--small section__content-box-3d-letters">
       <div class="box__container">
+        <Logo3D text="Aa" />
         <p class="letters-test">
           <span>Aa</span>
           <span>Áá</span>
@@ -89,7 +91,13 @@ const text = 'Skýrt, nútímalegt og með karakter. Letrið okkar – Aeonik �
   </div>
   <div class="grid__col grid__col--6">
     <div class="box box--gray box--small section__content-box-font-weights">
-      <div class="box__container">Light Regular Medium SemiBold Bold</div>
+      <div class="box__container">
+        <p>Light</p>
+        <p>Regular</p>
+        <p>Medium</p>
+        <p>SemiBold</p>
+        <p>Bold</p>
+      </div>
     </div>
   </div>
 </div>
