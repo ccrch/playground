@@ -38,6 +38,24 @@ const data = [
     textShowDuration: 7.3,
     videoUrl: 'https://youtu.be/zcZMQZbPMxM?t=187.4',
   },
+  {
+    id: 6,
+    text: 'he drives fast just to feel it.. feel it...',
+    textShowDuration: 2.4,
+    videoUrl: 'https://youtu.be/5dA094oAy-g?si=iKNjxo9en9vGe1gY&t=112',
+  },
+  {
+    id: 7,
+    text: "I've been this way... I want to change...",
+    textShowDuration: 9,
+    videoUrl: 'https://youtu.be/5dA094oAy-g?si=iKNjxo9en9vGe1gY&t=127',
+  },
+  {
+    id: 8,
+    text: "I dont' sleep much, that's crazy, how'd you know that?",
+    textShowDuration: 3.5,
+    videoUrl: 'https://youtu.be/QZfH7cFp3Ys?si=sAPrl-Lkg0wf8UTT&t=182',
+  },
 ]
 ---
 
@@ -56,6 +74,7 @@ const data = [
   const el = {
     currentTime: document.querySelector<HTMLElement>('.youtube .controls p span'),
     loadButtons: document.querySelectorAll<HTMLElement>('.youtube .controls button[data-yt]'),
+    randomButton: document.querySelector<HTMLElement>('.youtube .controls button[data-action="random"]'),
     pauseButton: document.querySelector<HTMLElement>('.youtube .controls button[data-action="pause"]'),
     playButton: document.querySelector<HTMLElement>('.youtube .controls button[data-action="play"]'),
     player: document.querySelector<HTMLElement>('.youtube .player'),
@@ -113,7 +132,7 @@ const data = [
     textAnimation = gsap
       .timeline()
       // .fromTo(el.playerText, { scale: 1 }, { scale: 1.5, duration: textShowDuration + 0.5, ease: 'none' }, 0)
-      .fromTo(el.playerText, { backgroundPosition: '100% 100%' }, { backgroundPosition: '0% 100%', duration: textShowDuration + 0.5, ease: 'none' }, 0)
+      .fromTo(el.playerText, { backgroundPosition: '100% 100%' }, { backgroundPosition: '0% 100%', duration: textShowDuration + 0.5, ease: textShowDuration > 5 ? 'none' : 'power1.inOut' }, 0)
   }
 
   el.loadButtons.forEach((button) => {
@@ -141,6 +160,15 @@ const data = [
 
       el.playerText.textContent = button.getAttribute('title') || ''
     })
+  })
+
+  el.randomButton.addEventListener('click', () => {
+    if (!ytPlayer) return
+
+    const randomIndex = Math.floor(Math.random() * el.loadButtons.length)
+    const button = el.loadButtons[randomIndex]
+
+    button.click()
   })
 
   el.playButton.addEventListener('click', () => {
@@ -172,6 +200,10 @@ const data = [
     padding: 20vh 20vw;
     font-family: 'DM Sans', sans-serif;
 
+    @media (width <= 768px) {
+      padding: 30vh 20px;
+    }
+
     .player {
       position: relative;
       z-index: 1;
@@ -179,6 +211,10 @@ const data = [
       overflow: hidden;
       aspect-ratio: 16 / 9;
       background: #111;
+
+      @media (width <= 768px) {
+        width: 100%;
+      }
 
       // &::before {
       //   content: '';
@@ -219,7 +255,7 @@ const data = [
         line-height: 140%;
         text-align: center;
         text-transform: uppercase;
-        // pointer-events: none;
+        pointer-events: none;
 
         span {
           background-image: linear-gradient(to right, #fff 50%, #777 50%);
@@ -241,7 +277,7 @@ const data = [
       display: flex;
       flex-flow: row wrap;
       gap: 1vw;
-      font-size: 0.8vw;
+      font-size: max(12px, 0.8vw);
 
       > div {
         flex: 0 0 100%;
@@ -251,13 +287,13 @@ const data = [
       }
 
       button {
-        padding: 0.1vw 0.6vw;
+        padding: 0.1vw max(8px, 0.6vw);
         border: solid 1px #333;
         border-radius: 0;
         cursor: pointer;
 
         &[data-yt] {
-          width: 2.1vw;
+          width: max(26px, 2.1vw);
           padding: 0;
           aspect-ratio: 1;
         }
@@ -281,6 +317,7 @@ const data = [
             </button>
           ))
         }
+        <button data-action="random">random</button>
         <div>
           <button data-action="play">play</button>
           <button data-action="pause">pause</button>

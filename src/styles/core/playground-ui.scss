@@ -28,6 +28,10 @@
     align-items: flex-start;
     gap: 7px;
     list-style: none;
+
+    @media (width <= 768px) {
+      flex-flow: row wrap;
+    }
   }
 
   a {
@@ -40,6 +44,10 @@
 
     span + span {
       font-size: 70%;
+
+      @media (width <= 768px) {
+        display: none;
+      }
     }
   }
 }
