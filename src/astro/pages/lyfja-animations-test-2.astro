@@ -1,0 +1,512 @@
+---
+export const frontmatter = {
+  baseClass: 'lyfja-animations-test',
+  navDescription: '',
+  navTitle: 'Lyfja animations test #2',
+}
+
+import Layout from '../layouts/playground-layout.astro'
+import { Measurement, LeafSvg, LoopSvg, SixLinesSvg, SwirlsSvg, WaveSvg } from '../components/lyfja-animations-svgs.astro'
+---
+
+<script>
+  import gsap from 'gsap'
+  import DrawSVGPlugin from 'gsap/DrawSVGPlugin'
+  import ScrollTrigger from 'gsap/ScrollTrigger'
+  import { lenisScroll } from 'src/scripts/core/helpers'
+  import { throttle } from 'throttle-debounce'
+
+  gsap.registerPlugin(DrawSVGPlugin, ScrollTrigger)
+
+  lenisScroll.init()
+
+  // const q = gsap.utils.selector('.lyfja-animations-test')
+
+  gsap.set('.lyfja-animations-test', { visibility: 'visible' })
+  // // gsap.set(`.measurement--1 svg path[stroke]`, { drawSVG: '0% 0%' })
+
+  // Helpers to manage animations & store them in an array
+
+  const animations = []
+  const animation = (id) => animations.find((animation) => animation.vars.id === id)
+
+  // Measurement animations
+
+  const measurementAnimations = () => {
+    Array.from({ length: 3 }).forEach((_, i) => {
+      // Reset animations
+      animations.push(
+        gsap
+          .timeline({ defaults: { overwrite: true }, id: `measurement-${i + 1}-reset`, paused: true })
+          .set(`.measurement--${i + 1} picture`, { rotation: 2, scale: 1.08 })
+          .set(`.measurement--${i + 1} p`, { opacity: 0 })
+          .set(`.measurement--${i + 1} svg mask path[stroke]`, { drawSVG: '0% 0%' })
+      )
+
+      // Reveal animations (1 & 2)
+      if (i < 2) {
+        animations.push(
+          gsap
+            .timeline({ defaults: { ease: 'power3.out' }, id: `measurement-${i + 1}-reveal`, paused: true })
+            .to(`.measurement--${i + 1} picture`, { duration: 5, rotation: 0, scale: 1 }, 0.1)
+            .to(`.measurement--${i + 1} svg mask path[stroke]`, { drawSVG: '100% 0%', duration: 3, stagger: 0.3 }, '<')
+            .to(`.measurement--${i + 1} p`, { duration: 3, opacity: 1 }, '<0.8')
+        )
+      }
+
+      // Scrub animation (3)
+      if (i === 2) {
+        animations.push(
+          gsap
+            .timeline({ defaults: { ease: 'none' }, id: `measurement-3-reveal`, paused: true })
+            .to(`.measurement--3 picture`, { duration: 3, rotation: 0, scale: 1 }, 0.1)
+            .to(`.measurement--3 svg mask path[stroke]`, { drawSVG: '100% 0%', duration: 3, overwrite: false, stagger: 0.3 }, '<')
+            .to(`.measurement--3 p`, { duration: 3, opacity: 1 }, '<0.8')
+        )
+      }
+    })
+
+    // Measurement animation 1
+
+    animation('measurement-1-reset').play()
+    animation('measurement-1-reveal').play()
+
+    // Measurement animation 2
+
+    animation('measurement-2-reset').play()
+
+    ScrollTrigger.create({
+      onEnter: () => {
+        animation('measurement-2-reveal').play()
+      },
+      start: '0% 70%',
+      trigger: '.measurement--2',
+    })
+
+    ScrollTrigger.create({
+      onLeaveBack: () => {
+        animation('measurement-2-reset').play()
+        animation('measurement-2-reveal').pause(0)
+      },
+      start: '0% 100%',
+      trigger: '.measurement--2',
+    })
+
+    // Measurement animation 3
+
+    animation('measurement-3-reset').play()
+
+    ScrollTrigger.create({
+      animation: animation('measurement-3-reveal'),
+      scrub: true,
+      start: '0% 90%',
+      end: '50% 30%',
+      trigger: '.measurement--3',
+    })
+  }
+
+  measurementAnimations()
+
+  // Phone animation
+
+  const phoneAnimation = () => {
+    ScrollTrigger.create({
+      animation: gsap.to('.phone__leaf--1 svg', { ease: 'none', rotation: -12 }),
+      scrub: true,
+      start: '0% 100%',
+      end: '100% 0%',
+      trigger: '.phone',
+    })
+
+    gsap.set('.phone__leaf svg .phone__leaf-green:nth-child(1), .phone__leaf svg .phone__leaf-green:nth-child(1) path', { transformOrigin: '80% 95%' })
+    gsap.set('.phone__leaf svg .phone__leaf-green:nth-child(2), .phone__leaf svg .phone__leaf-green:nth-child(2) path', { transformOrigin: '100% 21%' })
+    gsap.set('.phone__leaf svg .phone__leaf-green:nth-child(3), .phone__leaf svg .phone__leaf-green:nth-child(3) path', { transformOrigin: '91% 1%' })
+    gsap.set('.phone__leaf svg .phone__leaf-green:nth-child(4), .phone__leaf svg .phone__leaf-green:nth-child(4) path', { transformOrigin: '2% 23%' })
+
+    ScrollTrigger.create({
+      animation: gsap.to('.phone__leaf svg .phone__leaf-green', { ease: 'none', rotation: (i) => (i > 1 ? -33 : 33) }),
+      scrub: true,
+      start: '0% 100%',
+      end: '100% 0%',
+      trigger: '.phone',
+    })
+
+    const onMouseMove = (event) => {
+      const x = event.touches ? event.touches[0].clientX : event.clientX
+      const y = event.touches ? event.touches[0].clientY : event.clientY
+
+      const xPercent = (x / window.innerWidth - 0.5) * 100
+      const yPercent = (y / window.innerHeight - 0.5) * 100
+
+      gsap.to('.phone__leaf > div', {
+        duration: 1.234,
+        ease: 'power4.out',
+        overwrite: true,
+        rotateY: `${-xPercent * 0.12}%`,
+        rotateX: `${-yPercent * 0.12}%`,
+      })
+
+      gsap.to('.phone__leaf svg .phone__leaf-green path', {
+        duration: 1.234,
+        ease: 'power4.out',
+        rotation: (i) => `${xPercent * 0.15}%`,
+        stagger: 0.05,
+      })
+    }
+
+    window.addEventListener('mousemove', throttle(33, onMouseMove))
+  }
+
+  phoneAnimation()
+
+  // Box animations
+
+  const boxAnimations = () => {
+    Array.from({ length: document.querySelectorAll('.lyfja-animations-test .box').length }).forEach((_, i) => {
+      // Reset animations
+      animations.push(
+        gsap
+          //
+          .timeline({ defaults: { overwrite: true }, id: `box-${i + 1}-reset`, paused: true })
+          .set(`.box--${i + 1} svg mask path[stroke]`, { drawSVG: '0% 0%' })
+      )
+
+      // Reveal animations
+      const isScrub = i + 1 === 2 || i + 1 === 5 || i + 1 === 8 || i + 1 === 11
+
+      animations.push(
+        gsap
+          //
+          .timeline({ defaults: { ease: isScrub ? 'none' : 'power3.out' }, id: `box-${i + 1}-reveal`, paused: true })
+          .to(`.box--${i + 1} svg mask path[stroke]`, { drawSVG: '100% 0%', duration: 2.1, stagger: 0.1 }, '<')
+      )
+    })
+
+    const createBoxReveal = (id) => {
+      animation(`box-${id}-reset`).play()
+
+      ScrollTrigger.create({
+        onEnter: () => {
+          animation(`box-${id}-reveal`).seek(0).play()
+        },
+        start: '0% 70%',
+        trigger: `.box--${id}`,
+      })
+
+      ScrollTrigger.create({
+        onLeaveBack: () => {
+          animation(`box-${id}-reset`).play()
+          animation(`box-${id}-reveal`).pause(0)
+        },
+        start: '0% 100%',
+        trigger: `.box--${id}`,
+      })
+    }
+
+    const createBoxScrub = (id) => {
+      animation(`box-${id}-reset`).play()
+
+      ScrollTrigger.create({
+        animation: animation(`box-${id}-reveal`),
+        scrub: true,
+        start: '0% 75%',
+        end: '50% 30%',
+        trigger: `.box--${id}`,
+      })
+    }
+
+    const createBoxHover = (id) => {
+      animation(`box-${id}-reset`).play()
+
+      document.querySelector(`.box--${id}`).addEventListener('mouseenter', () => {
+        animation(`box-${id}-reveal`).seek(0).timeScale(1.5).play()
+      })
+
+      document.querySelector(`.box--${id}`).addEventListener('mouseleave', () => {
+        animation(`box-${id}-reveal`).timeScale(2.5).reverse()
+      })
+    }
+
+    createBoxReveal(1)
+    createBoxScrub(2)
+    createBoxHover(3)
+    createBoxReveal(4)
+    createBoxScrub(5)
+    createBoxHover(6)
+    createBoxReveal(7)
+    createBoxScrub(8)
+    createBoxHover(9)
+    createBoxReveal(10)
+    createBoxScrub(11)
+    createBoxHover(12)
+  }
+
+  boxAnimations()
+</script>
+
+<style lang="scss" is:global>
+  @font-face {
+    font-family: 'Proxima Nova';
+    src:
+      url('../../assets/fonts/ProximaNova-Bold.woff2') format('woff2'),
+      url('../../assets/fonts/ProximaNova-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: block;
+  }
+
+  @font-face {
+    font-family: 'Proxima Nova';
+    src:
+      url('../../assets/fonts/ProximaNova-ExtraBold.woff2') format('woff2'),
+      url('../../assets/fonts/ProximaNova-ExtraBold.woff') format('woff');
+    font-weight: 800;
+    font-style: normal;
+    font-display: block;
+  }
+
+  @font-face {
+    font-family: 'Proxima Nova';
+    src:
+      url('../../assets/fonts/ProximaNova-Regular.woff2') format('woff2'),
+      url('../../assets/fonts/ProximaNova-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: block;
+  }
+
+  @font-face {
+    font-family: 'Proxima Nova';
+    src:
+      url('../../assets/fonts/ProximaNova-RegularItalic.woff2') format('woff2'),
+      url('../../assets/fonts/ProximaNova-RegularItalic.woff') format('woff');
+    font-weight: 400;
+    font-style: italic;
+    font-display: block;
+  }
+
+  @font-face {
+    font-family: 'Proxima Nova';
+    src:
+      url('../../assets/fonts/ProximaNova-SemiBold.woff2') format('woff2'),
+      url('../../assets/fonts/ProximaNova-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: block;
+  }
+
+  .lyfja-animations-test-body {
+    background: #fafafa;
+    color: #414143;
+  }
+
+  .lyfja-animations-test {
+    display: flex;
+    flex-flow: row wrap;
+    // align-items: center;
+    // justify-content: center;
+    // gap: 0 100px;
+    padding: 100px 50px 100vh 300px;
+    visibility: hidden;
+    font-family: 'Proxima Nova', sans-serif;
+
+    @media (width <= 768px) {
+      padding-inline: 20px;
+    }
+
+    .info {
+      margin-bottom: 30px;
+    }
+
+    .measurement {
+      position: relative;
+      z-index: 1;
+      max-width: 1445px;
+      margin-bottom: 33vh;
+      overflow: hidden;
+      aspect-ratio: 1445 / 772;
+      border-radius: 12px;
+
+      svg {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        width: 100%;
+        height: auto;
+      }
+
+      picture {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        height: auto;
+
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+
+      p {
+        position: absolute;
+        inset: auto auto min(3.5vw, 48px) min(3.5vw, 48px);
+        z-index: 3;
+        padding: min(3.5vw, 48px);
+        background: #fff;
+        border-radius: 12px;
+        box-shadow:
+          rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+          rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+          rgba(47, 47, 47, 0.08) 0px 0px 70px 0px;
+        font-size: min(3.5vw, 40px);
+        font-weight: 800;
+        text-transform: uppercase;
+
+        @media (width <= 768px) {
+          font-size: 18px;
+          padding: 18px;
+          inset: auto auto 18px 18px;
+        }
+      }
+    }
+
+    .phone {
+      position: relative;
+      z-index: 1;
+      max-width: 1445px;
+      margin-bottom: 33vh;
+      overflow: hidden;
+      border-radius: 12px;
+
+      picture,
+      img {
+        width: 100%;
+        height: auto;
+      }
+
+      picture + picture {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+      }
+
+      &__leaf {
+        position: absolute;
+        z-index: 1;
+        transform-style: preserve-3d;
+        perspective: 1234px;
+
+        &--1 {
+          inset: 6% 38% auto -5%;
+        }
+
+        &--2 {
+          inset: 27% 30% auto 16%;
+
+          svg {
+            transform: rotate(58deg);
+          }
+        }
+
+        > div {
+          transform-origin: 80% 95%;
+        }
+
+        svg {
+          transform-origin: 80% 95%;
+          width: 100%;
+          height: auto;
+        }
+      }
+    }
+
+    .boxes {
+      display: flex;
+      flex-flow: row wrap;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 120px;
+      width: 100%;
+    }
+
+    .box {
+      flex: 0 0 calc(50% - 60px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+      max-width: calc(1445px / 2 - 60px);
+      // margin-bottom: 33vh;
+      // overflow: hidden;
+      aspect-ratio: 4 / 3;
+      background: #f8e4e2;
+      border-radius: 12px;
+
+      @media (width <= 768px) {
+        flex: 0 0 100%;
+        max-width: none;
+      }
+
+      &::before {
+        content: attr(data-info);
+        position: absolute;
+        inset: -54px auto auto 0;
+        z-index: 2;
+      }
+
+      &--hover {
+        cursor: pointer;
+      }
+
+      svg {
+        max-width: 66%;
+        height: auto;
+      }
+
+      &:nth-child(3n) {
+        background: #dcecd1;
+      }
+
+      &:nth-child(3n - 1) {
+        background: #efeace;
+      }
+    }
+  }
+</style>
+
+<Layout baseClass={frontmatter.baseClass} metaDescription={frontmatter.navDescription} metaTitle={frontmatter.navTitle}>
+  <main class={frontmatter.baseClass} slot="body">
+    <p class="info">Measurement animation #1 - triggered on page load</p>
+    <div set:html={Measurement('1')} />
+    <p class="info">Measurement animation #2 - elements reveal when scrolled into view, they reset when scrolled back up</p>
+    <div set:html={Measurement('2')} />
+    <p class="info">Measurement animation #3 - elements reveal while website is being scrolled, elements' position based on current scroll position</p>
+    <div set:html={Measurement('3')} />
+    <p class="info">Lyfju appið animation - illustration elements animate on scroll through & mousemove</p>
+    <div class="phone">
+      <div class="phone__leaf phone__leaf--1"><div set:html={LeafSvg()} /></div>
+      <div class="phone__leaf phone__leaf--2"><div set:html={LeafSvg()} /></div>
+      <picture>
+        <img src="/playground/images/lyfja-phone-2.jpg" alt="" width="2161" height="2161" />
+      </picture>
+      <picture>
+        <img src="/playground/images/lyfja-phone-3.png" alt="" width="2161" height="2161" />
+      </picture>
+    </div>
+    <div class="boxes">
+      <div class="box box--1" data-info="Reveal on scroll to" set:html={WaveSvg('a')} />
+      <div class="box box--2" data-info="Animate on scroll through" set:html={WaveSvg('b')} />
+      <div class="box box--3 box--hover" data-info="Reveal on hover" set:html={WaveSvg('c')} />
+      <div class="box box--4" data-info="Reveal on scroll to" set:html={SixLinesSvg('a')} />
+      <div class="box box--5" data-info="Animate on scroll through" set:html={SixLinesSvg('b')} />
+      <div class="box box--6 box--hover" data-info="Reveal on hover" set:html={SixLinesSvg('c')} />
+      <div class="box box--7" data-info="Reveal on scroll to" set:html={LoopSvg('a')} />
+      <div class="box box--8" data-info="Animate on scroll through" set:html={LoopSvg('b')} />
+      <div class="box box--9 box--hover" data-info="Reveal on hover" set:html={LoopSvg('c')} />
+      <div class="box box--10" data-info="Reveal on scroll to" set:html={SwirlsSvg('a')} />
+      <div class="box box--11" data-info="Animate on scroll through" set:html={SwirlsSvg('b')} />
+      <div class="box box--12 box--hover" data-info="Reveal on hover" set:html={SwirlsSvg('c')} />
+    </div>
+  </main>
+</Layout>
