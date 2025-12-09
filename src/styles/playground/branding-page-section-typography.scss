@@ -48,12 +48,8 @@
       aspect-ratio: 1;
 
       @include isDesktop {
-        aspect-ratio: 4 / 3;
+        aspect-ratio: 4 / 3; // TODO: Check later if better to have all the boxes fitting the screen. Maybe make it 16/9
       }
-    }
-
-    .section__content-box-alphabet {
-      text-align: center; // TODO
     }
 
     .section__content-box-3d-letters {
@@ -70,9 +66,12 @@
         flex-direction: column;
         gap: 24rem;
 
-        p {
+        button {
+          background: none;
+          border: 0;
           font-size: 40rem;
           line-height: 100%;
+          cursor: pointer;
 
           @for $i from 1 through 5 {
             &:nth-child(#{$i}) {

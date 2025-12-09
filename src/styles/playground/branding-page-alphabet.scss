@@ -1,0 +1,55 @@
+
+.branding-page {
+  .alphabet {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 16rem;
+    text-align: center;
+
+    &__row--1 {
+      display: flex;
+      flex-flow: row nowrap;
+      gap: 14rem;
+
+      button {
+        background: none;
+        border: 0;
+        font-size: 13rem;
+        line-height: 110%;
+        cursor: pointer;
+
+        &:nth-child(1) {
+          font-weight: 400;
+        }
+
+        &:nth-child(2) {
+          font-weight: 500;
+        }
+
+        &:nth-child(3) {
+          font-weight: 700;
+        }
+      }
+    }
+
+    &__row--2 {
+      p {
+        font-size: 100rem;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 110%;
+      }
+    }
+    
+    &__row--3 {
+      p {
+        font-size: 17rem;
+        font-weight: 400;
+        // letter-spacing: -0.02em;
+        line-height: 156%;
+      }
+    }
+  }
+}

@@ -13,18 +13,11 @@ const Typography = {
       this.q('.split-content-text .split-line').forEach((line) => {
         ScrollTrigger.create({
           onEnter: () => {
-            gsap.to(line.querySelectorAll('.split-word'), {
-              duration: 1.234,
-              ease: 'power4.out',
-              opacity: 1,
-              stagger: 0.0543,
-              y: '0%',
-            })
+            gsap.to(line.querySelectorAll('.split-word'), { duration: 1.234, ease: 'power4.out', opacity: 1, stagger: 0.0543, y: '0%' })
           },
           start: '0% 90%',
           trigger: line.parentElement,
         })
-
         ScrollTrigger.create({
           onLeaveBack: () => {
             gsap.to(line.querySelectorAll('.split-word'), { duration: 0.543, overwrite: true, stagger: 0.0543, y: '100%' })
@@ -41,12 +34,6 @@ const Typography = {
 
     gsap.matchMedia().add(brandingPage.breakpoints, () => {
       SplitText.create('.split-content-text', {
-        // TODO: Test later
-        // autoSplit: true,
-        // onSplit: (self) => {
-        //   console.log(self)
-        //   // brandingPage.typography.scrollTriggers()
-        // },
         aria: 'none',
         linesClass: 'split-line',
         mask: 'lines',
@@ -96,16 +83,8 @@ const Typography = {
 
         ScrollTrigger.create({
           onEnter: () => {
-            // console.log(brandingPage.scrollVelocity)
             gsap.set(el.headlineLines, { overwrite: true, y: '0%' })
-            // gsap.timeline().timeScale(brandingPage.scrollVelocity > 2000 ? 3 : 1).to([el.headlineEyebrow, el.headlineChars], {
-            gsap.to([el.headlineEyebrow, el.headlineChars], {
-              duration: 1.234,
-              ease: 'power3.out',
-              opacity: 1,
-              stagger: !isHeadlineSmall ? 0.021 : 0.012,
-              y: '0%',
-            })
+            gsap.to([el.headlineEyebrow, el.headlineChars], { duration: 1.234, ease: 'power3.out', opacity: 1, stagger: !isHeadlineSmall ? 0.021 : 0.012, y: '0%' })
           },
           fastScrollEnd: true, // TODO: Check later
           start: '0% 50%',
@@ -117,30 +96,12 @@ const Typography = {
         ScrollTrigger.create({
           fastScrollEnd: true,
           onEnter: () => {
-            // gsap.set(el.headlineChars, { overwrite: true, y: '0%' })
-            gsap.to([el.headlineEyebrow, el.headlineLines], {
-              duration: 0.876,
-              ease: 'power3.inOut',
-              overwrite: true,
-              stagger: 0.0543,
-              y: '-100%',
-            })
+            gsap.to([el.headlineEyebrow, el.headlineLines], { duration: 0.876, ease: 'power3.inOut', overwrite: true, stagger: 0.0543, y: '-100%' })
           },
           onLeaveBack: () => {
             gsap.set(el.headlineChars, { overwrite: true, y: '100%' })
             gsap.set(el.headlineLines, { overwrite: true, y: '0%' })
-            gsap.fromTo(
-              [el.headlineEyebrow, el.headlineChars],
-              {
-                y: '100%',
-              },
-              {
-                duration: 1.234,
-                ease: 'power3.out',
-                stagger: !isHeadlineSmall ? 0.021 : 0.012,
-                y: '0%',
-              }
-            )
+            gsap.fromTo([el.headlineEyebrow, el.headlineChars], { y: '100%' }, { duration: 1.234, ease: 'power3.out', stagger: !isHeadlineSmall ? 0.021 : 0.012, y: '0%' })
           },
           start: '0% 100%',
           trigger: el.content,
@@ -149,16 +110,7 @@ const Typography = {
         // Move headline a bit while it reveals
 
         ScrollTrigger.create({
-          animation: gsap.fromTo(
-            el.headline,
-            {
-              y: '66rem',
-            },
-            {
-              ease: 'none',
-              y: '-66rem',
-            }
-          ),
+          animation: gsap.fromTo(el.headline, { y: '66rem' }, { ease: 'none', y: '-66rem' }),
           end: '+=210%',
           scrub: true,
           start: '0% 100%',

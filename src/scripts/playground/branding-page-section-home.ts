@@ -11,9 +11,7 @@ const Section = {
     // Set random circle rotations
 
     this.q('.circle__container').forEach((circle) => {
-      gsap.set(circle, {
-        rotate: gsap.utils.random(0, 180, 33),
-      })
+      gsap.set(circle, { rotate: gsap.utils.random(0, 180, 33) })
     })
 
     // lenis.scrollTo(0, { immediate: true })
@@ -28,13 +26,7 @@ const Section = {
 
       // Show headline characters
 
-      gsap.to(this.q('h1 .split-char'), {
-        delay: 0.543,
-        duration: 1.234,
-        ease: 'power3.inOut',
-        stagger: 0.021,
-        y: '0%',
-      })
+      gsap.to(this.q('h1 .split-char'), { delay: 0.543, duration: 1.234, ease: 'power3.inOut', stagger: 0.021, y: '0%' })
 
       // Enable scrolling
 
@@ -60,10 +52,7 @@ const Section = {
 
       ScrollTrigger.create({
         onEnter: () => {
-          gsap.set(this.q('.section__headline .split-char'), {
-            overwrite: true,
-            y: '100%',
-          })
+          gsap.set(this.q('.section__headline .split-char'), { overwrite: true, y: '100%' })
         },
         start: '100% 30%',
         trigger: '.section--home',
@@ -73,12 +62,7 @@ const Section = {
 
       ScrollTrigger.create({
         onLeaveBack: () => {
-          gsap.to(this.q('.section--home .section__headline .split-char'), {
-            duration: 1.234,
-            ease: 'power3.out',
-            stagger: 0.021,
-            y: '0%',
-          })
+          gsap.to(this.q('.section--home .section__headline .split-char'), { duration: 1.234, ease: 'power3.out', stagger: 0.021, y: '0%' })
         },
         start: '100% 70%',
         trigger: '.section--home',

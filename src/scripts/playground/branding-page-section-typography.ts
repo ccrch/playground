@@ -6,7 +6,7 @@ const Section = {
   q: gsap.utils.selector('.section--typography'),
 
   init(): void {
-    //
+    this.handleFontWeightsChange()
 
     Logo.animate3DLogo({
       scrollTriggerTrigger: this.q('.section__content-box-3d-letters')[0],
@@ -76,6 +76,31 @@ const Section = {
       //   }
       // },
       // })
+    })
+  },
+
+  handleFontWeightsChange(): void {
+    // Changing font weights in 1st & 4th box
+
+    const box1Buttons = this.q('.alphabet__row--1 button')
+    const box1Weights = [400, 500, 700]
+    const box4Buttons = this.q('.section__content-box-font-weights button')
+    const box4Weights = [300, 400, 500, 600, 700]
+
+    box1Buttons.forEach((button, index) => {
+      ;['click', 'mouseenter'].forEach((event) => {
+        button.addEventListener(event, () => {
+          gsap.to(this.q('.alphabet__row--3 p'), { duration: 0.543, ease: 'power3.out', fontWeight: box1Weights[index] })
+        })
+      })
+    })
+
+    box4Buttons.forEach((button, index) => {
+      ;['click', 'mouseenter'].forEach((event) => {
+        button.addEventListener(event, () => {
+          gsap.to(this.q('.logo--3d p, .scrambled-text'), { duration: 0.543, ease: 'power3.out', fontWeight: box4Weights[index] })
+        })
+      })
     })
   },
 }
