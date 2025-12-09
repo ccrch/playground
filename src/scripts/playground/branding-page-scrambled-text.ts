@@ -1,14 +1,10 @@
 import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
 import SplitText from 'gsap/SplitText'
 import brandingPage from './branding-page'
 
 const ScrambledText = {
   init({ target }: { target: HTMLElement }): void {
-    this.test1(target)
-  },
-
-  test1(target): void {
-    // Testing scramble text
     ;(async () => {
       // Loading fonts
 
@@ -16,59 +12,141 @@ const ScrambledText = {
       await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)))
       await brandingPage.delay(12)
 
-      gsap.matchMedia().add(brandingPage.breakpoints, () => {
-        SplitText.create(target, {
-          aria: 'none',
-          linesClass: 'split-line',
-          mask: 'lines',
-          tag: 'span',
-          type: 'lines, chars',
-          charsClass: 'split-char',
-        })
-
-        const chars = gsap.utils.toArray(target.querySelectorAll('.split-char'))
-
-        gsap.utils.shuffle(chars)
-
-        const scrambleTimeline = gsap.timeline({ paused: true })
-
-        chars.forEach((char: HTMLElement, index) => {
-          const letter = char.textContent
-          // gsap.set(char, { fontWeight: 100, opacity: 1 })
-
-          const tween = gsap.timeline().to(char, {
-            duration: 1.5 + index * 0.3,
-            ease: 'none',
-            scrambleText: {
-              // chars: '0123456789$฿€£¥@#?¿!¡www+−×÷=➀%➊←↑↕↓→&©¶Ω',
-              chars: '0123456789$฿€£¥@#?¿!¡www+−×÷=➀%←↑↕↓→&©Ω',
-              // chars: '@!#$&*)%£¥¢§¶•ªº{}[]<>',
-              // chars: '!@#$%^&*(),.:;/|<>?+-=~',
-              // chars: '.,;:/|<>&+-=~',
-              revealDelay: 1.5 + index * 0.3,
-              // speed: index > 10 ? 0.3 : 1.6,
-              speed: 0.3,
-              text: letter,
-            },
-            onComplete: () => {
-              char.textContent = letter
-            },
-          })
-          // .to(char, { fontWeight: 700, opacity: 1, duration: 0.543 })
-
-          scrambleTimeline.add(tween, 0)
-        })
-
-        // gsap.fromTo(scrambleTimeline, { progress: 0 }, {
-        //   delay: 1,
-        //   duration: 5,
-        //   ease: 'power2.out',
-        //   progress: 1,
-        // })
-
-        scrambleTimeline.timeScale(1).play()
-      })
+      this.splitText(target)
+      this.scrambleText(target)
+      this.handleScrollTriggers(target)
     })()
+  },
+
+  handleScrollTriggers(target): void {
+    const scrambledTextTimeline = gsap.getById('scrambled-text-timeline')
+    const highlightsTimeline = gsap.getById('highlights-timeline')
+
+    ScrollTrigger.create({
+      onEnter: () => {
+        gsap.to(scrambledTextTimeline, { duration: 4.321, ease: 'power4.out', progress: 1 })
+        highlightsTimeline.seek(0).play()
+      },
+      start: '0% 90%',
+      trigger: target,
+    })
+
+    ScrollTrigger.create({
+      onEnter: () => {
+        gsap.set(scrambledTextTimeline, { overwrite: true, progress: 0.01 })
+        highlightsTimeline.pause(0)
+      },
+      start: '0% 100%',
+      trigger: target,
+    })
+
+    gsap.set(scrambledTextTimeline, { progress: 1 })
+    gsap.set(highlightsTimeline, { progress: 1 })
+
+    // Scrubs, maybe for later use
+
+    // ScrollTrigger.create({
+    //   animation: gsap.fromTo(scrambledTextTimeline, { progress: 0 }, { ease: 'none', progress: 1 }),
+    //   end: '50% 60%',
+    //   scrub: true,
+    //   start: '0% 100%',
+    //   trigger: target,
+    // })
+
+    // ScrollTrigger.create({
+    //   animation: gsap.fromTo(scrambledTextTimeline, { progress: 1 }, { ease: 'none', progress: 0 }),
+    //   end: '100% 0%',
+    //   scrub: true,
+    //   start: '0% 0%',
+    //   trigger: target,
+    // })
+  },
+
+  scrambleText(target): void {
+    const letters = gsap.utils.toArray(target.querySelectorAll('.split-char'))
+    const textContent = target.textContent.replace(/\s+/g, '').trim()
+
+    gsap.utils.shuffle(letters)
+
+    const scrambledTextTimeline = gsap.timeline({ id: 'scrambled-text-timeline', defaults: { ease: 'none' }, paused: true })
+
+    letters.forEach((char: HTMLElement) => {
+      const letter = char.textContent
+      const duration = 1 + gsap.utils.random(0, 10, 0.5)
+
+      const scrambledLetterTween = gsap
+        .timeline()
+        // .set(char, { opacity: 0.5 })
+        .to(char, {
+          duration,
+          ease: 'power3.out',
+          scrambleText: {
+            chars: textContent,
+            revealDelay: duration,
+            speed: 0.05 * (gsap.utils.random(1, 10, 0.5) / 10),
+            text: letter,
+          },
+          onComplete: () => {
+            char.textContent = letter
+          },
+        })
+        // This prolongs the animation a bit for better effect
+        .to(char, { opacity: 1, duration: 2.1, ease: 'power3.out' })
+
+      scrambledTextTimeline.add(scrambledLetterTween, 0)
+    })
+
+    scrambledTextTimeline.pause(0.01)
+
+    // Additional animation for red highlights
+
+    const spans = target.querySelectorAll('span')
+    const span = (nr) => target.querySelectorAll(`span:nth-child(${nr})`)
+    const spanInRow = (nr1, nr2) => target.querySelectorAll(`p:nth-child(${nr1}) span:nth-child(${nr2})`)
+
+    let highlightCount = 1
+
+    gsap
+      .timeline({
+        defaults: { ease: 'none' },
+        id: 'highlights-timeline',
+        onRepeat: () => {
+          highlightCount = highlightCount > 9 ? 1 : highlightCount + 1
+        },
+        onStart: () => {
+          highlightCount = 1
+          spans.forEach((el) => el.removeAttribute('data-highlight'))
+          gsap
+            .timeline()
+            .set(spans, { clearProps: 'color' })
+            .to([spanInRow(1, 2), spanInRow(2, 6), spanInRow(3, 4), spanInRow(3, 11), spanInRow(4, 2)], { color: '#ff3d00', stagger: 0.2 }, 0.3)
+        },
+        paused: true,
+        repeat: 9,
+      })
+      .call(
+        () => {
+          gsap.set(span(highlightCount), { attr: { 'data-highlight': '' } })
+        },
+        null,
+        0
+      )
+      .call(
+        () => {
+          spans.forEach((el) => el.removeAttribute('data-highlight'))
+        },
+        null,
+        '>0.1'
+      )
+  },
+
+  splitText(target): void {
+    SplitText.create(target.querySelectorAll('p'), {
+      aria: 'none',
+      tag: 'span',
+      type: 'chars',
+      charsClass: 'split-char',
+    })
   },
 }
 

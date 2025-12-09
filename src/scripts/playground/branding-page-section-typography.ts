@@ -88,7 +88,7 @@ const Section = {
     const box4Weights = [300, 400, 500, 600, 700]
 
     box1Buttons.forEach((button, index) => {
-      ;['click', 'mouseenter'].forEach((event) => {
+      ;['click'].forEach((event) => {
         button.addEventListener(event, () => {
           gsap.to(this.q('.alphabet__row--3 p'), { duration: 0.543, ease: 'power3.out', fontWeight: box1Weights[index] })
         })
@@ -96,9 +96,9 @@ const Section = {
     })
 
     box4Buttons.forEach((button, index) => {
-      ;['click', 'mouseenter'].forEach((event) => {
+      ;['click'].forEach((event) => {
         button.addEventListener(event, () => {
-          gsap.to(this.q('.logo--3d p, .scrambled-text'), { duration: 0.543, ease: 'power3.out', fontWeight: box4Weights[index] })
+          gsap.to(this.q('.logo--3d p, .scrambled-text p'), { duration: 0.543, ease: 'power3.out', fontWeight: box4Weights[index] })
         })
       })
     })

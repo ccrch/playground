@@ -1,18 +1,21 @@
 
 .branding-page {
   .scrambled-text {
-    font-size: 43rem;
-    font-weight: 700;
-    line-height: 120%;
-    letter-spacing: 0.03em;
-    text-align: center;
+    p {
+      font-size: 43rem;
+      font-weight: 700;
+      line-height: 120%;
+      letter-spacing: 0.03em;
+      text-align: center;
 
-    .split-mask-line-mask:nth-child(1) .split-char:nth-child(2),
-    .split-mask-line-mask:nth-child(2) .split-char:nth-child(6),
-    .split-mask-line-mask:nth-child(3) .split-char:nth-child(4),
-    .split-mask-line-mask:nth-child(3) .split-char:nth-child(11),
-    .split-mask-line-mask:nth-child(4) .split-char:nth-child(2) {
-      color: var(--color-red);
+      // &:nth-child(1) .split-char:nth-child(2),
+      // &:nth-child(2) .split-char:nth-child(6),
+      // &:nth-child(3) .split-char:nth-child(4),
+      // &:nth-child(3) .split-char:nth-child(11),
+      // &:nth-child(4) .split-char:nth-child(2),
+      span[data-highlight] {
+        color: var(--color-red);
+      }
     }
   }
 }
