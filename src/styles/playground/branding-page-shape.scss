@@ -35,7 +35,7 @@
   @if $type == 'octagon' {
     mask-image: url('data:image/svg+xml;utf8,\
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
-        <polygon points="30,5 70,5 95,30 95,70 70,95 30,95 5,70 5,30" fill="#{$fill}" stroke="#{$stroke}" stroke-width="#{$stroke-width}" vector-effect="non-scaling-stroke" />\
+        <polygon points="30,5 70,5 95,30 95,70 70,95 30,95 5,70 5,30" fill="#{$fill}" stroke="#{$stroke}" stroke-width="#{$stroke-width}" vector-effect="non-scaling-stroke" style="transform: scale(0.9); transform-origin: 50% 50%;" />\
       </svg>');
   }
 
