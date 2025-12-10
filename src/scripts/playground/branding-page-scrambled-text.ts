@@ -104,17 +104,17 @@ const ScrambledText = {
     const span = (nr) => target.querySelectorAll(`span:nth-child(${nr})`)
     const spanInRow = (nr1, nr2) => target.querySelectorAll(`p:nth-child(${nr1}) span:nth-child(${nr2})`)
 
-    let highlightCount = 1
+    let highlightIndex = 1
 
     gsap
       .timeline({
         defaults: { ease: 'none' },
         id: 'highlights-timeline',
         onRepeat: () => {
-          highlightCount = highlightCount > 9 ? 1 : highlightCount + 1
+          highlightIndex = highlightIndex > 9 ? 1 : highlightIndex + 1
         },
         onStart: () => {
-          highlightCount = 1
+          highlightIndex = 1
           spans.forEach((el) => el.removeAttribute('data-highlight'))
           gsap
             .timeline()
@@ -126,7 +126,7 @@ const ScrambledText = {
       })
       .call(
         () => {
-          gsap.set(span(highlightCount), { attr: { 'data-highlight': '' } })
+          gsap.set(span(highlightIndex), { attr: { 'data-highlight': '' } })
         },
         null,
         0

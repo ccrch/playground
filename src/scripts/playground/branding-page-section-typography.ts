@@ -7,6 +7,7 @@ const Section = {
 
   init(): void {
     this.handleFontWeightsChange()
+    this.handleLettersChange()
 
     Logo.animate3DLogo({
       scrollTriggerTrigger: this.q('.section__content-box-3d-letters')[0],
@@ -14,69 +15,6 @@ const Section = {
     })
 
     ScrambledText.init({ target: this.q('.scrambled-text')[0] })
-
-    //
-    //
-    // TODO
-    // Letter test
-
-    const letters = document.querySelectorAll('.letters-test span')
-    let lettersIndex = 0
-    const lettersCount = letters.length
-
-    // gsap.set(letters, { display: 'none' })
-    // gsap.to(letters[0], { display: 'block' })
-
-    const showLetter = (index: number) => {
-      gsap
-        .timeline()
-        .set(letters, { visibility: 'hidden' })
-        .set(letters[index], { visibility: 'visible' })
-        .set(
-          letters[lettersIndex],
-          {
-            visibility: 'hidden',
-            onComplete: () => {
-              lettersIndex = (lettersIndex + 1) % lettersCount
-              showLetter(lettersIndex)
-            },
-          },
-          1
-        )
-    }
-
-    showLetter(lettersIndex)
-
-    // const lettersTimeline = gsap
-    //   .timeline()
-    //   .set(letters, { display: 'none' })
-    //   .to(letters[lettersIndex], { display: 'block' })
-    //   .to(letters[lettersIndex], { display: 'none' }, 1)
-    //   .call(() => {
-    //     lettersIndex = (lettersIndex + 1) % lettersCount
-    //     console.log(lettersIndex)
-    //     lettersTimeline.play()
-    // })
-
-    letters.forEach((el, index) => {
-      // gsap.set(el, { display: 'none' })
-      // gsap.set(letters[index], { display: 'block' })
-      // gsap
-      // .timeline()
-      // .set(letters, { display: 'none' })
-      // .set(letters[index], { delay: 1 + 1 * index, display: 'block' }, 0.1)
-      // .set(letters, { display: 'none' }, 1)
-      // gsap.to(el, {
-      // delay: index,
-      // duration: 1,
-      // onComplete: () => {
-      //   gsap.set(el, { display: 'none' })
-      //   if (index === letters.length - 1) {
-      //   gsap.set(letters[0], { display: 'block' }) // Loop back to the first letter
-      //   }
-      // },
-      // })
-    })
   },
 
   handleFontWeightsChange(): void {
@@ -102,6 +40,29 @@ const Section = {
         })
       })
     })
+  },
+
+  handleLettersChange(): void {
+    const letters = ['Aa', 'Áá', 'Bb', 'Dd', 'Ðð', 'Ee', 'Éé', 'Ff', 'Gg', 'Hh', 'Ii', 'Íí', 'Jj', 'Kk', 'Ll', 'Mm', 'Nn', 'Oo', 'Óó', 'Pp', 'Rr', 'Ss', 'Tt', 'Uu', 'Úú', 'Vv', 'Xx', 'Yy', 'Ýý', 'Þþ', 'Ææ', 'Öö']
+    let lettersIndex = 0
+
+    gsap
+      .timeline({
+        defaults: { ease: 'none' },
+        onRepeat: () => {
+          lettersIndex = lettersIndex >= letters.length - 1 ? 0 : lettersIndex + 1
+        },
+        repeat: -1,
+      })
+      .call(
+        () => {
+          this.q('.section__content-box-3d-letters .logo--3d p').forEach((el) => {
+            el.textContent = letters[lettersIndex]
+          })
+        },
+        null,
+        '>0.2'
+      )
   },
 }
 
