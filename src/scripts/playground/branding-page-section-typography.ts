@@ -1,4 +1,5 @@
 import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
 import Logo from './branding-page-logo'
 import ScrambledText from './branding-page-scrambled-text'
 
@@ -44,25 +45,46 @@ const Section = {
 
   handleLettersChange(): void {
     const letters = ['Aa', 'Áá', 'Bb', 'Dd', 'Ðð', 'Ee', 'Éé', 'Ff', 'Gg', 'Hh', 'Ii', 'Íí', 'Jj', 'Kk', 'Ll', 'Mm', 'Nn', 'Oo', 'Óó', 'Pp', 'Rr', 'Ss', 'Tt', 'Uu', 'Úú', 'Vv', 'Xx', 'Yy', 'Ýý', 'Þþ', 'Ææ', 'Öö']
-    let lettersIndex = 0
+    let lettersIndex = 1
+
+    const updateLetters = () => {
+      this.q('.section__content-box-3d-letters .logo--3d p').forEach((el) => {
+        el.textContent = letters[lettersIndex]
+      })
+    }
 
     gsap
       .timeline({
-        defaults: { ease: 'none' },
+        id: 'letters-timeline',
         onRepeat: () => {
           lettersIndex = lettersIndex >= letters.length - 1 ? 0 : lettersIndex + 1
         },
+        paused: true,
         repeat: -1,
+        repeatDelay: 2.1,
       })
-      .call(
-        () => {
-          this.q('.section__content-box-3d-letters .logo--3d p').forEach((el) => {
-            el.textContent = letters[lettersIndex]
-          })
-        },
-        null,
-        '>0.2'
-      )
+      .to(this.q('.section__content-box-3d-letters-container'), { duration: 0.543, ease: 'power4.in', onComplete: updateLetters, opacity: 0, y: '-21rem' })
+      .set(this.q('.section__content-box-3d-letters-container'), { opacity: 0, y: '31rem' })
+      .to(this.q('.section__content-box-3d-letters-container'), { duration: 1.234, ease: 'power4.out', opacity: 1, y: '0rem' })
+
+    ScrollTrigger.create({
+      once: true,
+      onEnter: () => {
+        gsap.getById('letters-timeline').play()
+
+        ScrollTrigger.create({
+          end: '100% 0%',
+          onEnter: () => gsap.getById('letters-timeline').play(),
+          onEnterBack: () => gsap.getById('letters-timeline').play(),
+          onLeave: () => gsap.getById('letters-timeline').pause(),
+          onLeaveBack: () => gsap.getById('letters-timeline').pause(),
+          start: '0% 100%',
+          trigger: this.q('.section__content-box-3d-letters'),
+        })
+      },
+      start: '0% 50%',
+      trigger: this.q('.section__content-box-3d-letters'),
+    })
   },
 }
 

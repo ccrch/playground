@@ -32,29 +32,19 @@ const ScrambledText = {
     })
 
     ScrollTrigger.create({
-      onEnter: () => {
-        gsap.set(scrambledTextTimeline, { overwrite: true, progress: 0.01 })
+      onLeaveBack: () => {
+        gsap.set(scrambledTextTimeline, { overwrite: 'auto', progress: 0.01 })
         highlightsTimeline.pause(0)
       },
       start: '0% 100%',
       trigger: target,
     })
 
-    gsap.set(scrambledTextTimeline, { progress: 1 })
-    gsap.set(highlightsTimeline, { progress: 1 })
-
-    // Scrubs, maybe for later use
+    gsap.to(scrambledTextTimeline, { progress: 1 })
+    gsap.to(highlightsTimeline, { progress: 1 })
 
     // ScrollTrigger.create({
-    //   animation: gsap.fromTo(scrambledTextTimeline, { progress: 0 }, { ease: 'none', progress: 1 }),
-    //   end: '50% 60%',
-    //   scrub: true,
-    //   start: '0% 100%',
-    //   trigger: target,
-    // })
-
-    // ScrollTrigger.create({
-    //   animation: gsap.fromTo(scrambledTextTimeline, { progress: 1 }, { ease: 'none', progress: 0 }),
+    //   animation: gsap.fromTo(scrambledTextTimeline, { progress: 1 }, { ease: 'none', overwrite: 'auto', progress: 0.5 }),
     //   end: '100% 0%',
     //   scrub: true,
     //   start: '0% 0%',
