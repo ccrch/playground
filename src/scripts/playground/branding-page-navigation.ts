@@ -128,6 +128,8 @@ const Navigation = {
       })
     }
 
+    // TODO: Figure out later - problem with overriding default theme change triggers
+
     extraThemeChange({ changeTo: 'white', trigger: '.section--sign .section__content-box-3d-logo' })
     extraThemeChange({ changeTo: 'navy', trigger: '.section--colors .box' })
     extraThemeChange({ changeTo: 'white', trigger: '.section--tone .box' })

@@ -40,8 +40,8 @@ const ScrambledText = {
       trigger: target,
     })
 
-    gsap.to(scrambledTextTimeline, { progress: 1 })
-    gsap.to(highlightsTimeline, { progress: 1 })
+    // gsap.to(scrambledTextTimeline, { progress: 1 })
+    // gsap.to(highlightsTimeline, { progress: 1 })
 
     // ScrollTrigger.create({
     //   animation: gsap.fromTo(scrambledTextTimeline, { progress: 1 }, { ease: 'none', overwrite: 'auto', progress: 0.5 }),

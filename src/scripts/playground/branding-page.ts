@@ -76,38 +76,10 @@ const brandingPage = {
       ScrollTrigger.refresh()
     })()
 
-    // window.addEventListener('resize', () => {
-    //   console.log(ScrollTrigger.getAll().length)
-    // })
-
     // TODO: Test later
     // ScrollTrigger.normalizeScroll(true)
 
-    // TODO: Testing parallax shapes
-
-    // gsap.set('.section__shapes', { display: 'none' })
-
-    // document.querySelectorAll('.section:not(.section--home)').forEach((section) => {
-    //   section.querySelectorAll('.section__shapes > div').forEach((shape, index) => {
-    //     gsap.set(shape, { width: gsap.utils.random(180, 440, 44) + 'rem', aspectRatio: 1 })
-
-    //     if ((index - 1) % 2 === 0) {
-    //       gsap.set(shape, { left: gsap.utils.random(-10, -1, 1) + '%' })
-    //     } else {
-    //       gsap.set(shape, { right: gsap.utils.random(-10, -1, 1) + '%' })
-    //     }
-    //   })
-
-    //   ScrollTrigger.create({
-    //     animation: gsap.to(section.querySelector('.section__shapes'), { y: '50%'}),
-    //     end: '100% 0%',
-    //     scrub: true,
-    //     start: '0% 100%',
-    //     trigger: section,
-    //   })
-    // })
-
-    // Testing velocity
+    // Testing velocity // TODO: Check later
 
     // Testing scroll velocity & lag
 

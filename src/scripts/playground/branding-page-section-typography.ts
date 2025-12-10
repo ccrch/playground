@@ -2,13 +2,15 @@ import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import Logo from './branding-page-logo'
 import ScrambledText from './branding-page-scrambled-text'
+import brandingPage from './branding-page'
 
 const Section = {
   q: gsap.utils.selector('.section--typography'),
 
   init(): void {
+    this.animate3DLetters()
+    this.animateTypoCircles()
     this.handleFontWeightsChange()
-    this.handleLettersChange()
 
     Logo.animate3DLogo({
       scrollTriggerTrigger: this.q('.section__content-box-3d-letters')[0],
@@ -18,32 +20,7 @@ const Section = {
     ScrambledText.init({ target: this.q('.scrambled-text')[0] })
   },
 
-  handleFontWeightsChange(): void {
-    // Changing font weights in 1st & 4th box
-
-    const box1Buttons = this.q('.alphabet__row--1 button')
-    const box1Weights = [400, 500, 700]
-    const box4Buttons = this.q('.section__content-box-font-weights button')
-    const box4Weights = [300, 400, 500, 600, 700]
-
-    box1Buttons.forEach((button, index) => {
-      ;['click'].forEach((event) => {
-        button.addEventListener(event, () => {
-          gsap.to(this.q('.alphabet__row--3 p'), { duration: 0.543, ease: 'power3.out', fontWeight: box1Weights[index] })
-        })
-      })
-    })
-
-    box4Buttons.forEach((button, index) => {
-      ;['click'].forEach((event) => {
-        button.addEventListener(event, () => {
-          gsap.to(this.q('.logo--3d p, .scrambled-text p'), { duration: 0.543, ease: 'power3.out', fontWeight: box4Weights[index] })
-        })
-      })
-    })
-  },
-
-  handleLettersChange(): void {
+  animate3DLetters(): void {
     const letters = ['Aa', 'Áá', 'Bb', 'Dd', 'Ðð', 'Ee', 'Éé', 'Ff', 'Gg', 'Hh', 'Ii', 'Íí', 'Jj', 'Kk', 'Ll', 'Mm', 'Nn', 'Oo', 'Óó', 'Pp', 'Rr', 'Ss', 'Tt', 'Uu', 'Úú', 'Vv', 'Xx', 'Yy', 'Ýý', 'Þþ', 'Ææ', 'Öö']
     let lettersIndex = 1
 
@@ -84,6 +61,61 @@ const Section = {
       },
       start: '0% 50%',
       trigger: this.q('.section__content-box-3d-letters'),
+    })
+  },
+
+  animateTypoCircles(): void {
+    gsap.matchMedia().add(brandingPage.breakpoints, (context) => {
+      const { isDesktop } = context.conditions
+
+      ScrollTrigger.create({
+        animation: gsap
+          .timeline({ defaults: { ease: 'none' } })
+          .set(this.q('.typo-circles'), { x: `${-75 - 17 * 5}rem` })
+          .set(this.q('.typo-circles li'), { margin: '0 17rem' })
+          .to(this.q('.typo-circles'), { x: '0rem' })
+          .to(this.q('.typo-circles li'), { margin: '0 -15rem' }, '<'),
+        end: '50% 50%',
+        scrub: true,
+        start: '0% 100%',
+        trigger: this.q('.typo-circles'),
+      })
+
+      ScrollTrigger.create({
+        animation: gsap
+          .timeline({ defaults: { ease: 'none' } })
+          .fromTo(this.q('.typo-circles'), { x: '0rem' }, { x: `${12 * 5}rem` })
+          .fromTo(this.q('.typo-circles li'), { margin: '0 -15rem' }, { margin: `0 ${-15 - 12}rem` }, '<'),
+        end: '100% 0%',
+        scrub: true,
+        start: '50% 50%',
+        trigger: this.q('.typo-circles'),
+      })
+    })
+  },
+
+  handleFontWeightsChange(): void {
+    // Changing font weights in 1st & 4th box
+
+    const box1Buttons = this.q('.alphabet__row--1 button')
+    const box1Weights = [400, 500, 700]
+    const box4Buttons = this.q('.section__content-box-font-weights button')
+    const box4Weights = [300, 400, 500, 600, 700]
+
+    box1Buttons.forEach((button, index) => {
+      ;['click'].forEach((event) => {
+        button.addEventListener(event, () => {
+          gsap.to(this.q('.alphabet__row--3 p'), { duration: 0.543, ease: 'power3.out', fontWeight: box1Weights[index] })
+        })
+      })
+    })
+
+    box4Buttons.forEach((button, index) => {
+      ;['click'].forEach((event) => {
+        button.addEventListener(event, () => {
+          gsap.to(this.q('.logo--3d p, .scrambled-text p'), { duration: 0.543, ease: 'power3.out', fontWeight: box4Weights[index] })
+        })
+      })
     })
   },
 }

@@ -2,29 +2,13 @@
 import Alphabet from '../components/branding-page-alphabet.astro'
 import Logo3D from '../components/branding-page-3d-logo.astro'
 import ScrambledText from '../components/branding-page-scrambled-text.astro'
+import TypoCircles from '../components/branding-page-typo-circles.astro'
 
 const headline = 'Letrið okkar'
 const text = 'Skýrt, nútímalegt og með karakter. Letrið okkar – Aeonik – sameinar fágaðan stíl og góða læsileika. Það virkar á öllum miðlum og speglar nútímalegan, traustan og aðgengilegan persónuleika Vettvangs.'
 ---
 
-<div class="typography-circles">
-  <div class="typography-circle">
-    <p>Læsilegt</p>
-  </div>
-  <div class="typography-circle">
-    <p>Þægilegt</p>
-    {/* 🎩🕊️💎 */}
-  </div>
-  <div class="typography-circle">
-    <p>Fágað</p>
-  </div>
-  <div class="typography-circle">
-    <p>Fallegt</p>
-  </div>
-  <div class="typography-circle">
-    <p>Sterkt</p>
-  </div>
-</div>
+<TypoCircles />
 <div class="grid">
   <div class="grid__col grid__col--6">
     <h2 class="split-content-text" set:html={headline} />
