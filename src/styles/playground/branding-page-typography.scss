@@ -1,6 +1,7 @@
 
 .branding-page {
-  .split-mask-line-mask,
+  .split-mask-line-mask, // This class is generated in dev mode
+  .split-line-mask, // This one, somehow, is generated in production
   .split-line {
     display: block;
   }
