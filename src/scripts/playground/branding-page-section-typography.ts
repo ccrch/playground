@@ -68,33 +68,73 @@ const Section = {
     gsap.matchMedia().add(brandingPage.breakpoints, (context) => {
       const { isDesktop } = context.conditions
 
-      const spacingBottom = 17
-      const spacingTop = 4
+      const circlesReveal = (opacity) => {
+        gsap.to(this.q('.typo-circles .container'), { autoAlpha: opacity })
+      }
+
+      gsap.set(this.q('.typo-circles .container'), { autoAlpha: 0, overwrite: true })
+
+      ScrollTrigger.create({
+        onEnter: () => circlesReveal(1),
+        onEnterBack: () => circlesReveal(1),
+        onLeave: () => circlesReveal(0),
+        end: '100% 80%',
+        start: '0% 50%',
+        trigger: this.q('.typo-circles'),
+      })
+
+      ScrollTrigger.create({
+        onLeaveBack: () => circlesReveal(0),
+        start: '0% 80%',
+        trigger: this.q('.typo-circles'),
+      })
+
+      const spacing = 2
 
       ScrollTrigger.create({
         animation: gsap
-          .timeline({ defaults: { ease: 'power2.out' } })
-          .set(this.q('.typo-circles'), { x: `${-75 - spacingBottom * 5}rem` })
-          .set(this.q('.typo-circles li'), { margin: `0 ${spacingBottom}rem` })
-          .to(this.q('.typo-circles'), { x: '0rem' })
+          .timeline({ defaults: { ease: 'none' } })
+          .set(this.q('.typo-circles ul'), { x: `${-75 - spacing * 5}rem` })
+          .set(this.q('.typo-circles li'), { margin: `0 ${spacing}rem` })
+          .to(this.q('.typo-circles ul'), { x: '0rem' })
           .to(this.q('.typo-circles li'), { margin: '0 -15rem' }, '<'),
-        end: '50% 50%',
+        end: '100% 50%',
         scrub: true,
         start: '0% 100%',
         trigger: this.q('.typo-circles'),
       })
-
-      ScrollTrigger.create({
-        animation: gsap
-          .timeline({ defaults: { ease: 'power2.in' } })
-          .fromTo(this.q('.typo-circles'), { x: '0rem' }, { x: `${-75 - spacingTop * 5}rem` })
-          .fromTo(this.q('.typo-circles li'), { margin: '0 -15rem' }, { margin: `0 ${spacingTop}rem` }, '<'),
-        end: '100% 0%',
-        scrub: true,
-        start: '50% 50%',
-        trigger: this.q('.typo-circles'),
-      })
     })
+
+    // gsap.matchMedia().add(brandingPage.breakpoints, (context) => {
+    //   const { isDesktop } = context.conditions
+
+    //   const spacingBottom = 17
+    //   const spacingTop = -30
+
+    //   ScrollTrigger.create({
+    //     animation: gsap
+    //       .timeline({ defaults: { ease: 'power2.out' } })
+    //       .set(this.q('.typo-circles'), { x: `${-75 - spacingBottom * 5}rem` })
+    //       .set(this.q('.typo-circles li'), { margin: `0 ${spacingBottom}rem` })
+    //       .to(this.q('.typo-circles'), { x: '0rem' })
+    //       .to(this.q('.typo-circles li'), { margin: '0 -15rem' }, '<'),
+    //     end: '50% 50%',
+    //     scrub: true,
+    //     start: '0% 100%',
+    //     trigger: this.q('.typo-circles'),
+    //   })
+
+    //   ScrollTrigger.create({
+    //     animation: gsap
+    //       .timeline({ defaults: { ease: 'power2.in' } })
+    //       .fromTo(this.q('.typo-circles'), { x: '0rem' }, { x: `${-75 - spacingTop * 5}rem` })
+    //       .fromTo(this.q('.typo-circles li'), { margin: '0 -15rem' }, { margin: `0 ${spacingTop}rem` }, '<'),
+    //     end: '100% 0%',
+    //     scrub: true,
+    //     start: '50% 50%',
+    //     trigger: this.q('.typo-circles'),
+    //   })
+    // })
   },
 
   handleFontWeightsChange(): void {
@@ -106,18 +146,14 @@ const Section = {
     const box4Weights = [300, 400, 500, 600, 700]
 
     box1Buttons.forEach((button, index) => {
-      ;['click'].forEach((event) => {
-        button.addEventListener(event, () => {
-          gsap.to(this.q('.alphabet__row--3 p'), { duration: 0.543, ease: 'power3.out', fontWeight: box1Weights[index] })
-        })
+      button.addEventListener('click', () => {
+        gsap.to(this.q('.alphabet__row--3 p'), { duration: 0.543, ease: 'power3.out', fontWeight: box1Weights[index] })
       })
     })
 
     box4Buttons.forEach((button, index) => {
-      ;['click'].forEach((event) => {
-        button.addEventListener(event, () => {
-          gsap.to(this.q('.logo--3d p, .scrambled-text p'), { duration: 0.543, ease: 'power3.out', fontWeight: box4Weights[index] })
-        })
+      button.addEventListener('click', () => {
+        gsap.to(this.q('.logo--3d p, .scrambled-text p'), { duration: 0.543, ease: 'power3.out', fontWeight: box4Weights[index] })
       })
     })
   },

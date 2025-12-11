@@ -1,86 +1,111 @@
 
 .branding-page {
   .typo-circles {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
     width: 100%;
-    padding: 0 15rem;
-    // margin: -50rem auto;
-    // padding: 50rem 15rem;
-    // background: var(--color-white);
+    height: 100vh;
+    // background: #eee;
+    pointer-events: none;
 
-    @include isMobile {
-      flex-direction: column;
-      padding: 0;
-      // padding: 50rem 0;
-    }
-
-    li {
-      flex: 0 0 calc(20% + 30rem);
+    &__pin {
       display: flex;
-      flex-flow: column nowrap;
       align-items: center;
       justify-content: center;
-      width: calc(20% + 30rem);
-      margin: 0 -15rem;
-      aspect-ratio: 1;
-      border: 1px solid var(--color-gray-dark);
-      border-radius: 50%;
-      text-align: center;
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .container {
+      pointer-events: all;
+    }
+
+    ul {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      width: 100%;
+      padding: 0 15rem;
+      // margin: -50rem auto;
+      // padding: 50rem 15rem;
+      // background: var(--color-white);
 
       @include isMobile {
-        flex: 0 0 60%;
-        width: 60%;
-        margin: -15rem 0;
+        flex-direction: column;
+        padding: 0;
+        // padding: 50rem 0;
       }
 
-      span {
-        display: block;
-        padding: 10rem 0;
-        font-size: 24rem;
-        line-height: 150%;
-      }
+      li {
+        flex: 0 0 calc(20% + 30rem);
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: center;
+        width: calc(20% + 30rem);
+        margin: 0 -15rem;
+        aspect-ratio: 1;
+        border: 1px solid var(--color-gray-dark);
+        border-radius: 50%;
+        text-align: center;
 
-      &:nth-child(1) span {
-        text-decoration: underline solid 1.5rem;
-        text-underline-offset: 10rem;
-      }
+        @include isMobile {
+          flex: 0 0 60%;
+          width: 60%;
+          margin: -15rem 0;
+        }
 
-      &:nth-child(3) span {
-        font-style: italic;
-        // transform: skew(-7.5deg);
-      }
+        > span {
+          display: block;
+          padding: 10rem 0;
+          font-size: 24rem;
+          line-height: 200%;
+        }
 
-      &:nth-child(4) span {
-        position: relative;
-        z-index: 1;
-        overflow: hidden;
+        &:nth-child(1) > span {
+          text-decoration: underline;
+          text-decoration-style: solid;
+          text-decoration-thickness: 1.5rem;
+          text-underline-offset: 10rem;
+        }
 
-        &::before {
-          content: 'FágaðFágað';
-          position: absolute;
-          inset: 10rem auto auto 0;
-          color: transparent;
-          z-index: -1;
-          text-decoration: underline wavy 1.5rem var(--color-navy);
-          text-underline-offset: 7rem;
-          animation: wave-underline 7s linear infinite;
+        &:nth-child(3) > span {
+          font-style: italic;
+          // transform: skew(-7.5deg);
+        }
 
-          @keyframes wave-underline {
-            0% {
-              transform: translateX(0%)
-            }
-            100% {
-              transform: translateX(-50%)
+        &:nth-child(4) > span {
+          position: relative;
+          z-index: 1;
+          overflow: hidden;
+
+          &::before {
+            content: 'FágaðFágað';
+            position: absolute;
+            inset: 10rem auto auto 0;
+            color: transparent;
+            z-index: -1;
+            text-decoration: underline;
+            text-decoration-style: wavy;
+            text-decoration-thickness: 1.5rem;
+            text-decoration-color: var(--color-navy);
+            text-underline-offset: 7rem;
+            animation: wave-underline 7s linear infinite;
+
+            @keyframes wave-underline {
+              0% {
+                transform: translateX(0%)
+              }
+              100% {
+                transform: translateX(-50%)
+              }
             }
           }
         }
-      }
 
-      &:nth-child(5) span {
-        font-weight: 600;
+        &:nth-child(5) > span {
+          font-weight: 600;
+        }
       }
     }
-  }  
+  } 
 }
