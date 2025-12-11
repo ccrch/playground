@@ -1,7 +1,7 @@
 
 .branding-page {
-  .split-mask-line-mask, // This class is generated in dev mode
-  .split-line-mask, // This one, somehow, is generated in production
+  .split-mask-line-mask, // This class is generated when dev/build runs properly
+  .split-line-mask, // This one, somehow, is generated in production while deployed to github with missing text
   .split-line {
     display: block;
   }
