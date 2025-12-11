@@ -68,11 +68,14 @@ const Section = {
     gsap.matchMedia().add(brandingPage.breakpoints, (context) => {
       const { isDesktop } = context.conditions
 
+      const spacingBottom = 17
+      const spacingTop = 4
+
       ScrollTrigger.create({
         animation: gsap
-          .timeline({ defaults: { ease: 'none' } })
-          .set(this.q('.typo-circles'), { x: `${-75 - 17 * 5}rem` })
-          .set(this.q('.typo-circles li'), { margin: '0 17rem' })
+          .timeline({ defaults: { ease: 'power2.out' } })
+          .set(this.q('.typo-circles'), { x: `${-75 - spacingBottom * 5}rem` })
+          .set(this.q('.typo-circles li'), { margin: `0 ${spacingBottom}rem` })
           .to(this.q('.typo-circles'), { x: '0rem' })
           .to(this.q('.typo-circles li'), { margin: '0 -15rem' }, '<'),
         end: '50% 50%',
@@ -83,9 +86,9 @@ const Section = {
 
       ScrollTrigger.create({
         animation: gsap
-          .timeline({ defaults: { ease: 'none' } })
-          .fromTo(this.q('.typo-circles'), { x: '0rem' }, { x: `${12 * 5}rem` })
-          .fromTo(this.q('.typo-circles li'), { margin: '0 -15rem' }, { margin: `0 ${-15 - 12}rem` }, '<'),
+          .timeline({ defaults: { ease: 'power2.in' } })
+          .fromTo(this.q('.typo-circles'), { x: '0rem' }, { x: `${-75 - spacingTop * 5}rem` })
+          .fromTo(this.q('.typo-circles li'), { margin: '0 -15rem' }, { margin: `0 ${spacingTop}rem` }, '<'),
         end: '100% 0%',
         scrub: true,
         start: '50% 50%',

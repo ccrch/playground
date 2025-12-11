@@ -36,8 +36,10 @@
       }
 
       span {
+        display: block;
         padding: 10rem 0;
         font-size: 24rem;
+        line-height: 150%;
       }
 
       &:nth-child(1) span {
