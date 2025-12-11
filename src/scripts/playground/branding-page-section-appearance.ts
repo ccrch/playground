@@ -11,7 +11,7 @@ const Section = {
       target: this.q('.logo--3d')[0],
     })
 
-    ScrambledText.init({ target: this.q('.scrambled-text')[0] })
+    // ScrambledText.init({ target: this.q('.scrambled-text')[0] })
   },
 }
 
