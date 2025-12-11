@@ -69,17 +69,18 @@ const Section = {
       const { isDesktop } = context.conditions
 
       const circlesReveal = (opacity) => {
-        gsap.to(this.q('.typo-circles .container'), { autoAlpha: opacity })
+        gsap.to(this.q('.typo-circles .container'), { duration: 2.1, ease: 'power3.out', autoAlpha: opacity })
       }
 
       gsap.set(this.q('.typo-circles .container'), { autoAlpha: 0, overwrite: true })
 
       ScrollTrigger.create({
+        end: '100% 70%',
+        fastScrollEnd: true, // TODO: Check later
         onEnter: () => circlesReveal(1),
         onEnterBack: () => circlesReveal(1),
         onLeave: () => circlesReveal(0),
-        end: '100% 80%',
-        start: '0% 50%',
+        start: '0% 35%',
         trigger: this.q('.typo-circles'),
       })
 
@@ -98,9 +99,10 @@ const Section = {
           .set(this.q('.typo-circles li'), { margin: `0 ${spacing}rem` })
           .to(this.q('.typo-circles ul'), { x: '0rem' })
           .to(this.q('.typo-circles li'), { margin: '0 -15rem' }, '<'),
-        end: '100% 50%',
+        end: '100% 0%',
+        fastScrollEnd: true, // TODO: Check later
         scrub: true,
-        start: '0% 100%',
+        start: '0% 120%',
         trigger: this.q('.typo-circles'),
       })
     })

@@ -7,29 +7,31 @@
     width: 100%;
     height: 100%;
 
-    &__image {
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      background: url('../../assets/images/macbook-mockup.png') no-repeat center / cover;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-    }
-
     iframe {
       position: absolute;
       inset: 95rem auto auto 124rem;
       z-index: 1;
       // transform: translate3d(-50%, -50%, 0) scale(0.13) translate; // rotateX(3deg) rotateY(9deg) rotateZ(-12deg);
-      transform: scale(0.127) rotateY(2deg);
+      transform: translateZ(100px) scale(0.127) rotateY(2deg); // translateZ(112px);
       transform-origin: 0 0;
       transform-style: preserve-3d;
+      perspective: 4234px;
       width: 1940rem;
       overflow: hidden;
       aspect-ratio: 1253 / 909; // 16 / 10;
       border: 0;
-      // pointer-events: none;
+      pointer-events: all;
+    }
+
+    &__image {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      transform: translateZ(100px);
+      background: url('../../assets/images/macbook-mockup.png') no-repeat center / cover;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
     }
   }
 }

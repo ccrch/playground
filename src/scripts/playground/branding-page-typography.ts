@@ -82,11 +82,11 @@ const Typography = {
         // Show headline on scroll down
 
         ScrollTrigger.create({
+          fastScrollEnd: true, // TODO: Check later
           onEnter: () => {
             gsap.set(el.headlineLines, { overwrite: true, y: '0%' })
             gsap.to([el.headlineEyebrow, el.headlineChars], { duration: 1.234, ease: 'power3.out', opacity: 1, stagger: !isHeadlineSmall ? 0.021 : 0.012, y: '0%' })
           },
-          fastScrollEnd: true, // TODO: Check later
           start: '0% 50%',
           trigger: section,
         })
