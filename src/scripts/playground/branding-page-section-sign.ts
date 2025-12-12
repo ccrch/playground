@@ -47,7 +47,7 @@ const Section = {
             Logo.renderFirework({
               amount: 45,
               container: this.q('.section--sign .section__content-box-2-logos')[0],
-              x: isDesktop ? '67%' : '10%',
+              x: isDesktop ? '67%' : '10%', // TODO
               y: isDesktop ? '47%' : '10%',
             })
           },

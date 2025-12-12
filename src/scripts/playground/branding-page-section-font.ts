@@ -5,7 +5,7 @@ import ScrambledText from './branding-page-scrambled-text'
 import brandingPage from './branding-page'
 
 const Section = {
-  q: gsap.utils.selector('.section--typography'),
+  q: gsap.utils.selector('.section--font'),
 
   init(): void {
     this.animate3DLetters()
@@ -66,10 +66,15 @@ const Section = {
 
   animateTypoCircles(): void {
     gsap.matchMedia().add(brandingPage.breakpoints, (context) => {
-      const { isDesktop } = context.conditions
+      const { isDesktop } = context.conditions // TODO
 
       const circlesReveal = (opacity) => {
-        gsap.to(this.q('.typo-circles .container'), { duration: 2.1, ease: 'power3.out', autoAlpha: opacity })
+        gsap.to(this.q('.typo-circles .container'), {
+          autoAlpha: opacity,
+          duration: opacity === 1 ? 2.1 : 0.543,
+          ease: 'power3.out',
+          overwrite: opacity === 0,
+        })
       }
 
       gsap.set(this.q('.typo-circles .container'), { autoAlpha: 0, overwrite: true })
@@ -106,37 +111,6 @@ const Section = {
         trigger: this.q('.typo-circles'),
       })
     })
-
-    // gsap.matchMedia().add(brandingPage.breakpoints, (context) => {
-    //   const { isDesktop } = context.conditions
-
-    //   const spacingBottom = 17
-    //   const spacingTop = -30
-
-    //   ScrollTrigger.create({
-    //     animation: gsap
-    //       .timeline({ defaults: { ease: 'power2.out' } })
-    //       .set(this.q('.typo-circles'), { x: `${-75 - spacingBottom * 5}rem` })
-    //       .set(this.q('.typo-circles li'), { margin: `0 ${spacingBottom}rem` })
-    //       .to(this.q('.typo-circles'), { x: '0rem' })
-    //       .to(this.q('.typo-circles li'), { margin: '0 -15rem' }, '<'),
-    //     end: '50% 50%',
-    //     scrub: true,
-    //     start: '0% 100%',
-    //     trigger: this.q('.typo-circles'),
-    //   })
-
-    //   ScrollTrigger.create({
-    //     animation: gsap
-    //       .timeline({ defaults: { ease: 'power2.in' } })
-    //       .fromTo(this.q('.typo-circles'), { x: '0rem' }, { x: `${-75 - spacingTop * 5}rem` })
-    //       .fromTo(this.q('.typo-circles li'), { margin: '0 -15rem' }, { margin: `0 ${spacingTop}rem` }, '<'),
-    //     end: '100% 0%',
-    //     scrub: true,
-    //     start: '50% 50%',
-    //     trigger: this.q('.typo-circles'),
-    //   })
-    // })
   },
 
   handleFontWeightsChange(): void {

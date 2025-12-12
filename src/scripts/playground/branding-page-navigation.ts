@@ -103,12 +103,21 @@ const Navigation = {
 
     el.sections.forEach((section) => {
       ScrollTrigger.create({
+        end: () => `100% ${window.innerHeight - el.navigation.offsetHeight}px`,
         onEnter: () => {
+          section.classList.contains('section--white') ? whiteToNavy() : navyToWhite()
+        },
+        onEnterBack: () => {
           section.classList.contains('section--white') ? whiteToNavy() : navyToWhite()
         },
         onLeaveBack: () => {
           section.classList.contains('section--white') ? navyToWhite() : whiteToNavy()
         },
+        onLeave: () => {
+          section.classList.contains('section--white') ? navyToWhite() : whiteToNavy()
+        },
+        // preventOverlaps: true,
+        // refreshPriority: 0,
         start: () => `0% ${window.innerHeight - el.navigation.offsetHeight}px`,
         trigger: section,
       })
@@ -123,18 +132,37 @@ const Navigation = {
         onEnterBack: changeTo === 'white' ? navyToWhite : whiteToNavy,
         onLeave: changeTo === 'white' ? whiteToNavy : navyToWhite,
         onLeaveBack: changeTo === 'white' ? whiteToNavy : navyToWhite,
+        // preventOverlaps: true,
+        // refreshPriority: 1,
         start: () => `0% ${window.innerHeight - el.navigation.offsetHeight}px`,
         trigger,
       })
+
+      // Testing alternative approach to fix overriding issues
+
+      // ScrollTrigger.create({
+      //   onEnter: changeTo === 'white' ? navyToWhite : whiteToNavy,
+      //   onLeaveBack: changeTo === 'white' ? whiteToNavy : navyToWhite,
+      //   start: () => `0% ${window.innerHeight - el.navigation.offsetHeight}px`,
+      //   trigger,
+      // })
+
+      // ScrollTrigger.create({
+      //   onEnter: changeTo === 'white' ? whiteToNavy : navyToWhite,
+      //   onLeaveBack: changeTo === 'white' ? navyToWhite : whiteToNavy,
+      //   start: () => `100% ${window.innerHeight - el.navigation.offsetHeight}px`,
+      //   trigger,
+      // })
     }
 
     // TODO: Figure out later - problem with overriding default theme change triggers
 
     extraThemeChange({ changeTo: 'white', trigger: '.section--sign .section__content-box-3d-logo' })
-    extraThemeChange({ changeTo: 'navy', trigger: '.section--colors .box' })
+    extraThemeChange({ changeTo: 'white', trigger: '.section--colors .box' })
     extraThemeChange({ changeTo: 'white', trigger: '.section--tone .box' })
-    extraThemeChange({ changeTo: 'navy', trigger: '.section--appearance .section__content-box-reel' })
     extraThemeChange({ changeTo: 'white', trigger: '.footer__bottom' })
+
+    // ScrollTrigger.refresh()
   },
 }
 

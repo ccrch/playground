@@ -1,0 +1,87 @@
+
+.branding-page {
+  .colors {
+    width: 100%;
+    height: 100%;
+
+    &__container {
+      display: flex;
+      flex-flow: row nowrap;
+      // width: 100%;
+      height: 100%;
+      transform: skewX(-7deg);
+      margin: 0 -35rem;
+
+      > div {
+        display: flex;
+        flex-flow: column nowrap;
+        position: relative;
+        z-index: 1;
+        // clip-path: polygon(0 0, 15% 0, 15% 100%, 0% 100%);
+        transition: all 1s;
+
+        // &:hover {
+        //   clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%) !important;
+        // }
+        
+        &:nth-child(1) {
+          width: 57%;
+          background-color: var(--color-navy);
+          // clip-path: polygon(0 0, 15% 0, 15% 100%, 0% 100%);
+
+          &::before {
+            content: '';
+            position: absolute;
+            inset: auto 1rem 1rem auto;
+            z-index: 1;
+            // transform: scaleY(3.5);
+            // transform-origin: 100% 100%;
+            width: 200rem;
+            aspect-ratio: 1;
+            background: var(--color-white);
+            // mix-blend-mode: overlay;
+            opacity: 0.05;
+            // border-bottom-right-radius: 12rem;
+            mask-image: linear-gradient(to bottom right, transparent 50%, black 100%);
+          }
+        }
+
+        &:nth-child(2) {
+          width: 28%;
+          background-color: var(--color-gray);
+          color: var(--color-navy);
+          // clip-path: polygon(0 0, 15% 0, 15% 100%, 0% 100%);
+        }
+
+        &:nth-child(3) {
+          transform: translateX(-1rem);
+          width: 15%;
+          background-color: var(--color-red);
+        }
+      }
+    }
+
+    p {
+      position: relative;
+      z-index: 2;
+      transform: skewX(7deg);
+    }
+
+    &__label {
+      padding: 100rem 26rem;
+      font-size: 16rem;
+      font-weight: 700;
+
+      span {
+        opacity: 0.5;
+      }
+    }
+
+    &__hex {
+      margin-top: auto;
+      padding: 100rem 30rem;
+      font-size: 12rem;
+      font-weight: 400;
+    }
+  }
+}

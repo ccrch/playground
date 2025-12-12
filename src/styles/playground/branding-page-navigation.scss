@@ -12,6 +12,7 @@
     height: 64rem;
     margin: 36rem;
     pointer-events: none;
+    user-select: none;
     transition: opacity 0.321s;
 
     &__logo {

@@ -11,7 +11,7 @@ const Section = {
 
   animateSmallShapes(): void {
     gsap.matchMedia().add(brandingPage.breakpoints, (context) => {
-      const { isDesktop } = context.conditions
+      const { isDesktop } = context.conditions // TODO
 
       const firstShape = this.q('.shape--small:first-child')
       const shapeTypes = ['hexagon', 'triangle-down', 'diamond', 'circle', 'pentagon', 'square', 'triangle-up', 'octagon']

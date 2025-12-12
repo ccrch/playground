@@ -10,18 +10,18 @@ import Navigation from '../components/branding-page-navigation.astro'
 import Section from '../components/branding-page-section.astro'
 import SectionContentAppearance from '../components/branding-page-section-appearance.astro'
 import SectionContentColors from '../components/branding-page-section-colors.astro'
+import SectionContentFont from '../components/branding-page-section-font.astro'
 import SectionContentSign from '../components/branding-page-section-sign.astro'
 import SectionContentSymbols from '../components/branding-page-section-symbols.astro'
 import SectionContentTone from '../components/branding-page-section-tone.astro'
-import SectionContentTypography from '../components/branding-page-section-typography.astro'
 import SectionHome from '../components/branding-page-section-home.astro'
 import Layout from '../layouts/playground-layout.astro'
 
 const navigation = [
   { section: 'home', label: 'Heim', url: '#heim', headline: 'Ný ásýnd<br> Vettvangs' },
   { section: 'sign', label: 'Merkið', url: '#merkid', headline: 'Ný nálgun á<br> rótgrónu merki' },
+  { section: 'font', label: 'Letur', url: '#letur', headline: 'Letrið setur<br> tóninn' },
   { section: 'colors', label: 'Litir', url: '#litir', headline: 'Litirnir spegla<br> kjarnann okkar' },
-  { section: 'typography', label: 'Letur', url: '#letur', headline: 'Letrið setur<br> tóninn' },
   { section: 'symbols', label: 'Tákn', url: '#takn', headline: 'Grafíkin styður<br> upplifun og flæði' },
   { section: 'tone', label: 'Raddblær', url: '#raddblaer', headline: 'Við erum hnitmiðuð, aðgengileg, skýr, reynd, traust, vinaleg, leiðandi og áhrifarík' },
   { section: 'appearance', label: 'Ásýnd', url: '#asynd', headline: 'Samræmi skapar<br> fagurfræði<span class="split-break"></span>lega heild' },
@@ -56,8 +56,8 @@ const sectionId = (index) => navigation[index].url.replace('#', '')
         return (
           <Section {...props}>
             {item.section === 'sign' && <SectionContentSign />}
+            {item.section === 'font' && <SectionContentFont />}
             {item.section === 'colors' && <SectionContentColors />}
-            {item.section === 'typography' && <SectionContentTypography />}
             {item.section === 'symbols' && <SectionContentSymbols />}
             {item.section === 'tone' && <SectionContentTone />}
             {item.section === 'appearance' && <SectionContentAppearance />}

@@ -7,11 +7,11 @@ import { lenisScroll } from '../core/helpers'
 import Navigation from './branding-page-navigation'
 import SectionAppearance from './branding-page-section-appearance'
 import SectionColors from './branding-page-section-colors'
+import SectionFont from './branding-page-section-font'
 import SectionHome from './branding-page-section-home'
 import SectionSign from './branding-page-section-sign'
 import SectionSymbols from './branding-page-section-symbols'
 import SectionTone from './branding-page-section-tone'
-import SectionTypography from './branding-page-section-typography'
 import Typography from './branding-page-typography'
 
 const brandingPage = {
@@ -56,8 +56,8 @@ const brandingPage = {
 
       SectionHome.scrollTriggers()
       SectionSign.init()
+      SectionFont.init()
       SectionColors.init()
-      SectionTypography.init()
       SectionSymbols.init()
       SectionTone.init()
       SectionAppearance.init()

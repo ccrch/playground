@@ -19,7 +19,9 @@ const Section = {
   },
 
   reveal(): void {
-    gsap.matchMedia().add(brandingPage.breakpoints, () => {
+    gsap.matchMedia().add(brandingPage.breakpoints, (context) => {
+      const { isDesktop } = context.conditions // TODO
+
       // Reveal the page
 
       gsap.to('.branding-page', { delay: 0.234, duration: 1.234, opacity: 1 })
@@ -47,7 +49,9 @@ const Section = {
       trigger: '.section--home',
     })
 
-    gsap.matchMedia().add(brandingPage.breakpoints, () => {
+    gsap.matchMedia().add(brandingPage.breakpoints, (context) => {
+      const { isDesktop } = context.conditions // TODO
+
       // Hide headline on scroll down
 
       ScrollTrigger.create({
@@ -84,7 +88,9 @@ const Section = {
     // Split the text & reset it
     // Setting text-align to left to avoid issues with SplitText not splitting text correctly when aligned to center
 
-    gsap.matchMedia().add(brandingPage.breakpoints, () => {
+    gsap.matchMedia().add(brandingPage.breakpoints, (context) => {
+      const { isDesktop } = context.conditions // TODO
+
       gsap.set(this.q('h1'), { textAlign: 'left' })
 
       SplitText.create(this.q('h1'), {

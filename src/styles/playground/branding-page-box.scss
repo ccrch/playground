@@ -32,6 +32,12 @@
       color: var(--color-white);
     }
 
+    &--navy-light .box__container {
+      background: var(--color-navy-light);
+      border: solid 1px var(--color-navy-border);
+      color: var(--color-white);
+    }
+
     &--red .box__container {
       // position: relative;
       // z-index: 1;
