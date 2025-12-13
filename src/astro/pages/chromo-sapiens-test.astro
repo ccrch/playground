@@ -1,0 +1,318 @@
+---
+export const frontmatter = {
+  baseClass: 'chromo-sapiens-test',
+  navDescription: '',
+  navTitle: 'Chromo Sapiens test',
+}
+
+import Layout from '../layouts/playground-layout.astro'
+---
+
+<script>
+  import gsap from 'gsap'
+  import ScrollTrigger from 'gsap/ScrollTrigger'
+  import { throttle } from 'throttle-debounce'
+  import { lenisScroll } from 'src/scripts/core/helpers'
+
+  lenisScroll.init()
+  gsap.registerPlugin(ScrollTrigger)
+
+  // https://ffmpeg-online.vercel.app/
+
+  // -c:v libx264
+  // -pix_fmt yuv420p
+  // -profile:v main
+  // -level 4.0
+  // -r 30
+  // -g 4
+  // -keyint_min 4
+  // -sc_threshold 0
+  // -crf 20
+  // -maxrate 8M
+  // -bufsize 16M
+  // -movflags +faststart
+  // -an
+
+  const ChromoSapiens = {
+    init(): void {
+      const video = document.querySelector<HTMLVideoElement>('.chromo-sapiens-test video')
+
+      if (!video) return
+
+      if (video.readyState >= 1) ChromoSapiens.handleVideoScroll(video)
+      else video.addEventListener('loadedmetadata', () => ChromoSapiens.handleVideoScroll(video), { once: true })
+
+      ChromoSapiens.handleScrollTriggers()
+    },
+
+    async handleVideoScroll(video): Promise<void> {
+      try {
+        await video.play()
+        video.pause()
+      } catch {}
+
+      let ticking = false
+
+      const updateScrollPosition = () => {
+        // const scrollHeight = document.documentElement.scrollHeight
+        const scrollHeight = document.querySelector<HTMLElement>('.chromo-sapiens-test .video__scroll-area').offsetHeight
+        const scrollTop = window.scrollY || document.documentElement.scrollTop
+        const maxScrollTop = scrollHeight - window.innerHeight
+        const scrollFraction = maxScrollTop > 0 ? scrollTop / maxScrollTop : 0
+
+        const frameRate = 30
+        const frameCount = Math.floor(video.duration * frameRate)
+        const frameIndex = Math.min(frameCount - 1, Math.floor(scrollFraction * frameCount))
+
+        // video.currentTime = (frameIndex / frameCount) * video.duration
+
+        gsap.to(video, {
+          currentTime: (frameIndex / frameCount) * video.duration,
+          duration: 1.234,
+          ease: 'power3.out',
+          overwrite: true,
+        })
+      }
+
+      const throttledScroll = throttle(30, () => {
+        if (ticking) return
+        ticking = true
+        requestAnimationFrame(() => {
+          updateScrollPosition()
+          ticking = false
+        })
+      })
+
+      window.addEventListener('scroll', throttledScroll, { passive: true })
+
+      updateScrollPosition()
+    },
+
+    handleScrollTriggers(): void {
+      // Pin the video
+
+      ScrollTrigger.create({
+        end: '+=1200%',
+        // end: '100% 100%',
+        pin: '.video video',
+        pinSpacing: false,
+        start: '0% 0%',
+        trigger: '.video__scroll-area',
+      })
+
+      // Fade out the video
+
+      ScrollTrigger.create({
+        animation: gsap.to('.video__container', { autoAlpha: 0, ease: 'none' }),
+        end: '+=60%',
+        scrub: true,
+        start: '40% 0%',
+        trigger: '.video__scroll-area',
+      })
+
+      // Pin the headline & unpin it when content comes in
+
+      ScrollTrigger.create({
+        end: '0% 50%',
+        endTrigger: '.content',
+        pin: '.headline h1',
+        pinSpacing: false,
+        start: '0% 0%',
+        trigger: '.video__scroll-area',
+      })
+
+      // Fade in & scale the headline
+
+      gsap.set('.headline h1 span', { autoAlpha: 0, scale: 0.5 })
+
+      ScrollTrigger.create({
+        animation: gsap.to('.headline h1 span', { autoAlpha: 1, ease: 'none', scale: 1 }),
+        end: '+=30%',
+        scrub: true,
+        start: '47% 0%',
+        trigger: '.video__scroll-area',
+      })
+    },
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ChromoSapiens.init, { once: true })
+  else ChromoSapiens.init()
+</script>
+
+<style lang="scss" is:global>
+  @mixin isMobile {
+    @media (max-width: 767px) {
+      @content;
+    }
+  }
+
+  @mixin isDesktop {
+    @media (min-width: 768px) {
+      @content;
+    }
+  }
+
+  @mixin isUltrawide {
+    @media (min-width: 2560px) {
+      @content;
+    }
+  }
+
+  .chromo-sapiens-test-html {
+    --mobile-design-width: 440;
+    --desktop-design-width: 1440;
+    --ultrawide-breakpoint: 2560;
+
+    font-size: calc((100 / var(--mobile-design-width)) * 1vw); // This must match desktop-xl breakpoint
+
+    @include isDesktop {
+      font-size: calc((100 / var(--desktop-design-width)) * 1vw);
+    }
+
+    @include isUltrawide {
+      font-size: calc(((100 / var(--desktop-design-width)) * var(--ultrawide-breakpoint) / 16) * 0.01rem);
+    }
+  }
+
+  .chromo-sapiens-test {
+    background: #fff;
+    color: #111;
+    .video {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+      height: 100vh;
+      margin-bottom: 100vh;
+
+      &__container {
+        width: 100%;
+        height: 100%;
+
+        @include isDesktop {
+          width: 600rem;
+          max-height: calc(100vh - 120rem);
+          aspect-ratio: 9 / 16;
+        }
+
+        video {
+          width: 100%;
+          height: 100%;
+          // object-fit: contain;
+          object-fit: cover;
+          object-position: 50% 75%;
+        }
+      }
+
+      &__scroll-area {
+        position: absolute;
+        inset: 0 auto auto 0;
+        z-index: 1;
+        width: 100%;
+        height: 200vh;
+      }
+    }
+
+    .headline {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+
+      h1 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        margin: 0 auto;
+
+        @include isDesktop {
+          width: 600rem;
+        }
+      }
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      margin: 0 auto;
+      padding: 90rem 30rem 0;
+
+      @include isDesktop {
+        width: 600rem;
+        padding: 120rem 30rem;
+      }
+    }
+
+    h1,
+    h2 {
+      font-size: 56rem;
+      line-height: 112%;
+      text-transform: uppercase;
+
+      @include isDesktop {
+        font-size: 80rem;
+      }
+    }
+
+    h2 {
+      margin: 30rem 0;
+      font-size: 40rem;
+
+      @include isDesktop {
+        margin: 40rem 0;
+        font-size: 48rem;
+      }
+    }
+
+    p {
+      font-size: 18rem;
+      line-height: 148%;
+
+      @include isDesktop {
+        font-size: 21rem;
+      }
+    }
+
+    span {
+      display: block;
+    }
+
+    img {
+      width: calc(100% + 60rem);
+      margin: 30rem -30rem 0;
+      aspect-ratio: 1;
+      object-fit: cover;
+
+      @include isDesktop {
+        width: 100%;
+        margin: 40rem 0 0;
+      }
+    }
+  }
+</style>
+
+<Layout baseClass={frontmatter.baseClass} metaDescription={frontmatter.navDescription} metaTitle={frontmatter.navTitle}>
+  <main class={frontmatter.baseClass} slot="body">
+    <div class="video">
+      <div class="video__container">
+        <video autoplay muted playsinline preload="auto">
+          <source src="/playground/videos/chromo-sapiens.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="video__scroll-area"></div>
+    </div>
+    <div class="headline">
+      <h1><span>Welcome to <br />Höfuðstöðin</span></h1>
+    </div>
+    <div class="content">
+      <p>The home of chromo sapiens by Shoplifter / Hrafnhildur Arnardóttir</p>
+      <h2>About <br />Höfuðstöðin</h2>
+      <p>Höfuðstöðin is an art and culture center in Reykjavík, Iceland that permanently displays the large-scale multi-sensory installation Chromo Sapiens by Shoplifter / Hrafnhildur Arnardóttir. Höfuðstöðin also features a design shop, café & bar with outdoor seating and the space can be rented for private events.</p>
+      <h2>Create your <br />own souvenir</h2>
+      <p>Experience the large-scale, immersive installation Chromo Sapiens by Icelandic artist Hrafnhildur Arnardóttir / Shoplifter. The installation invites you to explore your inner landscape through the stimulation of the senses. Afterward, you have a seat in our lounge area where you will have a drink and create your own souvenir to take home.</p>
+      <p>Please note Create Your Own Souvenir requires a pre-booking and it is available every day except Saturdays.</p>
+      <img src="https://hofudstodin.com/wp-content/uploads/2022/02/Shoplifter_003-1024x683.jpg" />
+    </div>
+  </main>
+</Layout>
